@@ -9,7 +9,6 @@ const navbr = () => {
             <Navbar.Collapse id="basic-navbar-nav">
                 <Nav className="mr-auto">
                     <Nav.Link href="#home">Home</Nav.Link>
-                    <Nav.Link href="#link">Link</Nav.Link>
                 </Nav>
                 <Nav><Button color='primary' variant='contained'>Login/Register</Button></Nav>
             </Navbar.Collapse>

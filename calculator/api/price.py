@@ -22,7 +22,7 @@ async def get_price(symbol: str):
             'annual_return': annual_return,
             'company': symbol,
             'daily_closing_price': list(df['close']),
-            'trading_dates': list(df['date']),
+            'trading_dates': list(df['date'].dt.date),
             'volume':list(df['volume'])
         }        
     except Exception as err:
