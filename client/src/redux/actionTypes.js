@@ -1,0 +1,2 @@
+export const FETCH_STOCK_PRICE = 'FETCH_STOCK_PRICE'
+export const SET_ERROR = 'SET_ERROR'

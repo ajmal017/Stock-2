@@ -1,0 +1,20 @@
+import React from 'react'
+import { Button } from '@material-ui/core'
+import { Navbar, Nav } from 'react-bootstrap'
+const navbr = () => {
+    return (
+        <Navbar expand="lg" >
+            <Navbar.Brand href="#home">React-Bootstrap</Navbar.Brand>
+            <Navbar.Toggle aria-controls="basic-navbar-nav" />
+            <Navbar.Collapse id="basic-navbar-nav">
+                <Nav className="mr-auto">
+                    <Nav.Link href="#home">Home</Nav.Link>
+                    <Nav.Link href="#link">Link</Nav.Link>
+                </Nav>
+                <Nav><Button color='primary' variant='contained'>Login/Register</Button></Nav>
+            </Navbar.Collapse>
+        </Navbar >
+    )
+}
+
+export default navbr

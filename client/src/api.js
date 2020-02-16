@@ -1,0 +1,1 @@
+export const STOCK_PRICE_URL = 'api/calculator/stock'
