@@ -1,0 +1,17 @@
+.container{
+    padding: 4rem 0;
+}
+
+.row{
+    justify-content: center;
+    align-content: center;
+    text-align: center;
+}
+
+.button{
+    margin: 2rem 0 0 0 !important;
+}
+
+.textField{
+  
+}

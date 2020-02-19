@@ -1,7 +1,9 @@
-import React, { useState } from 'react';
+import React from 'react';
 import {
-    LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer
+    LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend
 } from 'recharts';
+import { shallowEqual, useSelector } from 'react-redux';
+
 
 const mydata = [
     {
@@ -25,6 +27,8 @@ const mydata = [
 
 
 const lineChart = () => {
+    const stocks = useSelector(state => state.stocks);
+
     return (
         <LineChart
             width={730} height={250}

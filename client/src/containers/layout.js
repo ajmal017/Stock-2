@@ -1,16 +1,18 @@
-import React from 'react'
-import { Container, Col, Row } from 'react-bootstrap'
+import React, { Fragment } from 'react'
 import LineChart from './lineChart/lineChart'
+import TopBox from './topBox/topBox'
+import Form from './stockform/stockForm'
+import TextField from '@material-ui/core/TextField';
+import Autocomplete from '@material-ui/lab/Autocomplete';
 
 const layout = () => {
     return (
-        <Container fluid>
-            <Row>
-                <Col>
-                    <LineChart></LineChart>
-                </Col>
-            </Row>
-        </Container>
+        <Fragment>
+            <TopBox></TopBox>
+            <Form></Form>
+            <LineChart></LineChart>
+        </Fragment>
+
     )
 }
 

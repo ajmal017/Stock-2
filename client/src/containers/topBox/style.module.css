@@ -1,0 +1,14 @@
+.container{
+    background-color: #040E27;
+    padding: 3rem;
+    color: white;
+}
+
+.row{
+    justify-content: center;
+    align-content: center;
+}
+
+.text{
+    text-align: center;
+}

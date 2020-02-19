@@ -1,17 +1,21 @@
-import { FETCH_STOCK_PRICE } from "../actionTypes"
+import { FETCH_STOCK_PRICE, } from "../actionTypes"
 
 const initialState = {
-    stocks: []
+    stocksSelected: [],
+    stocks: {}
 }
 
 const stockReducer = (state = initialState, action) => {
 
     switch (action.type) {
         case FETCH_STOCK_PRICE:
+            const { symbol } = action.data
+            const stock = { [symbol]: action.data.historical }
             return {
                 ...state,
-                stocks: [...state.stocks, action.data]
+                stocks: { ...stock }
             }
+
         default:
             return state
     }
