@@ -1,18 +1,6 @@
 version: "3"
 
 services:
-  pricer:
-    container_name: pricer
-    image: stocky-pricer:dev
-    restart: always
-    command: ["npm", "run", "dev"]
-    environment:
-      - docker.env
-    # depends_on:
-    #   - mongo:dev
-    volumes:
-      - /app/node_modules
-      - ./pricer:/app
   calculator:
     container_name: calculator
     image: stocky-calculator:dev
@@ -20,13 +8,10 @@ services:
     command: "uvicorn main:app --reload --host 0.0.0.0 --port 80"
     environment:
       - docker.env
-    # depends_on:
-    #   - mongo:dev
     volumes:
       - /app/node_modules
       - ./calculator:/app
-    ports:
-      - "80:80"
+
   client:
     container_name: client
     image: stocky-client:dev
@@ -39,3 +24,16 @@ services:
     ports:
       - "3000:3000"
 
+  gateway:
+    container_name: gateway
+    command: ["npm","run","dev"]
+    image: stocky-gateway:dev
+    restart: always
+    environment:
+      - docker.env
+    volumes:
+      - /app/node_modules
+      - ./gateway:/app
+    ports:
+      - "80:3000"
+    

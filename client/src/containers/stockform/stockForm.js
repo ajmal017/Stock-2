@@ -1,16 +1,13 @@
-import React, { useState, useEffect } from 'react'
+import React from 'react'
 import { Container, Row, Col } from 'react-bootstrap'
 import style from './style.module.css'
-import stocks from './stocks'
 import { TextField, Button } from '@material-ui/core';
 import Autocomplete from '@material-ui/lab/Autocomplete';
 import logic from './logic'
 
 const form = () => {
     const { state, handleChange, handleClick } = logic()
-    console.log(state.stocks.length)
     const { symbol } = state
-    console.log(symbol)
 
     return (
         <Container className={style.container}>
@@ -23,6 +20,7 @@ const form = () => {
                             options={state.stocks}
                             getOptionLabel={option => option.name}
                             value={symbol}
+                            filterSelectedOptions
                             onChange={(event, newValue) => {
                                 handleChange(newValue);
                             }}

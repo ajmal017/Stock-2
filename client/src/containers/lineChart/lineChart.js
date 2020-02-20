@@ -26,7 +26,7 @@ const mydata = [
 ]
 
 
-const lineChart = () => {
+const LinChart = () => {
     const stocks = useSelector(state => state.stocks);
 
     return (
@@ -48,4 +48,4 @@ const lineChart = () => {
     );
 }
 
-export default lineChart
+export default LinChart

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from 'axios'
 import { useDispatch, useSelector } from "react-redux";
-import { fetchStockData } from '../../redux/actions'
+import { fetchStockData, selectStock } from '../../redux/actions'
 
 
 const Logic = () => {
@@ -26,7 +26,7 @@ const Logic = () => {
     }
 
     const handleClick = () => {
-        dispatch(fetchStockData(state.symbol))
+        dispatch(selectStock(state.symbol))
     }
 
     useEffect(() => {

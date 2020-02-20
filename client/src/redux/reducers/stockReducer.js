@@ -1,21 +1,30 @@
-import { FETCH_STOCK_PRICE, } from "../actionTypes"
+import { FETCH_STOCK_PRICE, SELECT_STOCK, REMOVE_STOCK } from "../actionTypes"
 
 const initialState = {
-    stocksSelected: [],
+    stocksSelected: {},
     stocks: {}
 }
 
 const stockReducer = (state = initialState, action) => {
 
     switch (action.type) {
-        case FETCH_STOCK_PRICE:
+        case SELECT_STOCK:
             const { symbol } = action.data
-            const stock = { [symbol]: action.data.historical }
+
+            if (!state.stocksSelected[symbol])
+                return {
+                    ...state,
+                    stocksSelected: { ...state.stocksSelected, [symbol]: action.data }
+                }
+            else return { ...state }
+
+        case REMOVE_STOCK:
+            const newStocksSelected = { ...state.stocksSelected }
+            delete newStocksSelected[action.data]
             return {
                 ...state,
-                stocks: { ...stock }
+                stocksSelected: { ...newStocksSelected }
             }
-
         default:
             return state
     }

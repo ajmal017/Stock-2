@@ -1,4 +1,4 @@
-import { FETCH_STOCK_PRICE, SET_ERROR } from './actionTypes'
+import { FETCH_STOCK_PRICE, SET_ERROR, SELECT_STOCK, REMOVE_STOCK } from './actionTypes'
 import axios from 'axios'
 import { STOCK_PRICE_URL } from '../api'
 
@@ -14,5 +14,13 @@ export const fetchStockData = (symbol) => async dispatch => {
     }
 }
 
+
+export const selectStock = (symbol) => {
+    return { type: SELECT_STOCK, data: symbol }
+}
+
+export const removeStock = symbol => {
+    return { type: REMOVE_STOCK, data: symbol }
+}
 
 
