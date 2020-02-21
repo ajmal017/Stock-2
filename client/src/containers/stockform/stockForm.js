@@ -12,7 +12,7 @@ const form = () => {
     return (
         <Container className={style.container}>
             <Row className={style.row}>
-                <Col md={8}>
+                <Col md={8} lg={6}>
                     <form onSubmit={handleClick}>
                         <Autocomplete
                             className={style.TextField}
@@ -25,7 +25,7 @@ const form = () => {
                                 handleChange(newValue);
                             }}
                             renderInput={params => (
-                                <TextField {...params} label="Type a company    " margin="normal" fullWidth />
+                                <TextField {...params} label="Type a company " margin="normal" fullWidth />
                             )}
                         />
                         <Button className={style.button} color="primary" variant='contained' size='large'
