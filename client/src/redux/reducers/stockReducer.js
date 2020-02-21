@@ -10,6 +10,7 @@ const stockReducer = (state = initialState, action) => {
     switch (action.type) {
         case SELECT_STOCK:
             const { symbol } = action.data
+            console.log('reducer', symbol)
 
             if (!state.stocksSelected[symbol])
                 return {

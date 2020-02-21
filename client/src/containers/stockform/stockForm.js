@@ -6,14 +6,14 @@ import Autocomplete from '@material-ui/lab/Autocomplete';
 import logic from './logic'
 
 const form = () => {
-    const { state, handleChange, handleClick } = logic()
+    const { state, handleChange, handleClick, isDisabled } = logic()
     const { symbol } = state
 
     return (
         <Container className={style.container}>
             <Row className={style.row}>
                 <Col md={8}>
-                    <form>
+                    <form onSubmit={handleClick}>
                         <Autocomplete
                             className={style.TextField}
                             id="select-stock"
@@ -29,7 +29,7 @@ const form = () => {
                             )}
                         />
                         <Button className={style.button} color="primary" variant='contained' size='large'
-                            onClick={handleClick}>save</Button>
+                            onClick={handleClick} type='button'>save</Button>
                     </form>
                 </Col>
             </Row>

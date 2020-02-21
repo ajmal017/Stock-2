@@ -16,6 +16,7 @@ export const fetchStockData = (symbol) => async dispatch => {
 
 
 export const selectStock = (symbol) => {
+    console.log('action', symbol)
     return { type: SELECT_STOCK, data: symbol }
 }
 
