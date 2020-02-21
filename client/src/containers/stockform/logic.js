@@ -1,26 +1,29 @@
 import React, { useState, useEffect } from "react";
 import axios from 'axios'
 import { useDispatch, useSelector } from "react-redux";
-import { fetchStockData, selectStock } from '../../redux/actions'
+import { fetchStockPrice, selectStock } from '../../redux/actions'
 import stocks from './stocksList'
 
 
 const Logic = () => {
     const [state, setState] = useState({
         symbol: {},
-        label: "",
         stocks: stocks
     });
     const dispatch = useDispatch();
+    const symbols = useSelector(state => state.stockReducer.stocksSelected)
 
     const handleChange = symbol => {
         setState({ ...state, symbol });
     };
 
     const handleClick = (e) => {
-        console.log(e)
         e.preventDefault()
-        dispatch(selectStock(state.symbol))
+        const symbol = { ...state.symbol }
+        if (!symbols[symbol]) {
+            dispatch(selectStock(symbol))
+            dispatch(fetchStockPrice(state.symbol.symbol))
+        }
     }
 
     return { state, handleChange, handleClick }

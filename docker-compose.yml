@@ -11,6 +11,8 @@ services:
     volumes:
       - /app/node_modules
       - ./calculator:/app
+    ports:
+      - "8080:80"
 
   client:
     container_name: client

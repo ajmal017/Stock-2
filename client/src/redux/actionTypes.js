@@ -1,4 +1,5 @@
 export const FETCH_STOCK_PRICE = 'FETCH_STOCK_PRICE'
+export const REMOVE_STOCK_PRICE = 'REMOVE_STOCK_PRICE'
 export const SELECT_STOCK = 'SELECT_STOCK'
 export const REMOVE_STOCK = 'REMOVE_STOCK'
 export const SET_ERROR = 'SET_ERROR'

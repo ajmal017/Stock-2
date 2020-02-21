@@ -1,16 +1,25 @@
 from fastapi import FastAPI
 from starlette.config import Config
 from api import price
+from starlette.middleware.cors import CORSMiddleware
 
 config = Config(".env")
 
 app = FastAPI(debug='DEBUG', cas=bool, default=False)
 
 
-# @app.get('/stock/{symbol}')
-# async def simple_return(symbol):
-#     stock = Pricer(symbol)
-#     daily_close_price = stock.get_price()
-#     return daily_close_price
+origins = [
+    "http://localhost:3000",
+    "http://localhost:8080",
+]
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=origins,
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+
 
 app.include_router(price.router)
