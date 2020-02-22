@@ -1,6 +1,6 @@
 import React from 'react'
 import logic from './logic'
-import { Card, CardContent, Paper } from '@material-ui/core'
+import { Paper } from '@material-ui/core'
 import { Container, Row, Col } from 'react-bootstrap'
 import TrendingUpRoundedIcon from '@material-ui/icons/TrendingUpRounded';
 import TrendingDownRoundedIcon from '@material-ui/icons/TrendingDownRounded';
@@ -19,9 +19,9 @@ const StockCard = ({ data, handleDelete }) => {
             <Container fluid className={style.container}>
 
                 <Row className={style.topRow}>
-                    <p className={style.symbol}> <DeleteForeverOutlinedIcon color='secondary' onClick={() => handleDelete(data.symbol)} />
+                    <DeleteForeverOutlinedIcon color='secondary' onClick={() => handleDelete(data.symbol)} />
 
-                        {data.symbol}</p>
+                    <h5 className={style.symbol}> {data.symbol}</h5>
                     {icon}
                 </Row>
                 <Row className={style.middleRow}>

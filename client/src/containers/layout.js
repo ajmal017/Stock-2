@@ -12,6 +12,7 @@ const layout = () => {
             <TopBox></TopBox>
             <Form></Form>
             <StockCard></StockCard>
+            <LineChart></LineChart>
         </div>
 
     )

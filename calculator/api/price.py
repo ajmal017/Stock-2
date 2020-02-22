@@ -30,7 +30,10 @@ async def get_price_history(body:Symbols):
         for symbol in symbols:
             response = r.get_stock_price(symbol)
             myData[symbol] = pd.DataFrame(response['historical']).set_index('date')['close']
-        return {myData.reset_index().to_json(orient='records')}
+            
+        data = myData.reset_index().to_dict(orient='records')
+        
+        return data
     except Exception as err:
         raise HTTPException(status_code=400, detail=str(err))
 

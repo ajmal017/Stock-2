@@ -2,6 +2,7 @@ import { FETCH_STOCK_PRICE, SELECT_STOCK, REMOVE_STOCK, SET_ERROR, REMOVE_STOCK_
 
 const initialState = {
     stockPriceHistory: [],
+    stocksList: ['HPQ'],
     stocksSelected: {
         HPQ: {
             symbol: 'HPQ',
@@ -38,7 +39,8 @@ const stockReducer = (state = initialState, action) => {
             const { symbol } = action.data
             return {
                 ...state,
-                stocksSelected: { ...state.stocksSelected, [symbol]: action.data }
+                stocksSelected: { ...state.stocksSelected, [symbol]: action.data },
+                stocksList: [...state.stocksList, action.data.symbol]
             }
 
 
@@ -47,7 +49,9 @@ const stockReducer = (state = initialState, action) => {
             delete newStocksSelected[action.data]
             return {
                 ...state,
-                stocksSelected: { ...newStocksSelected }
+                stocksSelected: { ...newStocksSelected },
+                stocksList: state.stocksList.filter(item => item !== action.data)
+
             }
 
         case FETCH_STOCK_PRICE:
@@ -67,12 +71,12 @@ const stockReducer = (state = initialState, action) => {
         case FETCH_STOCK_PRICE_HISTORY:
             return {
                 ...state,
-                stockPriceHistory: [...state.stockPriceHistory, ...action.data]
+                stockPriceHistory: [...action.data]
             }
 
 
         case SET_ERROR:
-            return { ...state, error: [...state.error, action.data] }
+            return { ...state }
         default:
             return state
     }
