@@ -1,4 +1,4 @@
-import { FETCH_STOCK_PRICE, SET_ERROR, SELECT_STOCK, REMOVE_STOCK, REMOVE_STOCK_PRICE } from './actionTypes'
+import { FETCH_STOCK_PRICE, SET_ERROR, SELECT_STOCK, REMOVE_STOCK, REMOVE_STOCK_PRICE, FETCH_STOCK_PRICE_HISTORY } from './actionTypes'
 import axios from 'axios'
 import { STOCK_PRICE_URL } from '../api'
 
@@ -20,10 +20,10 @@ export const fetchStockPrice = (symbol) => async dispatch => {
         const res = await axios.get(`${STOCK_PRICE_URL}/${symbol}`)
 
         console.log('stock fetched', res.data)
-        dispatch({ type: FETCH_STOCK_PRICE, data: res.data })
+        return dispatch({ type: FETCH_STOCK_PRICE, data: res.data })
     } catch (error) {
         console.log(error)
-        dispatch({ type: SET_ERROR, data: error })
+        return dispatch({ type: SET_ERROR, data: error })
     }
 }
 
@@ -31,5 +31,19 @@ export const removeStockPrice = symbol => {
     return { type: REMOVE_STOCK_PRICE, data: symbol }
 }
 
+
+// fetch history price of stocks
+
+export const fetchStockPriceHistory = symbols => async dispatch => {
+    try {
+        const res = await axios.post(`${STOCK_PRICE_HISTORY_URL}`, { symbols })
+        return dispatch({ type: FETCH_STOCK_PRICE_HISTORY, data: res.data })
+
+    } catch (error) {
+        return dispatch({ type: SET_ERROR, data: error })
+    }
+
+
+}
 
 

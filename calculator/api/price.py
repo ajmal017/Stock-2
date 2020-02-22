@@ -1,8 +1,13 @@
 from fastapi import APIRouter, HTTPException
+from pydantic import BaseModel
+from typing import List
 import pandas as pd
 from utils import requester
 
 router = APIRouter()
+
+class Symbols(BaseModel):
+    symbols: List[str] = []
 
 
 @router.get('/stockPrice/{symbol}')
@@ -15,6 +20,20 @@ async def get_price(symbol:str):
         return {symbol:data}
     except Exception as err:
         raise HTTPException(status_code=400, detail=str(err))
+
+@router.post('/stockPriceHistory')
+async def get_price_history(body:Symbols):
+    try:
+        symbols = body.symbols
+        myData=pd.DataFrame()
+        r = requester.Requester()
+        for symbol in symbols:
+            response = r.get_stock_price(symbol)
+            myData[symbol] = pd.DataFrame(response['historical']).set_index('date')['close']
+        return {myData.reset_index().to_json(orient='records')}
+    except Exception as err:
+        raise HTTPException(status_code=400, detail=str(err))
+
 
 
 # @router.get('/stock/{symbol}')

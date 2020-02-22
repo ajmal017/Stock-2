@@ -8,11 +8,11 @@ import StockCard from './stockCard/stockCard'
 
 const layout = () => {
     return (
-        <Fragment>
+        <div style={{ backgroundColor: "#EEF5F9" }}>
             <TopBox></TopBox>
             <Form></Form>
             <StockCard></StockCard>
-        </Fragment>
+        </div>
 
     )
 }

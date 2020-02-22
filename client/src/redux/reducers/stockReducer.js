@@ -1,6 +1,7 @@
-import { FETCH_STOCK_PRICE, SELECT_STOCK, REMOVE_STOCK, SET_ERROR, REMOVE_STOCK_PRICE } from "../actionTypes"
+import { FETCH_STOCK_PRICE, SELECT_STOCK, REMOVE_STOCK, SET_ERROR, REMOVE_STOCK_PRICE, FETCH_STOCK_PRICE_HISTORY } from "../actionTypes"
 
 const initialState = {
+    stockPriceHistory: [],
     stocksSelected: {
         HPQ: {
             symbol: 'HPQ',
@@ -61,6 +62,12 @@ const stockReducer = (state = initialState, action) => {
             return {
                 ...state,
                 stocks: { ...newStocks }
+            }
+
+        case FETCH_STOCK_PRICE_HISTORY:
+            return {
+                ...state,
+                stockPriceHistory: [...state.stockPriceHistory, ...action.data]
             }
 
 
