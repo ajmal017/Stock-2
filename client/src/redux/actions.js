@@ -1,6 +1,6 @@
-import { FETCH_STOCK_PRICE, SET_ERROR, SELECT_STOCK, REMOVE_STOCK, REMOVE_STOCK_PRICE, FETCH_STOCK_PRICE_HISTORY } from './actionTypes'
+import { FETCH_STOCK_PRICE, SET_ERROR, SELECT_STOCK, REMOVE_STOCK, REMOVE_STOCK_PRICE, FETCH_STOCK_PRICE_HISTORY, FETCH_STOCK_PRICE_CHANGE } from './actionTypes'
 import axios from 'axios'
-import { STOCK_PRICE_URL, STOCK_PRICE_HISTORY_URL } from '../api'
+import { STOCK_PRICE_URL, STOCK_PRICE_HISTORY_URL, STOCK_PRICE_CHANGE_URL } from '../api'
 
 
 // Add stock for chips
@@ -40,8 +40,16 @@ export const fetchStockPriceHistory = symbols => async dispatch => {
     } catch (error) {
         return dispatch({ type: SET_ERROR, data: error })
     }
+}
 
-
+// fetch price history
+export const fetchStockPriceChange = symbols => async dispatch => {
+    try {
+        const res = await axios.post(`${STOCK_PRICE_CHANGE_URL}`, { symbols })
+        return dispatch({ type: FETCH_STOCK_PRICE_CHANGE, data: res.data })
+    } catch (error) {
+        return dispatch({ type: SET_ERROR, data: error })
+    }
 }
 
 

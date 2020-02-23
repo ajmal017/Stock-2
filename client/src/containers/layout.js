@@ -1,18 +1,21 @@
 import React, { Fragment } from 'react'
-import LineChart from './lineChart/lineChart'
+import HistoricPrice from './historicPrice/historicPrice'
+import PriceChange from './PriceChange/priceChange'
 import TopBox from './topBox/topBox'
 import Form from './stockform/stockForm'
-import Chips from './chips/chip'
 import StockCard from './stockCard/stockCard'
+import Chips from './chips/chip'
 
 
 const layout = () => {
     return (
         <div style={{ backgroundColor: "#EEF5F9" }}>
             <TopBox></TopBox>
+            <Chips></Chips>
             <Form></Form>
             <StockCard></StockCard>
-            <LineChart></LineChart>
+            <HistoricPrice></HistoricPrice>
+            <PriceChange></PriceChange>
         </div>
 
     )

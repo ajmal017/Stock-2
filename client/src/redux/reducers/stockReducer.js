@@ -1,7 +1,9 @@
-import { FETCH_STOCK_PRICE, SELECT_STOCK, REMOVE_STOCK, SET_ERROR, REMOVE_STOCK_PRICE, FETCH_STOCK_PRICE_HISTORY } from "../actionTypes"
+import { FETCH_STOCK_PRICE, SELECT_STOCK, REMOVE_STOCK, SET_ERROR, REMOVE_STOCK_PRICE, FETCH_STOCK_PRICE_HISTORY, FETCH_STOCK_PRICE_CHANGE } from "../actionTypes"
+import { STOCK_PRICE_CHANGE_URL } from "../../api"
 
 const initialState = {
     stockPriceHistory: [],
+    stockPriceChange: [],
     stocksList: ['HPQ'],
     stocksSelected: {
         HPQ: {
@@ -72,6 +74,12 @@ const stockReducer = (state = initialState, action) => {
             return {
                 ...state,
                 stockPriceHistory: [...action.data]
+            }
+
+        case FETCH_STOCK_PRICE_CHANGE:
+            return {
+                ...state,
+                stockPriceChange: [...action.data]
             }
 
 

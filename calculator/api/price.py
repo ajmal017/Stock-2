@@ -25,20 +25,36 @@ async def get_price(symbol:str):
 async def get_price_history(body:Symbols):
     try:
         symbols = body.symbols
-        myData=pd.DataFrame()
+        df=pd.DataFrame()
         r = requester.Requester()
         for symbol in symbols:
             response = r.get_stock_price(symbol)
-            myData[symbol] = pd.DataFrame(response['historical']).set_index('date')['close']
+            df[symbol] = pd.DataFrame(response['historical']).set_index('date')['close']
             
-        data = myData.reset_index().to_dict(orient='records')
+        data = df.reset_index().to_dict(orient='records')
         
         return data
     except Exception as err:
         raise HTTPException(status_code=400, detail=str(err))
 
 
+@router.post('/stockPriceChange')
+async def get_price_change(body:Symbols):
+    try:
+        symbols=body.symbols
+        df=pd.DataFrame()
+        r = requester.Requester()
+        for symbol in symbols:
+            response = r.get_stock_price(symbol)
+            df[symbol]=pd.DataFrame(response['historical']).set_index('date')['close'].pct_change()
+        df.dropna(axis=0,how='any',inplace=True)
+        df = df.round(3)
+        data = df.reset_index().to_dict(orient='records')
+        return data
+    except Exception as err:
+        raise HTTPException(status_code=400, details=str(err))
 
+    
 # @router.get('/stock/{symbol}')
 # async def get_price(symbol: str):
 #     try:
