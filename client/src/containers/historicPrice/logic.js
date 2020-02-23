@@ -8,12 +8,8 @@ const Logic = () => {
     const stockPriceHistory = useSelector(state => state.stockReducer.stockPriceHistory);
     const dispatch = useDispatch()
 
-    const fetchPriceHistory = () => {
-        dispatch(fetchStockPriceHistory(stocks))
-    }
-
     useEffect(() => {
-        fetchPriceHistory()
+        dispatch(fetchStockPriceHistory(stocks))
     }, [stocks])
 
 

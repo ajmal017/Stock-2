@@ -1,6 +1,9 @@
-import { FETCH_STOCK_PRICE, SET_ERROR, SELECT_STOCK, REMOVE_STOCK, REMOVE_STOCK_PRICE, FETCH_STOCK_PRICE_HISTORY, FETCH_STOCK_PRICE_CHANGE } from './actionTypes'
+import {
+    FETCH_STOCK_PRICE, SET_ERROR, SELECT_STOCK, REMOVE_STOCK, REMOVE_STOCK_PRICE,
+    FETCH_STOCK_PRICE_HISTORY, FETCH_STOCK_PRICE_CHANGE, FETCH_STOCK_RISK_RETURN
+} from './actionTypes'
 import axios from 'axios'
-import { STOCK_PRICE_URL, STOCK_PRICE_HISTORY_URL, STOCK_PRICE_CHANGE_URL } from '../api'
+import { STOCK_PRICE_URL, STOCK_PRICE_HISTORY_URL, STOCK_PRICE_CHANGE_URL, STOCK_RISK_RETURN_URL } from '../api'
 
 
 // Add stock for chips
@@ -47,6 +50,15 @@ export const fetchStockPriceChange = symbols => async dispatch => {
     try {
         const res = await axios.post(`${STOCK_PRICE_CHANGE_URL}`, { symbols })
         return dispatch({ type: FETCH_STOCK_PRICE_CHANGE, data: res.data })
+    } catch (error) {
+        return dispatch({ type: SET_ERROR, data: error })
+    }
+}
+
+export const fetchStockRiskReturn = symbols => async  dispatch => {
+    try {
+        const res = await axios.post(STOCK_RISK_RETURN_URL, { symbols })
+        return dispatch({ type: FETCH_STOCK_RISK_RETURN, data: res.data })
     } catch (error) {
         return dispatch({ type: SET_ERROR, data: error })
     }
