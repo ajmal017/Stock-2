@@ -5,8 +5,7 @@ import TopBox from './topBox/topBox'
 import Form from './stockform/stockForm'
 import StockCard from './stockCard/stockCard'
 import Chips from './chips/chip'
-import RiskReturnBarplot from './riskReturn/riskReturnBarplot'
-import RiskReturnBarPlot from './riskReturn/riskReturnBarplot'
+import RiskReturnBarplot from './riskReturn/layout'
 
 
 const layout = () => {
@@ -18,7 +17,7 @@ const layout = () => {
             <StockCard></StockCard>
             <HistoricPrice></HistoricPrice>
             <PriceChange></PriceChange>
-            <RiskReturnBarPlot></RiskReturnBarPlot>
+            <RiskReturnBarplot></RiskReturnBarplot>
         </div>
 
     )

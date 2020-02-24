@@ -4,6 +4,7 @@ from typing import List
 import pandas as pd
 import numpy as np
 from utils import requester
+from utils import framer
 
 router = APIRouter()
 
@@ -81,26 +82,40 @@ async def get_risk_return(body:Symbols):
         raise HTTPException(status_code=400, details=str(err))
 
     
-# @router.get('/stock/{symbol}')
-# async def get_price(symbol: str):
-#     try:
-#         r = requester.Requester()
-#         data =r.get_stock_price(symbol)
-    
+@router.post('/portfolioRiskReturn')
+def get_portfolio_risk_return(body:Symbols):
+    symbols=body.symbols
+    df=pd.DataFrame()
+    r = requester.Requester()
+    for symbol in symbols:
+        response = r.get_stock_price(symbol)
+        df[symbol]=pd.DataFrame(response['historical']).set_index('date')['close']
+    returns = (df/df.shift(1))-1
+    ratio = 100/len(symbols)/100
+    weights=np.array([])
+    for symbol in symbols:
+        weights= np.append(weights,[ratio])
+    annual_returns=returns.mean()*252
+    portfolio=(round(np.dot(annual_returns, weights), 5) * 100)
+    sec_returns = np.log(df/df.shift(1))
+    portfolio_volatility = (np.dot(weights.T, np.dot(sec_returns.cov() * 250, weights))) ** 0.5
 
-#         df = pd.DataFrame(data['historical'])
-#         df['date'] = pd.to_datetime(df['date'])
-#         df['daily_return'] = (df['close']/df['close'].shift(1))-1
-#         df['pct_daily_change'] = df['close'].pct_change()
-#         annual_return = round(df['daily_return'].mean() * 250, 3)
 
-#         return {
-#             'annual_return': annual_return,
-#             'company': symbol,
-#             'daily_closing_price': list(df['close']),
-#             'trading_dates': list(df['date'].dt.date),
-#             'volume':list(df['volume'])
-#         }        
-#     except Exception as err:
-#         print(err)
-#         raise HTTPException(status_code=400, detail=str(err))
+
+@router.post('/financialMetrics')
+def get_financial_metrics(body:Symbols):
+    r = requester.Requester()
+    df = framer.DataFramer(body.symbols,r)
+    price_history = df.get_stock_price_history()
+    price_history_change = df.get_stock_price_history_change()
+    stock_annual_log_risk_return = df.get_stocks_annual_log_risk_returns()
+
+    return{
+        'price_history':price_history,
+        'price_history_change':price_history_change,
+        'stock_annual_log_risk_return':stock_annual_log_risk_return
+    }
+
+
+
+

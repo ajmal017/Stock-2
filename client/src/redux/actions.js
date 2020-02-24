@@ -19,10 +19,7 @@ export const removeStock = symbol => {
 // add stock for cards with today's price
 export const fetchStockPrice = (symbol) => async dispatch => {
     try {
-        console.log('fetching data of stock', symbol)
         const res = await axios.get(`${STOCK_PRICE_URL}/${symbol}`)
-
-        console.log('stock fetched', res.data)
         return dispatch({ type: FETCH_STOCK_PRICE, data: res.data })
     } catch (error) {
         console.log(error)
@@ -63,5 +60,8 @@ export const fetchStockRiskReturn = symbols => async  dispatch => {
         return dispatch({ type: SET_ERROR, data: error })
     }
 }
+
+
+export const fetchAggregator = symbols => { }
 
 
