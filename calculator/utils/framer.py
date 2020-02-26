@@ -20,6 +20,7 @@ class DataFramer:
         df=pd.DataFrame()
         tickers = yf.Tickers(self.symbols_as_str)
         df = tickers.download(period='max')['Close']
+        df = df.dropna(how='any').resample('Y').mean()
         df['year'] = df.index.year
         df = df.dropna(how='any').reset_index()
         df['Date']=pd.to_datetime(df['Date']).dt.date
@@ -45,8 +46,8 @@ class DataFramer:
      
     
     def get_stocks_annual_log_risk_returns(self):
-        risk = round(self.log_returns_df[self.symbols].std()*250**0.5*100,2).tolist()
-        returns = round(self.log_returns_df[self.symbols].mean()*250*100,2).tolist()
+        risk = round(self.log_returns_df[self.symbols].std()**0.5*100,2).tolist()
+        returns = round(self.log_returns_df[self.symbols].mean()*100,2).tolist()
         print(returns)
         data = []
         for index,symbol in enumerate(self.symbols):

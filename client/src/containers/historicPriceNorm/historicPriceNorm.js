@@ -7,7 +7,7 @@ const HistoricPrice = () => {
     const { stockPriceHistory, stocks } = logic()
     return (
         <LinChart data={stockPriceHistory} stocks={stocks} xInterval="preserveStartEnd"
-            dataKey="Date" xInterval={300} width={3} tickFormatter={value => value.toString().slice(0, 4)}></LinChart>
+            dataKey="Date" width={3} tickFormatter={value => value.toString().slice(0, 4)}></LinChart>
     );
 }
 

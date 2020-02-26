@@ -7,7 +7,7 @@ const PriceChang = () => {
     const { stockPriceChange, stocks } = logic()
     console.log('sotckprice change', stockPriceChange)
     return (
-        <LinChart data={stockPriceChange} stocks={stocks} width={1.5} dataKey="Date"></LinChart>
+        <LinChart data={stockPriceChange} stocks={stocks} xInterval={1} tickFormatter={value => value.toString().slice(0, 4)} width={1.5} dataKey="Date"></LinChart>
     );
 }
 
