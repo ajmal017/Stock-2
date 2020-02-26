@@ -1,5 +1,5 @@
 import {
-    FETCH_STOCK_PRICE, SET_ERROR, SELECT_STOCK, REMOVE_STOCK, REMOVE_STOCK_PRICE,
+    FETCH_CARDS, SET_ERROR, SELECT_STOCK, REMOVE_STOCK, REMOVE_STOCK_PRICE,
     FETCH_STOCK_PRICE_HISTORY, FETCH_STOCK_PRICE_CHANGE, FETCH_STOCK_RISK_RETURN,
     SET_LOADING_FALSE, SET_LOADING_TRUE, FETCH_STOCK_PRICE_NORMALIZED
 } from './actionTypes'
@@ -14,7 +14,7 @@ export const getMetrics = symbols => async dispatch => {
         const res = await axios.post(STOCK_METRICS, { symbols })
         batch(() => {
             dispatch({ type: SELECT_STOCK, data: res.data.symbols })
-            dispatch({ type: FETCH_STOCK_PRICE, data: res.data.price_history[-1] })
+            dispatch({ type: FETCH_CARDS, data: res.data.price_history[-1] })
             dispatch({ type: FETCH_STOCK_PRICE_HISTORY, data: res.data.price_history })
             dispatch({ type: FETCH_STOCK_PRICE_CHANGE, data: res.data.price_history_change })
             dispatch({ type: FETCH_STOCK_PRICE_NORMALIZED, data: res.data.price_history_normalized })
@@ -42,7 +42,7 @@ export const removeStock = symbol => {
 export const fetchStockPrice = (symbol) => async dispatch => {
     try {
         const res = await axios.get(`${STOCK_PRICE_URL}/${symbol}`)
-        return dispatch({ type: FETCH_STOCK_PRICE, data: res.data })
+        return dispatch({ type: FETCH_CARDS, data: res.data })
     } catch (error) {
         console.log(error)
         return dispatch({ type: SET_ERROR, data: error })

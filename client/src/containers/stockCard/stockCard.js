@@ -46,11 +46,11 @@ const StockCards = () => {
     return (
         <Container fluid className={style.section}>
             <Row>
-                {Object.entries(stocks).map(([key, value]) => (
+                {/* {stocks.map((item, i) => (
                     <Col md={6} lg={4} xl={3} className={style.col}>
-                        <StockCard data={value} handleDelete={handleDelete}></StockCard>
+                        <StockCard data={item} handleDelete={handleDelete}></StockCard>
                     </Col>
-                ))}
+                ))} */}
             </Row>
         </Container>
     )

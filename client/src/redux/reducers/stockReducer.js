@@ -1,5 +1,5 @@
 import {
-    FETCH_STOCK_PRICE, SELECT_STOCK, REMOVE_STOCK, SET_ERROR, REMOVE_STOCK_PRICE,
+    FETCH_CARDS, SELECT_STOCK, REMOVE_STOCK, SET_ERROR, REMOVE_STOCK_PRICE,
     FETCH_STOCK_PRICE_HISTORY, FETCH_STOCK_PRICE_CHANGE, FETCH_STOCK_RISK_RETURN,
     SET_LOADING_FALSE, SET_LOADING_TRUE, FETCH_STOCK_PRICE_NORMALIZED
 } from "../actionTypes"
@@ -10,7 +10,7 @@ const initialState = {
     stockPriceNormalized: [],
     stockRiskReturn: [],
     symbolList: [],
-    cards: {},
+    cards: [],
     initialSymbols: ['GS', 'BAC'],
     loading: false
 }
@@ -36,10 +36,11 @@ const stockReducer = (state = initialState, action) => {
 
             }
 
-        case FETCH_STOCK_PRICE:
+        case FETCH_CARDS:
+            console.log('FETCH cards', action.data)
             return {
                 ...state,
-                cards: { ...state.cards, ...action.data }
+                cards: [action.data]
             }
 
         case REMOVE_STOCK_PRICE:
