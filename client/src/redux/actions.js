@@ -5,24 +5,25 @@ import {
 } from './actionTypes'
 import axios from 'axios'
 import { STOCK_PRICE_URL, STOCK_PRICE_HISTORY_URL, STOCK_PRICE_CHANGE_URL, STOCK_RISK_RETURN_URL, STOCK_METRICS } from '../api'
-
+import { batch } from 'react-redux'
 //Calculate metrics
 
 export const getMetrics = symbols => async dispatch => {
     try {
         dispatch({ type: SET_LOADING_TRUE })
         const res = await axios.post(STOCK_METRICS, { symbols })
-        dispatch({ type: SELECT_STOCK, data: res.data.symbols })
-        dispatch({ type: FETCH_STOCK_PRICE, data: res.data.price_history[-1] })
-        dispatch({ type: FETCH_STOCK_PRICE_HISTORY, data: res.data.price_history })
-        dispatch({ type: FETCH_STOCK_PRICE_CHANGE, data: res.data.price_history_change })
-        dispatch({ type: FETCH_STOCK_PRICE_NORMALIZED, data: res.data.price_history_normalized })
-        dispatch({ type: FETCH_STOCK_RISK_RETURN, data: res.data.stock_annual_log_risk_return })
-        dispatch({ type: SET_LOADING_FALSE })
+        batch(() => {
+            dispatch({ type: SELECT_STOCK, data: res.data.symbols })
+            dispatch({ type: FETCH_STOCK_PRICE, data: res.data.price_history[-1] })
+            dispatch({ type: FETCH_STOCK_PRICE_HISTORY, data: res.data.price_history })
+            dispatch({ type: FETCH_STOCK_PRICE_CHANGE, data: res.data.price_history_change })
+            dispatch({ type: FETCH_STOCK_PRICE_NORMALIZED, data: res.data.price_history_normalized })
+            dispatch({ type: FETCH_STOCK_RISK_RETURN, data: res.data.stock_annual_log_risk_return })
+            dispatch({ type: SET_LOADING_FALSE })
+        })
     } catch (error) {
         console.log(error)
         dispatch({ type: SET_LOADING_FALSE })
-
     }
 }
 

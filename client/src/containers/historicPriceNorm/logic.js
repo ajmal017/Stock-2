@@ -1,11 +1,10 @@
-import React, { useEffect } from 'react'
-import { fetchStockPriceHistory } from '../../redux/actions'
-import { useSelector, useDispatch, shallowEqual } from 'react-redux'
+import React from 'react'
+import { useSelector, shallowEqual } from 'react-redux'
 
 
 const Logic = () => {
-    const stocks = useSelector(state => state.stockReducer.symbolList);
-    const stockPriceHistory = useSelector(state => state.stockReducer.stockPriceNormalized);
+    const stocks = useSelector(state => (state.stockReducer.symbolList), shallowEqual);
+    const stockPriceHistory = useSelector(state => (state.stockReducer.stockPriceNormalized), shallowEqual);
     return { stockPriceHistory, stocks }
 }
 

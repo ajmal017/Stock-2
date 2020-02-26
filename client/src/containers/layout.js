@@ -1,30 +1,31 @@
-import React from 'react'
-import PricePlots from './lineplots/lineplots'
-
-import TopBox from './topBox/topBox'
-import Form from './stockform/stockForm'
-import StockCard from './stockCard/stockCard'
-import Chips from './chips/chip'
-import RiskReturnBarplot from './riskReturn/layout'
-import Spinner from './spinner/spinner'
+import React, { Suspense, lazy } from 'react'
 import { useSelector } from 'react-redux'
+import Spinner from './spinner/spinner'
 
+const TopBox = lazy(() => import('./topBox/topBox'))
+const Chips = lazy(() => import('./chips/chip'))
+const Form = lazy(() => import('./stockform/stockForm'))
+const StockCard = lazy(() => import('./stockCard/stockCard'))
+const PricePlots = lazy(() => import('./lineplots/lineplots'))
+const RiskReturnBarplot = lazy(() => import('./riskReturn/layout'))
 
 const Layout = () => {
     const loading = useSelector(state => state.stockReducer.loading)
-    // if (loading) return <Spinner></Spinner>
-    // else {
-    return (
-        <div style={{ backgroundColor: "#EEF5F9" }}>
-            <TopBox></TopBox>
-            <Chips></Chips>
-            <Form></Form>
-            <StockCard></StockCard>
-            <PricePlots></PricePlots>
-            <RiskReturnBarplot></RiskReturnBarplot>
-        </div>
-    )
+    if (loading) return <Spinner></Spinner>
+    else {
+        return (
+            <div style={{ backgroundColor: "#EEF5F9" }}>
+                <Suspense fallback={Spinner}>
+                    <TopBox></TopBox>
+                    <Chips></Chips>
+                    <Form></Form>
+                    <StockCard></StockCard>
+                    <PricePlots></PricePlots>
+                    <RiskReturnBarplot></RiskReturnBarplot>
+                </Suspense>
+            </div>
+        )
+    }
 }
-// }
 
 export default Layout

@@ -1,11 +1,10 @@
-import React, { useEffect } from 'react'
-import { useSelector, useDispatch } from 'react-redux'
-import { fetchStockRiskReturn } from '../../redux/actions'
+import React from 'react'
+import { useSelector, shallowEqual } from 'react-redux'
 
 
 const Logic = () => {
-    const stocks = useSelector(state => state.stockReducer.symbolList)
-    const riskReturn = useSelector(state => state.stockReducer.stockRiskReturn)
+    const stocks = useSelector(state => state.stockReducer.symbolList, shallowEqual)
+    const riskReturn = useSelector(state => state.stockReducer.stockRiskReturn, shallowEqual)
 
     return { stocks, riskReturn }
 

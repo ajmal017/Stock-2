@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch, useSelector, shallowEqual } from "react-redux";
 import { getMetrics } from '../../redux/actions'
 import stocks from './stocksList'
 
@@ -10,8 +10,8 @@ const Logic = () => {
         stocks: stocks
     });
     const dispatch = useDispatch();
-    const symbols = useSelector(state => state.stockReducer.symbolList)
-    const initialSymbols = useSelector(state => state.stockReducer.initialSymbols)
+    const symbols = useSelector(state => state.stockReducer.symbolList, shallowEqual)
+    const initialSymbols = useSelector(state => state.stockReducer.initialSymbols, shallowEqual)
 
     const handleChange = symbol => {
         setState({ ...state, symbol });
