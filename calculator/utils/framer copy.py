@@ -1,29 +1,19 @@
 import pandas as pd
 import numpy as np
-import yfinance as yf
 
 class DataFramer:
-    def __init__(self,symbols):
+    def __init__(self,symbols,requester):
         self.symbols = symbols
-        self.symbols_as_str = self.get_symbols_as_str(symbols)
+        self.requester = requester
         self.df = self.get_dataFrame()
         self.log_returns_df = self.get_log_returns_dataframe()
         self.weights = self.get_weights()
     
-    def get_symbols_as_str(self,symbols):
-        result= ''
-        for item in symbols:
-            result += item + ' '
-        return result
-    
     def get_dataFrame(self):
         df=pd.DataFrame()
-        tickers = yf.Tickers(self.symbols_as_str)
-        df = tickers.download(period='max')['Close']
-        df['year'] = df.index.year
-        df = df.dropna(how='any').reset_index()
-        df['Date']=pd.to_datetime(df['Date']).dt.date
-        df.set_index('Date',inplace=True)
+        for symbol in self.symbols:
+            response = self.requester.get_stock_price(symbol)
+            df[symbol]=pd.DataFrame(response['historical']).set_index('date')['close']
         return df
 
     def get_log_returns_dataframe(self):
@@ -35,19 +25,14 @@ class DataFramer:
         stock_price_history = self.df.reset_index().to_dict(orient='records')
         return stock_price_history
 
-    def get_stock_price_history_normalized(self):
-        stock_price_history_normalized = (self.df / self.df.iloc[0] * 100).round(3).reset_index().to_dict(orient='records')
-        return stock_price_history_normalized
-
     def get_stock_price_history_change(self):
-        stock_price_history_change = self.df.pct_change().dropna(how='any').round(3).reset_index().to_dict(orient='records')
+        stock_price_history_change = self.df.pct_change().dropna(axis=0,how='any').round(3).reset_index().to_dict(orient='records')
         return stock_price_history_change
      
     
     def get_stocks_annual_log_risk_returns(self):
-        risk = round(self.log_returns_df[self.symbols].std()*250**0.5*100,2).tolist()
-        returns = round(self.log_returns_df[self.symbols].mean()*250*100,2).tolist()
-        print(returns)
+        risk = round((self.log_returns_df[self.symbols].std()*250**0.5*100),2).tolist()
+        returns = round((self.log_returns_df[self.symbols].mean()*252*100),2).tolist()
         data = []
         for index,symbol in enumerate(self.symbols):
             dictionary = {}

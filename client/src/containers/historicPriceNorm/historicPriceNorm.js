@@ -12,7 +12,4 @@ const HistoricPrice = () => {
 }
 
 
-
-
-
 export default HistoricPrice

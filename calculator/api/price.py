@@ -102,18 +102,22 @@ def get_portfolio_risk_return(body:Symbols):
 
 
 
-@router.post('/financialMetrics')
+@router.post('/stockMetrics')
 def get_financial_metrics(body:Symbols):
-    r = requester.Requester()
-    df = framer.DataFramer(body.symbols,r)
+    df = framer.DataFramer(body.symbols)
     price_history = df.get_stock_price_history()
     price_history_change = df.get_stock_price_history_change()
+    price_history_normalized = df.get_stock_price_history_normalized()
     stock_annual_log_risk_return = df.get_stocks_annual_log_risk_returns()
+    symbols = body.symbols
 
+    
     return{
         'price_history':price_history,
         'price_history_change':price_history_change,
-        'stock_annual_log_risk_return':stock_annual_log_risk_return
+        'price_history_normalized':price_history_normalized,
+        'stock_annual_log_risk_return':stock_annual_log_risk_return,
+        'symbols':symbols
     }
 
 

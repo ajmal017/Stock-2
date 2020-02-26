@@ -5,8 +5,9 @@ import LinChart from '../lineChart/lineChart'
 
 const PriceChang = () => {
     const { stockPriceChange, stocks } = logic()
+    console.log('sotckprice change', stockPriceChange)
     return (
-        <LinChart data={stockPriceChange} stocks={stocks} xInterval={180} width={1.5} ></LinChart>
+        <LinChart data={stockPriceChange} stocks={stocks} width={1.5} dataKey="Date"></LinChart>
     );
 }
 

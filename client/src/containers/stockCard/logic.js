@@ -4,7 +4,7 @@ import { useSelector, useDispatch } from 'react-redux'
 
 
 const Logic = () => {
-    const stocks = useSelector(state => state.stockReducer.stocks)
+    const stocks = useSelector(state => state.stockReducer.cards)
     const dispatch = useDispatch()
 
     const handleDelete = (symbol) => {

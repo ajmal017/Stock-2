@@ -4,13 +4,8 @@ import { fetchStockRiskReturn } from '../../redux/actions'
 
 
 const Logic = () => {
-    const stocks = useSelector(state => state.stockReducer.stocksList)
+    const stocks = useSelector(state => state.stockReducer.symbolList)
     const riskReturn = useSelector(state => state.stockReducer.stockRiskReturn)
-    const dispatch = useDispatch()
-
-    useEffect(() => {
-        dispatch(fetchStockRiskReturn(stocks))
-    }, [stocks])
 
     return { stocks, riskReturn }
 
