@@ -19,7 +19,7 @@ router = APIRouter()
 @router.post('/financialMetrics', response_model=FinancialMetricsOut)
 async def calculate_financial_metrics(metrics: FinancialMetricsIn):
     try:
-        tickers = []
+        # Initialising objects
         filterer = HistoricalDataFilterFactory().factory()
         requester = RequesterFactory().factory()
         dataframer = DataframerFactory().factory()
@@ -30,22 +30,40 @@ async def calculate_financial_metrics(metrics: FinancialMetricsIn):
         normalized_price = HistoryPriceNormalizedFactory().factory()
         dict_converter = DictionaryConverterFactory().factory()
 
+        # these array will hold all the ticker entities
+        # a ticker is a company with a dataframe with data
+        tickers = []
+
         for tick in metrics.tickers:
+            # creating ticker (company object to hold data)
             ticker = TickerFactory().factory(tick)
+
+            # creating url to fetch historical data
             url_creator = UrlPriceCreatorFactory().factory(ticker.get_ticker())
             url = url_creator.create_url()
+            # fetching data
             response = requester.get_data(url)
+            # filtering response
             filtered_response = filterer.filter(response, 'history')
+            # creating a pandas frame and moving it to the ticker entity
             ticker.dataframe = dataframer.create_dataframe(filtered_response)
+            # pushing data to array with all ticker entities
             tickers.append(ticker)
 
-        df_close = DataFrameJoiner.join_dataframes(tickers, HISTORICAL_DATA.CLOSE.value)
-        print(df_close.head(2))
+        # joining dataframes of each ticker. The ['close'] column is taken from each each dataframe
+        df_close = DataFrameJoiner.join_dataframes(
+            tickers, HISTORICAL_DATA.CLOSE.value)
+
+        # composing calculator with formulas -> composite pattern
         calculator.add_formula(annual_mean_log_returns_formula)
         calculator.add_formula(normalized_price)
+        # composing calculator with data
         calculator.add_data(df_close)
 
+        # executing all formulas in calculator and unpacking it
         annual_mean_log_returns, normalized_price = calculator.calculate()
+
+        # resampling to yearly frequency
         annual_price = annual_resampler.calculate(df_close)
         price_history_normalized = annual_resampler.calculate(normalized_price)
 
