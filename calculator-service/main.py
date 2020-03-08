@@ -2,7 +2,7 @@ from fastapi import FastAPI
 from starlette.config import Config
 from starlette.middleware.cors import CORSMiddleware
 
-from api import financial_metrics_resource, price
+from api import financial_metrics_resource
 
 config = Config(".env")
 

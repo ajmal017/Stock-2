@@ -10,7 +10,7 @@ services:
       - docker.env
     volumes:
       - /app/node_modules
-      - ./calculator:/app
+      - ./calculator-service:/app
     ports:
       - "8080:80"
 
@@ -22,7 +22,7 @@ services:
       - docker.env
     volumes:
       - /app/node_modules
-      - ./client:/app
+      - ./client-service:/app
     ports:
       - "3000:3000"
     
