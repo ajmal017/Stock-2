@@ -28,12 +28,12 @@ You can run the tests of each service through "npm run test:local".
 
 ### Services Description
 
-- Identity: It manages the credentials of the customers through JWT tokens. Users can login with google credentials.
-- Orchestrator: It orchestrates fetching the stocks data and calculations
+<!-- - Identity: It manages the credentials of the customers through JWT tokens. Users can login with google credentials. -->
+<!-- - Orchestrator: It orchestrates fetching the stocks data and calculations -->
 - Calculator: It runs the financial calculatios of the stocks and portfolios
-- Pricer: It retrieves the stocks data
+<!-- - Pricer: It retrieves the stocks data -->
 - Client: This is the front end website to interact with all the backend services.
-- Ngingx: It is a reverse proxy that directs the requests to the client or the backend services.
+<!-- - Ngingx: It is a reverse proxy that directs the requests to the client or the backend services. -->
 
 ## Deployment
 

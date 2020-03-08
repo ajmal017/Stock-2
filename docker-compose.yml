@@ -25,17 +25,4 @@ services:
       - ./client:/app
     ports:
       - "3000:3000"
-
-  gateway:
-    container_name: gateway
-    command: ["npm","run","dev"]
-    image: stocky-gateway:dev
-    restart: always
-    environment:
-      - docker.env
-    volumes:
-      - /app/node_modules
-      - ./gateway:/app
-    ports:
-      - "80:3000"
     

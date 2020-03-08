@@ -23,5 +23,5 @@ app.add_middleware(
 )
 
 
-app.include_router(price.router)
+# app.include_router(price.router)
 app.include_router(financial_metrics_resource.router)
