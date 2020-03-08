@@ -5,3 +5,4 @@ numpy==1.18.1
 requests==2.22.0
 email-validator==1.0.5
 yfinance==0.1.54
+pytest===5.3.5

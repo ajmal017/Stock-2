@@ -9,7 +9,6 @@ services:
     environment:
       - docker.env
     volumes:
-      - /app/node_modules
       - ./calculator-service:/app
     ports:
       - "8080:80"

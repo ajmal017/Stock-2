@@ -1,0 +1,27 @@
+version: "3"
+
+services:
+  calculator:
+    container_name: calculator
+    image: stocky-calculator:dev
+    command: "pytest"
+    environment:
+      - docker.env
+    volumes:
+      - ./calculator-service:/app
+    ports:
+      - "8080:80"
+
+#  client:
+#    container_name: client
+#    image: stocky-client:dev
+#    restart: always
+#    command: "npm run test"
+#    environment:
+#      - docker.env
+#    volumes:
+#      - /app/node_modules
+#      - ./client-service:/app
+#    ports:
+#      - "3000:3000"
+    

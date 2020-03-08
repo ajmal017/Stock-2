@@ -1,5 +1,6 @@
 import requests
 from abc import ABC, abstractmethod
+from entities.Factory import AbstractFactory
 
 
 class RequesterAbstract(ABC):
@@ -20,11 +21,6 @@ class Requester(RequesterAbstract):
             raise error
 
 
-class RequesterAbstractFactory(ABC):
-    @abstractmethod
-    def factory(self): pass
-
-
-class RequesterFactory(RequesterAbstractFactory):
+class RequesterFactory(AbstractFactory):
     def factory(self):
         return Requester()
