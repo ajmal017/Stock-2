@@ -3,9 +3,9 @@ import { useSelector } from 'react-redux'
 import Spinner from './spinner/spinner'
 
 const TopBox = lazy(() => import('./topBox/topBox'))
-const Chips = lazy(() => import('./chips/chip'))
+// const Chips = lazy(() => import('./chips/chip'))
 const Form = lazy(() => import('./stockform/stockForm'))
-const StockCard = lazy(() => import('./stockCard/stockCard'))
+// const StockCard = lazy(() => import('./stockCard/stockCard'))
 const PricePlots = lazy(() => import('./lineplots/lineplots'))
 const RiskReturnBarplot = lazy(() => import('./riskReturn/layout'))
 
@@ -17,9 +17,9 @@ const Layout = () => {
             <div style={{ backgroundColor: "#EEF5F9" }}>
                 <Suspense fallback={Spinner}>
                     <TopBox></TopBox>
-                    <Chips></Chips>
+                    {/* <Chips></Chips> */}
                     <Form></Form>
-                    <StockCard></StockCard>
+                    {/* <StockCard></StockCard> */}
                     <PricePlots></PricePlots>
                     <RiskReturnBarplot></RiskReturnBarplot>
                 </Suspense>

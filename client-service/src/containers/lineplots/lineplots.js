@@ -8,15 +8,15 @@ const PricePlots = () => {
     return (
         <Container fluid >
             <Row style={{ justifyContent: 'center' }}>
-                <Col lg={6} xl={4} >
+                <Col lg={6}  >
                     <HistoricPrice></HistoricPrice>
                 </Col>
-                <Col lg={6} xl={4} >
+                <Col lg={6}  >
                     <HistoricPriceNorm></HistoricPriceNorm>
                 </Col>
             </Row>
             <Row style={{ justifyContent: 'center' }}>
-                <Col lg={6} xl={4} >
+                <Col lg={6} >
                     <HistoricPriceChange></HistoricPriceChange>
                 </Col>
             </Row>

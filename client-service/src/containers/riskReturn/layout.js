@@ -7,7 +7,7 @@ const layout = () => {
     return (
         <Container fluid>
             <Row style={{ justifyContent: 'center' }}>
-                <Col lg={6} xl={4} >
+                <Col lg={6} >
                     <RiskReturnBarPlot></RiskReturnBarPlot>
                 </Col>
             </Row>
