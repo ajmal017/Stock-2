@@ -30,7 +30,7 @@ async def calculate_financial_metrics(metrics: FinancialMetricsIn):
         normalized_price = HistoryPriceNormalizedFactory().factory()
         dict_converter = DictionaryConverterFactory().factory()
 
-        # these array will hold all the ticker entities
+        # this array will hold all the ticker entities
         # a ticker is a company with a dataframe with data
         tickers = []
 
@@ -61,7 +61,7 @@ async def calculate_financial_metrics(metrics: FinancialMetricsIn):
         calculator.add_data(df_close)
 
         # executing all formulas in calculator and unpacking it
-        annual_mean_log_returns, normalized_price = calculator.calculate()
+        annual_mean_log_risk_returns, normalized_price = calculator.calculate()
 
         # resampling to yearly frequency
         annual_price = annual_resampler.calculate(df_close)
@@ -71,7 +71,7 @@ async def calculate_financial_metrics(metrics: FinancialMetricsIn):
             'price_history': dict_converter.convert_to_dictionary(df_close),
             'price_history_change': dict_converter.convert_to_dictionary(annual_price),
             'price_history_normalized': dict_converter.convert_to_dictionary(price_history_normalized),
-            'stock_annual_log_risk_return': annual_mean_log_returns,
+            'stock_annual_log_risk_return': annual_mean_log_risk_returns,
             'symbols': metrics.tickers
         }
 
