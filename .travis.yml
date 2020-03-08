@@ -1,0 +1,43 @@
+sudo: required
+services:
+  - docker
+env:
+  global:
+    - SHA=$(git rev-parse HEAD)
+
+before_install:
+  # Build Testing and Production images
+  - docker build -t vidalignacio/stocky-client-service:test -f ./client-service/Dockerfile.dev ./client-service
+  - docker build -t vidalignacio/stocky-calculator-service:latest -t vidalignacio/stocky-calculator-service:$SHA ./calculator-service
+
+  # Run Testing with Dev images
+  - docker run -e CI vidalignacio/stocky-client-service:test npm run test
+
+after_success:
+  # Build Production images
+  - docker build -t vidalignacio/stocky-client-service:latest -t vidalignacio/stocky-client-service:$SHA ./client-service
+  - docker build -t vidalignacio/stocky-nginx-service:latest -t vidalignacio/stocky-nginx-service:$SHA -f ./nginx-service/Dockerfile ./nginx-service
+
+  #Log into docker CLI
+  - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
+
+  # Push images to Docker Hub
+  - docker push vidalignacio/stocky-client-service:latest
+  - docker push vidalignacio/stocky-calculator-service:latest
+
+  - docker push  vidalignacio/stocky-client-service:$SHA
+  - docker push  vidalignacio/stocky-calculator-service:$SHA
+
+deploy:
+  provider: elasticbeanstalk
+  region: eu-west-2
+  app: stocky
+  env: stocky-prod
+  bucket_name: elasticbeanstalk-eu-west-2-571507774031
+  bucket_path: stocky-container
+  on:
+    branch: master
+  access_key_id:
+    secure: $AWS_ACCESS_KEY
+  secret_access_key:
+    secure: $AWS_SECRET_KEY
