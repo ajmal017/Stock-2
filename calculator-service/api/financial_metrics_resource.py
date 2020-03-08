@@ -35,10 +35,10 @@ async def calculate_financial_metrics(metrics: FinancialMetricsIn):
         tickers = []
 
         for tick in metrics.tickers:
-            # creating ticker (company object to hold data)
+            # creating ticker (company object to hold data) - considering moving this to a static method in class and not initilising
             ticker = TickerFactory().factory(tick)
 
-            # creating url to fetch historical data
+            # creating url to fetch historical data -
             url_creator = UrlPriceCreatorFactory().factory(ticker.get_ticker())
             url = url_creator.create_url()
             # fetching data
@@ -47,7 +47,7 @@ async def calculate_financial_metrics(metrics: FinancialMetricsIn):
             filtered_response = filterer.filter(response, 'history')
             # creating a pandas frame and moving it to the ticker entity
             ticker.dataframe = dataframer.create_dataframe(filtered_response)
-            # pushing data to array with all ticker entities
+            # pushing ticker entities to array
             tickers.append(ticker)
 
         # joining dataframes of each ticker. The ['close'] column is taken from each each dataframe
