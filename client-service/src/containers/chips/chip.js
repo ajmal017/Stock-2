@@ -3,35 +3,29 @@ import style from './style.module.css'
 import Chip from '@material-ui/core/Chip';
 import { Container, Row, Col } from 'react-bootstrap'
 import { useSelector, useDispatch, shallowEqual } from 'react-redux'
-import { removeStock, removeStockPrice } from '../../redux/actions'
+import { } from '../../redux/actions'
 
 const Chips = () => {
-    const symbols = useSelector(state => state.stockReducer.stocksSelected, shallowEqual)
+    const symbols = useSelector(state => state.stockReducer.symbolList, shallowEqual)
     const dispatch = useDispatch()
 
-    const handleDelete = (key) => {
-        dispatch(removeStock(key))
-        dispatch(removeStockPrice(key))
-    }
-
-
+    const handleDelete = (key) => { }
     if (symbols) {
         return (
             <Container><Row>
                 {
-                    Object.entries(symbols).map(([key, value]) => (
+                    symbols.map(value => (
                         <Chip
-                            key={value.symbol}
+                            key={value}
                             color="primary"
                             clickable
                             className={style.chip}
-                            label={value.name}
-                            onDelete={() => handleDelete([key])}
+                            label={value}
+                            onDelete={() => handleDelete()}
                         />
                     ))
                 }
             </Row></Container >
-
         )
     }
     else return <p> </p>

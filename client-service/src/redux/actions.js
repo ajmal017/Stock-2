@@ -15,7 +15,7 @@ export const getMetrics = symbols => async dispatch => {
         console.log('response received with metrics', res.data)
         batch(() => {
             dispatch({ type: SELECT_STOCK, data: res.data.symbols })
-            dispatch({ type: FETCH_CARDS, data: res.data.price_history[-1] })
+            dispatch({ type: FETCH_CARDS, data: res.data.price_history[res.data.price_history.length - 1] })
             dispatch({ type: FETCH_STOCK_PRICE_HISTORY, data: res.data.price_history })
             dispatch({ type: FETCH_STOCK_PRICE_CHANGE, data: res.data.price_history_change })
             dispatch({ type: FETCH_STOCK_PRICE_NORMALIZED, data: res.data.price_history_normalized })

@@ -6,11 +6,16 @@ import { Container, Row, Col } from 'react-bootstrap'
 import style from './style.module.css'
 import { Paper } from '@material-ui/core'
 import COLOURS from './Colours'
+import TP from '../tooltip/tooltip'
 
-const LinChart = ({ data, stocks, width, yInterval, xInterval, xlabel, ylabel, dataKey, tickFormatter }) => {
+
+const LinChart = ({ title, tooltip, data, stocks, width, yInterval, xInterval, xlabel, ylabel, dataKey, tickFormatter }) => {
     return (
-        <Container fluid className={style.section}><Row><Col className={style.col}>
+        <Container fluid className={style.section}><Row className={style.row}><Col className={style.col}>
             <Paper elevation={11} className={style.paper}>
+                <h5 className={style.title}>{title}
+                    <TP tooltip={tooltip}></TP>
+                </h5>
                 <ResponsiveContainer width="100%" height={400}>
                     <LineChart
                         data={data}
@@ -26,7 +31,7 @@ const LinChart = ({ data, stocks, width, yInterval, xInterval, xlabel, ylabel, d
                         <Tooltip />
                         <Legend />
                         {stocks.map((symbol, i) => (
-                            <Line type="monotone" dataKey={symbol} dot={false} stroke={COLOURS[i]} strokeWidth={width} />
+                            <Line type="monotone" dataKey={symbol} dot={false} stroke={COLOURS[i]} strokeWidth={width} key={i} />
 
                         ))}
                     </LineChart>
