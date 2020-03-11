@@ -11,15 +11,17 @@ class FormulatorAbstract(ABC):
 
 class AnnualMeanLogRiskReturns(FormulatorAbstract):
     def calculate(self, df):
-        log_returns = np.log(df / df.shift(1)).dropna(how='any')
+        log_returns = np.log(df / df.shift(1))
         companies = df.columns.tolist()
 
-        price_volatility = round((log_returns[companies].std() * 250 ** 0.5 * 100), 2).tolist()
-        returns = round((log_returns[companies].mean() * 252 * 100), 2).tolist()
+        price_volatility = round(
+            log_returns[companies].std() * 250 ** 0.5 * 100, 3).tolist()
+        returns = round(log_returns[companies].mean() * 250 * 100, 3).tolist()
 
         data = []
         for index, ticker in enumerate(companies):
-            dictionary = {'price_volatility': price_volatility[index], 'ticker': ticker, 'annual_mean_return': returns[index]}
+            dictionary = {
+                'price_volatility': price_volatility[index], 'ticker': ticker, 'annual_mean_return': returns[index]}
             data.append(dictionary)
         return data
 
@@ -31,7 +33,8 @@ class AnnualMeanLogRiskReturnsFactory(AbstractFactory):
 
 class HistoryPriceNormalized(FormulatorAbstract):
     def calculate(self, df):
-        normalized_price = (df / df.iloc[0] * 100).round(3)
+        normalized_price = (df / df.iloc[0] * 100)
+        print(normalized_price)
         return normalized_price
 
 
@@ -50,7 +53,15 @@ class Resampler(FormulatorAbstract):
         return new_df
 
 
-
 class ResamplerFactory(AbstractFactory):
     def factory(self, period):
         return Resampler(period)
+
+
+class WeightMaker(FormulatorAbstract):
+    def calculate(self, array_of_tickers):
+        ratio = 100/len(array_of_tickers)/100
+        weights = np.array([])
+        for symbol in array_of_tickers:
+            weights = np.append(weights, [ratio])
+        return weights

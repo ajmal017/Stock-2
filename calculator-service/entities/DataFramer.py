@@ -15,6 +15,8 @@ class DataFramer(DataFramerAbstract):
         if index is not None:
             df.set_index(index, inplace=True)
         df = df.astype('float')
+        df = df[::-1]
+        print(df.head(2))
         return df
 
 
@@ -36,8 +38,9 @@ class DataFrameJoiner(DataFrameJoinerAbstract):
             print('joining tickets', ticker)
             df = ticker.dataframe[[column_filter]].rename(columns={column_filter: ticker.get_ticker()})
             dataframes.append(df)
-        joined = dataframes[0].join(dataframes[1:])
-        joined = joined[::-1].dropna(how='any')
+        joined = dataframes[0].join(dataframes[1:]).dropna(how='any')
+        print(joined.head(2))
+        print(joined.tail(2))
         return joined
 
 

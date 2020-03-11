@@ -9,9 +9,11 @@ from entities.Url import UrlPriceCreatorFactory
 from entities.DataFramer import DataframerFactory, DataFrameJoinerFactory
 from constants.CONSTANTS import HISTORICAL_DATA
 from entities.Calculator import CalculatorFactory
-from entities.Formulator import AnnualMeanLogRiskReturnsFactory, ResamplerFactory, HistoryPriceNormalizedFactory
+from entities.Formulator import AnnualMeanLogRiskReturnsFactory, ResamplerFactory, \
+    HistoryPriceNormalizedFactory
 from models.api import FinancialMetricsOut, FinancialMetricsIn
 from entities.utilities import DictionaryConverterFactory
+from entities.YFinance import FinanceDataPuller
 
 router = APIRouter()
 
@@ -46,7 +48,9 @@ async def calculate_financial_metrics(metrics: FinancialMetricsIn):
             # filtering response
             filtered_response = filterer.filter(response, 'history')
             # creating a pandas frame and moving it to the ticker entity
-            ticker.dataframe = dataframer.create_dataframe(filtered_response)
+            ticker.dataframe = FinanceDataPuller.get_data(ticker.get_ticker())
+            # ticker.dataframe = dataframer.create_dataframe(filtered_response)
+
             # pushing ticker entities to array
             tickers.append(ticker)
 
