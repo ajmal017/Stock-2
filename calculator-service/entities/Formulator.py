@@ -33,8 +33,7 @@ class AnnualMeanLogRiskReturnsFactory(AbstractFactory):
 
 class HistoryPriceNormalized(FormulatorAbstract):
     def calculate(self, df):
-        normalized_price = (df / df.iloc[0] * 100)
-        print(normalized_price)
+        normalized_price = round((df / df.iloc[0] * 100), 2)
         return normalized_price
 
 
@@ -44,18 +43,15 @@ class HistoryPriceNormalizedFactory(AbstractFactory):
 
 
 class Resampler(FormulatorAbstract):
-    def __init__(self, period):
-        self._period = period
-
     def calculate(self, df):
-        df.index = pd.to_datetime(df.index)
-        new_df = df.resample(self._period).mean()
-        return new_df
+        df = df.head(1).append(
+            df.loc[(df.index.day == 31) & (df.index.month == 12) | (df.index.day == 30) & (df.index.month == 6)])
+        return df
 
 
 class ResamplerFactory(AbstractFactory):
-    def factory(self, period):
-        return Resampler(period)
+    def factory(self):
+        return Resampler()
 
 
 class WeightMaker(FormulatorAbstract):

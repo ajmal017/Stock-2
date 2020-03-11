@@ -10,8 +10,8 @@ class DictionaryConverterAbstract(ABC):
 
 class DictionaryConverter(DictionaryConverterAbstract):
     def convert_to_dictionary(self, df):
-        df.index = df.index.date
-        dictionary = df.reset_index().to_dict(orient='records')
+        df['date'] = df.index.date
+        dictionary = df.to_dict(orient='records')
         return dictionary
 
 

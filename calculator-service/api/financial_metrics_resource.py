@@ -28,7 +28,7 @@ async def calculate_financial_metrics(metrics: FinancialMetricsIn):
         DataFrameJoiner = DataFrameJoinerFactory().factory()
         calculator = CalculatorFactory().factory()
         annual_mean_log_returns_formula = AnnualMeanLogRiskReturnsFactory().factory()
-        annual_resampler = ResamplerFactory().factory('Y')
+        annual_resampler = ResamplerFactory().factory()
         normalized_price = HistoryPriceNormalizedFactory().factory()
         dict_converter = DictionaryConverterFactory().factory()
 
@@ -40,13 +40,13 @@ async def calculate_financial_metrics(metrics: FinancialMetricsIn):
             # creating ticker (company object to hold data) - considering moving this to a static method in class and not initilising
             ticker = TickerFactory().factory(tick)
 
-            # creating url to fetch historical data -
-            url_creator = UrlPriceCreatorFactory().factory(ticker.get_ticker())
-            url = url_creator.create_url()
-            # fetching data
-            response = requester.get_data(url)
-            # filtering response
-            filtered_response = filterer.filter(response, 'history')
+            # # creating url to fetch historical data -
+            # url_creator = UrlPriceCreatorFactory().factory(ticker.get_ticker())
+            # url = url_creator.create_url()
+            # # fetching data
+            # response = requester.get_data(url)
+            # # filtering response
+            # filtered_response = filterer.filter(response, 'history')
             # creating a pandas frame and moving it to the ticker entity
             ticker.dataframe = FinanceDataPuller.get_data(ticker.get_ticker())
             # ticker.dataframe = dataframer.create_dataframe(filtered_response)
@@ -66,13 +66,15 @@ async def calculate_financial_metrics(metrics: FinancialMetricsIn):
 
         # executing all formulas in calculator and unpacking it
         annual_mean_log_risk_returns, normalized_price = calculator.calculate()
+        print('before resampling')
 
         # resampling to yearly frequency
         annual_price = annual_resampler.calculate(df_close)
         price_history_normalized = annual_resampler.calculate(normalized_price)
+        print('after resampling', annual_price.index)
 
         return {
-            'price_history': dict_converter.convert_to_dictionary(df_close),
+            'price_history': dict_converter.convert_to_dictionary(annual_price),
             'price_history_change': dict_converter.convert_to_dictionary(annual_price),
             'price_history_normalized': dict_converter.convert_to_dictionary(price_history_normalized),
             'stock_annual_log_risk_return': annual_mean_log_risk_returns,
@@ -80,4 +82,4 @@ async def calculate_financial_metrics(metrics: FinancialMetricsIn):
         }
 
     except Exception as err:
-        raise HTTPException(status_code=400, details=str(err))
+        raise HTTPException(status_code=400, detail=str(err))
