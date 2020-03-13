@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector, shallowEqual } from "react-redux";
 import { getMetrics } from '../../redux/actions'
+import { setError } from '../../redux/errorActions'
 import stocks from './stocksList'
 
 
@@ -24,6 +25,9 @@ const Logic = () => {
             console.log(payload)
             dispatch(getMetrics(payload))
             setState({ ...state, symbol: {} })
+        }
+        else {
+            dispatch(setError('Stock already included in the analysis'))
         }
     }
 

@@ -8,6 +8,7 @@ const Form = lazy(() => import('./stockform/stockForm'))
 // const StockCard = lazy(() => import('./stockCard/stockCard'))
 const PricePlots = lazy(() => import('./lineplots/lineplots'))
 const RiskReturnBarplot = lazy(() => import('./riskReturn/layout'))
+const Toast = lazy(() => import('./toast/toast'))
 
 const Layout = () => {
     const loading = useSelector(state => state.stockReducer.loading)
@@ -16,6 +17,7 @@ const Layout = () => {
         return (
             <div style={{ backgroundColor: "#EEF5F9" }}>
                 <Suspense fallback={<Spinner></Spinner>}>
+                    <Toast></Toast>
                     <TopBox></TopBox>
                     <Chips></Chips>
                     <Form></Form>

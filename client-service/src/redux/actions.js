@@ -4,7 +4,7 @@ import {
     SET_LOADING_FALSE, SET_LOADING_TRUE, FETCH_STOCK_PRICE_NORMALIZED
 } from './actionTypes'
 import axios from 'axios'
-import { STOCK_PRICE_URL, STOCK_PRICE_HISTORY_URL, STOCK_PRICE_CHANGE_URL, STOCK_RISK_RETURN_URL, STOCK_METRICS } from '../api'
+import { STOCK_METRICS } from '../api'
 import { batch } from 'react-redux'
 //Calculate metrics
 
@@ -25,6 +25,7 @@ export const getMetrics = symbols => async dispatch => {
     } catch (error) {
         console.log(error)
         dispatch({ type: SET_LOADING_FALSE })
+        dispatch({ type: SET_ERROR, data: 'Network Error -> Try again!' })
     }
 }
 
@@ -37,9 +38,6 @@ export const selectStock = (symbol) => {
 export const removeStock = symbol => {
     return { type: REMOVE_STOCK, data: symbol }
 }
-
-
-
 
 
 export const fetchAggregator = symbols => { }

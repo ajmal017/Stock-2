@@ -1,7 +1,6 @@
 import {
-    FETCH_CARDS, SELECT_STOCK, REMOVE_STOCK, SET_ERROR, REMOVE_STOCK_PRICE,
-    FETCH_STOCK_PRICE_HISTORY, FETCH_STOCK_PRICE_CHANGE, FETCH_STOCK_RISK_RETURN,
-    SET_LOADING_FALSE, SET_LOADING_TRUE, FETCH_STOCK_PRICE_NORMALIZED
+    FETCH_CARDS, SELECT_STOCK, REMOVE_STOCK, SET_ERROR, FETCH_STOCK_PRICE_HISTORY,
+    FETCH_STOCK_PRICE_CHANGE, FETCH_STOCK_RISK_RETURN, SET_LOADING_FALSE, SET_LOADING_TRUE, FETCH_STOCK_PRICE_NORMALIZED
 } from "../actionTypes"
 
 const initialState = {
@@ -43,14 +42,6 @@ const stockReducer = (state = initialState, action) => {
                 cards: [action.data]
             }
 
-        case REMOVE_STOCK_PRICE:
-            const newStocks = { ...state.stocks }
-            delete newStocks[action.data]
-            return {
-                ...state,
-                stocks: { ...newStocks }
-            }
-
         case FETCH_STOCK_PRICE_HISTORY:
             return {
                 ...state,
@@ -86,7 +77,6 @@ const stockReducer = (state = initialState, action) => {
                 ...state,
                 loading: true
             }
-
 
         case SET_ERROR:
             return { ...state }
