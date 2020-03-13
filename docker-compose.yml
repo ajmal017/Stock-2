@@ -3,7 +3,7 @@ version: "3"
 services:
   calculator:
     container_name: calculator
-    image: stocky-calculator:dev
+    image: stocky-calculator-service:dev
     restart: always
     command: "uvicorn main:app --reload --host 0.0.0.0 --port 80"
     environment:
@@ -15,7 +15,7 @@ services:
 
   client:
     container_name: client
-    image: stocky-client:dev
+    image: stocky-client-service:dev
     restart: always
     environment:
       - docker.env
