@@ -25,6 +25,11 @@ yarn-error.log*
 
 
 # other
-docke.env
+docker.env
 
 # jupyter
+
+
+
+# python testing
+.pytest_cache

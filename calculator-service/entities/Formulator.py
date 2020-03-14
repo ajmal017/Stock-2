@@ -54,10 +54,42 @@ class ResamplerFactory(AbstractFactory):
         return Resampler()
 
 
-class WeightMaker(FormulatorAbstract):
-    def calculate(self, array_of_tickers):
-        ratio = 100/len(array_of_tickers)/100
+class EqualWeightMaker(FormulatorAbstract):
+    def calculate(self, number_of_tickers):
+        ratio = 1/number_of_tickers
         weights = np.array([])
-        for symbol in array_of_tickers:
-            weights = np.append(weights, [ratio])
+        print(ratio)
+        for i in range(0, number_of_tickers):
+            weights = np.append(weights, ratio)
+        print(weights)
         return weights
+
+
+class EqualWeightMakerFactory(AbstractFactory):
+    def factory(self):
+        return EqualWeightMaker()
+
+
+class PortfolioRiskReturn(FormulatorAbstract):
+    def calculate(self, df):
+        weights = EqualWeightMakerFactory().factory().calculate(df.shape[1])
+        # calculate portfolio returns using the mean of the annual simple returns and equal weights
+        simple_returns = (df/df.shift(1)) - 1
+        simple_annual_returns = simple_returns.mean() * 250
+        portfolio_returns = round(np.dot(simple_annual_returns, weights) * 100, 3)
+
+
+        """ 
+        calculate the portfolio volatility based on the deviation 
+        of the mean of the annual log returns and equal weights"""
+        log_returns = np.log(df/df.shift(1))
+        cov_matrix_annual = log_returns.cov() * 250
+        portfolio_volatility = round(((np.dot(weights.T, np.dot(cov_matrix_annual, weights))) ** 0.5) * 100, 3)
+
+        data = {'portfolio_returns': portfolio_returns, 'portfolio_volatility': portfolio_volatility}
+        return data
+
+
+class PortfolioRiskReturnFactory(AbstractFactory):
+    def factory(self):
+        return PortfolioRiskReturn()

@@ -7,6 +7,7 @@ class FinancialMetricsOut(BaseModel):
     price_history_change: List[Dict] = []
     price_history_normalized: List[Dict] = []
     stock_annual_log_risk_return: List[Dict] = []
+    portfolio_risk_returns: List[Dict] = []
     symbols: List[str] = []
 
 

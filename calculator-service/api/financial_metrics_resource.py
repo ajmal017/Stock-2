@@ -10,7 +10,7 @@ from entities.DataFramer import DataframerFactory, DataFrameJoinerFactory
 from constants.CONSTANTS import HISTORICAL_DATA
 from entities.Calculator import CalculatorFactory
 from entities.Formulator import AnnualMeanLogRiskReturnsFactory, ResamplerFactory, \
-    HistoryPriceNormalizedFactory
+    HistoryPriceNormalizedFactory, PortfolioRiskReturnFactory
 from models.api import FinancialMetricsOut, FinancialMetricsIn
 from entities.utilities import DictionaryConverterFactory
 from entities.YFinance import FinanceDataPuller
@@ -22,14 +22,16 @@ router = APIRouter()
 async def calculate_financial_metrics(metrics: FinancialMetricsIn):
     try:
         # Initialising objects
-        filterer = HistoricalDataFilterFactory().factory()
-        requester = RequesterFactory().factory()
-        dataframer = DataframerFactory().factory()
+        # filterer = HistoricalDataFilterFactory().factory()
+        # requester = RequesterFactory().factory()
+        # dataframer = DataframerFactory().factory()
         DataFrameJoiner = DataFrameJoinerFactory().factory()
         calculator = CalculatorFactory().factory()
         annual_mean_log_returns_formula = AnnualMeanLogRiskReturnsFactory().factory()
+        normalized_price_formula = HistoryPriceNormalizedFactory().factory()
+        portfolio_risk_returns_formula = PortfolioRiskReturnFactory().factory()
+
         annual_resampler = ResamplerFactory().factory()
-        normalized_price = HistoryPriceNormalizedFactory().factory()
         dict_converter = DictionaryConverterFactory().factory()
 
         # this array will hold all the ticker entities
@@ -60,24 +62,27 @@ async def calculate_financial_metrics(metrics: FinancialMetricsIn):
 
         # composing calculator with formulas -> composite pattern
         calculator.add_formula(annual_mean_log_returns_formula)
-        calculator.add_formula(normalized_price)
+        calculator.add_formula(normalized_price_formula)
+        calculator.add_formula(portfolio_risk_returns_formula)
         # composing calculator with data
         calculator.add_data(df_close)
 
         # executing all formulas in calculator and unpacking it
-        annual_mean_log_risk_returns, normalized_price = calculator.calculate()
-        print('before resampling')
+        annual_mean_log_risk_returns, normalized_price_formula, portfolio_risk_returns = calculator.calculate()
 
         # resampling to yearly frequency
         annual_price = annual_resampler.calculate(df_close)
-        price_history_normalized = annual_resampler.calculate(normalized_price)
-        print('after resampling', annual_price.index)
+        price_history_normalized = annual_resampler.calculate(normalized_price_formula)
+
+        # calculating portfolio Risk and Return
+        print('portfolio_risk_returns', portfolio_risk_returns)
 
         return {
             'price_history': dict_converter.convert_to_dictionary(annual_price),
             'price_history_change': dict_converter.convert_to_dictionary(annual_price),
             'price_history_normalized': dict_converter.convert_to_dictionary(price_history_normalized),
             'stock_annual_log_risk_return': annual_mean_log_risk_returns,
+            'portfolio_risk_returns': [portfolio_risk_returns],
             'symbols': metrics.tickers
         }
 
