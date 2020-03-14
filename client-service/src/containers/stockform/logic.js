@@ -22,12 +22,11 @@ const Logic = () => {
         e.preventDefault()
         if (!symbols.includes(state.symbol.symbol)) {
             const payload = [...symbols, state.symbol.symbol]
-            console.log(payload)
             dispatch(getMetrics(payload))
             setState({ ...state, symbol: {} })
         }
         else {
-            dispatch(setError('Stock already included in the analysis'))
+            dispatch(setError('Stock already selected'))
         }
     }
 
