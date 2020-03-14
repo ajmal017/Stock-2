@@ -72,7 +72,8 @@ async def calculate_financial_metrics(metrics: FinancialMetricsIn):
 
         # resampling to yearly frequency
         annual_price = annual_resampler.calculate(df_close)
-        price_history_normalized = annual_resampler.calculate(normalized_price_formula)
+        price_history_normalized = annual_resampler.calculate(
+            normalized_price_formula)
 
         # calculating portfolio Risk and Return
         print('portfolio_risk_returns', portfolio_risk_returns)
@@ -82,7 +83,7 @@ async def calculate_financial_metrics(metrics: FinancialMetricsIn):
             'price_history_change': dict_converter.convert_to_dictionary(annual_price),
             'price_history_normalized': dict_converter.convert_to_dictionary(price_history_normalized),
             'stock_annual_log_risk_return': annual_mean_log_risk_returns,
-            'portfolio_risk_returns': [portfolio_risk_returns],
+            'portfolio_risk_returns': portfolio_risk_returns,
             'symbols': metrics.tickers
         }
 
