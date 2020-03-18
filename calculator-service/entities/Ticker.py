@@ -17,6 +17,7 @@ class Ticker(TickerAbstract):
 
     def _validate_ticker(self, ticker):
         try:
+            print(ticker)
             if not ticker or not isinstance(ticker, str):
                 raise ValueError
             else:
@@ -36,3 +37,5 @@ class Ticker(TickerAbstract):
 class TickerFactory(AbstractFactory):
     def factory(self, ticker):
         return Ticker(ticker)
+
+

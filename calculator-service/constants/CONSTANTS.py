@@ -2,10 +2,9 @@ from enum import Enum
 
 
 class HISTORICAL_DATA(Enum):
-    DATE = 'Date'
+    DATE = 'date'
     OPEN = 'open'
     HIGH = 'high'
     LOW = 'low'
-    CLOSE = 'Close'
+    CLOSE = 'close'
     VOLUME = 'volume'
-

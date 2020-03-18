@@ -14,7 +14,7 @@ const initialState = {
 const portfolioReducer = (state = initialState, action) => {
     switch (action.type) {
         case FETCH_PORTFOLIO_RISK_RETURNS:
-            console.log(action.data)
+            console.log('portfolio metrics reducer', action.data)
             return {
                 ...state,
                 portfolio: {

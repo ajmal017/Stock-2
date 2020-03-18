@@ -2,7 +2,7 @@ import {
     FETCH_CARDS, SET_ERROR, SELECT_STOCK, REMOVE_STOCK, REMOVE_STOCK_PRICE,
     FETCH_STOCK_PRICE_HISTORY, FETCH_STOCK_PRICE_CHANGE, FETCH_STOCK_RISK_RETURN,
     SET_LOADING_FALSE, SET_LOADING_TRUE, FETCH_STOCK_PRICE_NORMALIZED,
-    FETCH_PORTFOLIO_RISK_RETURNS
+    FETCH_PORTFOLIO_RISK_RETURNS, INCREASE_COUNTER
 } from './actionTypes'
 import axios from 'axios'
 import { STOCK_METRICS } from '../api'
@@ -27,6 +27,7 @@ export const getMetrics = symbols => async dispatch => {
     } catch (error) {
         console.log(error)
         dispatch({ type: SET_LOADING_FALSE })
+        dispatch({ type: INCREASE_COUNTER })
         dispatch({ type: SET_ERROR, data: 'Network Error -> Try again!' })
     }
 }

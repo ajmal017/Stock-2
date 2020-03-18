@@ -2,7 +2,7 @@ from fastapi import FastAPI
 from starlette.config import Config
 from starlette.middleware.cors import CORSMiddleware
 
-from api import financial_metrics_resource
+from api import financial_metrics_resource, portfolio_metrics, stock_historical_data, stock_metrics
 
 config = Config(".env")
 
@@ -25,3 +25,6 @@ app.add_middleware(
 
 # app.include_router(price.router)
 app.include_router(financial_metrics_resource.router)
+app.include_router(stock_historical_data.router)
+app.include_router(stock_metrics.router)
+app.include_router(portfolio_metrics.router)

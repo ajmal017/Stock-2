@@ -24,4 +24,17 @@ services:
       - ./client-service:/app
     ports:
       - "3000:3000"
+
+  orchestrator:
+    container_name: orchestrator
+    image: stocky-orchestrator-service:dev
+    restart: always
+    command: "npm run dev"
+    environment:
+      - docker.env
+    volumes:
+      - /app/node_modules
+      - ./orchestrator-service:/app
+    ports:
+      - "5000:3000"
     

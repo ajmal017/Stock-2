@@ -3,6 +3,7 @@ from enum import Enum
 from datetime import date, datetime
 import time
 
+
 class Urls(Enum):
     STOCK_PRICE = 'https://financialmodelingprep.com/api/v3/historical-price-full'
     VOLUME_PRICE = 'https://financialmodelingprep.com/api/v3/volume-price-full'

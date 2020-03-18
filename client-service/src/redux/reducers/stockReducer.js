@@ -1,6 +1,7 @@
 import {
     FETCH_CARDS, SELECT_STOCK, REMOVE_STOCK, SET_ERROR, FETCH_STOCK_PRICE_HISTORY,
-    FETCH_STOCK_PRICE_CHANGE, FETCH_STOCK_RISK_RETURN, SET_LOADING_FALSE, SET_LOADING_TRUE, FETCH_STOCK_PRICE_NORMALIZED
+    FETCH_STOCK_PRICE_CHANGE, FETCH_STOCK_RISK_RETURN, SET_LOADING_FALSE, SET_LOADING_TRUE, FETCH_STOCK_PRICE_NORMALIZED,
+    INCREASE_COUNTER
 } from "../actionTypes"
 
 const initialState = {
@@ -11,7 +12,8 @@ const initialState = {
     symbolList: [],
     cards: [],
     initialSymbols: ['GS', 'BAC', 'MS'],
-    loading: false
+    loading: false,
+    counter: 0
 }
 
 
@@ -78,6 +80,11 @@ const stockReducer = (state = initialState, action) => {
                 loading: true
             }
 
+        case INCREASE_COUNTER:
+            return {
+                ...state,
+                counter: state.counter + 1
+            }
         case SET_ERROR:
             return { ...state }
         default:

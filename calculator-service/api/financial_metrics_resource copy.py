@@ -58,7 +58,7 @@ async def calculate_financial_metrics(metrics: FinancialMetricsIn):
 
         # joining dataframes of each ticker. The ['close'] column is taken from each each dataframe
         df_close = DataFrameJoiner.join_dataframes(
-            tickers, 'Close')
+            tickers, HISTORICAL_DATA.CLOSE.value)
 
         # composing calculator with formulas -> composite pattern
         calculator.add_formula(annual_mean_log_returns_formula)

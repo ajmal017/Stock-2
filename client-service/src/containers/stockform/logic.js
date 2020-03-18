@@ -10,6 +10,7 @@ const Logic = () => {
         symbol: {},
         stocks: stocks
     });
+    const counter = useSelector(state => state.stockReducer.counter)
     const dispatch = useDispatch();
     const symbols = useSelector(state => state.stockReducer.symbolList, shallowEqual)
     const initialSymbols = useSelector(state => state.stockReducer.initialSymbols, shallowEqual)
@@ -37,8 +38,10 @@ const Logic = () => {
                 missing.push(item)
             }
         }
-        if (missing.length > 0) dispatch(getMetrics(missing))
-        else return;
+        if (missing.length > 0 && counter < 4) {
+            dispatch(getMetrics(missing))
+        }
+        else return
     }
 
     useEffect(() => {
