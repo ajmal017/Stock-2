@@ -9,14 +9,14 @@ class FormulatorAbstract(ABC):
     def calculate(self, *args, **kwargs): pass
 
 
-class AnnualMeanLogRiskReturns(FormulatorAbstract):
+class AnnualMeanRiskReturns(FormulatorAbstract):
     def calculate(self, df):
-        log_returns = (df / df.shift(1)) - 1
+        simple_returns = (df / df.shift(1)) - 1
         companies = df.columns.tolist()
 
         price_volatility = round(
-            log_returns[companies].std() * 250 ** 0.5 * 100, 3).tolist()
-        returns = round(log_returns[companies].mean() * 250 * 100, 3).tolist()
+            simple_returns[companies].std() * 250 ** 0.5 * 100, 3).tolist()
+        returns = round(simple_returns[companies].mean() * 250 * 100, 3).tolist()
 
         data = []
         for index, ticker in enumerate(companies):
@@ -28,7 +28,7 @@ class AnnualMeanLogRiskReturns(FormulatorAbstract):
 
 class AnnualMeanLogRiskReturnsFactory(AbstractFactory):
     def factory(self):
-        return AnnualMeanLogRiskReturns()
+        return AnnualMeanRiskReturns()
 
 
 class HistoryPriceNormalized(FormulatorAbstract):

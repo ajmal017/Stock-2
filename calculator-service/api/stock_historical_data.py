@@ -51,7 +51,6 @@ async def calculate_financial_metrics(body: StockHistoryIn):
 
         return {
             'price_history': dict_converter.convert_to_dictionary(annual_price),
-            'price_history_change': dict_converter.convert_to_dictionary(annual_price),
             'price_history_normalized': dict_converter.convert_to_dictionary(price_history_normalized)
         }
 

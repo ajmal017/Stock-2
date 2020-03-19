@@ -21,7 +21,6 @@ class StockHistoryIn(BaseModel):
 
 class StockHistoryOut(BaseModel):
     price_history: List[Dict] = []
-    price_history_change: List[Dict] = []
     price_history_normalized: List[Dict] = []
 
 

@@ -1,6 +1,6 @@
 import {
     FETCH_CARDS, SET_ERROR, SELECT_STOCK, REMOVE_STOCK, REMOVE_STOCK_PRICE,
-    FETCH_STOCK_PRICE_HISTORY, FETCH_STOCK_PRICE_CHANGE, FETCH_STOCK_RISK_RETURN,
+    FETCH_STOCK_PRICE_HISTORY, FETCH_STOCK_RISK_RETURN,
     SET_LOADING_FALSE, SET_LOADING_TRUE, FETCH_STOCK_PRICE_NORMALIZED,
     FETCH_PORTFOLIO_RISK_RETURNS, INCREASE_COUNTER
 } from './actionTypes'
@@ -18,7 +18,6 @@ export const getMetrics = symbols => async dispatch => {
             dispatch({ type: SELECT_STOCK, data: res.data.symbols })
             dispatch({ type: FETCH_CARDS, data: res.data.price_history[res.data.price_history.length - 1] })
             dispatch({ type: FETCH_STOCK_PRICE_HISTORY, data: res.data.price_history })
-            dispatch({ type: FETCH_STOCK_PRICE_CHANGE, data: res.data.price_history_change })
             dispatch({ type: FETCH_STOCK_PRICE_NORMALIZED, data: res.data.price_history_normalized })
             dispatch({ type: FETCH_STOCK_RISK_RETURN, data: res.data.stock_annual_log_risk_return })
             dispatch({ type: FETCH_PORTFOLIO_RISK_RETURNS, data: res.data.portfolio_risk_returns })
