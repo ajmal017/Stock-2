@@ -3,7 +3,7 @@ from fastapi import APIRouter, HTTPException
 from entities.DataFramer import DataframerFactory, DataFrameJoinerFactory
 from constants.CONSTANTS import HISTORICAL_DATA
 from entities.Calculator import CalculatorFactory
-from entities.Formulator import PortfolioRiskReturnFactory
+from entities.Formulator import PortfolioRiskReturnFactory, Divider
 from models.api import PortfolioMetricsOut, StockHistoryIn
 from entities.TickerRunner import TickerRunner
 
@@ -40,6 +40,26 @@ async def calculate_financial_metrics(body: StockHistoryIn):
 
         # executing all formulas in calculator and unpacking it
         portfolio_risk_returns, = calculator.calculate()
+
+        # calculating returns and risk the day before
+        # adding data until yesterday
+        calculator.add_data(df_close[:-1])
+
+        yesterday_annual_mean_log_risk_returns, = calculator.calculate()
+        print(yesterday_annual_mean_log_risk_returns)
+
+        returns_change = Divider.divide(
+            portfolio_risk_returns['portfolio_returns'],
+            yesterday_annual_mean_log_risk_returns['portfolio_returns'],
+            4)
+
+        volatility_change = Divider.divide(
+            portfolio_risk_returns['portfolio_volatility'],
+            yesterday_annual_mean_log_risk_returns['portfolio_volatility'],
+            4)
+
+        portfolio_risk_returns['portfolio_returns_change'] = returns_change
+        portfolio_risk_returns['portfolio_volatility_change'] = volatility_change
 
         return {'portfolio_risk_returns': portfolio_risk_returns}
 

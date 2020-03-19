@@ -18,10 +18,21 @@ const TopBox = () => {
             </Row>
             <Row className={style.row}>
                 <Col md={6} lg={4}>
-                    <PortfolioCard data={data} name="Portfolio Returns" value={data.returns}></PortfolioCard>
+                    <PortfolioCard data={data}
+                        name="Portfolio Returns"
+                        value={data.returns}
+                        changePct={data.returnsChange}
+                        typ='Returns'
+                    ></PortfolioCard>
                 </Col>
                 <Col md={6} lg={4}>
-                    <PortfolioCard data={data} name="Portfolio Volatility" value={data.volatility}></PortfolioCard>
+                    <PortfolioCard data={data}
+                        name="Portfolio Volatility"
+                        value={data.volatility}
+                        changePct={data.volatilityChange}
+                        typ='Volatility'
+
+                    ></PortfolioCard>
                 </Col>
             </Row>
         </Container>

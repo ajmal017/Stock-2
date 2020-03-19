@@ -5,7 +5,8 @@ const initialState = {
         returns: 0,
         volatility: 0,
         volume: 10000,
-        changePercent: 10
+        returnsChange: 0,
+        volatilityChange: 0
 
     },
     historical: [],
@@ -20,7 +21,9 @@ const portfolioReducer = (state = initialState, action) => {
                 portfolio: {
                     ...state.portfolio,
                     returns: action.data.portfolio_returns,
-                    volatility: action.data.portfolio_volatility
+                    volatility: action.data.portfolio_volatility,
+                    returnsChange: action.data.portfolio_returns_change,
+                    volatilityChange: action.data.portfolio_volatility_change * -1
                 }
             }
 

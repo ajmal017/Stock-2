@@ -93,3 +93,13 @@ class PortfolioRiskReturn(FormulatorAbstract):
 class PortfolioRiskReturnFactory(AbstractFactory):
     def factory(self):
         return PortfolioRiskReturn()
+
+
+class Divider:
+    @staticmethod
+    def divide(num1, num2, rounder=None):
+        if rounder is not None:
+            print(num1, num2, rounder)
+            return round((num1 / num2) - 1,  rounder)
+        else:
+            return (num1 / num2) - 1
