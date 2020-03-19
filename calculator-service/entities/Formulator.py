@@ -60,6 +60,8 @@ class EqualWeightMaker(FormulatorAbstract):
         weights = np.array([])
         for i in range(0, number_of_tickers):
             weights = np.append(weights, ratio)
+        weights /= np.sum(weights)
+        print(weights)
         return weights
 
 
@@ -72,10 +74,13 @@ class PortfolioRiskReturn(FormulatorAbstract):
     def calculate(self, df):
         weights = EqualWeightMakerFactory().factory().calculate(df.shape[1])
         # calculate portfolio returns using the mean of the annual simple returns and equal weights
-        simple_returns = (df/df.shift(1)) - 1
+        simple_returns = (df / df.shift(1)) - 1
         simple_annual_returns = simple_returns.mean() * 250
-        portfolio_returns = round(
-            np.dot(simple_annual_returns, weights) * 100, 3)
+        print(simple_annual_returns)
+        portfolio_returns = np.dot(simple_annual_returns, weights) * 100
+        print('BAC sum', df.BAC.sum())
+        print('BAC returns', simple_returns.BAC.sum())
+        print(df.head(5), df.tail(5))
 
         """
         calculate the portfolio volatility based on the deviation

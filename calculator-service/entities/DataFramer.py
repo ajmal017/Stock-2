@@ -15,7 +15,6 @@ class DataFramer(DataFramerAbstract):
         if index is not None:
             df.set_index(index, inplace=True)
         df = df.astype('float')
-        df = df[::-1]
         df.index = pd.to_datetime(df.index)
         return df
 

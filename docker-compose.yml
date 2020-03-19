@@ -12,6 +12,18 @@ services:
       - ./calculator-service:/app
     ports:
       - "8080:80"
+      
+  pricer:
+    container_name: pricer
+    image: stocky-pricer-service:dev
+    restart: always
+    command: "uvicorn main:app --reload --host 0.0.0.0 --port 3000"
+    environment:
+      - docker.env
+    volumes:
+      - ./pricer-service:/app
+    ports:
+      - "3010:3000"
 
   client:
     container_name: client
