@@ -27,13 +27,15 @@ async def calculate_financial_metrics(body: StockHistoryIn):
 
         for tick in body.historicData:
             # creating ticker entity with dataframe with all columns
-            ticker = TickerRunner.create_ticker_with_dataframe(tick, 'name', 'history')
+            ticker = TickerRunner.create_ticker_with_dataframe(
+                tick, 'name', 'history')
             # pushing ticker entities to array
             tickers.append(ticker)
 
         # joining dataframes of each ticker. The ['close'] column is taken from each each dataframe
         df_close = DataFrameJoiner.join_dataframes(
             tickers, HISTORICAL_DATA.CLOSE.value)
+        print(df_close.info())
 
         # composing calculator with formulas and data -> composite pattern
         calculator.add_formula(normalized_price_formula)

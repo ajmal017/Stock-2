@@ -8,7 +8,6 @@ from constants.CONSTANTS import HISTORICAL_DATA
 from entities.Calculator import CalculatorFactory
 from entities.Formulator import AnnualMeanLogRiskReturnsFactory
 from models.api import StockMetricsOut, StockHistoryIn
-from entities.utilities import DictionaryConverterFactory
 
 router = APIRouter()
 
@@ -20,8 +19,6 @@ async def calculate_financial_metrics(body: StockHistoryIn):
         DataFrameJoiner = DataFrameJoinerFactory().factory()
         calculator = CalculatorFactory().factory()
         annual_mean_log_returns_formula = AnnualMeanLogRiskReturnsFactory().factory()
-
-        dict_converter = DictionaryConverterFactory().factory()
 
         # this array will hold all the ticker entities
         # a ticker is a company with a dataframe with data

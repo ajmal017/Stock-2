@@ -2,14 +2,35 @@ from pydantic import BaseModel
 from typing import List, Dict
 
 
-class StockOut(BaseModel):
-    price_history: List[Dict] = []
-    price_history_change: List[Dict] = []
-    price_history_normalized: List[Dict] = []
-    stock_annual_log_risk_return: List[Dict] = []
-    portfolio_risk_returns: Dict = {}
-    symbols: List[str] = []
-
-
 class StockIn(BaseModel):
     ticker: str
+
+
+class YfinanceHistory(BaseModel):
+    open: float
+    high: float
+    low: float
+    close: float
+    volume: float
+    dividends: float
+    stock_splits: float
+    date: str
+
+
+class YfinanceOut(BaseModel):
+    name: str
+    history: YfinanceHistory
+
+
+class WorldTradingHistory(BaseModel):
+    open: float
+    high: float
+    low: float
+    close: float
+    volume: float
+    date: str
+
+
+class WordlTradingOut(BaseModel):
+    name: str
+    history: WorldTradingHistory

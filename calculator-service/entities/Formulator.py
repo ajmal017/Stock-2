@@ -11,7 +11,7 @@ class FormulatorAbstract(ABC):
 
 class AnnualMeanLogRiskReturns(FormulatorAbstract):
     def calculate(self, df):
-        log_returns = np.log(df / df.shift(1))
+        log_returns = (df / df.shift(1)) - 1
         companies = df.columns.tolist()
 
         price_volatility = round(
@@ -61,7 +61,6 @@ class EqualWeightMaker(FormulatorAbstract):
         for i in range(0, number_of_tickers):
             weights = np.append(weights, ratio)
         weights /= np.sum(weights)
-        print(weights)
         return weights
 
 
@@ -76,11 +75,7 @@ class PortfolioRiskReturn(FormulatorAbstract):
         # calculate portfolio returns using the mean of the annual simple returns and equal weights
         simple_returns = (df / df.shift(1)) - 1
         simple_annual_returns = simple_returns.mean() * 250
-        print(simple_annual_returns)
-        portfolio_returns = np.dot(simple_annual_returns, weights) * 100
-        print('BAC sum', df.BAC.sum())
-        print('BAC returns', simple_returns.BAC.sum())
-        print(df.head(5), df.tail(5))
+        portfolio_returns = round(np.dot(simple_annual_returns, weights) * 100, 3)
 
         """
         calculate the portfolio volatility based on the deviation

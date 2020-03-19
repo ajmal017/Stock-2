@@ -2,19 +2,28 @@ from typing import List
 from fastapi import APIRouter, HTTPException
 from requests import request
 
-from models.api import StockIn, StockOut
+from models.api import StockIn, YfinanceOut, WordlTradingOut
 import yfinance as yf
 
 router = APIRouter()
 
 
-@router.post('/stock',)
+@router.post('/stock')
 async def calculate_financial_metrics(body: StockIn):
     try:
+        print('sotck tecieved', body)
         tick = yf.Ticker(body.ticker)
         df = tick.history(period='max')
+        df.dropna(how='any', inplace=True)
+        df.rename(columns={"Open": 'open',
+                           "High": 'high',
+                           "Low": 'low',
+                           "Close": 'close',
+                           "Volume": 'volume',
+                           "Dividends": 'dividends',
+                           "Stock Splits": 'stock_splits'}, inplace=True)
 
-        return df.to_dict(orient='index')
+        return {'name': body.ticker, 'history': df.to_dict(orient='index')}
 
     except Exception as err:
         raise HTTPException(status_code=400, detail=str(err))
@@ -30,7 +39,7 @@ async def get_stock(body: StockIn):
             'sort': 'oldest'
         }
         tick = request('GET', base_url, params=params).json()
-        return tick['history']
+        return tick
 
     except Exception as err:
         print(err)

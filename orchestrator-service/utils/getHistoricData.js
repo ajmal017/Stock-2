@@ -1,21 +1,20 @@
 const urlMaker = require('./urlMaker')
 const axios = require('axios')
-const Requester = require('./Requester')
+const dotenv = require('dotenv').config()
+const { PRICER_STOCK, PRICER_STOCK_WORLD_TRADING } = process.env
 
 
 const getHistoricData = async (tickers) => {
     try {
-        if (!tickers) throw new Error('no ticker passed to requester')
-        const results = []
-        for (ticker of tickers) {
-            const url = urlMaker(ticker)
-            const requester = new Requester()
-            const res = await requester.get(url)
-            results.push(res)
+        const result = []
+        for (tick of tickers) {
+            console.log(tick, tickers.length)
+            const res = await axios.post(PRICER_STOCK, { ticker: tick })
+            result.push(res.data)
         }
-        return results
+        return result
     } catch (error) {
-        console.log(error)
+        console.log('historic data failed')
         throw error
     }
 }
