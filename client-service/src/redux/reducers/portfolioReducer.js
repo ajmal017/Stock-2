@@ -1,15 +1,14 @@
-import { FETCH_PORTFOLIO_RISK_RETURNS } from '../actionTypes'
+import { FETCH_PORTFOLIO_RISK_RETURNS, FETCH_EFFICIENT_FRONTIER } from '../actionTypes'
 
 const initialState = {
     portfolio: {
         returns: 0,
         volatility: 0,
-        volume: 10000,
         returnsChange: 0,
         volatilityChange: 0
 
     },
-    historical: [],
+    efficientFrontier: []
 }
 
 const portfolioReducer = (state = initialState, action) => {
@@ -25,6 +24,12 @@ const portfolioReducer = (state = initialState, action) => {
                     returnsChange: action.data.portfolio_returns_change,
                     volatilityChange: action.data.portfolio_volatility_change * -1
                 }
+            }
+
+        case FETCH_EFFICIENT_FRONTIER:
+            return {
+                ...state,
+                efficientFrontier: action.data.efficient_frontier
             }
 
         default:

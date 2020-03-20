@@ -103,3 +103,27 @@ class Divider:
             return round((num1 / num2) - 1,  rounder)
         else:
             return (num1 / num2) - 1
+
+
+class EfficientFrontier(FormulatorAbstract):
+    def calculate(self, df):
+        iterations = 1000
+        log_returns = np.log(df / df.shift(1))
+        num_assets = len(df.columns.tolist())
+        frontier = []
+        for i in range(iterations):
+            weights = np.random.random(num_assets)
+            weights /= np.sum(weights)
+            result = {
+                'returns': round(np.sum(weights * log_returns.mean()) * 250 * 100, 4),
+                'volatility': round(np.sqrt(np.dot(weights.T, np.dot(log_returns.cov() * 250, weights))) * 100, 4)
+            }
+            frontier.append(result)
+
+        return frontier
+
+
+class EfficientFrontierFactory(AbstractFactory):
+    def factory(self):
+        return EfficientFrontier()
+

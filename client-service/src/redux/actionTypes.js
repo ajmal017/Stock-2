@@ -7,11 +7,17 @@ export const FETCH_STOCK_PRICE_NORMALIZED = 'FETCH_STOCK_PRICE_NORMALIZED'
 export const FETCH_STOCK_RISK_RETURN = 'FETCH_STOCK_RISK_RETURN'
 export const INCREASE_COUNTER = 'INCREASE_COUNTER'
 
+// Efficient Frontier
+export const FETCH_EFFICIENT_FRONTIER = 'FETCH_EFFICIENT_FRONTIER'
+
+
 // Generic Resouces
 export const SET_LOADING_FALSE = 'SET_LOADING_FALSE'
 export const SET_LOADING_TRUE = 'SET_LOADING_TRUE'
 export const SET_ERROR = 'SET_ERROR'
 export const REMOVE_ERROR = 'REMOVE_ERROR'
+
+
 
 
 // Portfolio Resources

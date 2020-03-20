@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector, shallowEqual } from "react-redux";
-import { getMetrics } from '../../redux/actions'
+import { getMetrics, getEfficientFrontier } from '../../redux/actions'
 import { setError } from '../../redux/errorActions'
 import stocks from './stocksList'
 
@@ -24,6 +24,7 @@ const Logic = () => {
         if (!symbols.includes(state.symbol.symbol)) {
             const payload = [...symbols, state.symbol.symbol]
             dispatch(getMetrics(payload))
+            dispatch(getEfficientFrontier(payload))
             setState({ ...state, symbol: {} })
         }
         else {
@@ -40,6 +41,8 @@ const Logic = () => {
         }
         if (missing.length > 0 && counter < 4) {
             dispatch(getMetrics(missing))
+            dispatch(getEfficientFrontier(missing))
+
         }
         else return
     }

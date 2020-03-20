@@ -8,7 +8,6 @@ const getHistoricData = async (tickers) => {
     try {
         const result = []
         for (tick of tickers) {
-            console.log(tick, tickers.length)
             const res = await axios.post(PRICER_STOCK, { ticker: tick })
             result.push(res.data)
         }

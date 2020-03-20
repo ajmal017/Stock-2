@@ -33,3 +33,8 @@ docker.env
 
 # python testing
 .pytest_cache
+
+
+#Mongo local
+db/
+db-service/

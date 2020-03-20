@@ -5,5 +5,6 @@ const router = express.Router()
 
 router.post('', [], stock.financialMetrics)
 
+router.post('/efficientFrontier', [], stock.efficientFrontier)
 
 module.exports = router
