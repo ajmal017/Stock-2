@@ -3,7 +3,7 @@ version: "3"
 services:
   calculator:
     container_name: calculator
-    image: stocky-calculator-service:dev
+    image: stock-calculator-service:dev
     restart: always
     command: "uvicorn main:app --reload --host 0.0.0.0 --port 3000"
     environment:
@@ -15,7 +15,7 @@ services:
       
   pricer:
     container_name: pricer
-    image: stocky-pricer-service:dev
+    image: stock-pricer-service:dev
     restart: always
     command: "uvicorn main:app --reload --host 0.0.0.0 --port 3000"
     environment:
@@ -27,7 +27,7 @@ services:
 
   client:
     container_name: client
-    image: stocky-client-service:dev
+    image: stock-client-service:prod
     restart: always
     environment:
       - docker.env
@@ -35,11 +35,25 @@ services:
       - /app/node_modules
       - ./client-service:/app
     ports:
-      - "3000:3000"
+      - "5000:3000"
+
+  nginx:
+    container_name: nginx
+    image: stock-nginx-service:dev
+    restart: always
+    ports:
+      - "80:80"
+
+    depends_on: 
+      - calculator
+      - pricer
+      - orchestrator
+      - redis
+      - client
 
   orchestrator:
     container_name: orchestrator
-    image: stocky-orchestrator-service:dev
+    image: stock-orchestrator-service:dev
     restart: always
     command: "npm run dev"
     environment:
@@ -48,13 +62,13 @@ services:
       - /app/node_modules
       - ./orchestrator-service:/app
     ports:
-      - "3020:3000"
+      - "3000:3000"
     depends_on: 
       - redis
 
   redis:
     container_name: redis
-    image: stocky-redis-service:dev
+    image: stock-redis-service:dev
     restart: always
 
   redis-admin:

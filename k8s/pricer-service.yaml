@@ -26,6 +26,7 @@ spec:
       containers:
         - name: pricer
           image: vidalignacio/stock-pricer-service
+          imagePullPolicy: Always
           # resources:
           #   limits:
           #     memory: "128Mi"

@@ -26,6 +26,7 @@ spec:
       containers:
         - name: redis
           image: vidalignacio/stock-redis-service
+          imagePullPolicy: Always
           # resources:
           #   limits:
           #     memory: "128Mi"

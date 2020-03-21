@@ -26,6 +26,7 @@ spec:
       containers:
         - name: calculator
           image: vidalignacio/stock-calculator-service
+          imagePullPolicy: Always
           # resources:
           #   limits:
           #     memory: "128Mi"

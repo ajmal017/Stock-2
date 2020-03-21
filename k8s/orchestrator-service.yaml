@@ -26,6 +26,7 @@ spec:
       containers:
         - name: orchestrator
           image: vidalignacio/stock-orchestrator-service
+          imagePullPolicy: Always
           # resources:
           #   limits:
           #     memory: "128Mi"
