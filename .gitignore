@@ -28,7 +28,7 @@ yarn-error.log*
 docker.env
 
 # jupyter
-
+jupyter
 
 
 # python testing

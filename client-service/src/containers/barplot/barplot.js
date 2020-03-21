@@ -3,13 +3,17 @@ import { BarChart, CartesianGrid, XAxis, YAxis, Tooltip, Legend, Bar, Responsive
 import { Container, Row, Col } from 'react-bootstrap'
 import style from './style.module.css'
 import { Paper } from '@material-ui/core'
+import TP from '../tooltip/tooltip'
 
 
-const Barplot = ({ data, dataKey }) => {
+const Barplot = ({ data, dataKey, tooltip, title }) => {
     return (
         < Container fluid className={style.section} >
             <Paper elevation={11} className={style.paper}>
-                <ResponsiveContainer width="100%" height={350}>
+                <h5 className={style.title}>{title}
+                    <TP tooltip={tooltip}></TP>
+                </h5>
+                <ResponsiveContainer width="100%" height={400}>
                     < BarChart data={data} margin={{ top: 15, right: 30, left: 20, bottom: 15 }} >
                         <CartesianGrid strokeDasharray="3 3" />
                         <XAxis dataKey={dataKey} />

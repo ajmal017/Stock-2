@@ -5,13 +5,13 @@ services:
     container_name: calculator
     image: stocky-calculator-service:dev
     restart: always
-    command: "uvicorn main:app --reload --host 0.0.0.0 --port 80"
+    command: "uvicorn main:app --reload --host 0.0.0.0 --port 3000"
     environment:
       - docker.env
     volumes:
       - ./calculator-service:/app
     ports:
-      - "8080:80"
+      - "8080:3000"
       
   pricer:
     container_name: pricer
@@ -48,7 +48,7 @@ services:
       - /app/node_modules
       - ./orchestrator-service:/app
     ports:
-      - "5000:3000"
+      - "3020:3000"
     depends_on: 
       - redis
 
