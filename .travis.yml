@@ -5,7 +5,6 @@ services:
 env:
   global:
     - SHA=$(git rev-parse HEAD)
-
 script:
   # Build Production images
   - docker build -t vidalignacio/stock-calculator-service:latest -t vidalignacio/stock-calculator-service:SHA ./calculator-service
