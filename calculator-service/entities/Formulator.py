@@ -16,7 +16,8 @@ class AnnualMeanRiskReturns(FormulatorAbstract):
 
         price_volatility = round(
             simple_returns[companies].std() * 250 ** 0.5 * 100, 3).tolist()
-        returns = round(simple_returns[companies].mean() * 250 * 100, 3).tolist()
+        returns = round(
+            simple_returns[companies].mean() * 250 * 100, 3).tolist()
 
         data = []
         for index, ticker in enumerate(companies):
@@ -75,7 +76,8 @@ class PortfolioRiskReturn(FormulatorAbstract):
         # calculate portfolio returns using the mean of the annual simple returns and equal weights
         simple_returns = (df / df.shift(1)) - 1
         simple_annual_returns = simple_returns.mean() * 250
-        portfolio_returns = round(np.dot(simple_annual_returns, weights) * 100, 3)
+        portfolio_returns = round(
+            np.dot(simple_annual_returns, weights) * 100, 3)
 
         """
         calculate the portfolio volatility based on the deviation
@@ -99,7 +101,6 @@ class Divider:
     @staticmethod
     def divide(num1, num2, rounder=None):
         if rounder is not None:
-            print(num1, num2, rounder)
             return round((num1 / num2) - 1,  rounder)
         else:
             return (num1 / num2) - 1
@@ -126,4 +127,3 @@ class EfficientFrontier(FormulatorAbstract):
 class EfficientFrontierFactory(AbstractFactory):
     def factory(self):
         return EfficientFrontier()
-

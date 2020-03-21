@@ -49,10 +49,20 @@ services:
       - ./orchestrator-service:/app
     ports:
       - "5000:3000"
+    depends_on: 
+      - redis
 
-  mongo-service:
-    container_name: mongo
+  redis:
+    container_name: redis
+    image: stocky-redis-service:dev
     restart: always
-    image: stocky-mongo-service:dev
-    volumes:
-      - ./mongo-service/db:/data/db
+
+  redis-admin:
+    image: erikdubbelboer/phpredisadmin
+    container_name: redis-admin
+    environment:
+        - REDIS_1_HOST=redis
+    ports:
+        - "6379:80"
+    depends_on:
+        - redis

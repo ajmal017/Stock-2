@@ -46,7 +46,6 @@ async def calculate_financial_metrics(body: StockHistoryIn):
         calculator.add_data(df_close[:-1])
 
         yesterday_annual_mean_log_risk_returns, = calculator.calculate()
-        print(yesterday_annual_mean_log_risk_returns)
 
         returns_change = Divider.divide(
             portfolio_risk_returns['portfolio_returns'],
