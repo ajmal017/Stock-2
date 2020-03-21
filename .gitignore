@@ -29,6 +29,8 @@ docker.env
 
 # jupyter
 jupyter
+jupyter/
+.ipynb_checkpoints
 
 
 # python testing
@@ -38,3 +40,4 @@ jupyter
 #Mongo local
 db/
 db-service/
+
