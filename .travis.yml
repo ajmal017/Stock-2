@@ -24,11 +24,11 @@ script:
   - docker push vidalignacio/stock-orchestrator-service:latest
   - docker push vidalignacio/stock-redis-service:latest
 
-  - docker push vidalignacio/stock-calculator-service:SHA
-  - docker push vidalignacio/stock-client-service:SHA
-  - docker push vidalignacio/stock-pricer-service:SHA
-  - docker push vidalignacio/stock-orchestrator-service:SHA
-  - docker push vidalignacio/stock-redis-service:SHA
+  - docker push vidalignacio/stock-calculator-service:$SHA
+  - docker push vidalignacio/stock-client-service:$SHA
+  - docker push vidalignacio/stock-pricer-service:$SHA
+  - docker push vidalignacio/stock-orchestrator-service:$SHA
+  - docker push vidalignacio/stock-redis-service:$SHA
 
 deploy:
   provider: elasticbeanstalk
