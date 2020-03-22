@@ -7,7 +7,7 @@ import logic from './logic'
 import stocks from './stocksList'
 
 const form = () => {
-    const { state, handleChange, handleClick } = logic()
+    const { handleChange, handleClick } = logic()
 
     return (
         <Container className={style.container}>
