@@ -32,14 +32,14 @@ script:
 
 deploy:
   provider: elasticbeanstalk
-  access_key_id:
-    secure: AKIAYKEEESJHQZG35N4Q
-  secret_access_key:
-    secure: 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
+  bucket_name: elasticbeanstalk-eu-west-2-571507774031
+  bucket_path: stock-container
   region: eu-west-2
   app: stock
   env: stock-env
-  bucket_name: elasticbeanstalk-eu-west-2-571507774031
-  bucket_path: stock-container
   on:
     branch: master
+  access_key_id:
+    secure: $AWS_ACCESS_KEY
+  secret_access_key:
+    secure: $AWS_SECRET_KEY
