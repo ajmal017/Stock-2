@@ -26,7 +26,7 @@ const scatterPlot = ({ title, tooltip, data1, data2, data3 }) => {
                         <Scatter data={data3} fill="#D7263D" name="Min Volatility" shape="triangle" />
                         <CartesianGrid strokeDasharray="3 3" />
                         <XAxis type="number" dataKey="volatility" name="Expected Volatility" unit="%" domain={['auto', 'auto']}>
-                            <Label value="Expected Volatility" position="insideBottomRight" offset={-10} />
+                            <Label value="Expected Volatility" position="insideBottomRight" offset={-7} />
                         </XAxis>
                         <YAxis type="number" dataKey="returns" name="Expected Returns" unit="%" domain={['auto', 'auto']}
                             label={{ value: 'Expected Returns', angle: -90, position: 'left' }} />
