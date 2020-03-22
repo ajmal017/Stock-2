@@ -11,4 +11,3 @@ def setup_instance():
 
 def test_instance_should_type_class(setup_instance):
     assert isinstance(setup_instance, type(DataFramer))
-

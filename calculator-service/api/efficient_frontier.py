@@ -23,6 +23,7 @@ async def calculate_financial_metrics(body: StockHistoryIn):
         # this array will hold all the ticker entities
         # a ticker is a company with a dataframe with data
         tickers = []
+        print(body)
 
         for tick in body.historicData:
             # creating ticker entity with dataframe with all columns
