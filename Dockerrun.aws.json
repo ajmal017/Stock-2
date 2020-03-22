@@ -9,10 +9,7 @@
       "memory": 128,
       "links": [
         "client",
-        "calculator",
-        "pricer",
-        "orchestrator",
-        "redis"
+        "orchestrator"
       ],
       "portMappings": [
         {
@@ -51,7 +48,12 @@
       "image": "vidalignacio/stock-orchestrator-service",
       "hostname": "orchestrator",
       "essential": false,
-      "memory": 128
+      "memory": 128,
+      "links":[
+        "calculator",
+        "pricer",
+        "redis"
+      ]
     },
     {
       "name": "redis",
