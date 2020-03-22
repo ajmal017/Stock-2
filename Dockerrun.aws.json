@@ -27,7 +27,10 @@
       "image": "vidalignacio/stock-client-service",
       "hostname": "client",
       "essential": false,
-      "memory": 128
+      "memory": 128,
+      "links":[
+      "orchestrator"
+      ]
     },
     {
       "name": "calculator",
