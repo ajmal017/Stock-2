@@ -105,29 +105,27 @@ class Divider:
         else:
             return (num1 / num2) - 1
 
-
-class EfficientFrontier(FormulatorAbstract):
-    def calculate(self, df):
-        iterations = 1000
-        log_returns = np.log(df / df.shift(1))
-        num_assets = len(df.columns.tolist())
-        frontier = []
-        for i in range(iterations):
-            weights = np.random.random(num_assets)
-            weights /= np.sum(weights)
-            result = {
-                'returns': round(np.sum(weights * log_returns.mean()) * 250 * 100, 4),
-                'volatility': round(np.sqrt(np.dot(weights.T, np.dot(log_returns.cov() * 250, weights))) * 100, 4)
-            }
-            frontier.append(result)
-        return frontier
-
-
-class EfficientFrontierFactory(AbstractFactory):
-    def factory(self):
-        return EfficientFrontier()
-
-
+# new function added below - need to confirm if log returns or standard returns should be used
+# class EfficientFrontier(FormulatorAbstract):
+#     def calculate(self, df):
+#         iterations = 1000
+#         log_returns = np.log(df / df.shift(1))
+#         num_assets = len(df.columns.tolist())
+#         frontier = []
+#         for i in range(iterations):
+#             weights = np.random.random(num_assets)
+#             weights /= np.sum(weights)
+#             result = {
+#                 'returns': round(np.sum(weights * log_returns.mean()) * 250 * 100, 4),
+#                 'volatility': round(np.sqrt(np.dot(weights.T, np.dot(log_returns.cov() * 250, weights))) * 100, 4)
+#             }
+#             frontier.append(result)
+#         return frontier
+#
+#
+# class EfficientFrontierFactory(AbstractFactory):
+#     def factory(self):
+#         return EfficientFrontier()
 
 
 class EfficientFrontierSharpe(FormulatorAbstract):
@@ -141,12 +139,11 @@ class EfficientFrontierSharpe(FormulatorAbstract):
         cov_annual = cov_daily * 250
 
         # empty lists to store returns, volatility and weights of imiginary portfolios
-
         result = []
 
         # set the number of combinations for imaginary portfolios
-        num_assets =,df.shape[0]
-        num_portfolios = 1000
+        num_assets = df.shape[1]
+        num_portfolios = 2000
 
         # set random seed for reproduction's sake
         np.random.seed(101)
@@ -155,17 +152,18 @@ class EfficientFrontierSharpe(FormulatorAbstract):
             weights = np.random.random(num_assets)
             weights /= np.sum(weights)
             returns = np.dot(weights, returns_annual)
-            volatility = np.sqrt(np.dot(weights.T, np.dot(cov_annual, weights)))
+            volatility = np.sqrt(
+                np.dot(weights.T, np.dot(cov_annual, weights)))
             sharpe = returns / volatility
 
             # create dictionary with calculations and push into results array
             portfolio = {'returns': returns,
                          'volatility': volatility,
                          'sharpe_ratio': sharpe,
-                         'weights': weights
+                         'weights': list(weights)
                          }
             result.append(portfolio)
-            return portfolio
+        return result
 
 
 class EfficientFrontierSharpeFactory(AbstractFactory):

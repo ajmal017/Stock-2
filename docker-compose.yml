@@ -54,8 +54,8 @@ services:
   orchestrator:
     container_name: orchestrator
     image: stock-orchestrator-service:dev
-    restart: always
     command: "npm run dev"
+    restart: always
     environment:
       - docker.env
     volumes:

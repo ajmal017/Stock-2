@@ -6,9 +6,7 @@ import { useSelector } from 'react-redux'
 
 const TopBox = () => {
     const data = useSelector(state => state.portfolioReducer.portfolio)
-
-    console.log('topbos', data)
-
+    
     return (
         <Container fluid className={style.container}>
             <Row className={style.row}>

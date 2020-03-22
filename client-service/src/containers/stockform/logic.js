@@ -2,13 +2,11 @@ import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector, shallowEqual } from "react-redux";
 import { getMetrics, getEfficientFrontier } from '../../redux/actions'
 import { setError } from '../../redux/errorActions'
-import stocks from './stocksList'
 
 
 const Logic = () => {
     const [state, setState] = useState({
         symbol: {},
-        stocks: stocks
     });
     const counter = useSelector(state => state.stockReducer.counter)
     const dispatch = useDispatch();

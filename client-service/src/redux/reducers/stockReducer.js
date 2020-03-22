@@ -37,7 +37,6 @@ const stockReducer = (state = initialState, action) => {
             }
 
         case FETCH_CARDS:
-            console.log(action.data, 'fetch cards')
             return {
                 ...state,
                 cards: [action.data]

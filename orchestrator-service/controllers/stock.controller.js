@@ -20,7 +20,7 @@ exports.financialMetrics = async (req, res) => {
         const data = { ...history.data, ...stockMetrics.data, ...portfolioMetrics.data, symbols: [...tickers] }
         return res.status(200).json(data)
     } catch (error) {
-        console.log(error)
+        console.log(error.data)
         return res.send({ error })
     }
 }

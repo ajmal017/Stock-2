@@ -4,10 +4,10 @@ import style from './style.module.css'
 import { TextField, Button } from '@material-ui/core';
 import Autocomplete from '@material-ui/lab/Autocomplete';
 import logic from './logic'
+import stocks from './stocksList'
 
 const form = () => {
-    const { state, handleChange, handleClick, isDisabled } = logic()
-    const { symbol } = state
+    const { state, handleChange, handleClick } = logic()
 
     return (
         <Container className={style.container}>
@@ -17,15 +17,14 @@ const form = () => {
                         <Autocomplete
                             className={style.TextField}
                             id="select-stock"
-                            options={state.stocks}
+                            options={stocks}
                             getOptionLabel={option => option.name}
-                            value={symbol}
                             filterSelectedOptions
                             onChange={(event, newValue) => {
                                 handleChange(newValue);
                             }}
                             renderInput={params => (
-                                <TextField {...params} label="Type a company " margin="normal" fullWidth />
+                                <TextField {...params} label="Type a company " margin="normal" variant='outlined' fullWidth />
                             )}
                         />
                         <Button className={style.button} color="primary" variant='contained' size='large'
