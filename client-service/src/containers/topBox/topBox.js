@@ -11,7 +11,7 @@ const TopBox = () => {
         <Container fluid className={style.container}>
             <Row className={style.row}>
                 <Col md={8} lg={8} xl={6}>
-                    <p className={style.text}>Build your own stock portfolios and compare them against  market Indexes so you can make informed decisions based on  risk and return ratios. We use historical data and financial models </p>
+                    <p className={style.text}>Select stocks and optmise your portfolio through the application of the Modern Portfolio Theory (MPT) and Capital Asset Pricing Model (CAPM) </p>
                 </Col>
             </Row>
             <Row className={style.row}>

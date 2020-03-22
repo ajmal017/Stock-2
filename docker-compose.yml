@@ -6,7 +6,7 @@ services:
     image: stock-calculator-service:dev
     restart: always
     command: "uvicorn main:app --reload --host 0.0.0.0 --port 3000"
-    environment:
+    env_file:
       - docker.env
     volumes:
       - ./calculator-service:/app
@@ -18,7 +18,7 @@ services:
     image: stock-pricer-service:dev
     restart: always
     command: "uvicorn main:app --reload --host 0.0.0.0 --port 3000"
-    environment:
+    env_file:
       - docker.env
     volumes:
       - ./pricer-service:/app
@@ -28,9 +28,9 @@ services:
       
   client:
     container_name: client
-    image: stock-client-service:prod
+    image: stock-client-service:dev
     restart: always
-    environment:
+    env_file:
       - docker.env
     volumes:
       - /app/node_modules
@@ -57,7 +57,7 @@ services:
     image: stock-orchestrator-service:dev
     command: "npm run dev"
     restart: always
-    environment:
+    env_file:
       - docker.env
     volumes:
       - /app/node_modules
@@ -75,7 +75,7 @@ services:
   redis-admin:
     image: erikdubbelboer/phpredisadmin
     container_name: redis-admin
-    environment:
+    env_file:
         - REDIS_1_HOST=redis
     ports:
         - "6379:80"
