@@ -1,0 +1,64 @@
+{
+  "AWSEBDockerrunVersion": 2,
+  "containerDefinitions": [
+    {
+      "name": "nginx",
+      "image": "vidalignacio/stock-nginx-service",
+      "hostname": "nginx",
+      "essential": true,
+      "memory": 128,
+      "links": [
+        "client",
+        "calculator",
+        "pricer",
+        "orchestrator",
+        "redis"
+      ],
+      "portMappings": [
+        {
+          "hostPort": 80,
+          "containerPort": 80
+        },
+        {
+          "hostPort": 443,
+          "containerPort": 443
+        }
+      ]
+    },
+    {
+      "name": "client",
+      "image": "vidalignacio/stock-client-service",
+      "hostname": "client",
+      "essential": false,
+      "memory": 128
+    },
+    {
+      "name": "calculator",
+      "image": "vidalignacio/stock-calculator-service",
+      "hostname": "calculator",
+      "essential": false,
+      "memory": 128
+    },
+    {
+      "name": "pricer",
+      "image": "vidalignacio/stock-pricer-service",
+      "hostname": "pricer",
+      "essential": false,
+      "memory": 128
+    },
+    {
+      "name": "orchestrator",
+      "image": "vidalignacio/stock-orchestrator-service",
+      "hostname": "orchestrator",
+      "essential": false,
+      "memory": 128
+    },
+    {
+      "name": "redis",
+      "image": "vidalignacio/stock-redis-service",
+      "hostname": "redis",
+      "essential": false,
+      "memory": 128
+    }
+  ]
+}

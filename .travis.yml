@@ -40,6 +40,6 @@ deploy:
   on:
     branch: master
   access_key_id:
-    secure: "$AWS_USER"
+    secure: $AWS_USER
   secret_access_key:
-    secure: "$AWS_KEY"
+    secure: $AWS_KEY
