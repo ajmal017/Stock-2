@@ -23,6 +23,7 @@ async def calculate_financial_metrics(body: StockIn):
                            "Dividends": 'dividends',
                            "Stock Splits": 'stock_splits'}, inplace=True)
 
+
         return {'name': body.ticker, 'history': df.to_dict(orient='index')}
 
     except Exception as err:
