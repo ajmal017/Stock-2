@@ -39,13 +39,13 @@ after_success:
 
 deploy:
   provider: elasticbeanstalk
-  region: eu-west-2
-  app: stock
-  env: Stock-env
-  bucket_name: elasticbeanstalk-eu-west-2-571507774031
-  bucket_path: stock-container
+  region: "eu-west-2"
+  app: "stock"
+  env: "Stock-env-1"
+  bucket_name: "elasticbeanstalk-eu-west-2-571507774031"
+  bucket_path: "stock-container"
   on:
-    branch: master
+    branch: "master"
   access_key_id:
     secure: $AWS_ACCESS_KEY
   secret_access_key:
