@@ -15,10 +15,10 @@ before_install:
   - docker build -t vidalignacio/stock-pricer-service:latest -t vidalignacio/stock-pricer-service:$SHA ./pricer-service
   - docker build -t vidalignacio/stock-nginx-service:latest -t vidalignacio/stock-nginx-service:$SHA ./nginx-service
 
-  script:
+script:
     - docker run vidalignacio/stock-calculator-service:latest pytest
 
-  after_success:
+after_success:
   #Log into docker CLI
   - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
 
@@ -37,7 +37,7 @@ before_install:
   - docker push vidalignacio/stock-redis-service:$SHA
   - docker push vidalignacio/stock-nginx-service:$SHA
 
-deploy:
+  deploy:
   provider: elasticbeanstalk
   bucket_name: elasticbeanstalk-eu-west-2-571507774031
   bucket_path: stock-container
