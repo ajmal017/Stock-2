@@ -54,5 +54,4 @@ async def calculate_financial_metrics(body: StockHistoryIn):
         }
 
     except Exception as err:
-        print(err)
         raise HTTPException(status_code=400, detail=str(err))

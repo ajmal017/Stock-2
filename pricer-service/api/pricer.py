@@ -11,7 +11,6 @@ router = APIRouter()
 @router.post('/stock')
 async def calculate_financial_metrics(body: StockIn):
     try:
-        print('sotck tecieved', body)
         tick = yf.Ticker(body.ticker)
         df = tick.history(period='max')
         df.dropna(how='any', inplace=True)
@@ -43,5 +42,4 @@ async def get_stock(body: StockIn):
         return tick
 
     except Exception as err:
-        print(err)
         raise HTTPException(status_code=400, detail=str(err))

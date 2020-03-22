@@ -23,7 +23,6 @@ async def calculate_financial_metrics(body: StockHistoryIn):
         # this array will hold all the ticker entities
         # a ticker is a company with a dataframe with data
         tickers = []
-        print(body)
 
         for tick in body.historicData:
             # creating ticker entity with dataframe with all columns
@@ -44,10 +43,8 @@ async def calculate_financial_metrics(body: StockHistoryIn):
 
         # executing all formulas in calculator and unpacking it
         efficient_frontier, = calculator.calculate()
-        print('effi done', efficient_frontier['min_volatility'])
 
         return {'efficient_frontier': efficient_frontier}
 
     except Exception as err:
-        # print(err)
         raise HTTPException(status_code=400, detail=str(err))

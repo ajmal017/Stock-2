@@ -35,7 +35,7 @@ jupyter/
 
 # python testing
 .pytest_cache
-__pycache__/
+__pycache__
 wheels/
 pip-log.txt
 pip-wheel-metadata/
@@ -43,4 +43,8 @@ pip-wheel-metadata/
 #Mongo local
 db/
 db-service/
+
+
+# idea
+.idea/
 
