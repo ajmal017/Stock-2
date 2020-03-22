@@ -29,7 +29,7 @@
       "essential": false,
       "memory": 128,
       "links":[
-      "orchestrator"
+        "orchestrator"
       ]
     },
     {
