@@ -22,8 +22,8 @@ const scatterPlot = ({ title, tooltip, data1, data2, data3 }) => {
                         }}
                     >
                         <Scatter data={data1} fill="#8884d8" name="Return/Volatility" />
-                        <Scatter data={data2} fill="#090909" strokeWidth={3} name="Max Sharpe Ration" shape="star" />
-                        <Scatter data={data3} fill="#D7263D" strokeWidth={3} name="Min Volatility" shape="triangle" />
+                        <Scatter data={data2} fill="#090909" name="Max Sharpe Ratio" shape="star" />
+                        <Scatter data={data3} fill="#D7263D" name="Min Volatility" shape="triangle" />
                         <CartesianGrid strokeDasharray="3 3" />
                         <XAxis type="number" dataKey="volatility" name="Expected Volatility" unit="%" domain={['auto', 'auto']}>
                             <Label value="Expected Volatility" position="insideBottomRight" offset={0} />

@@ -4,8 +4,7 @@ services:
   calculator:
     container_name: calculator
     image: stock-calculator-service:dev
-    restart: always
-    command: "pytest"
+    command: "ptw"
     environment:
       - docker.env
     volumes:
@@ -13,17 +12,17 @@ services:
     ports:
       - "8080:3000"
       
-  pricer:
-    container_name: pricer
-    image: stock-pricer-service:dev
-    restart: always
-    command: "pytest"
-    environment:
-      - docker.env
-    volumes:
-      - ./pricer-service:/app
-    ports:
-      - "3010:3000"
+  # pricer:
+  #   container_name: pricer
+  #   image: stock-pricer-service:dev
+  #   restart: always
+  #   command: "pytest"
+  #   environment:
+  #     - docker.env
+  #   volumes:
+  #     - ./pricer-service:/app
+  #   ports:
+  #     - "3010:3000"
 
   # client:
   #   container_name: client
