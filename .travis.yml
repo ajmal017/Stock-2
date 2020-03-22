@@ -37,7 +37,6 @@ after_success:
   - docker push vidalignacio/stock-redis-service:$SHA
   - docker push vidalignacio/stock-nginx-service:$SHA
 
-
 deploy:
   provider: elasticbeanstalk
   region: eu-west-2
