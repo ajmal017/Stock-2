@@ -4,9 +4,9 @@ import ScatterChart from '../scatterPlot/scatterPlot'
 
 
 const EfficientFrontier = () => {
-    const { data, } = logic()
+    const { frontier, maxSharpe, minVolatility } = logic()
     return (
-        <ScatterChart data={data}
+        <ScatterChart data1={frontier} data2={maxSharpe} data3={minVolatility}
             title="Efficient Frontier"
             tooltip="Efficient Frontier"
         ></ScatterChart>

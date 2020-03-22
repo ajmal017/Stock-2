@@ -140,6 +140,10 @@ class EfficientFrontierSharpe(FormulatorAbstract):
 
         # empty lists to store returns, volatility and weights of imiginary portfolios
         result = []
+        max_sharpe_ratio = float('-inf')
+        min_volatility = float('inf')
+        max_sharpe_portfolio = {}
+        min_volatility_portfolio = {}
 
         # set the number of combinations for imaginary portfolios
         num_assets = df.shape[1]
@@ -148,9 +152,9 @@ class EfficientFrontierSharpe(FormulatorAbstract):
         # set random seed for reproduction's sake
         np.random.seed(101)
 
-        for single_portfolio in range(num_portfolios):
+        for i in range(num_portfolios):
             weights = np.random.random(num_assets)
-            weights /= np.sum(weights)
+            weights /= np.sum(weights),
             returns = np.dot(weights, returns_annual)
             volatility = np.sqrt(
                 np.dot(weights.T, np.dot(cov_annual, weights)))
@@ -162,8 +166,20 @@ class EfficientFrontierSharpe(FormulatorAbstract):
                          'sharpe_ratio': sharpe,
                          'weights': list(weights)
                          }
+
+            if sharpe > max_sharpe_ratio:
+                max_sharpe_ratio = sharpe
+                max_sharpe_portfolio = portfolio
+
+            if volatility < min_volatility:
+                min_volatility = volatility
+                min_volatility_portfolio = portfolio
+
             result.append(portfolio)
-        return result
+        return {'frontier': result,
+                'max_sharpe': [max_sharpe_portfolio],
+                'min_volatility': [min_volatility_portfolio]
+                }
 
 
 class EfficientFrontierSharpeFactory(AbstractFactory):

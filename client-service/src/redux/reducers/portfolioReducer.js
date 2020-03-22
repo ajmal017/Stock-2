@@ -8,7 +8,9 @@ const initialState = {
         volatilityChange: 0
 
     },
-    efficientFrontier: []
+    efficientFrontier: [],
+    maxSharpe: [],
+    minVolatility: []
 }
 
 const portfolioReducer = (state = initialState, action) => {
@@ -28,7 +30,9 @@ const portfolioReducer = (state = initialState, action) => {
         case FETCH_EFFICIENT_FRONTIER:
             return {
                 ...state,
-                efficientFrontier: action.data.efficient_frontier
+                efficientFrontier: action.data.efficient_frontier.frontier,
+                maxSharpe: action.data.efficient_frontier.max_sharpe,
+                minVolatility: action.data.efficient_frontier.min_volatility
             }
 
         default:

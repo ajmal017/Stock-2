@@ -12,7 +12,7 @@ from models.api import EfficientFrontierOut, StockHistoryIn
 router = APIRouter()
 
 
-@router.post('/efficientFrontier', response_model=EfficientFrontierOut)
+@router.post('/efficientFrontier')
 async def calculate_financial_metrics(body: StockHistoryIn):
     try:
         # Initialising objects
@@ -43,9 +43,10 @@ async def calculate_financial_metrics(body: StockHistoryIn):
 
         # executing all formulas in calculator and unpacking it
         efficient_frontier, = calculator.calculate()
+        print('effi done', efficient_frontier['min_volatility'])
 
         return {'efficient_frontier': efficient_frontier}
 
     except Exception as err:
-        print(err)
+        # print(err)
         raise HTTPException(status_code=400, detail=str(err))

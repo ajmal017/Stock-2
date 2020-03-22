@@ -10,7 +10,7 @@ const initialState = {
     stockRiskReturn: [],
     symbolList: [],
     cards: [],
-    initialSymbols: ['GS', 'BAC'],
+    initialSymbols: ['GS', 'F'],
     loading: false,
     counter: 0
 }
