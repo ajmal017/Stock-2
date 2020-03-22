@@ -37,7 +37,7 @@ after_success:
   - docker push vidalignacio/stock-redis-service:$SHA
   - docker push vidalignacio/stock-nginx-service:$SHA
 
-  deploy:
+deploy:
   provider: elasticbeanstalk
   bucket_name: elasticbeanstalk-eu-west-2-571507774031
   bucket_path: stock-container
