@@ -1,6 +1,6 @@
 # Stock and Portfolios
 
-Users can select stocks and optimise portfolios through the application ofMModern Portfolio Theory (MPT) and Capital Asset Pricing Model (CAPM). The application automatically calculates the portfolio returns and risks and plots the results in the charts.
+Users can select stocks and optimise portfolios through the application of Modern Portfolio Theory (MPT) and Capital Asset Pricing Model (CAPM). The application automatically calculates the portfolio returns and risks and plots the results in the charts.
 
 The application uses a React web client, microservices developed with Express (Nodejs) and python (FastAPI), nginx as a reverse proxy and Redis as a caching layer. The services are deployed in Docker containers in Elastic Beanstalk through Travis CI/CD pipeline.
 
@@ -28,7 +28,7 @@ You can run the tests of each service through "npm run test:local".
 
 <!-- - Identity: It manages the credentials of the customers through JWT tokens. Users can login with google credentials. -->
 <!-- - Orchestrator: It orchestrates fetching the stocks data and calculations -->
-- Calculator: It runs the financial calculatios of the stocks and portfolios
+- Calculator: It runs the financial calculations of the stocks and portfolios
 - Pricer: It retrieves the historical data of the stocks
 - Orchestrator: It is the gateway to coordinate and aggregate other APIs.
 - Client: This is the front end website to interact with all the backend services.
