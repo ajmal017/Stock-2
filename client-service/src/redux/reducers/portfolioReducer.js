@@ -23,7 +23,9 @@ const portfolioReducer = (state = initialState, action) => {
                     returns: action.data.portfolio_returns,
                     volatility: action.data.portfolio_volatility,
                     returnsChange: action.data.portfolio_returns_change,
-                    volatilityChange: action.data.portfolio_volatility_change * -1
+                    volatilityChange: action.data.portfolio_volatility_change * -1,
+                    idiosyncraticRisk: action.data.idiosyncratic_risk,
+                    systematicRisk: action.data.systematic_risk
                 }
             }
 

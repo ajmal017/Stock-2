@@ -18,18 +18,33 @@ const TopBox = () => {
                 <Col md={6} lg={4} xl={3}>
                     <PortfolioCard data={data}
                         name="Portfolio Returns"
-                        value={data.returns}
-                        changePct={data.returnsChange}
-                        typ='Returns'
+                        value={data.returns.toString() + '%'}
+                        changePct={data.returnsChange.toString() + '%'}
+                        icn={true}
                     ></PortfolioCard>
                 </Col>
                 <Col md={6} lg={4} xl={3}>
                     <PortfolioCard data={data}
                         name="Portfolio Volatility"
-                        value={data.volatility}
-                        changePct={data.volatilityChange}
-                        typ='Volatility'
-
+                        value={data.volatility.toString() + '%'}
+                        changePct={data.volatilityChange.toString() + '%'}
+                        icn={true}
+                    ></PortfolioCard>
+                </Col>
+            </Row>
+            <Row className={style.row}>
+                <Col md={6} lg={4} xl={3}>
+                    <PortfolioCard data={data}
+                        name="Portfolio Systematic Risk"
+                        value={data.systematicRisk}
+                        icn={false}
+                    ></PortfolioCard>
+                </Col>
+                <Col md={6} lg={4} xl={3}>
+                    <PortfolioCard data={data}
+                        name="Portfolio Idiosyncratic Risk"
+                        value={data.idiosyncraticRisk}
+                        icn={false}
                     ></PortfolioCard>
                 </Col>
             </Row>

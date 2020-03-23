@@ -5,13 +5,13 @@ import TrendingUpRoundedIcon from '@material-ui/icons/TrendingUpRounded';
 import TrendingDownRoundedIcon from '@material-ui/icons/TrendingDownRounded';
 import style from './style.module.css'
 import { green } from '@material-ui/core/colors';
-import DeleteForeverOutlinedIcon from '@material-ui/icons/DeleteForeverOutlined';
 
 
-const Card = ({ data, changePct, name, value, typ }) => {
+const Card = ({ changePct, name, value, icn }) => {
     let icon = null
-    if (changePct >= 0) icon = <TrendingUpRoundedIcon style={{ color: green[500] }} fontSize='large' />
-    else icon = <TrendingDownRoundedIcon color='secondary' fontSize='large' />;
+    if (!!icn && changePct >= 0) icon = <TrendingUpRoundedIcon style={{ color: green[500] }} fontSize='large' />
+    if(icn && changePct <= 0) icon = <TrendingDownRoundedIcon color='secondary' fontSize='large' />
+    
     return (
         <Paper elevation={11} className={style.paper}>
             <Container fluid className={style.container}>
@@ -20,7 +20,7 @@ const Card = ({ data, changePct, name, value, typ }) => {
                     {icon}
                 </Row>
                 <Row className={style.middleRow}>
-                    <h5 className={style.price}> {value} %</h5>
+                    <h5 className={style.price}> {value}</h5>
                     <p className={changePct < 0 ? style.negative : style.positive}>{changePct}</p>
 
                 </Row>
