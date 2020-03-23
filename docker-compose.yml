@@ -75,7 +75,7 @@ services:
   redis-admin:
     image: erikdubbelboer/phpredisadmin
     container_name: redis-admin
-    env_file:
+    environment:
         - REDIS_1_HOST=redis
     ports:
         - "6379:80"
