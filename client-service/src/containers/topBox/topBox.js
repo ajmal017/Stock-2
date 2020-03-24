@@ -3,6 +3,7 @@ import { Container, Row, Col } from 'react-bootstrap'
 import style from './style.module.css'
 import PortfolioCard from '../card/card'
 import { useSelector } from 'react-redux'
+import Cont from './cont'
 
 const TopBox = () => {
     const data = useSelector(state => state.portfolioReducer.portfolio)
@@ -15,9 +16,14 @@ const TopBox = () => {
                 </Col>
             </Row>
             <Row className={style.row}>
+                <Col lg={8} xl={6}>
+                    <Cont value="Portfolio Metrics"></Cont>
+                </Col>
+            </Row>
+            <Row className={style.row}>
                 <Col md={6} lg={4} xl={3}>
                     <PortfolioCard data={data}
-                        name="Portfolio Returns"
+                        name="Annual Returns"
                         value={data.returns.toString() + '%'}
                         changePct={data.returnsChange.toString() + '%'}
                         icn={true}
@@ -25,7 +31,7 @@ const TopBox = () => {
                 </Col>
                 <Col md={6} lg={4} xl={3}>
                     <PortfolioCard data={data}
-                        name="Portfolio Volatility"
+                        name="Volatility"
                         value={data.volatility.toString() + '%'}
                         changePct={data.volatilityChange.toString() + '%'}
                         icn={true}
@@ -35,14 +41,14 @@ const TopBox = () => {
             <Row className={style.row}>
                 <Col md={6} lg={4} xl={3}>
                     <PortfolioCard data={data}
-                        name="Portfolio Systematic Risk"
+                        name="Systematic Risk"
                         value={data.systematicRisk}
                         icn={false}
                     ></PortfolioCard>
                 </Col>
                 <Col md={6} lg={4} xl={3}>
                     <PortfolioCard data={data}
-                        name="Portfolio Idiosyncratic Risk"
+                        name="Idiosyncratic Risk"
                         value={data.idiosyncraticRisk}
                         icn={false}
                     ></PortfolioCard>
