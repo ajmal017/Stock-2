@@ -9,7 +9,7 @@ class FormulatorAbstract(ABC):
     def calculate(self, *args, **kwargs): pass
 
 
-class AnnualMeanRiskReturns(FormulatorAbstract):
+class SimpleMeanRiskReturns(FormulatorAbstract):
     def calculate(self, df):
         simple_returns = (df / df.shift(1)) - 1
         companies = df.columns.tolist()
@@ -27,9 +27,9 @@ class AnnualMeanRiskReturns(FormulatorAbstract):
         return data
 
 
-class AnnualMeanLogRiskReturnsFactory(AbstractFactory):
+class SimpleMeanLogRiskReturnsFactory(AbstractFactory):
     def factory(self):
-        return AnnualMeanRiskReturns()
+        return SimpleMeanRiskReturns()
 
 
 class HistoryPriceNormalized(FormulatorAbstract):
@@ -127,6 +127,13 @@ class Divider:
             return round((num1 / num2) - 1,  rounder)
         else:
             return (num1 / num2) - 1
+
+    @staticmethod
+    def subtract(num1, num2, rounder=None):
+        if rounder is not None:
+            return round((num1 - num2),  rounder)
+        else:
+            return num1 - num2
 
 
 class EfficientFrontierSharpe(FormulatorAbstract):
