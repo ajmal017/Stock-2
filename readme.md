@@ -2,7 +2,7 @@
 
 Users can select stocks and optimise portfolios through the application of Modern Portfolio Theory (MPT) and Capital Asset Pricing Model (CAPM). The application automatically calculates the portfolio returns and risks and plots the results in the charts.
 
-The application uses a React web client, microservices developed with Express (Nodejs) and python (FastAPI), nginx as a reverse proxy and Redis as a caching layer. The services are deployed in Docker containers in Elastic Beanstalk through Travis CI/CD pipeline.
+The application is available at www.romoclub.com and it uses a React web client, microservices developed with Express (Nodejs) and python (FastAPI), nginx as a reverse proxy and Redis as a caching layer. The services are deployed in Docker containers in Elastic Beanstalk through Travis CI/CD pipeline.
 
 ## Features:
 
