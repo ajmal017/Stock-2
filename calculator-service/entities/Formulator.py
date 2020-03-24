@@ -59,7 +59,7 @@ class EqualWeightMaker(FormulatorAbstract):
     def calculate(self, number_of_tickers):
         ratio = 1/number_of_tickers
         weights = np.array([])
-        for i in range(0, number_of_tickers):
+        for i in range(number_of_tickers):
             weights = np.append(weights, ratio)
         weights /= np.sum(weights)
         return weights
@@ -77,10 +77,10 @@ class PortfolioRiskReturn(FormulatorAbstract):
         number_assets = len(df.columns.tolist())
         weights = EqualWeightMakerFactory().factory().calculate(number_assets)
         # calculate portfolio returns using the mean of the annual simple returns and equal weights
-        simple_returns = np.log(df / df.shift(1))
-        simple_annual_returns = simple_returns.mean() * 250
+        simple_returns = (df/df.shift(1)) - 1
+        annual_simple_returns = simple_returns.mean() * 250
         portfolio_returns = round(
-            np.dot(simple_annual_returns, weights) * 100, 3)
+            np.dot(annual_simple_returns, weights) * 100, 3)
 
         """
         calculate the portfolio volatility based on the deviation
@@ -132,12 +132,12 @@ class Divider:
 class EfficientFrontierSharpe(FormulatorAbstract):
     def calculate(self, df):
         # calculate daily and annual returns of the stocks
-        returns_daily = df.pct_change()
-        returns_annual = returns_daily.mean() * 250
+        log_returns = np.log(df/df.shift(1))
+        annual_log_returns = log_returns.mean() * 250
+        num_assets = len(df.columns.tolist())
 
         # get daily and covariance of returns of the stock
-        cov_daily = returns_daily.cov()
-        cov_annual = cov_daily * 250
+        cov_annual = log_returns.cov() * 250
 
         # empty lists to store returns, volatility and weights of imiginary portfolios
         result = []
@@ -147,7 +147,6 @@ class EfficientFrontierSharpe(FormulatorAbstract):
         min_volatility_portfolio = {}
 
         # set the number of combinations for imaginary portfolios
-        num_assets = df.shape[1]
         num_portfolios = 2000
 
         # set random seed for reproduction's sake
@@ -155,10 +154,10 @@ class EfficientFrontierSharpe(FormulatorAbstract):
 
         for i in range(num_portfolios):
             weights = np.random.random(num_assets)
-            weights /= np.sum(weights),
-            returns = np.dot(weights, returns_annual)
-            volatility = np.sqrt(
-                np.dot(weights.T, np.dot(cov_annual, weights)))
+            weights /= np.sum(weights)
+            returns = np.sum(weights * annual_log_returns)
+                # np.dot(weights, returns_annual)
+            volatility = np.sqrt(np.dot(weights.T, np.dot(cov_annual, weights)))
             sharpe = returns / volatility
 
             # create dictionary with calculations and push into results array
