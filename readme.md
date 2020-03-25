@@ -4,36 +4,36 @@ Users can select stocks and optimise portfolios through the application of Moder
 
 The application is available at www.romoclub.com and it uses a React web client, microservices developed with Express (Nodejs) and python (FastAPI), nginx as a reverse proxy and Redis as a caching layer. The services are deployed in Docker containers in Elastic Beanstalk through Travis CI/CD pipeline.
 
+This platform has been developed for personal educational purposes to apply for a Masters degree. It is not to be considered as investment advice.
+
 ## Features:
 
-- Calculation of the risk and return of an individual stock.
-- Calculation of the portfolio risk and return.
-- Calculation of the efficient frontier
+- Calculation of the volatility and returns of individual stocks.
+- Calculation of the portfolio volatility and returns.
+- Optimisation of portfolio composotion through the Efficient Frontier
+- Calculation of expected returns through Monte Carlo Simulations.
 
 ## Getting Started
 
-You can clone this project and run docker-compose up.
-You will need docker and docker-compose to run this application.
+You can clone this project and run docker-compose up. See example.env for the environment variables that you need to add manually.
 
 ## Running the tests
 
-You can run the tests of each service through "npm run test:local".
+You can run the tests of each service through "npm run test:local" or pytest.
 
 ### Break down of testing
 
 - Pytest & Jest: Used for unit testing with mocks for external dependencies.
-- Supertest: Used for integration testing and API testing that includes external dependencies.
+- Supertest and TestClient: Used for integration testing and API testing that includes external dependencies.
 
 ### Services Description
 
-<!-- - Identity: It manages the credentials of the customers through JWT tokens. Users can login with google credentials. -->
-<!-- - Orchestrator: It orchestrates fetching the stocks data and calculations -->
 - Calculator: It runs the financial calculations of the stocks and portfolios
 - Pricer: It retrieves the historical data of the stocks
-- Orchestrator: It is the gateway to coordinate and aggregate other APIs.
+- Orchestrator: It is the gateway exposed to the web client that coordinates and aggregate the responses from the microservices.
 - Client: This is the front end website to interact with all the backend services.
 - Redis: Caching layer of historical stock data. The data is purged at the end of the day.
-- Ngingx: It is a reverse proxy that directs the requests to the Client and Orchestrator.
+- Ngingx: It is a reverse proxy that brokers the requests between the Client and Orchestrator.
 
 ## Deployment
 
