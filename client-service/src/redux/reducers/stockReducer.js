@@ -9,7 +9,7 @@ const initialState = {
     stockPriceNormalized: [],
     stockRiskReturn: [],
     symbolList: [],
-    cards: [],
+    details: [],
     initialSymbols: ['GS', 'F'],
     loading: false,
     counter: 0
@@ -39,7 +39,7 @@ const stockReducer = (state = initialState, action) => {
         case FETCH_CARDS:
             return {
                 ...state,
-                cards: [action.data]
+                details: [...action.data]
             }
 
         case FETCH_STOCK_PRICE_HISTORY:

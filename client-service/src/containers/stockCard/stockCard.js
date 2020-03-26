@@ -1,13 +1,8 @@
 import React from 'react'
 import logic from './logic'
-import { Paper } from '@material-ui/core'
 import { Container, Row, Col } from 'react-bootstrap'
-import TrendingUpRoundedIcon from '@material-ui/icons/TrendingUpRounded';
-import TrendingDownRoundedIcon from '@material-ui/icons/TrendingDownRounded';
 import style from './style.module.css'
-import { green } from '@material-ui/core/colors';
-import DeleteForeverOutlinedIcon from '@material-ui/icons/DeleteForeverOutlined';
-
+import StockCard from './card/card'
 
 const StockCards = () => {
     const { stocks, handleDelete } = logic()
@@ -15,11 +10,11 @@ const StockCards = () => {
     return (
         <Container fluid className={style.section}>
             <Row>
-                {/* {stocks.map((item, i) => (
+                {stocks.map((item, i) => (
                     <Col md={6} lg={4} xl={3} className={style.col}>
-                        <StockCard data={item} handleDelete={handleDelete}></StockCard>
+                        <StockCard data={item} icn={true}></StockCard>
                     </Col>
-                ))} */}
+                ))}
             </Row>
         </Container>
     )

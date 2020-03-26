@@ -1,0 +1,51 @@
+
+.section{
+    margin: 1rem 0 ;
+}
+
+.paper{
+    padding:1rem;
+    margin:1rem 0;
+    background-color: #040E27;
+    color:white
+}
+
+.col{
+    padding: 0;
+    margin:0
+}
+.row{
+    justify-content: space-between;
+    align-content: center;
+    padding:0.5rem 0 
+}
+
+
+.negative{
+    color: red;
+    margin:0;
+    display: inline-flex;
+}
+
+.positive{
+    color: green;
+    margin: 0;
+    display: inline-flex;
+
+}
+
+.price{
+    padding: 0;
+    margin:0 0.3rem 0 0;
+    display: inline-flex;
+}
+
+
+
+.vol{
+    margin:0;
+}
+
+.symbol{
+    margin:0
+}

@@ -5,7 +5,7 @@ import Spinner from './spinner/spinner'
 const TopBox = lazy(() => import('./topBox/topBox'))
 const Chips = lazy(() => import('./chips/chip'))
 const Form = lazy(() => import('./stockform/stockForm'))
-// const StockCard = lazy(() => import('./stockCard/stockCard'))
+const StockCard = lazy(() => import('./stockCard/stockCard'))
 const PricePlots = lazy(() => import('./lineplots/lineplots'))
 const RiskReturnBarplot = lazy(() => import('./riskReturn/layout'))
 const Toast = lazy(() => import('./toast/toast'))
@@ -21,7 +21,7 @@ const Layout = () => {
                     <TopBox></TopBox>
                     <Chips></Chips>
                     <Form></Form>
-                    {/* <StockCard></StockCard> */}
+                    <StockCard></StockCard>
                     <PricePlots></PricePlots>
                     <RiskReturnBarplot></RiskReturnBarplot>
                 </Suspense>

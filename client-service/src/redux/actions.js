@@ -16,7 +16,7 @@ export const getMetrics = symbols => async dispatch => {
         const res = await axios.post(STOCK_METRICS, { tickers: symbols })
         batch(() => {
             dispatch({ type: SELECT_STOCK, data: res.data.symbols })
-            dispatch({ type: FETCH_CARDS, data: res.data.price_history[res.data.price_history.length - 1] })
+            dispatch({ type: FETCH_CARDS, data: res.data.stock_details })
             dispatch({ type: FETCH_STOCK_PRICE_HISTORY, data: res.data.price_history })
             dispatch({ type: FETCH_STOCK_PRICE_NORMALIZED, data: res.data.price_history_normalized })
             dispatch({ type: FETCH_STOCK_RISK_RETURN, data: res.data.stock_annual_log_risk_return })

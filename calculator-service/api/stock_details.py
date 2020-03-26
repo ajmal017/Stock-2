@@ -71,7 +71,7 @@ async def calculate_financial_metrics(body: StockHistoryIn):
                 'volume': stock_volume_today[i],
                 'volume_change_value': round(stock_volume_change_value[i], 4),
                 'volume_change_pct':round(stock_volume_change_pct[i], 4),
-                'beta': beta,
+                'beta': round(beta,2),
                 'ticker': list_companies[i]
             }
             results.append(entry)
