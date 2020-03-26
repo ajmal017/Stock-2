@@ -5,9 +5,9 @@ import HistoricPriceNorm from '../historicPriceNorm/historicPriceNorm'
 
 const PricePlots = () => {
     return (
-        <Container fluid >
+        <Container fluid  >
             <Row style={{ justifyContent: 'center' }}>
-                <Col xl={6}  >
+                <Col xl={6} style={{ 'padding': 0 }} >
                     <HistoricPrice></HistoricPrice>
                 </Col>
                 <Col xl={6}  >

@@ -7,7 +7,7 @@ import EfficientFrontierScatter from '../efficientFrontier/efficientFrontier'
 const layout = () => {
     return (
         <Container fluid>
-            <Row style={{ justifyContent: 'center' }}>
+            <Row style={{ justifyContent: 'center', 'padding': 0 }}>
                 <Col xl={6} >
                     <RiskReturnBarPlot></RiskReturnBarPlot>
                 </Col>

@@ -10,10 +10,10 @@
     color:white
 }
 
-.col{
+/* .col{
     padding: 0;
     margin:0
-}
+} */
 .row{
     justify-content: space-between;
     align-content: center;
