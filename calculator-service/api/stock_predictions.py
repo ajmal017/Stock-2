@@ -13,7 +13,7 @@ import pandas as pd
 router = APIRouter()
 
 
-@router.post('/stockDetails', response_model=BetaOut)
+@router.post('/stockPredictions', response_model=BetaOut)
 async def calculate_financial_metrics(body: StockHistoryIn):
     try:
         # Initialising objects
@@ -35,29 +35,27 @@ async def calculate_financial_metrics(body: StockHistoryIn):
         # joining dataframes of each ticker. The ['close'] column is taken from each each dataframe
         df_close = DataFrameJoiner.join_dataframes(
             tickers, HISTORICAL_DATA.CLOSE.value)
-
-        df_volume = DataFrameJoiner.join_dataframes(
-            tickers, HISTORICAL_DATA.VOLUME.value)
-
-
-        stock_price_today = df_close.iloc[-1].values
-        stock_price_yesterday = df_close.iloc[-2].values
-        stock_price_change_value = stock_price_today - stock_price_yesterday
-        stock_price_change_pct = ((stock_price_today / stock_price_yesterday) - 1) * 100
-
-        stock_volume_today = df_volume.iloc[-1].values
-        stock_volume_yesterday = df_volume.iloc[-2].values
-        stock_volume_change_value = stock_volume_today - stock_volume_yesterday
-        stock_volume_change_pct = ((stock_volume_today / stock_volume_yesterday) - 1) * 100
+        log_returns = np.log(df_close/df_close.shift(1))
 
         results = []
-        list_companies = df_close.columns.tolist()
-        date_filter, = (df_close.tail(1).index - pd.offsets.DateOffset(years=5)).format()
-        today, = df_close.tail(1).index.format()
 
-        df_5_years = df_close.loc[date_filter:today]
+        for ticker in list_companies:
+            dataframe = log_returns[[ticker]]
+            mean = dataframe.mean()
+            variance = dataframe.var()
+            drift = mean - (0.5 * variance)
+            std = dataframe.std()
+            Z = norm.ppf(np.random.rand(10,2))
+            t_intervals = 1000
+            iterations = 10
+            daily_returns = np.exp(drift.values + std.values * norm.ppf(np.random.rand(t_intervals, iterations)))
+            S0 = dataframe.iloc[-1]
+            price_list = np.zeros_like(daily_returns)
+            price_list[0] = S0
+            for t in range(1, t_intervals):
+                price_list[t] = price_list[t - 1] * daily_returns[t]
 
-        for i in range(len(list_companies) - 1):
+
             ticker = list_companies[i]
             print('looping for', ticker)
             calculator = CalculatorFactory().factory()
