@@ -4,6 +4,8 @@ from requests import request
 
 from models.api import StockIn, YfinanceOut, WordlTradingOut
 import yfinance as yf
+import logging
+logger = logging.getLogger(__name__)
 
 router = APIRouter()
 
@@ -11,6 +13,7 @@ router = APIRouter()
 @router.post('/stock')
 async def calculate_financial_metrics(body: StockIn):
     try:
+        logger.info(f'requesting data for ticker {body.ticker}')
         tick = yf.Ticker(body.ticker)
         df = tick.history(period='max')
         df.dropna(how='any', inplace=True)
@@ -26,6 +29,7 @@ async def calculate_financial_metrics(body: StockIn):
         return {'name': body.ticker, 'history': df.to_dict(orient='index')}
 
     except Exception as err:
+        logger.error(f'Error requesting data for ticker {ticker}', err)
         raise HTTPException(status_code=400, detail=str(err))
 
 
