@@ -6,7 +6,7 @@ from entities.Factory import AbstractFactory
 
 class FormulatorAbstract(ABC):
     @abstractmethod
-    def calculate(self, *args, **kwargs): pass
+    def calculate(self, df): pass
 
 
 class SimpleMeanRiskReturns(FormulatorAbstract):
@@ -192,3 +192,23 @@ class EfficientFrontierSharpe(FormulatorAbstract):
 class EfficientFrontierSharpeFactory(AbstractFactory):
     def factory(self):
         return EfficientFrontierSharpe()
+
+
+class Beta(FormulatorAbstract):
+    def calculate(self, df):
+        log_returns = np.log(df/df.shift(1))
+        cov = log_returns.cov() * 250
+        cov_with_market = cov.iloc[0, 1]
+        market_var = log_returns['^GSPC'].var() * 250
+        beta = cov_with_market / market_var
+        return beta
+
+
+class BetaFactory(AbstractFactory):
+    def factory(self):
+        return Beta()
+
+
+
+
+

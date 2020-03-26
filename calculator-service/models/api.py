@@ -35,3 +35,6 @@ class PortfolioMetricsOut(BaseModel):
 class EfficientFrontierOut(BaseModel):
     efficient_frontier: List[Dict] = []
 
+
+class BetaOut(BaseModel):
+    stock_details: List[Dict] = []
