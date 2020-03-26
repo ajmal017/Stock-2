@@ -1,7 +1,8 @@
 .container{
     background-color: #040E27;
-    padding: 3rem;
     color: white;
+    padding-top: 2rem;
+    padding-bottom: 2rem ;
 }
 
 .row{
