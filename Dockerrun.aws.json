@@ -37,7 +37,7 @@
       "image": "vidalignacio/stock-calculator-service",
       "hostname": "calculator",
       "essential": false,
-      "memory": 128
+      "memory": 512
     },
     {
       "name": "pricer",
@@ -51,7 +51,7 @@
       "image": "vidalignacio/stock-orchestrator-service",
       "hostname": "orchestrator",
       "essential": false,
-      "memory": 128,
+      "memory": 512,
       "links":[
         "calculator",
         "pricer",
@@ -63,7 +63,7 @@
       "image": "vidalignacio/stock-redis-service",
       "hostname": "redis",
       "essential": false,
-      "memory": 128
+      "memory": 256
     }
   ]
 }
