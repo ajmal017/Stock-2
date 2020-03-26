@@ -7,8 +7,10 @@ from entities.Calculator import CalculatorFactory
 from entities.Formulator import BetaFactory
 from models.api import BetaOut, StockHistoryIn
 from entities.TickerRunner import TickerRunner
-
+import logging
 import pandas as pd
+
+logger = logging.getLogger(__name__)
 
 router = APIRouter()
 
@@ -79,4 +81,5 @@ async def calculate_financial_metrics(body: StockHistoryIn):
         return {'stock_details': results}
 
     except Exception as err:
+        logger.error('stockPredictions failed', error)
         raise HTTPException(status_code=400, detail=str(err))

@@ -7,7 +7,9 @@ from entities.Calculator import CalculatorFactory
 from entities.Formulator import SimpleMeanLogRiskReturnsFactory
 from models.api import StockMetricsOut, StockHistoryIn
 from entities.TickerRunner import TickerRunner
+import logging
 
+logger = logging.getLogger(__name__)
 router = APIRouter()
 
 
@@ -42,4 +44,5 @@ async def calculate_financial_metrics(body: StockHistoryIn):
         return {'stock_annual_log_risk_return': annual_mean_log_risk_returns}
 
     except Exception as err:
+        logger.error('stockPredictions failed', error)
         raise HTTPException(status_code=400, detail=str(err))

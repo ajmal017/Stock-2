@@ -12,7 +12,6 @@ exports.financialMetrics = async (req, res) => {
         console.log('financialMetrics for',tickers )
         const historicData = await getHistoricData(tickers)
         const index = await getHistoricData(['^GSPC'])
-        console.log('index',index)
         const stockIndex = [...historicData, ...index]
 
         const [history, stockMetrics, portfolioMetrics, stockDetails] = await axios.all([
@@ -24,7 +23,7 @@ exports.financialMetrics = async (req, res) => {
         const data = { ...history.data, ...stockMetrics.data, ...portfolioMetrics.data, ...stockDetails.data, symbols: [...tickers] }
         return res.status(200).json(data)
     } catch (error) {
-        console.log('error')
+        console.log('error', error)
         return res.send({ error })
     }
 }

@@ -6,7 +6,9 @@ from entities.Calculator import CalculatorFactory
 from entities.Formulator import PortfolioRiskReturnFactory, Divider
 from models.api import PortfolioMetricsOut, StockHistoryIn
 from entities.TickerRunner import TickerRunner
+import logging
 
+logger = logging.getLogger(__name__)
 router = APIRouter()
 
 
@@ -63,4 +65,5 @@ async def calculate_financial_metrics(body: StockHistoryIn):
         return {'portfolio_risk_returns': portfolio_risk_returns}
 
     except Exception as err:
+        logger.error('stockPredictions failed', error)
         raise HTTPException(status_code=400, detail=str(err))

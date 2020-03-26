@@ -2,6 +2,7 @@ from fastapi import FastAPI
 from starlette.config import Config
 from starlette.middleware.cors import CORSMiddleware
 from api import portfolio_metrics, stock_historical_data, stock_metrics, efficient_frontier, stock_details
+import logging
 
 config = Config(".env")
 
@@ -28,3 +29,11 @@ app.include_router(stock_metrics.router)
 app.include_router(portfolio_metrics.router)
 app.include_router(efficient_frontier.router)
 app.include_router(stock_details.router)
+
+logging.basicConfig(level=logging.DEBUG, format='%(asctime)s - %(name)s - %(levelname)s - %(message)s', datefmt='%d/%m/%Y %I:%M:%S %p')
+logging.info('Calculator listening')
+
+
+@app.on_event("shutdown")
+def shutdown_event():
+    logger.critical('Calculator shutting down')

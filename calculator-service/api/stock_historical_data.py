@@ -7,7 +7,9 @@ from entities.Formulator import ResamplerFactory, HistoryPriceNormalizedFactory
 from models.api import StockHistoryOut, StockHistoryIn
 from entities.utilities import DictionaryConverterFactory
 from entities.TickerRunner import TickerRunner
+import logging
 
+logger = logging.getLogger(__name__)
 router = APIRouter()
 
 
@@ -54,4 +56,5 @@ async def calculate_financial_metrics(body: StockHistoryIn):
         }
 
     except Exception as err:
+        logger.error('stockPredictions failed', error)
         raise HTTPException(status_code=400, detail=str(err))

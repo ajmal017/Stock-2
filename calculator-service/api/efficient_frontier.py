@@ -8,7 +8,9 @@ from constants.CONSTANTS import HISTORICAL_DATA
 from entities.Calculator import CalculatorFactory
 from entities.Formulator import EfficientFrontierSharpeFactory
 from models.api import EfficientFrontierOut, StockHistoryIn
+import logging
 
+logger = logging.getLogger(__name__)
 router = APIRouter()
 
 
@@ -47,4 +49,5 @@ async def calculate_financial_metrics(body: StockHistoryIn):
         return {'efficient_frontier': efficient_frontier}
 
     except Exception as err:
+        logger.error('stockPredictions failed', error)
         raise HTTPException(status_code=400, detail=str(err))

@@ -7,10 +7,11 @@ from entities.Calculator import CalculatorFactory
 from entities.Formulator import BetaFactory
 from models.api import BetaOut, StockHistoryIn
 from entities.TickerRunner import TickerRunner
-
+import logging
 import pandas as pd
 
 router = APIRouter()
+logger = logging.getLogger(__name__)
 
 
 @router.post('/stockDetails', response_model=BetaOut)
@@ -23,7 +24,6 @@ async def calculate_financial_metrics(body: StockHistoryIn):
         """this array will hold all the ticker entities.
         A ticker is a company with a dataframe"""
         tickers = []
-        print('stock details started')
 
         for tick in body.historicData:
             # creating ticker entity with dataframe with all columns
@@ -52,14 +52,9 @@ async def calculate_financial_metrics(body: StockHistoryIn):
 
         results = []
         list_companies = df_close.columns.tolist()
-        date_filter, = (df_close.tail(1).index - pd.offsets.DateOffset(years=5)).format()
-        today, = df_close.tail(1).index.format()
-
-        df_5_years = df_close.loc[date_filter:today]
 
         for i in range(len(list_companies) - 1):
             ticker = list_companies[i]
-            print('looping for', ticker)
             calculator = CalculatorFactory().factory()
             calculator.add_formula(beta_formula)
             calculator.add_data(df_close[[ticker, '^GSPC']])
@@ -77,8 +72,8 @@ async def calculate_financial_metrics(body: StockHistoryIn):
                 'expected_returns': round(expected_returns, 4)
             }
             results.append(entry)
-
         return {'stock_details': results}
 
     except Exception as err:
+        logger.error('stockDetail api error', err)
         raise HTTPException(status_code=400, detail=str(err))
