@@ -20,6 +20,12 @@
           "hostPort": 443,
           "containerPort": 443
         }
+      ],
+      "mountPoints": [
+        {
+          "sourceVolume": "awseb-logs-nginx",
+          "containerPath": "/var/log/nginx"
+        }
       ]
     },
     {
@@ -28,8 +34,14 @@
       "hostname": "client",
       "essential": false,
       "memory": 128,
-      "links":[
+      "links": [
         "orchestrator"
+      ],
+      "mountPoints": [
+        {
+          "sourceVolume": "awseb-logs-client",
+          "containerPath": "/var/log/client"
+        }
       ]
     },
     {
@@ -37,14 +49,26 @@
       "image": "vidalignacio/stock-calculator-service",
       "hostname": "calculator",
       "essential": false,
-      "memory": 512
+      "memory": 512,
+      "mountPoints": [
+        {
+          "sourceVolume": "awseb-logs-calculator",
+          "containerPath": "/var/log/calculator"
+        }
+      ]
     },
     {
       "name": "pricer",
       "image": "vidalignacio/stock-pricer-service",
       "hostname": "pricer",
       "essential": false,
-      "memory": 128
+      "memory": 128,
+      "mountPoints": [
+        {
+          "sourceVolume": "awseb-logs-pricer",
+          "containerPath": "/var/log/pricer"
+        }
+      ]
     },
     {
       "name": "orchestrator",
@@ -52,10 +76,16 @@
       "hostname": "orchestrator",
       "essential": false,
       "memory": 512,
-      "links":[
+      "links": [
         "calculator",
         "pricer",
         "redis"
+      ],
+      "mountPoints": [
+        {
+          "sourceVolume": "awseb-logs-orchestrator",
+          "containerPath": "/var/log/orchestrator"
+        }
       ]
     },
     {
@@ -63,7 +93,13 @@
       "image": "vidalignacio/stock-redis-service",
       "hostname": "redis",
       "essential": false,
-      "memory": 256
+      "memory": 256,
+      "mountPoints": [
+        {
+          "sourceVolume": "awseb-logs-redis",
+          "containerPath": "/var/log/redis"
+        }
+      ]
     }
   ]
 }
