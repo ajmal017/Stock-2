@@ -22,6 +22,7 @@ const getHistoricData = async (tickers) => {
         }
         return result
     } catch (error) {
+        console.log(error)
         throw error
     }
 }

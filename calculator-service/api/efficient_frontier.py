@@ -1,5 +1,5 @@
 from typing import List
-from fastapi import APIRouter, HTTPException
+from fastapi import APIRouter, HTTPException, Request
 
 from entities.TickerRunner import TickerRunner
 
@@ -15,8 +15,9 @@ router = APIRouter()
 
 
 @router.post('/efficientFrontier')
-async def calculate_financial_metrics(body: StockHistoryIn):
+async def calculate_financial_metrics(body: StockHistoryIn, request:Request):
     try:
+        logger.info('request headers', request.headers)
         # Initialising objects
         DataFrameJoiner = DataFrameJoinerFactory().factory()
         calculator = CalculatorFactory().factory()

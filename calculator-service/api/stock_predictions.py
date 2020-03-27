@@ -16,7 +16,7 @@ router = APIRouter()
 
 
 @router.post('/stockPredictions', response_model=BetaOut)
-async def calculate_financial_metrics(body: StockHistoryIn):
+async def calculate_stock_predictions(body: StockHistoryIn):
     try:
         # Initialising objects
         DataFrameJoiner = DataFrameJoinerFactory().factory()

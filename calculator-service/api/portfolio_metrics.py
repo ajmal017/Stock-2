@@ -16,6 +16,7 @@ router = APIRouter()
 async def calculate_financial_metrics(body: StockHistoryIn):
     try:
         # Initialising objects
+        lo
         DataFrameJoiner = DataFrameJoinerFactory().factory()
         calculator = CalculatorFactory().factory()
         portfolio_risk_returns_formula = PortfolioRiskReturnFactory().factory()
@@ -65,5 +66,5 @@ async def calculate_financial_metrics(body: StockHistoryIn):
         return {'portfolio_risk_returns': portfolio_risk_returns}
 
     except Exception as err:
-        logger.error('stockPredictions failed', error)
+        logger.error('portfolio<Metrics api failed', error)
         raise HTTPException(status_code=400, detail=str(err))
