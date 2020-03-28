@@ -76,4 +76,4 @@ async def calculate_financial_metrics(body: StockHistoryIn):
 
     except Exception as err:
         logger.error('stockDetail api error', err)
-        raise HTTPException(status_code=400, detail=str(err))
+        raise HTTPException(status_code=400, detail=str('internal error in stockDetails API'))

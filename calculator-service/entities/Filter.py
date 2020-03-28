@@ -1,5 +1,6 @@
 from abc import ABC, abstractmethod
-
+import logging
+logger = logging.getLogger(__name__)
 
 class FilterAbstract(ABC):
     @abstractmethod
@@ -11,12 +12,13 @@ class FilterAbstractFactory(ABC):
     def factory(self): pass
 
 
-class HistoricalDataFilter(FilterAbstract):
+class DataFilter(FilterAbstract):
     def filter(self, data, parameter):
+        logger.info(f'filtering data for {parameter}')
         data = data[parameter]
         return data
 
 
-class HistoricalDataFilterFactory(FilterAbstractFactory):
+class DataFilterFactory(FilterAbstractFactory):
     def factory(self):
-        return HistoricalDataFilter()
+        return DataFilter()

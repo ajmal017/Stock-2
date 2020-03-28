@@ -1,7 +1,6 @@
 from typing import List
 from fastapi import APIRouter, HTTPException
 from requests import request
-
 from models.api import StockIn, YfinanceOut, WordlTradingOut
 import yfinance as yf
 import logging

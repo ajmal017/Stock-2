@@ -2,6 +2,7 @@ from fastapi import FastAPI
 from starlette.config import Config
 from starlette.middleware.cors import CORSMiddleware
 import logging
+from utils.redis import Redis
 
 from api import pricer
 
@@ -9,6 +10,7 @@ config = Config(".env")
 
 app = FastAPI(debug='DEBUG', cast=bool, default=False)
 
+redis = Redis()
 
 origins = [
     "http://localhost:3000",

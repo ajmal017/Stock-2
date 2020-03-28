@@ -82,4 +82,4 @@ async def calculate_stock_predictions(body: StockHistoryIn):
 
     except Exception as err:
         logger.error('stockPredictions failed', error)
-        raise HTTPException(status_code=400, detail=str(err))
+        raise HTTPException(status_code=400, detail=str('internal error in stockPredictions API'))

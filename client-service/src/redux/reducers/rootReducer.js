@@ -1,9 +1,19 @@
 import { combineReducers } from 'redux'
-import stockReducer from './stockReducer'
 import errorReducer from './errorReducer'
-import portfolioReducer from './portfolioReducer'
+import stockDetails from './stockDetails'
+import stockMetrics from './stockMetrics'
+import stockHistory from './stockHistory'
+import portfolioMetrics from './portfolioMetrics'
+import efficientFrontier from './efficientFrontier'
+import tickers from './tickers'
 
 
 export default combineReducers({
-    stockReducer, errorReducer, portfolioReducer
+    stockDetails,
+    stockMetrics,
+    stockHistory,
+    portfolioMetrics,
+    efficientFrontier,
+    errorReducer,
+    tickers
 })

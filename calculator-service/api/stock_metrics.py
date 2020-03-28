@@ -7,15 +7,16 @@ from entities.Calculator import CalculatorFactory
 from entities.Formulator import SimpleMeanLogRiskReturnsFactory
 from models.api import StockMetricsOut, StockHistoryIn
 from entities.TickerRunner import TickerRunner
-import logging
+import Logger
 
-logger = logging.getLogger(__name__)
+logger = Logger.getLogger(__name__)
 router = APIRouter()
 
 
 @router.post('/stockMetrics', response_model=StockMetricsOut)
 async def calculate_financial_metrics(body: StockHistoryIn):
     try:
+        logger.info(f'/stockMetrics request received')
         # Initialising objects
         DataFrameJoiner = DataFrameJoinerFactory().factory()
         calculator = CalculatorFactory().factory()
@@ -35,7 +36,7 @@ async def calculate_financial_metrics(body: StockHistoryIn):
         # joining dataframes of each ticker. The ['close'] column is taken from each each dataframe
         df_close = DataFrameJoiner.join_dataframes(
             tickers, HISTORICAL_DATA.CLOSE.value)
-
+        logger.info(f'composing calculator for {df_close.columns.tolist()}')
         calculator.add_formula(simple_risk_returns_formula)
         calculator.add_data(df_close)
 
@@ -45,4 +46,4 @@ async def calculate_financial_metrics(body: StockHistoryIn):
 
     except Exception as err:
         logger.error('stockPredictions failed', error)
-        raise HTTPException(status_code=400, detail=str(err))
+        raise HTTPException(status_code=400, detail=str('internal error in stockMetrics API'))

@@ -31,7 +31,7 @@ const LinChart = ({ title, tooltip, data, stocks, width, yInterval, xInterval, x
                         <Tooltip />
                         <Legend />
                         {stocks.map((symbol, i) => (
-                            <Line type="monotone" dataKey={symbol} dot={{ stroke: 'black', strokeWidth: 2 }} stroke={COLOURS[i]} strokeWidth={width} key={i} />
+                            <Line type="monotone" dataKey={symbol} stroke={COLOURS[i]} strokeWidth={width} key={i} />
 
                         ))}
                     </LineChart>

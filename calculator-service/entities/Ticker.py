@@ -1,6 +1,7 @@
 from abc import ABC, abstractmethod
 from entities.Factory import AbstractFactory
-
+import logging
+logger = logging.getLogger(__name__)
 
 class TickerAbstract(ABC):
     @abstractmethod

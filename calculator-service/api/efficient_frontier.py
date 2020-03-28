@@ -51,4 +51,4 @@ async def calculate_financial_metrics(body: StockHistoryIn, request:Request):
 
     except Exception as err:
         logger.error('stockPredictions failed', error)
-        raise HTTPException(status_code=400, detail=str(err))
+        raise HTTPException(status_code=400, detail=str('internal error in efficientFrontier API'))

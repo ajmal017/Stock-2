@@ -2,6 +2,8 @@ from abc import abstractmethod, ABC
 import numpy as np
 import pandas as pd
 from entities.Factory import AbstractFactory
+import logging
+logger = logging.getLogger(__name__)
 
 
 class FormulatorAbstract(ABC):
@@ -11,6 +13,7 @@ class FormulatorAbstract(ABC):
 
 class SimpleMeanRiskReturns(FormulatorAbstract):
     def calculate(self, df):
+        logger.info('starting volatility and returns calculation of stocks')
         simple_returns = (df / df.shift(1)) - 1
         companies = df.columns.tolist()
 
@@ -19,8 +22,10 @@ class SimpleMeanRiskReturns(FormulatorAbstract):
         returns = round(
             simple_returns[companies].mean() * 250 * 100, 3).tolist()
 
+        logger.info('stock metrics, volatility and returns calculated')
         data = []
         for index, ticker in enumerate(companies):
+            logger.info(f'stock metrics looping to create dict {index}, {ticker} in {companies}')
             dictionary = {
                 'price_volatility': price_volatility[index], 'ticker': ticker, 'annual_mean_return': returns[index]}
             data.append(dictionary)
@@ -34,7 +39,9 @@ class SimpleMeanLogRiskReturnsFactory(AbstractFactory):
 
 class HistoryPriceNormalized(FormulatorAbstract):
     def calculate(self, df):
+        logger.info(f'normalising price for {df.columns.tolist()}')
         normalized_price = round(df / df.iloc[0] * 100, 2)
+        logger.info(f'normalised price for {df.columns.tolist()}')
         return normalized_price
 
 
@@ -72,7 +79,7 @@ class EqualWeightMakerFactory(AbstractFactory):
 
 class PortfolioRiskReturn(FormulatorAbstract):
     def calculate(self, df):
-
+        logger.info('formula portfolio risk and returns')
         """calculator portfolio returns """
         number_assets = len(df.columns.tolist())
         weights = EqualWeightMakerFactory().factory().calculate(number_assets)
@@ -81,7 +88,7 @@ class PortfolioRiskReturn(FormulatorAbstract):
         annual_simple_returns = simple_returns.mean() * 250
         portfolio_returns = round(
             np.dot(annual_simple_returns, weights) * 100, 3)
-
+        logger.info('formula portfolio risk and returns, portfolio returns done')
         """
         calculate the portfolio volatility based on the deviation
         of the mean of the annual log returns and equal weights"""
@@ -89,6 +96,7 @@ class PortfolioRiskReturn(FormulatorAbstract):
         cov_matrix_annual = log_returns.cov() * 250
         portfolio_variance = np.dot(weights.T, np.dot(cov_matrix_annual, weights))
         portfolio_volatility = round(portfolio_variance ** 0.5 * 100, 3)
+        logger.info('formula portfolio risk and returns, portfolio volatility done')
 
         """ calculating systematic and unsystematic risk"""
         stocks_risks = 0
@@ -111,6 +119,7 @@ class PortfolioRiskReturn(FormulatorAbstract):
                 'idiosyncratic_risk': idiosyncratic_risk,
                 'portfolio_variance': portfolio_variance
                 }
+        logger.info('formula portfolio risk and returns, systematic and idiosyncratic risk done')
 
         return data
 

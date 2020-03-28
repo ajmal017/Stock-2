@@ -1,58 +1,114 @@
 import {
-    FETCH_CARDS, SET_ERROR, SELECT_STOCK, REMOVE_STOCK, REMOVE_STOCK_PRICE,
-    FETCH_STOCK_PRICE_HISTORY, FETCH_STOCK_RISK_RETURN,
-    SET_LOADING_FALSE, SET_LOADING_TRUE, FETCH_STOCK_PRICE_NORMALIZED,
-    FETCH_PORTFOLIO_RISK_RETURNS, INCREASE_COUNTER, FETCH_EFFICIENT_FRONTIER
+    // Stock Resources
+    FETCH_STOCK_DETAILS,
+    STOCK_DETAILS_LOADING,
+    STOCK_DETAILS_NOT_LOADING,
+
+    FETCH_STOCK_PRICE_HISTORY,
+    STOCK_PRICE_HISTORY_LOADING,
+    STOCK_PRICE_HISTORY_NOT_LOADING,
+
+    FETCH_STOCK_METRICS,
+    STOCK_METRICS_LOADING,
+    STOCK_METRICS_NOT_LOADING,
+
+    FETCH_PORTFOLIO_METRICS,
+    PORTFOLIO_METRICS_LOADING,
+    PORTFOLIO_METRICS_NOT_LOADING,
+
+    FETCH_EFFICIENT_FRONTIER,
+    EFFICIENT_FRONTIER_LOADING,
+    EFFICIENT_FRONTIER_NOT_LOADING,
+
+    SET_ERROR,
+    REMOVE_ERROR,
+
+    ADD_TICKER,
+    REMOVE_TICKER
 } from './actionTypes'
 import axios from 'axios'
-import { STOCK_METRICS, EFFICIENT_FRONTIER } from '../api'
-import { batch } from 'react-redux'
-//Calculate metrics
+import {
+    STOCK_METRICS_URL,
+    STOCK_HISTORY_URL,
+    STOCK_DETAILS_URL,
+    PORTFOLIO_METRICS_URL,
+    EFFICIENT_FRONTIER_URL,
+} from '../api'
 
-export const getMetrics = symbols => async dispatch => {
+
+export const stockMetrics = tickers => async dispatch => {
     try {
-        console.log('get metrics dispatched')
-        dispatch({ type: SET_LOADING_TRUE })
-        const res = await axios.post(STOCK_METRICS, { tickers: symbols })
-        batch(() => {
-            dispatch({ type: SELECT_STOCK, data: res.data.symbols })
-            dispatch({ type: FETCH_CARDS, data: res.data.stock_details })
-            dispatch({ type: FETCH_STOCK_PRICE_HISTORY, data: res.data.price_history })
-            dispatch({ type: FETCH_STOCK_PRICE_NORMALIZED, data: res.data.price_history_normalized })
-            dispatch({ type: FETCH_STOCK_RISK_RETURN, data: res.data.stock_annual_log_risk_return })
-            dispatch({ type: FETCH_PORTFOLIO_RISK_RETURNS, data: res.data.portfolio_risk_returns })
-            dispatch({ type: SET_LOADING_FALSE })
-        })
+        dispatch({ type: STOCK_METRICS_LOADING })
+
+        const res = await axios.post(STOCK_METRICS_URL, { tickers: tickers })
+        dispatch({ type: FETCH_STOCK_METRICS, data: res.data.stock_annual_log_risk_return })
+
     } catch (error) {
-        console.log(error)
-        dispatch({ type: SET_LOADING_FALSE })
-        dispatch({ type: INCREASE_COUNTER })
-        dispatch({ type: SET_ERROR, data: 'Network Error -> Try again!' })
+        console.log('stockMetrics action creator dispatched error')
+        dispatch({ type: STOCK_METRICS_NOT_LOADING })
+        dispatch({ type: SET_ERROR, data: 'Network Failure => stock metrics' })
     }
 }
 
 
-// Add stock for chips
-export const selectStock = (symbol) => {
-    return { type: SELECT_STOCK, data: symbol }
-}
-
-export const removeStock = symbol => {
-    return { type: REMOVE_STOCK, data: symbol }
-}
-
-
-export const getEfficientFrontier = symbols => async dispatch => {
+export const stockHistory = tickers => async dispatch => {
     try {
-        console.log('efficient frontier distapched')
-        const res = await axios.post(EFFICIENT_FRONTIER, { tickers: symbols })
-        dispatch({ type: FETCH_EFFICIENT_FRONTIER, data: res.data })
-    }
-    catch (error) {
-        console.log(error)
-        dispatch({ type: SET_LOADING_FALSE })
-        dispatch({ type: INCREASE_COUNTER })
-        dispatch({ type: SET_ERROR, data: 'Network Error -> Try again!' })
+        dispatch({ type: STOCK_PRICE_HISTORY_LOADING })
+        const res = await axios.post(STOCK_HISTORY_URL, { tickers: tickers })
+        dispatch({ type: FETCH_STOCK_PRICE_HISTORY, data: res.data })
+
+    } catch (error) {
+        console.log('stockHistory action creator dispatched error')
+        dispatch({ type: STOCK_PRICE_HISTORY_NOT_LOADING })
+        dispatch({ type: SET_ERROR, data: 'Network Error => stock history' })
     }
 }
 
+
+export const stockDetails = tickers => async dispatch => {
+    try {
+        dispatch({ type: STOCK_DETAILS_LOADING })
+
+        const res = await axios.post(STOCK_DETAILS_URL, { tickers: tickers })
+        dispatch({ type: FETCH_STOCK_DETAILS, data: res.data })
+
+    } catch (error) {
+        console.log('stockDetails action creator dispatched error', error)
+        dispatch({ type: STOCK_DETAILS_NOT_LOADING })
+        dispatch({ type: SET_ERROR, data: 'Network Error => stock details' })
+    }
+}
+
+
+export const portfolioMetrics = tickers => async dispatch => {
+    try {
+        dispatch({ type: PORTFOLIO_METRICS_LOADING })
+        console.log()
+        const res = await axios.post(PORTFOLIO_METRICS_URL, { tickers: tickers })
+        dispatch({ type: FETCH_PORTFOLIO_METRICS, data: res.data })
+
+    } catch (error) {
+        console.log('portfolioMetrics action creator dispatched error')
+        dispatch({ type: PORTFOLIO_METRICS_NOT_LOADING })
+        dispatch({ type: SET_ERROR, data: 'Network Error => portfolio metrics' })
+    }
+}
+
+
+export const efficientFrontier = tickers => async dispatch => {
+    try {
+        dispatch({ type: EFFICIENT_FRONTIER_LOADING })
+        const res = await axios.post(EFFICIENT_FRONTIER_URL, { tickers: tickers })
+        dispatch({ type: FETCH_EFFICIENT_FRONTIER, data: res.data })
+
+    } catch (error) {
+        console.log('efficeintFrontier action creator dispatched error')
+        dispatch({ type: EFFICIENT_FRONTIER_NOT_LOADING })
+        dispatch({ type: SET_ERROR, data: 'Network Error => efficient frontier' })
+    }
+}
+
+
+export const tickersAction = ticker => dispatch => {
+    dispatch({ type: ADD_TICKER, data: ticker })
+}

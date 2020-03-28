@@ -6,9 +6,9 @@ from entities.Calculator import CalculatorFactory
 from entities.Formulator import PortfolioRiskReturnFactory, Divider
 from models.api import PortfolioMetricsOut, StockHistoryIn
 from entities.TickerRunner import TickerRunner
-import logging
+import Logger
 
-logger = logging.getLogger(__name__)
+logger = Logger.getLogger(__name__)
 router = APIRouter()
 
 
@@ -16,7 +16,7 @@ router = APIRouter()
 async def calculate_financial_metrics(body: StockHistoryIn):
     try:
         # Initialising objects
-        lo
+        logger.info(f'/portfolioMetrics request')
         DataFrameJoiner = DataFrameJoinerFactory().factory()
         calculator = CalculatorFactory().factory()
         portfolio_risk_returns_formula = PortfolioRiskReturnFactory().factory()
@@ -32,18 +32,20 @@ async def calculate_financial_metrics(body: StockHistoryIn):
             # pushing ticker entities to array
             tickers.append(ticker)
 
+
         # joining dataframes of each ticker. The ['close'] column is taken from each each dataframe
         df_close = DataFrameJoiner.join_dataframes(
             tickers, HISTORICAL_DATA.CLOSE.value)
-
+        logger.info('/portoflioMetrics composing calculator')
         # composing calculator with formulas -> composite pattern
         calculator.add_formula(portfolio_risk_returns_formula)
         # composing calculator with data
         calculator.add_data(df_close)
+        logger.info('/portfolioMetrics calculator composed')
 
         # executing all formulas in calculator and unpacking it
         portfolio_risk_returns, = calculator.calculate()
-
+        logger.info('/portfoloiMetrics calculator executed')
         # calculating returns and risk the day before
         # adding data until yesterday
         calculator.add_data(df_close[:-1])
@@ -66,5 +68,5 @@ async def calculate_financial_metrics(body: StockHistoryIn):
         return {'portfolio_risk_returns': portfolio_risk_returns}
 
     except Exception as err:
-        logger.error('portfolio<Metrics api failed', error)
-        raise HTTPException(status_code=400, detail=str(err))
+        logger.error('portfolioMetrics api failed', err)
+        raise HTTPException(status_code=400, detail=str('internal error in portfolioMetrics API'))
