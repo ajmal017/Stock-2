@@ -1,0 +1,25 @@
+
+.paper{
+    background-color: white;
+    padding: 3rem 0 ;
+}
+
+.section{
+    margin:2rem 0;
+}
+
+.row{
+    text-align: center;
+    text-transform: capitalize;
+}
+
+.title{
+    margin:0 0 1rem 0
+}
+
+
+.blur{
+    background-color:white;
+    padding: 3rem 0 ;
+    filter: blur(5px) brightness(30%);
+}
