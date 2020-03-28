@@ -26,11 +26,13 @@ class Calculator(CalculatorAbstract):
         self._data = data
 
     def calculate(self):
-        metrics = []
-        for child in self._children:
-            logger.info(f'calculator for child')
-            metrics.append(child.calculate(self._data))
-        return metrics
+        try:
+            metrics = []
+            for child in self._children:
+                metrics.append(child.calculate(self._data))
+            return metrics
+        except Exception as err:
+            raise err
 
 
 class CalculatorFactory(AbstractFactory):

@@ -16,7 +16,6 @@ router = APIRouter()
 @router.post('/stockMetrics', response_model=StockMetricsOut)
 async def calculate_financial_metrics(body: StockHistoryIn):
     try:
-        logger.info(f'/stockMetrics request received')
         # Initialising objects
         DataFrameJoiner = DataFrameJoinerFactory().factory()
         calculator = CalculatorFactory().factory()
@@ -36,7 +35,6 @@ async def calculate_financial_metrics(body: StockHistoryIn):
         # joining dataframes of each ticker. The ['close'] column is taken from each each dataframe
         df_close = DataFrameJoiner.join_dataframes(
             tickers, HISTORICAL_DATA.CLOSE.value)
-        logger.info(f'composing calculator for {df_close.columns.tolist()}')
         calculator.add_formula(simple_risk_returns_formula)
         calculator.add_data(df_close)
 
@@ -45,5 +43,5 @@ async def calculate_financial_metrics(body: StockHistoryIn):
         return {'stock_annual_log_risk_return': annual_mean_log_risk_returns}
 
     except Exception as err:
-        logger.error('stockPredictions failed', error)
+        logger.error('/stockPredictions failed', error)
         raise HTTPException(status_code=400, detail=str('internal error in stockMetrics API'))

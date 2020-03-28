@@ -26,6 +26,7 @@ async def calculate_financial_metrics(body: StockHistoryIn):
         tickers = []
 
         for tick in body.historicData:
+            print(f'/stockDetails requested for {tick["name"]}')
             # creating ticker entity with dataframe with all columns
             ticker = TickerRunner.create_ticker_with_dataframe(
                 tick, 'name', 'history')

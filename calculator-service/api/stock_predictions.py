@@ -7,10 +7,10 @@ from entities.Calculator import CalculatorFactory
 from entities.Formulator import BetaFactory
 from models.api import BetaOut, StockHistoryIn
 from entities.TickerRunner import TickerRunner
-import logging
+import Logger
 import pandas as pd
 
-logger = logging.getLogger(__name__)
+logger = Logger.getLogger(__name__)
 
 router = APIRouter()
 
@@ -59,7 +59,6 @@ async def calculate_stock_predictions(body: StockHistoryIn):
 
 
             ticker = list_companies[i]
-            print('looping for', ticker)
             calculator = CalculatorFactory().factory()
             calculator.add_formula(beta_formula)
             calculator.add_data(df_close[[ticker, '^GSPC']])
@@ -81,5 +80,5 @@ async def calculate_stock_predictions(body: StockHistoryIn):
         return {'stock_details': results}
 
     except Exception as err:
-        logger.error('stockPredictions failed', error)
+        logger.error('/stockPredictions failed', error)
         raise HTTPException(status_code=400, detail=str('internal error in stockPredictions API'))

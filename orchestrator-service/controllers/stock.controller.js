@@ -42,7 +42,11 @@ exports.stockHistory = async (req, res) => {
 exports.stockDetails = async (req, res) => {
     try {
         const { historicData, tickers } = req.body
-        console.log('/stockDetails for', tickers)
+        console.log('/stockDetails request to calculator for', tickers)
+        for (const item of historicData) {
+            console.log('nameee', item.name)
+
+        }
 
         const stockDetails = await axios.post(`${CALCULATOR_SERVICE}${CALCULATOR_STOCK_DETAILS}`,
             { historicData }, { headers: req.headers })

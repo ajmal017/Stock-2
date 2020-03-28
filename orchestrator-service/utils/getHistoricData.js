@@ -1,6 +1,6 @@
 const axios = require('axios')
 const dotenv = require('dotenv').config()
-const { PRICER_STOCK, PRICER_SERVICE } = process.env
+const { PRICER_WORLD_TRADING, PRICER_SERVICE } = process.env
 const redisClient = require('./redis-client')
 
 const getHistoricData = async (tickers) => {
@@ -13,7 +13,7 @@ const getHistoricData = async (tickers) => {
                 console.log('data from redis has been used', tick)
             }
             else {
-                res = await axios.post(`${PRICER_SERVICE}${PRICER_STOCK}`, { ticker: tick })
+                res = await axios.post(`${PRICER_SERVICE}${PRICER_WORLD_TRADING}`, { ticker: tick })
                 const expiration = parseInt((new Date().setHours(23, 59, 59, 999) - new Date()) / 1000)
                 await redisClient.setexAsync(tick, expiration, JSON.stringify(res.data))
                 result.push(res.data)

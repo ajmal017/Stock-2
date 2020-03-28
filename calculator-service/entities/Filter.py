@@ -1,5 +1,7 @@
 from abc import ABC, abstractmethod
+from entities.Factory import AbstractFactory
 import logging
+
 logger = logging.getLogger(__name__)
 
 class FilterAbstract(ABC):
@@ -7,18 +9,15 @@ class FilterAbstract(ABC):
     def filter(self, data, parameter): pass
 
 
-class FilterAbstractFactory(ABC):
-    @abstractmethod
-    def factory(self): pass
-
-
 class DataFilter(FilterAbstract):
     def filter(self, data, parameter):
-        logger.info(f'filtering data for {parameter}')
-        data = data[parameter]
-        return data
+        try:
+            data = data[parameter]
+            return data
+        except Exception as err:
+            raise err
 
 
-class DataFilterFactory(FilterAbstractFactory):
+class DataFilterFactory(AbstractFactory):
     def factory(self):
         return DataFilter()

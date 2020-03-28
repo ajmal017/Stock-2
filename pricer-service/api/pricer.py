@@ -9,7 +9,7 @@ logger = logging.getLogger(__name__)
 router = APIRouter()
 
 
-@router.post('/stock')
+@router.post('/stockYfinance')
 async def calculate_financial_metrics(body: StockIn):
     try:
         logger.info(f'requesting data for ticker {body.ticker}')
@@ -35,6 +35,7 @@ async def calculate_financial_metrics(body: StockIn):
 @router.post('/stockWorldTradingApi')
 async def get_stock(body: StockIn):
     try:
+        print(f'requestin worldtrading api for {body.ticker}')
         base_url = 'https://api.worldtradingdata.com/api/v1/history'
         params = {
             'symbol': body.ticker,
@@ -42,6 +43,7 @@ async def get_stock(body: StockIn):
             'sort': 'oldest'
         }
         tick = request('GET', base_url, params=params).json()
+        print(f'data pulled for {tick["name"]}')
         return tick
 
     except Exception as err:

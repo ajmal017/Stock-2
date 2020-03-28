@@ -10,9 +10,13 @@ class DictionaryConverterAbstract(ABC):
 
 class DictionaryConverter(DictionaryConverterAbstract):
     def convert_to_dictionary(self, df):
-        df['date'] = df.index.date
-        dictionary = df.to_dict(orient='records')
-        return dictionary
+        try:
+            df['date'] = df.index.date
+            dictionary = df.to_dict(orient='records')
+            return dictionary
+        except Exception as err:
+            raise err
+
 
 
 class DictionaryConverterFactory(AbstractFactory):
