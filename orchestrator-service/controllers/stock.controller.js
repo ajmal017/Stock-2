@@ -3,88 +3,46 @@ const dotenv = require('dotenv').config()
 const axios = require('axios')
 const { CALCULATOR_STOCK_HISTORY, CALCULATOR_STOCK_METRICS,
     CALCULATOR_PORTFOLIO_METRICS, CALCULATOR_EFFICIENT_FRONTIER, CALCULATOR_SERVICE,
-    CALCULATOR_STOCK_DETAILS } = process.env
+    CALCULATOR_STOCK_DETAILS, CALCULATOR_STOCK_OPTIONS } = process.env
 
 
 exports.stockMetrics = async (req, res) => {
-    try {
-        const { historicData, tickers } = req.body
-        console.log('stockMetrics for', tickers)
-        const stockMetrics = await
-            axios.post(`${CALCULATOR_SERVICE}${CALCULATOR_STOCK_METRICS}`,
-                { historicData }, { headers: req.headers })
-        return res.status(200).json(stockMetrics.data)
-    } catch (error) {
-        console.log('/stockMetrics error')
-        return res.sendStatus(400)
-    }
+    await requester(req, res, CALCULATOR_SERVICE, CALCULATOR_STOCK_METRICS)
 }
-
-
 
 
 exports.stockHistory = async (req, res) => {
-    try {
-        const { historicData, tickers } = req.body
-        console.log('/stockHistory for', tickers)
-
-        const history = await axios.post(`${CALCULATOR_SERVICE}${CALCULATOR_STOCK_HISTORY}`,
-            { historicData }, { headers: req.headers })
-
-        return res.status(200).json(history.data)
-    } catch (error) {
-        console.log('/stockHistory error')
-        return res.sendStatus(400)
-    }
+    await requester(req, res, CALCULATOR_SERVICE, CALCULATOR_STOCK_HISTORY)
 }
-
 
 exports.stockDetails = async (req, res) => {
-    try {
-        const { historicData, tickers } = req.body
-        console.log('/stockDetails request to calculator for', tickers)
-        for (const item of historicData) {
-            console.log('nameee', item.name)
-
-        }
-
-        const stockDetails = await axios.post(`${CALCULATOR_SERVICE}${CALCULATOR_STOCK_DETAILS}`,
-            { historicData }, { headers: req.headers })
-
-        return res.status(200).json(stockDetails.data)
-    } catch (error) {
-        console.log('/stockDetails error')
-        return res.sendStatus(400)
-    }
+    await requester(req, res, CALCULATOR_SERVICE, CALCULATOR_STOCK_DETAILS)
 }
 
-
 exports.portfolioMetrics = async (req, res) => {
-    try {
-        const { historicData, tickers } = req.body
-        console.log('/portfolioMetrics for', tickers)
-
-        const portfolioMetrics = await axios.post(`${CALCULATOR_SERVICE}${CALCULATOR_PORTFOLIO_METRICS}`,
-            { historicData }, { headers: req.headers })
-
-        return res.status(200).json(portfolioMetrics.data)
-    } catch (error) {
-        console.log('/portfolioMetrics error')
-        return res.sendStatus(400)
-    }
+    await requester(req, res, CALCULATOR_SERVICE, CALCULATOR_PORTFOLIO_METRICS)
 }
 
 exports.efficientFrontier = async (req, res) => {
+    await requester(req, res, CALCULATOR_SERVICE, CALCULATOR_EFFICIENT_FRONTIER)
+}
+
+exports.stockOptions = async (req, res) => {
+    await requester(req, res, CALCULATOR_SERVICE, CALCULATOR_STOCK_OPTIONS)
+}
+
+
+const requester = async (req, res, URL, API) => {
     try {
         const { historicData, tickers } = req.body
-        console.log('/efficientFrontier for', tickers)
+        console.log(URL, API, 'for', tickers)
 
-        const efficientFrontier = await axios.post(`${CALCULATOR_SERVICE}${CALCULATOR_EFFICIENT_FRONTIER}`,
+        const data = await axios.post(`${URL}${API}`,
             { historicData }, { headers: req.headers })
 
-        return res.status(200).json(efficientFrontier.data)
+        return res.status(200).json(data.data)
     } catch (error) {
-        console.log('/effiencientFrontier error')
+        console.log(URL, API, 'failed')
         return res.send({ error })
     }
 }

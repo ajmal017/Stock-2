@@ -1,6 +1,7 @@
 from abc import abstractmethod, ABC
 import numpy as np
 import pandas as pd
+from scipy.stats import norm
 from entities.Factory import AbstractFactory
 
 
@@ -27,7 +28,7 @@ class SimpleMeanRiskReturns(FormulatorAbstract):
                 data.append(dictionary)
             return data
         except Exceptions as err:
-            raise err
+            raise RuntimeError('SimpleMeanRiskReturns formula failed')
 
 
 class SimpleMeanLogRiskReturnsFactory(AbstractFactory):
@@ -41,7 +42,7 @@ class HistoryPriceNormalized(FormulatorAbstract):
             normalized_price = round(df / df.iloc[0] * 100, 2)
             return normalized_price
         except Exception as err:
-            raise err
+            raise RuntimeError('HistoryPriceNormalized formula failed')
 
 
 class HistoryPriceNormalizedFactory(AbstractFactory):
@@ -56,7 +57,7 @@ class Resampler(FormulatorAbstract):
                 df.loc[(df.index.day == 31) & (df.index.month == 12) | (df.index.day == 30) & (df.index.month == 6)])
             return df
         except Exception as err:
-            raise err
+            raise RuntimeError('Resampler formula failed')
 
 class ResamplerFactory(AbstractFactory):
     def factory(self):
@@ -73,7 +74,7 @@ class EqualWeightMaker(FormulatorAbstract):
             weights /= np.sum(weights)
             return weights
         except Exception as err:
-            raise err
+            raise RuntimeError('EqualWeightMaker formula failed')
 
 
 class EqualWeightMakerFactory(AbstractFactory):
@@ -123,7 +124,7 @@ class PortfolioRiskReturn(FormulatorAbstract):
                     }
             return data
         except Exception as err:
-            raise err
+            raise RuntimeError('PortfolioRiskReturn formula failed')
 
 
 class PortfolioRiskReturnFactory(AbstractFactory):
@@ -200,7 +201,7 @@ class EfficientFrontierSharpe(FormulatorAbstract):
                     'min_volatility': [min_volatility_portfolio]
                     }
         except Exception as err:
-            raise err
+            raise RuntimeError('EfficientFrontierSharpe formula failed')
 
 
 class EfficientFrontierSharpeFactory(AbstractFactory):
@@ -218,14 +219,64 @@ class Beta(FormulatorAbstract):
             beta = cov_with_market / market_var
             return beta
         except Exception as err:
-            raise err
+            raise RuntimeError('Beta formula failed')
 
 
 class BetaFactory(AbstractFactory):
     def factory(self):
         return Beta()
 
+class OptionsPricer(FormulatorAbstract):
+    def calculate(self, df):
+        try:
+            list_of_tickers = df.columns.tolist()
+            results = []
+            for indicator in range(90, 110, 1):
+                for item in list_of_tickers:
+                    dataframe = df[[item]]
+                    S = dataframe[item].iloc[-1]
+                    log_returns = np.log(1 + dataframe.pct_change())
+                    stdev = float(log_returns.std() * 250 ** 0.5)
+                    r = 0.00067
+                    K = S * indicator / 100
+                    T = 1
+                    option_price = self.bsm(S, K, r, stdev, T)
+                    entry={
+                        'ticker':item,
+                        'option_price':round(option_price,4),
+                        'strike_price': round(K,4),
+                        'indicator':indicator
+                    }
+                    results.append(entry)
 
+                print(results)
+            return {'option_prices':results}
+
+        except Exception as err:
+            raise RuntimeError(f'Options Pricer formula failed - {err}')
+
+    def d1(self, S, K, r, stdev, T):
+        try:
+            return (np.log(S / K) + (r + stdev ** 2 / 2) * T) / (stdev * np.sqrt(T))
+        except Exception as err:
+            raise RuntimeError('d1 formula in Black Scholes failed')
+
+    def d2(self, S, K, r, stdev, T):
+        try:
+            return (np.log(S / K) + (r - stdev ** 2 / 2) * T) / (stdev * np.sqrt(T))
+        except Exception as err:
+            raise RuntimeError('d1 formula in Black Scholes failed')
+
+    def bsm(self, S, K, r, stdev, T):
+        try:
+            return (S * norm.cdf(self.d1(S, K, r, stdev, T))) - (K * np.exp(-r * T) * norm.cdf(self.d2(S, K, r, stdev, T)))
+        except Exception as err:
+            raise RuntimeError('d1 formula in Black Scholes failed')
+
+
+class OptionsPricerFactory(AbstractFactory):
+    def factory(self):
+        return OptionsPricer()
 
 
 

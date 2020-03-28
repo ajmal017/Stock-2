@@ -10,5 +10,6 @@ router.post('/stockHistory', [redis], stock.stockHistory)
 router.post('/stockDetails', [marketIndex, redis], stock.stockDetails)
 router.post('/portfolioMetrics', [redis], stock.portfolioMetrics)
 router.post('/efficientFrontier', [redis], stock.efficientFrontier)
+router.post('/stockOptions', [redis], stock.stockOptions)
 
 module.exports = router
