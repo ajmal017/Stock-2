@@ -10,8 +10,8 @@ exports.stockMetrics = async (req, res) => {
     await requester(req, res, CALCULATOR_SERVICE, CALCULATOR_STOCK_METRICS)
 }
 
-
 exports.stockHistory = async (req, res) => {
+    console.log('sending request to stockHistory')
     await requester(req, res, CALCULATOR_SERVICE, CALCULATOR_STOCK_HISTORY)
 }
 

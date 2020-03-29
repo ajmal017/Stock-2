@@ -15,7 +15,6 @@ const stockMetrics = (state = initialState, action) => {
 
     switch (action.type) {
         case FETCH_STOCK_METRICS:
-            console.log('stockMEtrics reducer', action)
             return {
                 ...state,
                 volatilityReturns: [...state.volatilityReturns, ...action.data]

@@ -1,6 +1,9 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { stockMetrics, stockHistory, stockDetails, portfolioMetrics, efficientFrontier, tickersAction } from '../../redux/actions'
+import {
+    stockMetrics, stockHistory, stockDetails, portfolioMetrics, efficientFrontier,
+    tickersAction, stockOptions
+} from '../../redux/actions'
 import { setError } from '../../redux/errorActions'
 
 
@@ -20,15 +23,14 @@ const Logic = () => {
         const ticker = value.symbol
         if (!tickers.includes(ticker)) {
             const payload = [...tickers, ticker]
-
+            setValue(null)
             dispatch(tickersAction(ticker))
             dispatch(stockMetrics([ticker]))
             dispatch(stockHistory(payload))
             dispatch(stockDetails([ticker]))
             dispatch(portfolioMetrics(payload))
             dispatch(efficientFrontier(payload))
-
-            setValue(null)
+            dispatch(stockOptions(payload))
         }
         else {
             dispatch(setError('Stock already selected'))

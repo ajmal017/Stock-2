@@ -16,7 +16,5 @@ const setSync = () => {
 module.exports = {
     ...client,
     getAsync: promisify(client.get).bind(client),
-    setAsync: promisify(client.set).bind(client),
     setexAsync: promisify(client.setex).bind(client),
-    keysAsync: promisify(client.keys).bind(client),
 };

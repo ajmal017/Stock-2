@@ -8,10 +8,10 @@ const layout = () => {
     return (
         <Container fluid>
             <Row style={{ justifyContent: 'center', 'padding': 0 }}>
-                <Col xl={6} >
+                <Col xl={6} style={{ 'padding': 0 }} >
                     <RiskReturnBarPlot></RiskReturnBarPlot>
                 </Col>
-                <Col xl={6} >
+                <Col xl={6} style={{ 'padding': 0 }} >
                     <EfficientFrontierScatter></EfficientFrontierScatter>
                 </Col>
             </Row>

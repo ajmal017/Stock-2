@@ -2,8 +2,9 @@ import React from 'react'
 import { Container, Row, Col } from 'react-bootstrap'
 import HistoricPrice from '../historicPrice/historicPrice'
 import HistoricPriceNorm from '../historicPriceNorm/historicPriceNorm'
+import StockOptions from '../stockOptions/stockOptions'
 
-const PricePlots = () => {
+const LinePlots = () => {
     return (
         <Container fluid  >
             <Row style={{ justifyContent: 'center' }}>
@@ -14,8 +15,13 @@ const PricePlots = () => {
                     <HistoricPriceNorm></HistoricPriceNorm>
                 </Col>
             </Row>
+            <Row style={{ justifyContent: 'center' }}>
+                <Col style={{ 'padding': 0 }} >
+                    <StockOptions></StockOptions>
+                </Col>
+            </Row>
         </Container>
     )
 }
 
-export default PricePlots
+export default LinePlots

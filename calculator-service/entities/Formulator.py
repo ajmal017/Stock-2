@@ -242,14 +242,11 @@ class OptionsPricer(FormulatorAbstract):
                     T = 1
                     option_price = self.bsm(S, K, r, stdev, T)
                     entry={
-                        'ticker':item,
-                        'option_price':round(option_price,4),
+                        item: round(option_price,4),
                         'strike_price': round(K,4),
                         'indicator':indicator
                     }
                     results.append(entry)
-
-                print(results)
             return {'option_prices':results}
 
         except Exception as err:
