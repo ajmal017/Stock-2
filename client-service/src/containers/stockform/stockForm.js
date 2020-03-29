@@ -13,8 +13,9 @@ const Form = () => {
     return (
         <Container className={style.container}>
             <Row className={style.row}>
-                <Col md={8} lg={6}>
+                <Col xs={10} className={style.col}>
                     <form onSubmit={handleClick}>
+
                         <Autocomplete
                             id="select-stock"
                             options={stocks}
@@ -26,12 +27,15 @@ const Form = () => {
                             value={value}
 
                             renderInput={params => (
-                                <TextField {...params} label="Type a company " margin="normal" variant='outlined' fullWidth />
+                                <TextField {...params} label="Select a company " margin="normal" variant='outlined' fullWidth className={style.textField} />
                             )}
                         />
-                        <Button className={style.button} color="primary" variant='contained' size='large'
-                            onClick={handleClick} disabled={!value} type='button'>save</Button>
                     </form>
+
+                </Col>
+                <Col xs={2} className={style.col}>
+                    <Button className={style.button} variant='contained' size='large'
+                        onClick={handleClick} disabled={!value} type='button'>save</Button>
                 </Col>
             </Row>
         </Container>

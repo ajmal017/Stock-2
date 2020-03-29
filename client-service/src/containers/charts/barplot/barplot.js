@@ -7,7 +7,7 @@ import ChartContainer from '../chartContainer/chartContainer'
 const Barplot = ({ data, dataKey, tooltip, title }) => {
     return (
         <ChartContainer tooltip={tooltip} title={title} blur={!data.length > 0}>
-            < BarChart data={data} margin={{ top: 15, right: 30, left: 20, bottom: 15 }} >
+            < BarChart data={data} margin={{ top: 15, right: 30, left: 5, bottom: 15 }} >
                 <CartesianGrid strokeDasharray="3 3" />
                 <XAxis dataKey={dataKey} />
                 <YAxis />

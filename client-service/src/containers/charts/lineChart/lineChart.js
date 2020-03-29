@@ -13,7 +13,7 @@ const LinChart = ({ title, tooltip, data, stocks, width, xInterval, dataKey, tic
             <LineChart
                 data={data}
                 margin={{
-                    top: 5, right: 30, left: 20, bottom: 5,
+                    top: 5, right: 30, left: 5, bottom: 5,
                 }}
             >
                 <CartesianGrid vertical={false} strokeDasharray="3 3" />

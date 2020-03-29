@@ -5,6 +5,7 @@ import {
     tickersAction, stockOptions
 } from '../../redux/actions'
 import { setError } from '../../redux/errorActions'
+import stocDictList from './stock_dict.json'
 
 
 const Logic = () => {
@@ -20,27 +21,31 @@ const Logic = () => {
 
     const handleClick = (e) => {
         e.preventDefault()
-        const ticker = value.symbol
-        if (!tickers.includes(ticker)) {
-            const payload = [...tickers, ticker]
-            setValue(null)
-            dispatch(tickersAction(ticker))
-            dispatch(stockMetrics([ticker]))
-            dispatch(stockHistory(payload))
-            dispatch(stockDetails([ticker]))
-            dispatch(portfolioMetrics(payload))
-            dispatch(efficientFrontier(payload))
-            dispatch(stockOptions(payload))
-        }
+        if (!value) dispatch(setError('Select a stock from the dropwdown menu'))
         else {
-            dispatch(setError('Stock already selected'))
-            setValue(null)
+            const ticker = value.symbol
+            if (!stocDictList[ticker]) dispatch(setError('Select a stock from the dropwdown menu'))
+            else if (tickers.includes(ticker)) {
+                dispatch(setError('Stock already selected'))
+            }
+            else {
+                const payload = [...tickers, ticker]
+                setValue(null)
+
+                dispatch(tickersAction(ticker))
+                dispatch(stockMetrics([ticker]))
+                dispatch(stockHistory(payload))
+                dispatch(stockDetails([ticker]))
+                dispatch(portfolioMetrics(payload))
+                dispatch(efficientFrontier(payload))
+                dispatch(stockOptions(payload))
+
+            }
         }
     }
-
     return { value, setValue, handleClick, tickers, isDisabled }
-}
 
+}
 export default Logic
 
 

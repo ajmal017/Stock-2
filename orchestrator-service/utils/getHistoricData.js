@@ -16,6 +16,9 @@ const getHistoricData = async (tickers) => {
             }
             else {
                 res = await axios.post(`${PRICER_SERVICE}${PRICER_WORLD_TRADING}`, { ticker: tick })
+                const expiration = parseInt((new Date().setHours(23, 59, 59, 999) - new Date()) / 1000)
+                await redisClient.setexAsync(tick, expiration, JSON.stringify(res.data))
+                console.log('data setted in redis', tick)
                 result.push(res.data)
                 console.log('data from calculator used', tick)
             }

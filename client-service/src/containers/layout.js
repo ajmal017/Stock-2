@@ -16,7 +16,6 @@ const Layout = () => {
             <Suspense fallback={<Spinner></Spinner>}>
                 <Toast></Toast>
                 <TopBox></TopBox>
-                <Form></Form>
                 <StockCard></StockCard>
                 <PricePlots></PricePlots>
                 <RiskReturnBarplot></RiskReturnBarplot>

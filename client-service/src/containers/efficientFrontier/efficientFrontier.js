@@ -4,12 +4,13 @@ import ScatterChart from '../charts/scatterPlot/scatterPlot'
 
 
 const EfficientFrontier = () => {
-    const { frontier, maxSharpe, minVolatility, loading } = logic()
+    const { frontier, maxSharpe, minVolatility, loading, stocks } = logic()
     return (
         <ScatterChart data1={frontier} data2={maxSharpe} data3={minVolatility}
             title="Efficient Frontier"
             tooltip="Efficient Frontier"
             loading={loading}
+            blur={stocks.length < 2 ? true : false}
         ></ScatterChart>
     );
 }

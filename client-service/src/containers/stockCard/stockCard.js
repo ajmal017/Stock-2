@@ -18,7 +18,7 @@ const StockCards = () => {
                 <Row>
                     {stocks.map((item, i) => (
                         <Col md={6} lg={4} xl={3} className={style.col}>
-                            <StockCard data={item} icn={true}></StockCard>
+                            <StockCard data={item} key={i} icn={true}></StockCard>
                         </Col>
                     ))}
                 </Row>

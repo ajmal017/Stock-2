@@ -3,7 +3,7 @@ import logic from './logic'
 import LinChart from '../charts/lineChart/lineChart'
 
 
-const HistoricPrice = () => {
+const stockOptions = () => {
     const { stockOptions, stocks, loading } = logic()
     return (
         <LinChart data={stockOptions} stocks={stocks} xInterval="preserveStartEnd"
@@ -19,4 +19,4 @@ const HistoricPrice = () => {
 
 
 
-export default HistoricPrice
+export default stockOptions

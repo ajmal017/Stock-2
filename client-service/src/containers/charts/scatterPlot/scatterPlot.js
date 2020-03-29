@@ -4,13 +4,12 @@ import {
 } from 'recharts';
 import ChartContainer from '../chartContainer/chartContainer'
 
-const scatterPlot = ({ title, tooltip, data1, data2, data3, loading }) => {
+const scatterPlot = ({ title, tooltip, data1, data2, data3, loading, blur }) => {
     return (
-
-        <ChartContainer tooltip={tooltip} title={title} blur={!data1.length > 0} loading={loading}>
+        <ChartContainer tooltip={tooltip} title={title} blur={blur} loading={loading} placeholder="Select 2+ companies">
             <ScatterChart
                 margin={{
-                    top: 20, right: 20, left: 20, bottom: 20,
+                    top: 20, right: 20, left: 5, bottom: 20,
                 }}
             >
                 <Scatter data={data1} fill="#8884d8" name="Return/Volatility" />
@@ -21,7 +20,8 @@ const scatterPlot = ({ title, tooltip, data1, data2, data3, loading }) => {
                     <Label value="Expected Volatility" position="insideBottomRight" offset={-7} />
                 </XAxis>
                 <YAxis type="number" dataKey="returns" name="Expected Returns" unit="%" domain={['auto', 'auto']}
-                    label={{ value: 'Expected Returns', angle: -90, position: 'left' }} />
+                // label={{ value: 'Expected Returns', angle: -90, position: 'left' }}
+                />
                 <Tooltip />
                 <Legend />
             </ScatterChart>

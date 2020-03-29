@@ -4,6 +4,7 @@ import style from './style.module.css'
 import PortfolioCard from '../card/card'
 import { useSelector } from 'react-redux'
 import Cont from './cont'
+import StockForm from '../stockform/stockForm'
 
 const TopBox = () => {
     const data = useSelector(state => state.portfolioMetrics.portfolio)
@@ -16,8 +17,13 @@ const TopBox = () => {
                 </Col>
             </Row>
             <Row className={style.row}>
+                <Col md={8} lg={8} xl={6}>
+                    <StockForm></StockForm>
+                </Col>
+            </Row>
+            <Row className={style.row}>
                 <Col lg={8} xl={6}>
-                    <Cont value="Portfolio Metrics"></Cont>
+                    <h1 className={style.title}>Portfolio Metrics</h1>
                 </Col>
             </Row>
             <Row className={style.row}>

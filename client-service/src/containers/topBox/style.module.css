@@ -3,6 +3,7 @@
     color: white;
     padding-top: 2rem;
     padding-bottom: 2rem ;
+
 }
 
 .row{
@@ -12,4 +13,10 @@
 
 .text{
     text-align: center;
+
+}
+
+.title{
+    text-align: center;
+    margin:0 0 2rem 0 
 }

@@ -1,5 +1,4 @@
 import React from 'react'
-import { removeStockPrice, removeStock } from '../../redux/actions'
 import { useSelector, useDispatch } from 'react-redux'
 
 
