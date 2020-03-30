@@ -59,7 +59,13 @@ async def calculate_financial_metrics(body: StockHistoryIn):
             calculator = CalculatorFactory().factory()
             calculator.add_formula(beta_formula)
             calculator.add_data(df_close[[ticker, '^GSPC']])
-            beta, = calculator.calculate()
+            calculations, = calculator.calculate()
+            beta = calculations['beta']
+            alpha = calculations['alpha']
+            print('------------beta------------------')
+            print(calculations)
+            print(beta)
+            print(alpha)
             expected_returns = 0.83 + beta * 0.05
             entry = {
                 'price': stock_price_today[i],

@@ -1,7 +1,7 @@
 from abc import abstractmethod, ABC
 import numpy as np
 import pandas as pd
-from scipy.stats import norm
+from scipy.stats import norm, linregress
 from entities.Factory import AbstractFactory
 
 
@@ -209,22 +209,31 @@ class EfficientFrontierSharpeFactory(AbstractFactory):
         return EfficientFrontierSharpe()
 
 
-class Beta(FormulatorAbstract):
+class BetaRegression(FormulatorAbstract):
     def calculate(self, df):
         try:
-            log_returns = np.log(df/df.shift(1))
-            cov = log_returns.cov() * 250
-            cov_with_market = cov.iloc[0, 1]
-            market_var = log_returns['^GSPC'].var() * 250
-            beta = cov_with_market / market_var
-            return beta
+            print('---------------BETA BEGINNING----------')
+            list_stocks = df.columns.tolist()
+            print(list_stocks)
+            print(df.head(5))
+            returns = df.pct_change().dropna(how='any')
+            print(returns.head())
+            stock_returns = returns[list_stocks[0]]
+            index = returns['^GSPC']
+            print('----------STOCK, INDEX SERIES-----------')
+            print(stock_returns[:3])
+            print(index[:3])
+
+            (beta, alpha) = linregress(index, stock_returns)[:2]
+            return {'beta':beta, 'alpha':alpha}
         except Exception as err:
-            raise RuntimeError('Beta formula failed')
+            raise RuntimeError('Beta Formula with regression failed')
 
 
 class BetaFactory(AbstractFactory):
     def factory(self):
-        return Beta()
+        return BetaRegression()
+
 
 class OptionsPricer(FormulatorAbstract):
     def calculate(self, df):
