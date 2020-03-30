@@ -1,10 +1,19 @@
 import React from 'react'
 import { Button } from '@material-ui/core'
 import { Navbar, Nav } from 'react-bootstrap'
+import logo from './logo.png'
 const navbr = () => {
     return (
         <Navbar expand="lg" >
-            <Navbar.Brand href="/">Romo Club</Navbar.Brand>
+            <Navbar.Brand href="/">
+                <img
+                    src={logo}
+                    width="40"
+                    height="40"
+                    className="d-inline-block align-top"
+                    alt="logo"
+                />
+            </Navbar.Brand>
             <Navbar.Toggle aria-controls="basic-navbar-nav" />
             <Navbar.Collapse id="basic-navbar-nav">
                 <Nav className="mr-auto">
