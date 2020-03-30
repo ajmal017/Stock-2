@@ -8,6 +8,7 @@ import StockForm from '../stockform/stockForm'
 
 const TopBox = () => {
     const data = useSelector(state => state.portfolioMetrics.portfolio)
+    const loading = useSelector(state => state.portfolioMetrics.loading)
 
     return (
         <Container fluid className={style.container}>
@@ -33,6 +34,7 @@ const TopBox = () => {
                         value={data.returns.toString() + '%'}
                         changePct={data.returnsChange.toString() + '%'}
                         icn={true}
+                        loading={loading}
                     ></PortfolioCard>
                 </Col>
                 <Col md={6} lg={4} xl={3}>
@@ -41,6 +43,7 @@ const TopBox = () => {
                         value={data.volatility.toString() + '%'}
                         changePct={data.volatilityChange.toString() + '%'}
                         icn={true}
+                        loading={loading}
                     ></PortfolioCard>
                 </Col>
             </Row>
@@ -50,6 +53,7 @@ const TopBox = () => {
                         name="Systematic Risk"
                         value={data.systematicRisk}
                         icn={false}
+                        loading={loading}
                     ></PortfolioCard>
                 </Col>
                 <Col md={6} lg={4} xl={3}>
@@ -57,6 +61,7 @@ const TopBox = () => {
                         name="Idiosyncratic Risk"
                         value={data.idiosyncraticRisk}
                         icn={false}
+                        loading={loading}
                     ></PortfolioCard>
                 </Col>
             </Row>

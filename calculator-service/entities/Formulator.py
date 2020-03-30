@@ -17,9 +17,9 @@ class SimpleMeanRiskReturns(FormulatorAbstract):
             companies = df.columns.tolist()
 
             price_volatility = round(
-                simple_returns[companies].std() * 250 ** 0.5 * 100, 3).tolist()
+                simple_returns[companies].std() * 250 ** 0.5 * 100, 2).tolist()
             returns = round(
-                simple_returns[companies].mean() * 250 * 100, 3).tolist()
+                simple_returns[companies].mean() * 250 * 100, 2).tolist()
 
             data = []
             for index, ticker in enumerate(companies):

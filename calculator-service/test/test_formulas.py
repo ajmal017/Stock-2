@@ -16,11 +16,12 @@ def test_annual_mean_log_risk_returns(setup):
     results = formula.calculate(setup)
     expected_results = [
         {
-            "price_volatility": 37.408,
+            "price_volatility": 37.41,
             "ticker": "GS",
-            "annual_mean_return": 11.263
+            "annual_mean_return": 11.26
         }
     ]
+    print(results)
     assert results == expected_results
 
 
