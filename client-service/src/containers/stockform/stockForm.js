@@ -13,7 +13,7 @@ const Form = () => {
     return (
         <Container className={style.container}>
             <Row className={style.row}>
-                <Col xs={10} className={style.col}>
+                <Col md={10} className={style.col}>
                     <form onSubmit={handleClick}>
 
                         <Autocomplete
@@ -33,7 +33,7 @@ const Form = () => {
                     </form>
 
                 </Col>
-                <Col xs={2} className={style.col}>
+                <Col md={2} className={style.col}>
                     <Button className={style.button} variant='contained' size='large'
                         onClick={handleClick} disabled={!value} type='button'>save</Button>
                 </Col>
