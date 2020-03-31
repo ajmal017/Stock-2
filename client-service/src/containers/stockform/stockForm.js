@@ -4,7 +4,7 @@ import style from './style.module.css'
 import { TextField, Button } from '@material-ui/core';
 import Autocomplete from '@material-ui/lab/Autocomplete';
 import logic from './logic'
-import stocks from './sp_500'
+import stocks from './stock_list.json'
 
 const Form = () => {
     const { value, setValue, handleClick, isDisabled } = logic()
