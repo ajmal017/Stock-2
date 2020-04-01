@@ -24,7 +24,6 @@ const stockHistory = (state = initialState, action) => {
             }
 
         case STOCK_PRICE_HISTORY_NOT_LOADING:
-            console.log('loading false for historiprice reducx')
             return {
                 ...state,
                 loading: false

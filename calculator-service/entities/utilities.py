@@ -1,6 +1,6 @@
 from abc import ABC, abstractmethod
 import pandas as pd
-from entities.Factory import AbstractFactory
+from entities.Abstracts import AbstractFactory
 
 
 class DictionaryConverterAbstract(ABC):

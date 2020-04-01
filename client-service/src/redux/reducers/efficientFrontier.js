@@ -17,7 +17,6 @@ const efficientFrontier = (state = initialState, action) => {
     switch (action.type) {
 
         case FETCH_EFFICIENT_FRONTIER:
-            console.log('efficient frontier reducer, ', action)
             return {
                 ...state,
                 frontier: action.data.efficient_frontier.frontier,

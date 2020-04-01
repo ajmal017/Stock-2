@@ -5,7 +5,7 @@ import {
     tickersAction, stockOptions
 } from '../../redux/actions'
 import { setError } from '../../redux/errorActions'
-import stocDictList from './stock_dict.json'
+import stocDictList from './stocks_dict.json'
 
 
 const Logic = () => {
@@ -13,11 +13,6 @@ const Logic = () => {
 
     const tickers = useSelector(state => state.tickers.tickers)
     const dispatch = useDispatch();
-
-    let isDisabled = () => {
-        return !value.symbol
-    }
-
 
     const handleClick = (e) => {
         e.preventDefault()
@@ -38,12 +33,12 @@ const Logic = () => {
                 dispatch(stockDetails([ticker]))
                 dispatch(portfolioMetrics(payload))
                 dispatch(efficientFrontier(payload))
-                // dispatch(stockOptions(payload))
+                dispatch(stockOptions(payload))
 
             }
         }
     }
-    return { value, setValue, handleClick, tickers, isDisabled }
+    return { value, setValue, handleClick, tickers }
 
 }
 export default Logic

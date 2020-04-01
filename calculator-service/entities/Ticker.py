@@ -1,5 +1,5 @@
 from abc import ABC, abstractmethod
-from entities.Factory import AbstractFactory
+from entities.Abstracts import AbstractFactory
 import logging
 logger = logging.getLogger(__name__)
 

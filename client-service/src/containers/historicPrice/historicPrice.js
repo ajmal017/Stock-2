@@ -5,7 +5,6 @@ import LinChart from '../charts/lineChart/lineChart'
 
 const HistoricPrice = () => {
     const { stockPriceHistory, stocks, loading } = logic()
-    console.log('pircre loading', loading)
     return (
         <LinChart data={stockPriceHistory} stocks={stocks} xInterval="preserveStartEnd"
             dataKey="date" width={3} tickFormatter={value => value.toString().slice(0, 4)}
