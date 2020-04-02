@@ -37,7 +37,7 @@ const Logic = () => {
                 dispatch(stockDetails([ticker]))
                 dispatch(portfolioMetrics(payload))
                 dispatch(efficientFrontier(payload))
-                // dispatch(stockOptions(payload))
+                dispatch(stockOptions([ticker]))
 
             }
         }
