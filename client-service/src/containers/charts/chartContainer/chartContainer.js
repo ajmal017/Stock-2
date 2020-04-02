@@ -16,7 +16,7 @@ const chartContainer = (props) => {
                     <Paper elevation={11} className={props.blur ? style.blur : style.paper}>
                         <h5 className={style.title}>{props.title}
                             <TP tooltip={props.tooltip}></TP>
-                            {props.loading ? <CircularProgress size={30} ></CircularProgress> : <p></p>}
+                            {props.loading ? <CircularProgress size={20} ></CircularProgress> : <p></p>}
                         </h5>
                         <ResponsiveContainer width="100%" height={400}>
                             {props.children}

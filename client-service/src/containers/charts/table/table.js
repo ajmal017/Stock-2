@@ -23,7 +23,7 @@ const table = ({ data, tooltip, loading, blur }) => {
                     <Paper className={blur ? style.blur : style.paper}>
                         <h5 className={style.title}> European Options Pricing
                         <TP tooltip={tooltip}></TP>
-                            {loading ? <CircularProgress size={30} ></CircularProgress> : <p></p>}
+                            {loading ? <CircularProgress size={20} ></CircularProgress> : <p></p>}
                         </h5>
                         <TableContainer>
                             <Table stickyHeader className={style.table} size="small" aria-label="a dense table">

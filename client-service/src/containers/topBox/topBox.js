@@ -3,7 +3,6 @@ import { Container, Row, Col } from 'react-bootstrap'
 import style from './style.module.css'
 import PortfolioCard from '../card/card'
 import { useSelector } from 'react-redux'
-import Cont from './cont'
 import StockForm from '../stockform/stockForm'
 
 const TopBox = () => {
