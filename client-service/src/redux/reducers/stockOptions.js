@@ -13,7 +13,7 @@ const stockOptions = (state = initialState, action) => {
         case FETCH_STOCK_OPTIONS:
             return {
                 ...state,
-                optionPrices: [...state.optionPrices, ...action.data]
+                optionPrices: [...action.data]
             }
 
         case STOCK_OPTIONS_NOT_LOADING:

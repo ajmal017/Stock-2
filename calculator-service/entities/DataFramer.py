@@ -1,6 +1,6 @@
 from abc import ABC, abstractmethod
 import pandas as pd
-from entities.Abstracts import AbstractFactory
+from entities.Factory import AbstractFactory
 
 
 class DataFramerAbstract(ABC):

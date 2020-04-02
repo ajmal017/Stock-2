@@ -4,7 +4,7 @@ from fastapi import APIRouter, HTTPException
 from entities.DataFramer import DataframerFactory, DataFrameJoinerFactory
 from constants.CONSTANTS import HISTORICAL_DATA
 from entities.Calculator import CalculatorFactory
-from entities.StockOptions import OptionsPricerFactory
+from entities.Formulator import OptionsPricerFactory
 from models.api import StockHistoryIn
 from entities.TickerRunner import TickerRunner
 import Logger

@@ -11,6 +11,5 @@ router.post('/stockDetails', [marketIndex, redis_new], stock.stockDetails)
 router.post('/portfolioMetrics', [redis_new], stock.portfolioMetrics)
 router.post('/efficientFrontier', [redis_new], stock.efficientFrontier)
 router.post('/stockOptions', [redis_new], stock.stockOptions)
-router.post('/allAPIs', [redis_new], stock.allAPIs)
 
 module.exports = router

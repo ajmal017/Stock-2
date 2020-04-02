@@ -31,29 +31,6 @@ exports.stockOptions = async (req, res) => {
     await requester(req, res, CALCULATOR_SERVICE, CALCULATOR_STOCK_OPTIONS)
 }
 
-exports.allAPIs = async (req, res) => {
-    try {
-
-        const { historicData, tickers } = req.body
-
-        const stockDetails = axios.post(`${CALCULATOR_SERVICE}${CALCULATOR_STOCK_DETAILS}`, { historicData })
-        const stockOptions = axios.post(`${CALCULATOR_SERVICE}${CALCULATOR_STOCK_OPTIONS}`, { historicData })
-        const stockMetrics = axios.post(`${CALCULATOR_SERVICE}${CALCULATOR_STOCK_METRICS}`, { historicData })
-        const stockHistory = axios.post(`${CALCULATOR_SERVICE}${CALCULATOR_STOCK_HISTORY}`, { historicData })
-        const portfolioMetrics = axios.post(`${CALCULATOR_SERVICE}${CALCULATOR_PORTFOLIO_METRICS}`, { historicData })
-        const efficientFrontier = axios.post(`${CALCULATOR_SERVICE}${CALCULATOR_EFFICIENT_FRONTIER}`, { historicData })
-
-        const response = await axios.all([stockDetails, stockOptions, stockMetrics, stockHistory,
-            portfolioMetrics, efficientFrontier])
-        console.log('success', tickers)
-        return res.sendStatus(200)
-    } catch (error) {
-        console.log('error', error)
-        return res.sendStatus(400)
-
-    }
-}
-
 
 const requester = async (req, res, URL, API) => {
     try {

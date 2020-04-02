@@ -22,6 +22,7 @@ const initialState = {
 const portfolioMetrics = (state = initialState, action) => {
     switch (action.type) {
         case FETCH_PORTFOLIO_METRICS:
+            console.log('portoflio metrics', action)
             const { data: { portfolio_risk_returns } } = action
             return {
                 ...state,
