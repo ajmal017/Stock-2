@@ -1,6 +1,6 @@
 from starlette.testclient import TestClient
 from main import app
-from test.setup_data import setup_data, setup_df
+from test.setup_data import setup_df
 import pytest
 from entities.Formulator import SimpleMeanLogRiskReturnsFactory, HistoryPriceNormalizedFactory, ResamplerFactory
 import pandas as pd

@@ -11,11 +11,13 @@ def setup():
     return setup_data_multiple_tickers()
 
 
-def test_efficient_fronter_api_returns_200(setup):
-    response = client.post("/efficientFrontier", json=setup)
+def test_stock_options_api_returns_200(setup):
+    response = client.post("/stockOptions", json=setup)
     assert response.status_code == 200
 
 
-def test_efficient_fronter_api_returns_400_no_data():
-    response = client.post("efficientFrontier")
+def test_stock_options_api_returns_422_no_data():
+    response = client.post("/stockOptions")
     assert response.status_code == 422
+
+

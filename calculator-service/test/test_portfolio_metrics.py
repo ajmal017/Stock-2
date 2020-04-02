@@ -1,6 +1,6 @@
 from starlette.testclient import TestClient
 from main import app
-from test.setup_data import setup_data
+from test.setup_data import setup_data_multiple_tickers
 import pytest
 
 
@@ -9,7 +9,7 @@ client = TestClient(app)
 
 @pytest.fixture
 def setup():
-    return setup_data()
+    return setup_data_multiple_tickers()
 
 
 def test_portfolio_metrics_api_returns_200(setup):
