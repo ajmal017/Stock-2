@@ -1,6 +1,6 @@
 from starlette.testclient import TestClient
 from main import app
-from test.setup_data import setup_data_multiple_tickers
+from test.setup.setup_data import setup_data_multiple_tickers
 import pytest
 
 
