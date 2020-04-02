@@ -2,12 +2,7 @@ from abc import abstractmethod, ABC
 import numpy as np
 import pandas as pd
 from scipy.stats import norm, linregress
-from entities.Factory import AbstractFactory
-
-
-class FormulatorAbstract(ABC):
-    @abstractmethod
-    def calculate(self, df): pass
+from entities.Abstracts import AbstractFactory, FormulatorAbstract
 
 
 class SimpleMeanRiskReturns(FormulatorAbstract):

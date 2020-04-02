@@ -4,11 +4,10 @@ import style from './style.module.css'
 import { TextField, Button } from '@material-ui/core';
 import Autocomplete from '@material-ui/lab/Autocomplete';
 import logic from './logic'
-import stocks from './stock_list.json'
+import stocks from './stocks_list.json'
 
 const Form = () => {
     const { value, setValue, handleClick, isDisabled } = logic()
-    console.log('name seldcted is', value)
 
     return (
         <Container className={style.container}>

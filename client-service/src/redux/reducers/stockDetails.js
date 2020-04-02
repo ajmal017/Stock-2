@@ -14,8 +14,6 @@ const stockDetails = (state = initialState, action) => {
 
     switch (action.type) {
         case FETCH_STOCK_DETAILS:
-            console.log('stockDetails', action)
-
             return {
                 ...state,
                 stockDetails: [...state.stockDetails, ...action.data.stock_details]

@@ -5,7 +5,7 @@ import {
     tickersAction, stockOptions
 } from '../../redux/actions'
 import { setError } from '../../redux/errorActions'
-import stocDictList from './stock_dict.json'
+import stockDict from './stocks_dict.json'
 
 
 const Logic = () => {
@@ -18,13 +18,12 @@ const Logic = () => {
         return !value.symbol
     }
 
-
     const handleClick = (e) => {
         e.preventDefault()
         if (!value) dispatch(setError('Select a stock from the dropwdown menu'))
         else {
             const ticker = value.symbol
-            if (!stocDictList[ticker]) dispatch(setError('Select a stock from the dropwdown menu'))
+            if (!stockDict[ticker]) dispatch(setError('Select a stock from the dropwdown menu'))
             else if (tickers.includes(ticker)) {
                 dispatch(setError('Stock already selected'))
             }

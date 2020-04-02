@@ -82,7 +82,7 @@ export const stockDetails = tickers => async dispatch => {
         dispatch({ type: FETCH_STOCK_DETAILS, data: res.data })
 
     } catch (error) {
-        console.log('stockDetails action creator dispatched error', error)
+        console.log('stockDetails action creator dispatched error')
         dispatch({ type: SET_ERROR, data: 'Network Error => stock details' })
     } finally {
         dispatch({ type: STOCK_DETAILS_NOT_LOADING })
@@ -93,7 +93,6 @@ export const stockDetails = tickers => async dispatch => {
 export const portfolioMetrics = tickers => async dispatch => {
     try {
         dispatch({ type: PORTFOLIO_METRICS_LOADING })
-        console.log()
         const res = await axios.post(PORTFOLIO_METRICS_URL, { tickers: tickers })
         dispatch({ type: FETCH_PORTFOLIO_METRICS, data: res.data })
 
@@ -129,10 +128,9 @@ export const stockOptions = tickers => async dispatch => {
     try {
         dispatch({ type: STOCK_OPTIONS_LOADING })
         const res = await axios.post(STOCK_OPTIONS_URL, { tickers: tickers })
-        console.log('response of stoclk optons', res.data)
         dispatch({ type: FETCH_STOCK_OPTIONS, data: res.data.option_prices })
     } catch (error) {
-        console.log('stockOptions action creator dispatched error', error)
+        console.log('stockOptions action creator dispatched error')
         dispatch({ type: SET_ERROR, data: 'Network Error => stock options' })
     } finally {
         dispatch({ type: STOCK_OPTIONS_NOT_LOADING })
