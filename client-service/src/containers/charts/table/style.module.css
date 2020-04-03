@@ -1,5 +1,6 @@
 .cont{
-    padding: 1rem 0;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
 }
 
 .title{
@@ -13,10 +14,6 @@
 
 .paper{
     padding: 1rem 1rem;
-
-}
-
-.table{
 
 }
 
