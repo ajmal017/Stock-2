@@ -5,9 +5,11 @@ from models.api import StockIn, YfinanceOut, WordlTradingOut
 import yfinance as yf
 import logging
 logger = logging.getLogger(__name__)
+import os
 
 router = APIRouter()
 
+api_key = os.environ.get('WORLD_TRADING_API_KEY')
 
 @router.post('/stockYfinance')
 async def calculate_financial_metrics(body: StockIn):
@@ -39,7 +41,7 @@ async def get_stock(body: StockIn):
         base_url = 'https://api.worldtradingdata.com/api/v1/history'
         params = {
             'symbol': body.ticker,
-            'api_token': 'aQpKQhT0CzMSf1ReEySVQCxvCY9XbMEOxjEQjHVoi11KJnN2bEwFAyfeivHy',
+            'api_token': api_key,
             'sort': 'oldest'
         }
         tick = request('GET', base_url, params=params).json()

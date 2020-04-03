@@ -28,7 +28,7 @@ services:
       
   client:
     container_name: client
-    image: stock-client-service:dev
+    image: stock-client-service:prod
     restart: always
     env_file:
       - docker.env
