@@ -38,3 +38,6 @@ export const REMOVE_ERROR = 'REMOVE_ERROR'
 // Tickers
 export const ADD_TICKER = 'ADD_TICKER'
 export const REMOVE_TICKER = 'REMOVE_TICKER'
+
+// REDUCER THAT REQUIRE APIs
+export const RESET_REDUCER = 'RESET_REDUCER'

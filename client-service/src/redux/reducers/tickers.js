@@ -8,7 +8,7 @@ const initialState = {
 }
 
 
-const stockDetails = (state = initialState, action) => {
+const tickers = (state = initialState, action) => {
 
     switch (action.type) {
 
@@ -29,4 +29,4 @@ const stockDetails = (state = initialState, action) => {
     }
 }
 
-export default stockDetails
+export default tickers

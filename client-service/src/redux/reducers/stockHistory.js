@@ -2,6 +2,7 @@ import {
     FETCH_STOCK_PRICE_HISTORY,
     STOCK_PRICE_HISTORY_LOADING,
     STOCK_PRICE_HISTORY_NOT_LOADING,
+    RESET_REDUCER
 
 } from "../actionTypes"
 
@@ -33,6 +34,15 @@ const stockHistory = (state = initialState, action) => {
             return {
                 ...state,
                 loading: true
+            }
+
+        case RESET_REDUCER:
+            console.log('reset history', action)
+            return {
+                ...state,
+                price_history: [],
+                priceNormalized: [],
+                loading: false
             }
 
         default:

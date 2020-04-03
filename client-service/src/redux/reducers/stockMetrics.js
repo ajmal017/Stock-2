@@ -1,7 +1,7 @@
 import {
     FETCH_STOCK_METRICS,
     STOCK_METRICS_LOADING,
-    STOCK_METRICS_NOT_LOADING,
+    STOCK_METRICS_NOT_LOADING, REMOVE_TICKER
 } from "../actionTypes"
 
 const initialState = {
@@ -31,6 +31,14 @@ const stockMetrics = (state = initialState, action) => {
                 ...state,
                 loading: true
             }
+
+        case REMOVE_TICKER:
+            return {
+                ...state,
+                volatilityReturns: state.volatilityReturns.filter(item => item.ticker !== action.data)
+            }
+
+
 
         default:
             return state

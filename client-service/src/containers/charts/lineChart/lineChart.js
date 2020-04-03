@@ -9,7 +9,7 @@ import ChartContainer from '../chartContainer/chartContainer'
 
 const LinChart = ({ title, tooltip, data, stocks, width, xInterval, dataKey, tickFormatter, loading }) => {
     return (
-        <ChartContainer title={title} tooltip={tooltip} blur={!data.length > 0} loading={loading}>
+        <ChartContainer title={title} tooltip={tooltip} blur={!stocks.length > 0} loading={loading}>
             <LineChart
                 data={data}
                 margin={{

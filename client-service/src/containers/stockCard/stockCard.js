@@ -3,7 +3,6 @@ import logic from './logic'
 import { Container, Row, Col } from 'react-bootstrap'
 import style from './style.module.css'
 import StockCard from './card/card'
-import { stockDetails } from '../../redux/actions'
 
 const StockCards = () => {
     const { stocks, handleDelete } = logic()
@@ -17,8 +16,8 @@ const StockCards = () => {
             <Container fluid className={style.section}>
                 <Row>
                     {stocks.map((item, i) => (
-                        <Col md={6} lg={4} xl={3} className={style.col}>
-                            <StockCard data={item} key={i} icn={true}></StockCard>
+                        <Col md={6} lg={4} xl={3} className={style.col} key={item.ticker}>
+                            <StockCard data={item} icn={true} handleDelete={handleDelete}></StockCard>
                         </Col>
                     ))}
                 </Row>

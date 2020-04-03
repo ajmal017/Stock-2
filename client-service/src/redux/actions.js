@@ -16,7 +16,6 @@ import {
     PORTFOLIO_METRICS_LOADING,
     PORTFOLIO_METRICS_NOT_LOADING,
 
-
     FETCH_STOCK_OPTIONS,
     STOCK_OPTIONS_LOADING,
     STOCK_OPTIONS_NOT_LOADING,
@@ -27,10 +26,10 @@ import {
     EFFICIENT_FRONTIER_NOT_LOADING,
 
     SET_ERROR,
-    REMOVE_ERROR,
 
     ADD_TICKER,
-    REMOVE_TICKER
+    REMOVE_TICKER,
+    RESET_REDUCER
 } from './actionTypes'
 import axios from 'axios'
 import {
@@ -134,5 +133,24 @@ export const stockOptions = tickers => async dispatch => {
         dispatch({ type: SET_ERROR, data: 'Network Error => stock options' })
     } finally {
         dispatch({ type: STOCK_OPTIONS_NOT_LOADING })
+    }
+}
+
+
+export const removeTicker = (ticker) => dispatch => {
+    try {
+        dispatch({ type: REMOVE_TICKER, data: ticker })
+    } catch (error) {
+        dispatch({ type: SET_ERROR, data: 'Network Error => Delete stock' })
+    }
+}
+
+
+export const resetReducers = () => dispatch => {
+    try {
+        dispatch({ type: RESET_REDUCER })
+    } catch (error) {
+        dispatch({ type: SET_ERROR, data: 'Network Error => Delete stock' })
+
     }
 }

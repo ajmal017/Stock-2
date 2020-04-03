@@ -5,10 +5,9 @@ import TrendingUpRoundedIcon from '@material-ui/icons/TrendingUpRounded';
 import TrendingDownRoundedIcon from '@material-ui/icons/TrendingDownRounded';
 import style from './style.module.css'
 import { green } from '@material-ui/core/colors';
-import RiskReturnBarPlot from '../../riskReturn/riskReturnBarplot';
+import DeleteForeverOutlinedIcon from '@material-ui/icons/DeleteForeverOutlined';
 
-
-const Card = ({ data, icn, blur }) => {
+const Card = ({ data, icn, blur, handleDelete }) => {
     let icon = null
     if (icn && data.price_change_value >= 0) icon = <TrendingUpRoundedIcon style={{ color: green[500] }} fontSize='large' />
     if (icn && data.price_change_value <= 0) icon = <TrendingDownRoundedIcon color='secondary' fontSize='large' />
@@ -19,6 +18,8 @@ const Card = ({ data, icn, blur }) => {
             <Paper elevation={11} className={blur ? style.blur : style.paper}>
                 <Container fluid className={style.container}>
                     <Row className={style.row}>
+                        <DeleteForeverOutlinedIcon onClick={e => { handleDelete(e, data.ticker) }} color="error"></DeleteForeverOutlinedIcon>
+
                         <h3 className={style.symbol}> {data.ticker}</h3>
                         {icon}
                     </Row>
@@ -41,7 +42,7 @@ const Card = ({ data, icn, blur }) => {
                 </Container>
             </Paper>
             {placeholder}
-        </Fragment>
+        </Fragment >
     )
 }
 

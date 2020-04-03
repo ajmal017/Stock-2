@@ -14,10 +14,6 @@ const Logic = () => {
     const tickers = useSelector(state => state.tickers.tickers)
     const dispatch = useDispatch();
 
-    let isDisabled = () => {
-        return !value.symbol
-    }
-
     const handleClick = (e) => {
         e.preventDefault()
         if (!value) dispatch(setError('Select a stock from the dropwdown menu'))
@@ -42,7 +38,7 @@ const Logic = () => {
             }
         }
     }
-    return { value, setValue, handleClick, tickers, isDisabled }
+    return { value, setValue, handleClick, tickers }
 
 }
 export default Logic

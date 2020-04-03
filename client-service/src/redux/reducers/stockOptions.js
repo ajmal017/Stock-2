@@ -1,5 +1,5 @@
 import {
-    FETCH_STOCK_OPTIONS, STOCK_OPTIONS_LOADING, STOCK_OPTIONS_NOT_LOADING
+    FETCH_STOCK_OPTIONS, STOCK_OPTIONS_LOADING, STOCK_OPTIONS_NOT_LOADING, REMOVE_TICKER
 } from '../actionTypes'
 
 const initialState = {
@@ -26,6 +26,13 @@ const stockOptions = (state = initialState, action) => {
             return {
                 ...state,
                 loading: true
+            }
+
+        case REMOVE_TICKER:
+            return {
+                ...state,
+                optionPrices: state.optionPrices.filter(item => item.name !== action.data)
+
             }
 
         default:

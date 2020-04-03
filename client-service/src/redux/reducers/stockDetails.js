@@ -2,6 +2,7 @@ import {
     FETCH_STOCK_DETAILS,
     STOCK_DETAILS_LOADING,
     STOCK_DETAILS_NOT_LOADING,
+    REMOVE_TICKER
 } from "../actionTypes"
 
 const initialState = {
@@ -29,6 +30,12 @@ const stockDetails = (state = initialState, action) => {
             return {
                 ...state,
                 loading: true
+            }
+
+        case REMOVE_TICKER:
+            return {
+                ...state,
+                stockDetails: state.stockDetails.filter(item => item.ticker !== action.data)
             }
 
         default:

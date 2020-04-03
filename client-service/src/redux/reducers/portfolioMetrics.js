@@ -2,6 +2,7 @@ import {
     FETCH_PORTFOLIO_METRICS,
     PORTFOLIO_METRICS_LOADING,
     PORTFOLIO_METRICS_NOT_LOADING,
+    RESET_REDUCER
 } from "../actionTypes"
 
 const initialState = {
@@ -47,6 +48,20 @@ const portfolioMetrics = (state = initialState, action) => {
             return {
                 ...state,
                 loading: true
+            }
+
+        case RESET_REDUCER:
+            return {
+                ...state,
+                portfolio: {
+                    returns: 0,
+                    volatility: 0,
+                    returnsChange: 0,
+                    volatilityChange: 0,
+                    idiosyncraticRisk: 0,
+                    systematicRisk: 0,
+                    variance: 0,
+                }
             }
 
         default:
