@@ -20,7 +20,7 @@ const table = ({ data, tooltip, loading, blur }) => {
 
             <Row className={style.row}>
                 <Col md={6}>
-                    <Paper className={blur ? style.blur : style.paper}>
+                    <Paper elevation={11} className={blur ? style.blur : style.paper}>
                         <h5 className={style.title}> European Options Pricing
                         <TP tooltip={tooltip}></TP>
                             {loading ? <CircularProgress size={20} ></CircularProgress> : <p></p>}

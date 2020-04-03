@@ -1,6 +1,6 @@
 # Stock and Portfolios
 
-Users can select stocks and optimise portfolios through the application of Modern Portfolio Theory (MPT) and Capital Asset Pricing Model (CAPM). The application automatically calculates the portfolio returns and risks and plots the results in the charts.
+Users can select stocks and optimise portfolios through the application of Modern Portfolio Theory (MPT) and Capital Asset Pricing Model (CAPM). The application calculates the volatility and returns of the stocks and portfolios, the price of European options and plots the results in the charts.
 
 The application is available at www.romoclub.com and it uses a React web client, microservices developed with Express (Nodejs) and python (FastAPI), nginx as a reverse proxy and Redis as a caching layer. The services are deployed in Docker containers in Elastic Beanstalk through Travis CI/CD pipeline.
 
@@ -8,10 +8,9 @@ This platform has been developed for personal educational purposes to apply for 
 
 ## Features:
 
-- Calculation of the volatility and returns of individual stocks.
-- Calculation of the portfolio volatility and returns.
-- Optimisation of portfolio composotion through the Efficient Frontier
-- Calculation of expected returns through Monte Carlo Simulations.
+- Calculation of the volatility and returns of individual stocks and portfolios.
+- Optimisation of portfolio composotion through the Efficient Frontier.
+- Pricing of European Call options.
 
 ## Getting Started
 
@@ -46,6 +45,11 @@ This application uses Travis CI to run continuous delivery and integration and t
 - [Nginx](https://www.nginx.com/) - Reverse Proxy and static asset web server.
 - [Redis](https://redis.io/) - In memory store database.
 - [Docker](https://www.docker.com/) - Used to containerize the services.
+
+
+## Next Steps
+
+- Transition to a websocket connection between the Client and Gateway and utilise a message broker to manage asynchronous requests between the gateway and other services.
 
 ## Authors
 
