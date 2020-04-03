@@ -19,7 +19,7 @@ const navbr = () => {
                 <Nav className="mr-auto">
                     <Nav.Link href="/">Home</Nav.Link>
                 </Nav>
-                <Nav><Button color='primary' variant='contained'>Login/Register</Button></Nav>
+                {/* <Nav><Button color='primary' variant='contained'>Login/Register</Button></Nav> */}
             </Navbar.Collapse>
         </Navbar >
     )
