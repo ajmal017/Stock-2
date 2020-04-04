@@ -20,10 +20,11 @@ const Card = ({ changePct, name, value, icn, loading, tooltip }) => {
         <Paper elevation={11} className={style.paper}>
             <Container fluid className={style.container}>
                 <Row className={style.topRow}>
-                    <h4 className={style.symbol}> {name} <TP tooltip={tooltip}></TP></h4>
+                    <h4 className={style.symbol}> {name} <TP tooltip={tooltip}></TP>
+                        {icon}
+                        {spinner}
+                    </h4>
 
-                    {icon}
-                    {spinner}
                 </Row>
                 <Row className={style.middleRow}>
                     <h5 className={style.price}> {value}</h5>

@@ -44,6 +44,8 @@ const TopBox = () => {
                         changePct={data.volatilityChange.toString() + '%'}
                         icn={true}
                         loading={loading}
+                        tooltip="Standard Deviation of annual returns of the portfolio"
+
                     ></PortfolioCard>
                 </Col>
             </Row>
@@ -54,6 +56,7 @@ const TopBox = () => {
                         value={data.systematicRisk}
                         icn={false}
                         loading={loading}
+                        tooltip="Inherent risk of operating in the market"
                     ></PortfolioCard>
                 </Col>
                 <Col md={6} lg={4} xl={3}>
@@ -62,6 +65,7 @@ const TopBox = () => {
                         value={data.idiosyncraticRisk}
                         icn={false}
                         loading={loading}
+                        tooltip="....."
                     ></PortfolioCard>
                 </Col>
             </Row>

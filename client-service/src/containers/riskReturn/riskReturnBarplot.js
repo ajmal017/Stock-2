@@ -6,7 +6,7 @@ const RiskReturnBarPlot = () => {
     const { riskReturn, stocks, loading } = logic()
     return (
         <Barplot data={riskReturn} keys={stocks} dataKey='ticker'
-            title="Mean Annual Returns and Stock Volatility"
+            title="Stock Returns and Volatility"
             tooltip="Returns is the mean of the annual log returns. 
             Volatility is the standard deviation of the daily log returns"
             loading={loading}

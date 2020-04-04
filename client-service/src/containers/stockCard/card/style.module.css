@@ -1,11 +1,8 @@
 
-.section{
-    margin: 1rem 0 ;
-}
 
 .paper{
     padding:1rem;
-    margin:1rem 0;
+    margin:1rem 0 0 0;
     background-color: #040E27!important;
     color:white!important
 }
@@ -32,7 +29,7 @@
 .row{
     justify-content: space-between;
     align-content: center;
-    padding:0.5rem 0 
+    padding:0.3rem 0 
 }
 
 
