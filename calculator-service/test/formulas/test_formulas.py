@@ -1,6 +1,6 @@
 from starlette.testclient import TestClient
 from main import app
-from test.setup_data import setup_df
+from test.setup.setup_data import setup_df
 import pytest
 from entities.Formulator import SimpleMeanLogRiskReturnsFactory, HistoryPriceNormalizedFactory, ResamplerFactory
 import pandas as pd
@@ -21,7 +21,6 @@ def test_annual_mean_log_risk_returns(setup):
             "annual_mean_return": 11.26
         }
     ]
-    print(results)
     assert results == expected_results
 
 

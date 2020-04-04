@@ -40,26 +40,7 @@ class OptionsPricer(FormulatorAbstract):
             call = (S * norm.cdf(d1, 0.0, 1.0) - K * np.exp(-r * T) * norm.cdf(d2, 0.0, 1.0))
             return call
         except Exception as err:
-            raise RuntimeError('d1 formula in Black Scholes failed')
-
-
-    def d1(self, S, K, r, stdev, T):
-        try:
-            return (np.log(S / K) + (r + stdev ** 2 / 2) * T) / (stdev * np.sqrt(T))
-        except Exception as err:
-            raise RuntimeError('d1 formula in Black Scholes failed')
-
-    def d2(self, S, K, r, stdev, T):
-        try:
-            return (np.log(S / K) + (r - stdev ** 2 / 2) * T) / (stdev * np.sqrt(T))
-        except Exception as err:
-            raise RuntimeError('d1 formula in Black Scholes failed')
-
-    def bsm(self, S, K, r, stdev, T):
-        try:
-            return (S * norm.cdf(self.d1(S, K, r, stdev, T))) - (K * np.exp(-r * T) * norm.cdf(self.d2(S, K, r, stdev, T)))
-        except Exception as err:
-            raise RuntimeError('d1 formula in Black Scholes failed')
+            raise RuntimeError('Call Options Price formula failed')
 
 
 class OptionsPricerFactory(AbstractFactory):

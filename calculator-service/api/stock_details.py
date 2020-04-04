@@ -4,7 +4,7 @@ from fastapi import APIRouter, HTTPException
 from entities.DataFramer import DataFrameJoinerFactory
 from constants.CONSTANTS import HISTORICAL_DATA
 from entities.Calculator import CalculatorFactory
-from entities.Formulator import BetaFactory
+from entities.Beta import BetaFactory
 from models.api import BetaOut, StockHistoryIn
 from entities.TickerRunner import TickerRunner
 import logging
@@ -26,7 +26,6 @@ async def calculate_financial_metrics(body: StockHistoryIn):
         tickers = []
 
         for tick in body.historicData:
-            print(f'/stockDetails requested for {tick["name"]}')
             # creating ticker entity with dataframe with all columns
             ticker = TickerRunner.create_ticker_with_dataframe(
                 tick, 'name', 'history')
@@ -62,10 +61,7 @@ async def calculate_financial_metrics(body: StockHistoryIn):
             calculations, = calculator.calculate()
             beta = calculations['beta']
             alpha = calculations['alpha']
-            print('------------beta------------------')
-            print(calculations)
-            print(beta)
-            print(alpha)
+
             expected_returns = 0.83 + beta * 0.05
             entry = {
                 'price': stock_price_today[i],
@@ -76,7 +72,8 @@ async def calculate_financial_metrics(body: StockHistoryIn):
                 'volume_change_pct':round(stock_volume_change_pct[i], 4),
                 'beta': round(beta,2),
                 'ticker': list_companies[i],
-                'expected_returns': round(expected_returns, 4)
+                'expected_returns': round(expected_returns, 4),
+                'alpha':alpha
             }
             results.append(entry)
         return {'stock_details': results}

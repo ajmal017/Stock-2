@@ -16,7 +16,7 @@ before_install:
   - docker build -t vidalignacio/stock-nginx-service:latest -t vidalignacio/stock-nginx-service:$SHA ./nginx-service
 
 script:
-  - docker run vidalignacio/stock-calculator-service:latest pytest
+  - docker run vidalignacio/stock-calculator-service:latest python -m pytest
 
 after_success:
   #Log into docker CLI

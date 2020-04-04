@@ -1,6 +1,6 @@
 from starlette.testclient import TestClient
 from main import app
-from test.setup_data import setup_data_multiple_tickers
+from test.setup.setup_data import setup_data_multiple_tickers
 import pytest
 
 
@@ -15,7 +15,6 @@ def setup():
 def test_portfolio_metrics_api_returns_200(setup):
     response = client.post("/portfolioMetrics", json=setup)
     assert response.status_code == 200
-    print(response.json())
     assert response.json() == response_data
 
 

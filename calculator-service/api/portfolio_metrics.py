@@ -3,7 +3,8 @@ from fastapi import APIRouter, HTTPException
 from entities.DataFramer import DataframerFactory, DataFrameJoinerFactory
 from constants.CONSTANTS import HISTORICAL_DATA
 from entities.Calculator import CalculatorFactory
-from entities.Formulator import PortfolioRiskReturnFactory, Divider
+from entities.Formulator import Divider
+from entities.PortfolioMetrics import PortfolioRiskReturnFactory
 from models.api import PortfolioMetricsOut, StockHistoryIn
 from entities.TickerRunner import TickerRunner
 import Logger

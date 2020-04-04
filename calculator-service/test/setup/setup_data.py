@@ -34,3 +34,22 @@ def setup_df():
     df = df.astype('float')
     df.index = pd.to_datetime(df.index)
     return df
+
+
+def setup_df_with_GSPC():
+    files = ['GS.json', 'GSPC.json']
+    dataframes = []
+    for file in files:
+        path = os.path.join(base_dir,file)
+        data = {}
+        with open(path) as json_file:
+            data = json.load(json_file)
+        df = pd.DataFrame.from_dict(data['history'], orient='index')
+        print(df.head(3))
+        df = df[['close']]
+        df = df.rename(columns={'close': data['name']})
+        df = df.astype('float')
+        df.index = pd.to_datetime(df.index)
+        dataframes.append(df)
+    joined = pd.concat(dataframes, axis=1).dropna(how='any')
+    return joined

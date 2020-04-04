@@ -23,7 +23,6 @@ class DataFramer(DataFramerAbstract):
             raise err
 
 
-
 class DataframerFactory(AbstractFactory):
     def factory(self):
         return DataFramer
@@ -47,21 +46,6 @@ class DataFrameJoiner(DataFrameJoinerAbstract):
             return joined
         except Exception as err:
             raise err
-
-
-
-# class DataFrameJoiner(DataFrameJoinerAbstract):
-#     @staticmethod
-#     def join_dataframes(array_of_tickers, column_filter):
-#         dataframes = []
-#         for ticker in array_of_tickers:
-#             logger.info(f'joining dataframes {ticker.get_ticker()}')
-#             df = ticker.dataframe[[column_filter]].rename(
-#                 columns={column_filter: ticker.get_ticker()})
-#             dataframes.append(df)
-#         joined = dataframes[0].join(dataframes[1:]).dropna(how='any')
-#         logger.info(f'dataframes joined for {joined.columns.tolist()}{joined.head(2)}')
-#         return joined
 
 
 class DataFrameJoinerFactory(AbstractFactory):

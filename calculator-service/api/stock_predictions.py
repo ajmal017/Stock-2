@@ -25,7 +25,6 @@ async def calculate_stock_predictions(body: StockHistoryIn):
         """this array will hold all the ticker entities.
         A ticker is a company with a dataframe"""
         tickers = []
-        print('stock details started')
 
         for tick in body.historicData:
             # creating ticker entity with dataframe with all columns
