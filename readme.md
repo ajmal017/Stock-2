@@ -14,7 +14,7 @@ This platform has been developed for personal educational purposes to apply for 
 
 ## Getting Started
 
-You can clone this project and run docker-compose up. See example.env for the environment variables that you need to add manually.
+You can clone this project and run docker-compose up. See example.env for the environment variables that you need to add manually and you can build the containers with "bash bdev.sh".
 
 ## Running the tests
 
@@ -33,6 +33,9 @@ You can run the tests of each service through "npm run test:local" or pytest.
 - Client: This is the front end website to interact with all the backend services which is served as static content from an Nginx server.
 - Redis: Caching layer of historical stock data. The data is purged at the end of the day.
 - Ngingx: It is a reverse proxy that brokers the requests between the Client and Gateway.
+
+![Platform architecture](./Architecture.png)
+
 
 ## Deployment
 
