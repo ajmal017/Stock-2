@@ -37,13 +37,13 @@
 
 
 .negative{
-    color: red;
+    color:#F44336;
     margin:0;
     display: inline-flex;
 }
 
 .positive{
-    color: green;
+    color: #4CAF50;
     margin: 0;
     display: inline-flex;
 

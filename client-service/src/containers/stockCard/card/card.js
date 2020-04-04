@@ -10,7 +10,7 @@ import DeleteForeverOutlinedIcon from '@material-ui/icons/DeleteForeverOutlined'
 const Card = ({ data, icn, blur, handleDelete }) => {
     let icon = null
     if (icn && data.price_change_value >= 0) icon = <TrendingUpRoundedIcon style={{ color: green[500] }} fontSize='large' />
-    if (icn && data.price_change_value <= 0) icon = <TrendingDownRoundedIcon color='secondary' fontSize='large' />
+    if (icn && data.price_change_value <= 0) icon = <TrendingDownRoundedIcon color='error' fontSize='large' />
     let placeholder = null
     if (blur) placeholder = <p className={style.placeholder}>Select a company</p>
     return (
@@ -18,7 +18,7 @@ const Card = ({ data, icn, blur, handleDelete }) => {
             <Paper elevation={11} className={blur ? style.blur : style.paper}>
                 <Container fluid className={style.container}>
                     <Row className={style.row}>
-                        <DeleteForeverOutlinedIcon onClick={e => { handleDelete(e, data.ticker) }} color="error"></DeleteForeverOutlinedIcon>
+                        <DeleteForeverOutlinedIcon onClick={e => { handleDelete(e, data.ticker) }} color="error" style={{ 'cursor': 'pointer' }}></DeleteForeverOutlinedIcon>
 
                         <h3 className={style.symbol}> {data.ticker}</h3>
                         {icon}

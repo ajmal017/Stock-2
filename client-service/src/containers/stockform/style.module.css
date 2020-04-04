@@ -6,13 +6,13 @@
     justify-content: center;
     align-content: center;
     text-align: center;
-    margin:0
 }
 
 .button{
     background-color: green!important;
     color:white!important;
-    margin:22px 0
+    margin:22px 0!important;
+    cursor: pointer;
 }
 .button:hover{
     background-color: rgb(6, 34, 6)!important;
@@ -23,5 +23,5 @@
 }
 
 .col{
-    padding:0
+    /* padding:0 */
 }

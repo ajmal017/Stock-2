@@ -9,7 +9,7 @@
       "memory": 128,
       "links": [
         "client",
-        "orchestrator"
+        "gateway"
       ],
       "portMappings": [
         {
@@ -35,7 +35,7 @@
       "essential": false,
       "memory": 128,
       "links": [
-        "orchestrator"
+        "gateway"
       ],
       "mountPoints": [
         {
@@ -71,9 +71,9 @@
       ]
     },
     {
-      "name": "orchestrator",
-      "image": "vidalignacio/stock-orchestrator-service",
-      "hostname": "orchestrator",
+      "name": "gateway",
+      "image": "vidalignacio/stock-gateway-service",
+      "hostname": "gateway",
       "essential": false,
       "memory": 512,
       "links": [
@@ -83,8 +83,8 @@
       ],
       "mountPoints": [
         {
-          "sourceVolume": "awseb-logs-orchestrator",
-          "containerPath": "/var/log/orchestrator"
+          "sourceVolume": "awseb-logs-gateway",
+          "containerPath": "/var/log/gateway"
         }
       ]
     },

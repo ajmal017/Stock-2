@@ -28,7 +28,6 @@ exports.efficientFrontier = async (req, res) => {
 }
 
 exports.stockOptions = async (req, res) => {
-    console.log('----stock options', req.body.tickers)
     await requester(req, res, CALCULATOR_SERVICE, CALCULATOR_STOCK_OPTIONS)
 }
 

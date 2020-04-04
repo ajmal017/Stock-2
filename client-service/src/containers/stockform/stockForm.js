@@ -33,7 +33,7 @@ const Form = () => {
 
                 </Col>
                 <Col md={2} className={style.col}>
-                    <Button className={style.button} variant='contained' size='large'
+                    <Button className={style.button} color="secondary" variant='contained' size='large'
                         onClick={handleClick} disabled={!value} type='button'>save</Button>
                 </Col>
             </Row>

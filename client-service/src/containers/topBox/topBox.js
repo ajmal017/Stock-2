@@ -1,7 +1,7 @@
 import React from 'react'
 import { Container, Row, Col } from 'react-bootstrap'
 import style from './style.module.css'
-import PortfolioCard from '../card/card'
+import PortfolioCard from './card/card'
 import { useSelector } from 'react-redux'
 import StockForm from '../stockform/stockForm'
 
@@ -29,11 +29,12 @@ const TopBox = () => {
             <Row className={style.row}>
                 <Col md={6} lg={4} xl={3}>
                     <PortfolioCard data={data}
-                        name="Annual Returns"
+                        name="Returns"
                         value={data.returns.toString() + '%'}
                         changePct={data.returnsChange.toString() + '%'}
                         icn={true}
                         loading={loading}
+                        tooltip="Annual mean returns"
                     ></PortfolioCard>
                 </Col>
                 <Col md={6} lg={4} xl={3}>

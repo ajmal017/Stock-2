@@ -29,10 +29,10 @@ You can run the tests of each service through "npm run test:local" or pytest.
 
 - Calculator: It runs the financial calculations of the stocks and portfolios
 - Pricer: It retrieves the historical data of the stocks
-- Orchestrator: It is the gateway exposed to the web client that coordinates and aggregate the responses from the microservices.
-- Client: This is the front end website to interact with all the backend services.
+- Gateway: It is the gateway exposed to the web client that coordinates and aggregate the responses from the microservices.
+- Client: This is the front end website to interact with all the backend services which is served as static content from an Nginx server.
 - Redis: Caching layer of historical stock data. The data is purged at the end of the day.
-- Ngingx: It is a reverse proxy that brokers the requests between the Client and Orchestrator.
+- Ngingx: It is a reverse proxy that brokers the requests between the Client and Gateway.
 
 ## Deployment
 

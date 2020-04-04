@@ -28,7 +28,7 @@ services:
       
   client:
     container_name: client
-    image: stock-client-service:dev
+    image: stock-client-service:prod
     restart: always
     env_file:
       - docker.env
@@ -48,20 +48,20 @@ services:
     depends_on: 
       - calculator
       - pricer
-      - orchestrator
+      - gateway
       - redis
       - client
 
-  orchestrator:
-    container_name: orchestrator
-    image: stock-orchestrator-service:dev
+  gateway:
+    container_name: gateway
+    image: stock-gateway-service:dev
     command: "npm run dev"
     restart: always
     env_file:
       - docker.env
     volumes:
       - /app/node_modules
-      - ./orchestrator-service:/app
+      - ./gateway-service:/app
     ports:
       - "3000:3000"
     depends_on: 
