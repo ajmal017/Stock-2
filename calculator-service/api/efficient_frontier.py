@@ -6,7 +6,7 @@ from entities.TickerRunner import TickerRunner
 from entities.DataFramer import DataframerFactory, DataFrameJoinerFactory
 from constants.CONSTANTS import HISTORICAL_DATA
 from entities.Calculator import CalculatorFactory
-from entities.Formulator import EfficientFrontierSharpeFactory
+from entities.EfficientFrontier import EfficientFrontierSharpeFactory
 from models.api import EfficientFrontierOut, StockHistoryIn
 import logging
 
@@ -46,8 +46,8 @@ async def calculate_financial_metrics(body: StockHistoryIn, request:Request):
         # executing all formulas in calculator and unpacking it
         efficient_frontier, = calculator.calculate()
 
-        return {'efficient_frontier': efficient_frontier}
+        return efficient_frontier
 
     except Exception as err:
-        logger.error('/stockPredictions failed', error)
+        logger.error('/stockPredictions failed', err)
         raise HTTPException(status_code=400, detail=str('internal error in efficientFrontier API'))

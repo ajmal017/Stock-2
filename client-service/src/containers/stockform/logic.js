@@ -20,22 +20,22 @@ const Logic = () => {
         else {
             const ticker = value.symbol
             if (!stockDict[ticker]) dispatch(setError('Select a stock from the dropwdown menu'))
-            else if (tickers.includes(ticker)) {
+            if (tickers.includes(ticker)) {
                 dispatch(setError('Stock already selected'))
             }
-            else {
-                const payload = [...tickers, ticker]
-                setValue(null)
-
-                dispatch(tickersAction(ticker))
-                dispatch(stockMetrics([ticker]))
-                dispatch(stockHistory(payload))
-                dispatch(stockDetails([ticker]))
-                dispatch(portfolioMetrics(payload))
+            const payload = [...tickers, ticker]
+            if (payload.length >= 2) {
                 dispatch(efficientFrontier(payload))
-                dispatch(stockOptions([ticker]))
-
             }
+            setValue(null)
+            dispatch(tickersAction(ticker))
+            dispatch(stockMetrics([ticker]))
+            dispatch(stockHistory(payload))
+            dispatch(stockDetails([ticker]))
+            dispatch(portfolioMetrics(payload))
+            dispatch(stockOptions([ticker]))
+
+
         }
     }
     return { value, setValue, handleClick, tickers }

@@ -9,8 +9,10 @@ import {
 const initialState = {
 
     frontier: [],
-    maxSharpe: [],
-    minVolatility: [],
+    maxSharpeDistribution: [],
+    maxSharpePortfolio: [],
+    minVolatilityDistribution: [],
+    minVolatilityPortfolio: [],
     loading: false
 }
 const efficientFrontier = (state = initialState, action) => {
@@ -20,9 +22,11 @@ const efficientFrontier = (state = initialState, action) => {
         case FETCH_EFFICIENT_FRONTIER:
             return {
                 ...state,
-                frontier: action.data.efficient_frontier.frontier,
-                maxSharpe: action.data.efficient_frontier.max_sharpe,
-                minVolatility: action.data.efficient_frontier.min_volatility
+                frontier: action.data.frontier,
+                maxSharpeDistribution: action.data.max_sharpe_distribution,
+                maxSharpePortfolio: action.data.max_sharpe_portfolio,
+                minVolatilityDistribution: action.data.min_volatility_distribution,
+                minVolatilityPortfolio: action.data.min_volatility_portfolio,
             }
 
         case EFFICIENT_FRONTIER_LOADING:

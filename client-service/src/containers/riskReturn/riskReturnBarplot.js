@@ -10,6 +10,7 @@ const RiskReturnBarPlot = () => {
             tooltip="Returns is the mean of the annual log returns. 
             Volatility is the standard deviation of the daily log returns"
             loading={loading}
+            blur={stocks.length < 1}
         ></Barplot>
     )
 }

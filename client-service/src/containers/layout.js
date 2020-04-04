@@ -7,9 +7,11 @@ const PricePlots = lazy(() => import('./lineplots/lineplots'))
 const RiskReturnBarplot = lazy(() => import('./riskReturn/layout'))
 const Toast = lazy(() => import('./toast/toast'))
 const OptionsTable = lazy(() => import('./optionsTable/optionsTable'))
+const PortofolioDistribution = lazy(() => import('./optimalPortfolio/layout'))
+
+
+
 const Layout = () => {
-
-
     return (
         <div style={{ backgroundColor: "#EEF5F9" }}>
             <Suspense fallback={<Spinner></Spinner>}>
@@ -18,6 +20,7 @@ const Layout = () => {
                 <StockCard></StockCard>
                 <PricePlots></PricePlots>
                 <RiskReturnBarplot></RiskReturnBarplot>
+                <PortofolioDistribution></PortofolioDistribution>
                 <OptionsTable></OptionsTable>
             </Suspense>
         </div>
