@@ -29,7 +29,8 @@ import {
 
     ADD_TICKER,
     REMOVE_TICKER,
-    RESET_REDUCER
+    RESET_REDUCER,
+    RESET_EFFICIENT_FRONTIER
 } from './actionTypes'
 import axios from 'axios'
 import {
@@ -149,6 +150,15 @@ export const removeTicker = (ticker) => dispatch => {
 export const resetReducers = () => dispatch => {
     try {
         dispatch({ type: RESET_REDUCER })
+    } catch (error) {
+        dispatch({ type: SET_ERROR, data: 'Network Error => Delete stock' })
+
+    }
+}
+
+export const resetEfficientFrontier = () => dispatch => {
+    try {
+        dispatch({ type: RESET_EFFICIENT_FRONTIER })
     } catch (error) {
         dispatch({ type: SET_ERROR, data: 'Network Error => Delete stock' })
 

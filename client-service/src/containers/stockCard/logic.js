@@ -1,6 +1,6 @@
 import React from 'react'
 import { useSelector, useDispatch } from 'react-redux'
-import { removeTicker, stockHistory, efficientFrontier, portfolioMetrics, resetReducers } from '../../redux/actions'
+import { removeTicker, stockHistory, efficientFrontier, portfolioMetrics, resetReducers, resetEfficientFrontier } from '../../redux/actions'
 
 const Logic = () => {
     const stocks = useSelector(state => state.stockDetails.stockDetails)
@@ -12,12 +12,11 @@ const Logic = () => {
         if (newStocks.length > 0) {
             e.preventDefault()
             dispatch(stockHistory(newStocks))
-            dispatch(efficientFrontier(newStocks))
             dispatch(portfolioMetrics(newStocks))
         }
-        if (newStocks.length === 0) {
-            dispatch(resetReducers())
-        }
+        if (newStocks.length > 1) dispatch(efficientFrontier(newStocks))
+        if (newStocks.length <= 1) dispatch(resetEfficientFrontier())
+        if (newStocks.length === 0) dispatch(resetReducers())
 
         dispatch(removeTicker(ticker))
 

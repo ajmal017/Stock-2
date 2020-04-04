@@ -3,11 +3,10 @@ import {
     FETCH_EFFICIENT_FRONTIER,
     EFFICIENT_FRONTIER_LOADING,
     EFFICIENT_FRONTIER_NOT_LOADING,
-    RESET_REDUCER
+    RESET_EFFICIENT_FRONTIER
 } from "../actionTypes"
 
 const initialState = {
-
     frontier: [],
     maxSharpeDistribution: [],
     maxSharpePortfolio: [],
@@ -41,12 +40,14 @@ const efficientFrontier = (state = initialState, action) => {
                 loading: false
             }
 
-        case RESET_REDUCER:
+        case RESET_EFFICIENT_FRONTIER:
             return {
                 ...state,
                 frontier: [],
-                maxSharpe: [],
-                minVolatility: [],
+                maxSharpeDistribution: [],
+                maxSharpePortfolio: [],
+                minVolatilityDistribution: [],
+                minVolatilityPortfolio: [],
                 loading: false
             }
 
