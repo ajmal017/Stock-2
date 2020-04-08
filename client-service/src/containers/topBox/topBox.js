@@ -34,7 +34,8 @@ const TopBox = () => {
                         changePct={data.returnsChange.toString() + '%'}
                         icn={true}
                         loading={loading}
-                        tooltip="Annual mean returns"
+                        tooltip="Assumed equal distribution of stocks in the portfolio and
+                         multiplied by the annual mean (simple) returns of the stocks"
                     ></PortfolioCard>
                 </Col>
                 <Col md={6} lg={4} xl={3}>
@@ -44,7 +45,8 @@ const TopBox = () => {
                         changePct={data.volatilityChange.toString() + '%'}
                         icn={true}
                         loading={loading}
-                        tooltip="Standard Deviation of annual returns of the portfolio"
+                        tooltip="Assumed equal distribution of stocks in the portfolio and
+                         multiplied by the  annual Standard Deviation of the simple returns of the stocks"
 
                     ></PortfolioCard>
                 </Col>
@@ -65,7 +67,7 @@ const TopBox = () => {
                         value={data.idiosyncraticRisk}
                         icn={false}
                         loading={loading}
-                        tooltip="....."
+                        tooltip="Inherent stock risk "
                     ></PortfolioCard>
                 </Col>
             </Row>

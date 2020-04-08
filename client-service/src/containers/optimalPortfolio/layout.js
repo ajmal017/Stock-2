@@ -14,7 +14,7 @@ const layout = () => {
                 <Col xl={6} style={{ 'padding': 0 }} >
                     <Barplot data={maxSharpe} keys={stocks} dataKey='ticker'
                         title="Optimal Risk Adjusted Distribution"
-                        tooltip="it is based on the Sharpe ratio"
+                        tooltip="Portfolio distribution with the highest Sharpe ratio from the Efficient Frontier"
                         loading={loading}
                         blur={stocks.length < 2}
                         bars={[{ dataKey: 'value', labelKey: 'value' }]}
@@ -24,7 +24,7 @@ const layout = () => {
                 <Col xl={6} style={{ 'padding': 0 }} >
                     <Barplot data={minVolatility} keys={stocks} dataKey='ticker'
                         title="Minimal Volatility"
-                        tooltip="it is based on the Sharpe ratio"
+                        tooltip="Portfolio distribution with the smallest volatility ratio from the Efficient Frontier"
                         loading={loading}
                         blur={stocks.length < 2}
                         bars={[{ dataKey: 'value', labelKey: 'value' }]}

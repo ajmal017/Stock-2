@@ -9,7 +9,9 @@ const EfficientFrontier = () => {
     return (
         <ScatterChart data1={frontier} data2={maxSharpe} data3={minVolatility}
             title="Efficient Frontier"
-            tooltip="Efficient Frontier"
+            tooltip="Random weights are assigned to the stocks in the portfolio and the 
+            distributions with the highest Sharpe ratio and smallest volatility are flagged"
+
             loading={loading}
             blur={stocks.length < 2 ? true : false}
         ></ScatterChart>
