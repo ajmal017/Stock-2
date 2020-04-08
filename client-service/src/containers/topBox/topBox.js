@@ -13,7 +13,7 @@ const TopBox = () => {
         <Container fluid className={style.container}>
             <Row className={style.row}>
                 <Col md={8} lg={8} xl={6}>
-                    <p className={style.text}>Select stocks and optmise your portfolio through the application of the Modern Portfolio Theory (MPT) and Capital Asset Pricing Model (CAPM) </p>
+                    <p className={style.text}>Select stocks and optmise your portfolio through the application of the Modern Portfolio Theory (MPT)</p>
                 </Col>
             </Row>
             <Row className={style.row}>
