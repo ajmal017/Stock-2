@@ -34,8 +34,8 @@ const TopBox = () => {
                         changePct={data.returnsChange.toString() + '%'}
                         icn={true}
                         loading={loading}
-                        tooltip="Assumed equal distribution of stocks in the portfolio and
-                         multiplied by the annual mean (simple) returns of the stocks"
+                        tooltip="Assumes an equal distribution of the stocks and
+                         multiplies the weights by the annualised mean of the (Simple) returns of the stocks"
                     ></PortfolioCard>
                 </Col>
                 <Col md={6} lg={4} xl={3}>
@@ -45,8 +45,8 @@ const TopBox = () => {
                         changePct={data.volatilityChange.toString() + '%'}
                         icn={true}
                         loading={loading}
-                        tooltip="Assumed equal distribution of stocks in the portfolio and
-                         multiplied by the  annual Standard Deviation of the simple returns of the stocks"
+                        tooltip="Assumes an equal distribution of the stocks and
+                         multiplies the weights by the annualised Standard Deviation of the (Simple) returns of the stocks"
 
                     ></PortfolioCard>
                 </Col>
@@ -58,7 +58,7 @@ const TopBox = () => {
                         value={data.systematicRisk}
                         icn={false}
                         loading={loading}
-                        tooltip="Inherent risk of operating in the market"
+                        tooltip="Inherent market risk"
                     ></PortfolioCard>
                 </Col>
                 <Col md={6} lg={4} xl={3}>
