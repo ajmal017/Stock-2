@@ -45,7 +45,6 @@ def setup_df_with_GSPC():
         with open(path) as json_file:
             data = json.load(json_file)
         df = pd.DataFrame.from_dict(data['history'], orient='index')
-        print(df.head(3))
         df = df[['close']]
         df = df.rename(columns={'close': data['name']})
         df = df.astype('float')
