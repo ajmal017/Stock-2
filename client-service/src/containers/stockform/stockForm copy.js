@@ -8,25 +8,21 @@ import stocks from './stocks_list.json'
 
 const Form = () => {
     const { value, setValue, handleClick } = logic()
-    console.log('value of stockform', value)
 
     return (
-        <Container fluid className={style.container}>
+        <Container className={style.container}>
             <Row className={style.row}>
                 <Col md={10} className={style.col}>
                     <form onSubmit={handleClick}>
+
                         <Autocomplete
                             id="select-stock"
                             options={stocks}
-                            autoSelect={true}
                             getOptionLabel={option => option.name}
                             filterSelectedOptions
-                            onChange={
-                                (event, newValue) => {
-                                    setValue(newValue);
-
-                                }
-                            }
+                            onChange={(event, newValue) => {
+                                setValue(newValue);
+                            }}
                             value={value}
 
                             renderInput={params => (
@@ -37,7 +33,7 @@ const Form = () => {
 
                 </Col>
                 <Col md={2} className={style.col}>
-                    <Button fullWidth className={style.button} color="secondary" variant='contained' size='large'
+                    <Button className={style.button} color="secondary" variant='contained' size='large'
                         onClick={handleClick} disabled={!value} type='button'>save</Button>
                 </Col>
             </Row>

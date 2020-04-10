@@ -23,7 +23,7 @@ const layout = () => {
                 </Col>
                 <Col xl={6} style={{ 'padding': 0 }} >
                     <Barplot data={minVolatility} keys={stocks} dataKey='ticker'
-                        title="Minimal Volatility"
+                        title="Minimal Volatility Distribution"
                         tooltip="Portfolio distribution with the smallest volatility ratio from the Efficient Frontier"
                         loading={loading}
                         blur={stocks.length < 2}

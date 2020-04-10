@@ -8,7 +8,7 @@ from entities.Abstracts import AbstractFactory, FormulatorAbstract
 class SimpleMeanRiskReturns(FormulatorAbstract):
     def calculate(self, df):
         try:
-            simple_returns = (df / df.shift(1)) - 1
+            simple_returns = np.log(df / df.shift(1))
             companies = df.columns.tolist()
 
             price_volatility = round(

@@ -15,26 +15,29 @@ const Logic = () => {
     const dispatch = useDispatch();
 
     const handleClick = (e) => {
+        console.log(value)
         e.preventDefault()
         if (!value) dispatch(setError('Select a stock from the dropwdown menu'))
         else {
+            setValue(value)
             const ticker = value.symbol
             if (!stockDict[ticker]) dispatch(setError('Select a stock from the dropwdown menu'))
             if (tickers.includes(ticker)) {
                 dispatch(setError('Stock already selected'))
             }
-            const payload = [...tickers, ticker]
-            if (payload.length >= 2) {
-                dispatch(efficientFrontier(payload))
+            else {
+                const payload = [...tickers, ticker]
+                if (payload.length >= 2) {
+                    dispatch(efficientFrontier(payload))
+                }
+                setValue(null)
+                dispatch(tickersAction(ticker))
+                dispatch(stockMetrics([ticker]))
+                dispatch(stockHistory(payload))
+                dispatch(stockDetails([ticker]))
+                dispatch(portfolioMetrics(payload))
+                dispatch(stockOptions([ticker]))
             }
-            setValue(null)
-            dispatch(tickersAction(ticker))
-            dispatch(stockMetrics([ticker]))
-            dispatch(stockHistory(payload))
-            dispatch(stockDetails([ticker]))
-            dispatch(portfolioMetrics(payload))
-            dispatch(stockOptions([ticker]))
-
 
         }
     }

@@ -1,5 +1,6 @@
 from entities.DataFrame import DataFrameFactory
 from test.setup.setup_data import setup_df_with_GSPC
+import numpy as np
 import pytest
 
 @pytest.fixture
@@ -8,15 +9,7 @@ def dataframe():
     dataframe.dataframe = setup_df_with_GSPC()
     return dataframe
 
-
-def test_daily_simple_returns(dataframe):
-    result = dataframe.daily_simple_returns()
-    assert result.shape == (5255,2)
-
-def test_annual_simple_returns(dataframe):
-    result1, result2  = dataframe.annual_simple_returns()
-    assert result1 == 0.1126284717004994
-    assert result2 == 0.04502307243744686
+weights = np.array([0.3, 0.7])
 
 def test_daily_log_returns(dataframe):
     result = dataframe.daily_log_returns()
@@ -27,12 +20,18 @@ def test_annual_log_returns(dataframe):
     assert result1 == 0.04320936747242252
     assert result2 == 0.026092710152729407
 
-def test_annual_simple_volatility(dataframe):
-    result1, result2  = dataframe.annual_simple_volatility()
-    assert result1 == 0.37408356621789657
-    assert result2 == 0.19430695189838396
+def test_log_volatility(dataframe):
+    result1 = dataframe.log_volatility()
+    assert result1 == 0.11001501925646952
 
-def test_annual_log_volatility(dataframe):
-    result1, result2 = dataframe.annual_log_volatility()
-    assert result1 == 0.3721444478544607
-    assert result2 == 0.19475833893158512
+def test_weighted_log_returns(dataframe):
+    result = dataframe.weighted_log_returns(weights)
+    assert result == 0.03122770734863734
+
+def test_weighted_log_volatility(dataframe):
+    result = dataframe.weighted_log_volatility(weights)
+    assert result == 0.2305910029680196
+
+def test_weighted_log_variance(dataframe):
+    result = dataframe.weighted_log_variance(weights)
+    assert result == 0.05317221064979723

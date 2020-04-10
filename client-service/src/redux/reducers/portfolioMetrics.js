@@ -13,7 +13,8 @@ const initialState = {
         volatilityChange: 0,
         idiosyncraticRisk: 0,
         systematicRisk: 0,
-        variance: 0
+        variance: 0,
+        sharpeRatio: 0
 
     },
     loading: false
@@ -34,7 +35,8 @@ const portfolioMetrics = (state = initialState, action) => {
                     volatilityChange: portfolio_risk_returns.portfolio_volatility_change * -1,
                     idiosyncraticRisk: portfolio_risk_returns.idiosyncratic_risk,
                     systematicRisk: portfolio_risk_returns.systematic_risk,
-                    variance: portfolio_risk_returns.portfolio_variance
+                    variance: portfolio_risk_returns.portfolio_variance,
+                    sharpeRatio: portfolio_risk_returns.sharpe_ratio
                 }
             }
 

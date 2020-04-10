@@ -14,6 +14,7 @@ def setup():
 def test_stock_metrics_api_returns_200(setup):
     response = client.post("/stockMetrics", json=setup)
     assert response.status_code == 200
+    print(response.json())
     assert response.json() == response_data
 
 
@@ -24,13 +25,13 @@ def test_stock_metrics_api_returns_422_no_data():
 
 response_data = {'stock_annual_log_risk_return': [
     {
-        "price_volatility": 37.41,
+        "price_volatility": 37.21,
         "ticker": "GS",
-        "annual_mean_return": 11.26
+        "annual_mean_return": 4.32
     },
     {
-        "price_volatility": 45.69,
+        "price_volatility": 45.61,
         "ticker": "BAC",
-        "annual_mean_return": 11.19
+        "annual_mean_return": 0.8
     }
 ]}
