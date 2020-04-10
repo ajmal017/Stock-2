@@ -19,7 +19,7 @@ const table = (props) => {
     return (
         <Container fluid className={style.cont}>
             <Row className={style.row}>
-                <Col >
+                <Col lg={6} >
                     <Paper elevation={11} className={blur ? style.blur : style.paper}>
                         <h5 className={style.title}> {title}
                             <TP tooltip={tooltip}></TP>
