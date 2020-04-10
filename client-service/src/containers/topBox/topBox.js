@@ -13,12 +13,12 @@ const TopBox = () => {
     return (
         <Container fluid className={style.container}>
             <Row className={style.row}>
-                <Col md={8} lg={8} xl={6}>
+                <Col lg={8} xl={6}>
                     <p className={style.text}>Select stocks and optmise your portfolio through the application of the Modern Portfolio Theory (MPT)</p>
                 </Col>
             </Row>
             <Row className={style.row}>
-                <Col md={8} lg={8} xl={6}>
+                <Col lg={8} xl={6}>
                     <StockForm></StockForm>
                 </Col>
             </Row>
@@ -72,21 +72,23 @@ const TopBox = () => {
                     ></PortfolioCard>
                 </Col>
             </Row> */}
-            <Row>
-                <TableContainer
-                    title="Portfolio Metrics"
-                    value={equal.idiosyncraticRisk}
-                    icn={false}
-                    loading={loading}
-                    tooltip="Compare the returns, volatility and Sharpe ratio of portfolios with different weight distributions.
+            <Row className={style.row}>
+                <Col lg={8} xl={6}>
+                    <TableContainer
+                        title="Portfolio Metrics"
+                        value={equal.idiosyncraticRisk}
+                        icn={false}
+                        loading={loading}
+                        tooltip="Compare the returns, volatility and Sharpe ratio of portfolios with different weight distributions.
                     Returns and volatility are calculated using the log returns and their standard deviation."
-                    columns={['Distribution Type', 'Returns %', 'Volatility %', 'Sharpe Ratio %']}
-                    rows={rows}
-                    blur={stocks.length < 2}
-                    pl="Select 2+ Companies"
-                >
+                        columns={['Distribution Type', 'Returns %', 'Volatility %', 'Sharpe Ratio %']}
+                        rows={rows}
+                        blur={stocks.length < 2}
+                        pl="Select 2+ Companies"
+                    >
 
-                </TableContainer>
+                    </TableContainer>
+                </Col>
             </Row>
         </Container >
     )

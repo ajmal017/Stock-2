@@ -18,37 +18,34 @@ const table = (props) => {
 
     return (
         <Container fluid className={style.cont}>
-
             <Row className={style.row}>
-                <Col md={6}>
-                    <Paper elevation={11} className={blur ? style.blur : style.paper}>
-                        <h5 className={style.title}> {title}
-                            <TP tooltip={tooltip}></TP>
-                            {loading ? <CircularProgress size={20} ></CircularProgress> : <p></p>}
-                        </h5>
-                        <TableContainer>
-                            <Table stickyHeader className={style.table} size="small" aria-label="a dense table">
-                                <TableHead>
-                                    <TableRow>
-                                        {columns.map(item => (
+                <Paper elevation={11} className={blur ? style.blur : style.paper}>
+                    <h5 className={style.title}> {title}
+                        <TP tooltip={tooltip}></TP>
+                        {loading ? <CircularProgress size={20} ></CircularProgress> : <p></p>}
+                    </h5>
+                    <TableContainer>
+                        <Table stickyHeader className={style.table} size="small" aria-label="a dense table">
+                            <TableHead>
+                                <TableRow>
+                                    {columns.map(item => (
+                                        <TableCell align="center">{item}</TableCell>
+                                    ))}
+                                </TableRow>
+                            </TableHead>
+                            <TableBody>
+                                {rows.map((row, index) => (
+                                    <TableRow key={index}>
+                                        {row.map(item => (
                                             <TableCell align="center">{item}</TableCell>
                                         ))}
                                     </TableRow>
-                                </TableHead>
-                                <TableBody>
-                                    {rows.map((row, index) => (
-                                        <TableRow key={index}>
-                                            {row.map(item => (
-                                                <TableCell align="center">{item}</TableCell>
-                                            ))}
-                                        </TableRow>
-                                    ))}
-                                </TableBody>
-                            </Table>
-                        </TableContainer>
-                    </Paper>
-                    {placeholder}
-                </Col>
+                                ))}
+                            </TableBody>
+                        </Table>
+                    </TableContainer>
+                </Paper>
+                {placeholder}
             </Row>
         </Container >
 
