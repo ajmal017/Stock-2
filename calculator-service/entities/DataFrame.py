@@ -13,6 +13,7 @@ class DataFrame:
         self._annual_log_returns = None
         self._annual_simple_volatility = None
         self._annual_log_volatility = None
+        self._data = {}
 
     @property
     def dataframe(self):
@@ -22,6 +23,7 @@ class DataFrame:
     def dataframe(self, df):
         self._dataframe = df
         self._list_of_companies = df.columns.tolist()
+
 
     def daily_simple_returns(self):
         df = self._dataframe.pct_change()
