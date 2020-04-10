@@ -27,17 +27,18 @@ class PortfolioRiskReturn(FormulatorAbstract):
             number_assets = len(df.columns.tolist())
             weights = EqualWeightMakerFactory().factory().calculate(number_assets)
             # calculate portfolio returns using the mean of the annual simple returns and equal weights
-            simple_returns = (df/df.shift(1)) - 1
+            simple_returns = np.log(df/df.shift(1))
             annual_simple_returns = simple_returns.mean() * 250
             portfolio_returns = round(
-                np.dot(annual_simple_returns, weights) * 100, 3)
+                np.dot(annual_simple_returns, weights) * 100, 2)
             """
             calculate the portfolio volatility based on the deviation
             of the mean of the annual log returns and equal weights"""
             log_returns = np.log(df/df.shift(1))
             cov_matrix_annual = log_returns.cov() * 250
             portfolio_variance = np.dot(weights.T, np.dot(cov_matrix_annual, weights))
-            portfolio_volatility = round(portfolio_variance ** 0.5 * 100, 3)
+            portfolio_volatility = round(portfolio_variance ** 0.5 * 100, 2)
+            sharpe = round(portfolio_returns / portfolio_volatility * 100, 2)
 
             """ calculating systematic and unsystematic risk"""
             stocks_risks = 0
@@ -58,7 +59,8 @@ class PortfolioRiskReturn(FormulatorAbstract):
                     'portfolio_volatility': portfolio_volatility,
                     'systematic_risk': systematic_risk,
                     'idiosyncratic_risk': idiosyncratic_risk,
-                    'portfolio_variance': portfolio_variance
+                    'portfolio_variance': portfolio_variance,
+                    'sharpe_ratio':sharpe
                     }
             return data
         except Exception as err:

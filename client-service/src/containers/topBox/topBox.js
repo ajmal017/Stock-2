@@ -2,12 +2,13 @@ import React from 'react'
 import { Container, Row, Col } from 'react-bootstrap'
 import style from './style.module.css'
 import PortfolioCard from './card/card'
-import { useSelector } from 'react-redux'
 import StockForm from '../stockform/stockForm'
+import TableContainer from '../charts/table/tableContainer'
+import logic from './logic'
 
 const TopBox = () => {
-    const data = useSelector(state => state.portfolioMetrics.portfolio)
-    const loading = useSelector(state => state.portfolioMetrics.loading)
+    const { equal, loading, rows, stocks } = logic()
+
 
     return (
         <Container fluid className={style.container}>
@@ -21,17 +22,17 @@ const TopBox = () => {
                     <StockForm></StockForm>
                 </Col>
             </Row>
-            <Row className={style.row}>
+            {/* <Row className={style.row}>
                 <Col lg={8} xl={6}>
                     <h1 className={style.title}>Portfolio Metrics</h1>
                 </Col>
             </Row>
             <Row className={style.row}>
                 <Col md={6} lg={4} xl={3}>
-                    <PortfolioCard data={data}
+                    <PortfolioCard data={equal}
                         name="Returns"
-                        value={data.returns.toString() + '%'}
-                        changePct={data.returnsChange.toString() + '%'}
+                        value={equal.returns.toString() + '%'}
+                        changePct={equal.returnsChange.toString() + '%'}
                         icn={true}
                         loading={loading}
                         tooltip="Assumes an equal distribution of the stocks and
@@ -39,10 +40,10 @@ const TopBox = () => {
                     ></PortfolioCard>
                 </Col>
                 <Col md={6} lg={4} xl={3}>
-                    <PortfolioCard data={data}
+                    <PortfolioCard data={equal}
                         name="Volatility"
-                        value={data.volatility.toString() + '%'}
-                        changePct={data.volatilityChange.toString() + '%'}
+                        value={equal.volatility.toString() + '%'}
+                        changePct={equal.volatilityChange.toString() + '%'}
                         icn={true}
                         loading={loading}
                         tooltip="Assumes an equal distribution of the stocks and
@@ -53,25 +54,40 @@ const TopBox = () => {
             </Row>
             <Row className={style.row}>
                 <Col md={6} lg={4} xl={3}>
-                    <PortfolioCard data={data}
+                    <PortfolioCard data={equal}
                         name="Systematic Risk"
-                        value={data.systematicRisk}
+                        value={equal.systematicRisk}
                         icn={false}
                         loading={loading}
                         tooltip="Inherent market risk"
                     ></PortfolioCard>
                 </Col>
                 <Col md={6} lg={4} xl={3}>
-                    <PortfolioCard data={data}
+                    <PortfolioCard data={equal}
                         name="Idiosyncratic Risk"
-                        value={data.idiosyncraticRisk}
+                        value={equal.idiosyncraticRisk}
                         icn={false}
                         loading={loading}
                         tooltip="Inherent stock risk "
                     ></PortfolioCard>
                 </Col>
+            </Row> */}
+            <Row>
+                <TableContainer
+                    title="Portfolio Metrics"
+                    value={equal.idiosyncraticRisk}
+                    icn={false}
+                    loading={loading}
+                    tooltip="Compare the returns, volatility and Sharpe ratio of portfolios with different weight distributions"
+                    columns={['Distribution Type', 'Returns %', 'Volatility %', 'Sharpe Ratio %']}
+                    rows={rows}
+                    blur={stocks.length < 2}
+                    pl="Select 2+ Companies"
+                >
+
+                </TableContainer>
             </Row>
-        </Container>
+        </Container >
     )
 }
 
