@@ -13,12 +13,12 @@ const TopBox = () => {
     return (
         <Container fluid className={style.container}>
             <Row className={style.row}>
-                <Col lg={8} xl={6}>
+                <Col lg={6}>
                     <p className={style.text}>Select stocks and optmise your portfolio through the application of the Modern Portfolio Theory (MPT)</p>
                 </Col>
             </Row>
             <Row className={style.row}>
-                <Col lg={8} xl={6}>
+                <Col lg={6}>
                     <StockForm></StockForm>
                 </Col>
             </Row>

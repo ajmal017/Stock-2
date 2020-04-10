@@ -1,6 +1,6 @@
 .cont{
-    padding-top: 1rem;
-    padding-bottom: 1rem;
+    padding: 1rem;
+
 }
 
 .title{
@@ -29,3 +29,6 @@
     color: white;
     transform: translate(-50%,-50%);
 }
+
+
+.col{padding:0}
