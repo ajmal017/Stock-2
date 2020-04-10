@@ -19,14 +19,14 @@ const table = (props) => {
     return (
         <Container fluid className={style.cont}>
             <Row className={style.row}>
-                <Col className={style.col}>
+                <Col >
                     <Paper elevation={11} className={blur ? style.blur : style.paper}>
                         <h5 className={style.title}> {title}
                             <TP tooltip={tooltip}></TP>
                             {loading ? <CircularProgress size={20} ></CircularProgress> : <p></p>}
                         </h5>
                         <TableContainer >
-                            <Table stickyHeader className={style.table} size="small" aria-label="a dense table">
+                            <Table stickyHeader size="small" aria-label="a dense table">
                                 <TableHead>
                                     <TableRow>
                                         {columns.map(item => (

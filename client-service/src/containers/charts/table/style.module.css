@@ -1,5 +1,5 @@
 .cont{
-    padding: 1rem;
+    /* padding: 1rem; */
 
 }
 
@@ -30,5 +30,3 @@
     transform: translate(-50%,-50%);
 }
 
-
-.col{padding:0}
