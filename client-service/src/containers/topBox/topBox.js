@@ -78,7 +78,8 @@ const TopBox = () => {
                     value={equal.idiosyncraticRisk}
                     icn={false}
                     loading={loading}
-                    tooltip="Compare the returns, volatility and Sharpe ratio of portfolios with different weight distributions"
+                    tooltip="Compare the returns, volatility and Sharpe ratio of portfolios with different weight distributions.
+                    Returns and volatility are calculated using the log returns and their standard deviation."
                     columns={['Distribution Type', 'Returns %', 'Volatility %', 'Sharpe Ratio %']}
                     rows={rows}
                     blur={stocks.length < 2}

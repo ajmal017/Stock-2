@@ -7,8 +7,8 @@ const RiskReturnBarPlot = () => {
     return (
         <Barplot data={riskReturn} keys={stocks} dataKey='ticker'
             title="Stock Returns and Volatility"
-            tooltip="Returns = Annualised mean of the daily simple returns || 
-            Volatility = Annualised standard deviation of the daily returns"
+            tooltip="Returns = Annualised mean of log retuns || 
+            Volatility = Annualised standard deviation of the log returns"
             loading={loading}
             blur={stocks.length < 1}
         ></Barplot>

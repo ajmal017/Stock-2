@@ -14,11 +14,12 @@ def setup():
 def test_annual_mean_log_risk_returns(setup):
     formula = SimpleMeanLogRiskReturnsFactory().factory()
     results = formula.calculate(setup)
+    print(results)
     expected_results = [
         {
-            "price_volatility": 37.41,
+            "price_volatility": 37.21,
             "ticker": "GS",
-            "annual_mean_return": 11.26
+            "annual_mean_return": 4.32
         }
     ]
     assert results == expected_results
