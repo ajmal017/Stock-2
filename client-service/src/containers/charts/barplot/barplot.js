@@ -14,7 +14,7 @@ const Barplot = ({ data, dataKey, tooltip, title, loading }) => {
                 <Tooltip />
                 <Legend />
                 <ReferenceLine y={0} stroke="#000" />
-                <Bar dataKey='annual_mean_return' fill='#82ca9d'>
+                <Bar dataKey='annual_mean_return' fill='#040E27'>
                     <LabelList dataKey="annual_mean_return" position="top" formatter={value => value.toString() + '%'} />
                 </Bar>
                 <Bar dataKey='price_volatility' fill='#ff7300'>
