@@ -1,15 +1,15 @@
 from entities.Abstracts import AbstractFactory
 import pandas as pd
 import numpy as np
+from utilities.decorators import try_except
 
 
 class DataFrame:
     def __init__(self,):
         self._dataframe = None
-        self._list_of_companies = None
         self._daily_log_returns = None
         self._annual_log_returns = None
-        self._annual_log_volatility = None
+        self._log_volatility = None
         self._data = {}
 
     @property
@@ -19,13 +19,18 @@ class DataFrame:
     @dataframe.setter
     def dataframe(self, df):
         self._dataframe = df
-        self._list_of_companies = df.columns.tolist()
 
+    @try_except
+    def columns_list(self):
+        return self._dataframe.columns.tolist()
+
+    @try_except
     def daily_log_returns(self):
         df = np.log(self._dataframe/self._dataframe.shift(1))
         self._daily_log_returns = df
         return df
 
+    @try_except
     def annual_log_returns(self):
         if self._daily_log_returns is not None:
             df = self._daily_log_returns.mean() * 250
@@ -34,14 +39,17 @@ class DataFrame:
         self._annual_log_returns = df
         return df
 
+    @try_except
     def log_volatility(self):
+        list_of_companies = self.columns_list()
         if self._annual_log_returns is None:
-            df = self.annual_log_returns()[self._list_of_companies].std() ** 0.5
+            df = self.annual_log_returns()[list_of_companies].std() ** 0.5
         else:
-            df = self._annual_log_returns[self._list_of_companies].std() ** 0.5
-        self._annual_log_volatility = df
+            df = self._annual_log_returns[list_of_companies].std() ** 0.5
+        self._log_volatility = df
         return df
 
+    @try_except
     def weighted_log_returns(self, weights):
         if self._annual_log_returns is None:
             df = self.annual_log_returns()
@@ -50,6 +58,7 @@ class DataFrame:
         result = np.sum(df * weights)
         return result
 
+    @try_except
     def weighted_log_volatility(self, weights):
         if self._daily_log_returns is None:
             df = self.daily_log_returns()
@@ -58,6 +67,7 @@ class DataFrame:
         result = np.sqrt(np.dot(weights.T, np.dot(df.cov() *250, weights)))
         return result
 
+    @try_except
     def weighted_log_variance(self, weights):
         if self._daily_log_returns is None:
             df = self.daily_log_returns()
@@ -66,6 +76,7 @@ class DataFrame:
         result = np.dot(weights.T, np.dot(df.cov() *250, weights))
         return result
 
+    @try_except
     def systematic_idiosyncratic_risk(self, weights):
         stocks_risks = 0
 
