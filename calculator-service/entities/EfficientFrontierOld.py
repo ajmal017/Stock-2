@@ -2,19 +2,19 @@ import numpy as np
 import pandas as pd
 from scipy.stats import norm, linregress
 from entities.Abstracts import AbstractFactory, FormulatorAbstract
-from entities.DataFrame import DataFrameFactory
 
 class EfficientFrontierSharpe(FormulatorAbstract):
     def calculate(self, df):
         try:
-            dataframe = DataFrameFactory().factory()
-            dataframe.dataframe = df
+            # calculate daily and annual returns of the stocks
+            log_returns = np.log(df/df.shift(1))
+            annual_log_returns = log_returns.mean() * 250
+            num_assets = len(df.columns.tolist())
 
-            # number of assets to calculate weights
-            companies = dataframe.columns_list()
-            num_assets = len(companies)
+            # get daily and covariance of returns of the stock
+            cov_annual = log_returns.cov() * 250
 
-            # empty lists to store returns, volatility and weights of imaginary portfolios
+            # empty lists to store returns, volatility and weights of imiginary portfolios
             result = []
             max_sharpe_ratio = float('-inf')
             min_volatility_ratio = float('inf')
@@ -32,8 +32,8 @@ class EfficientFrontierSharpe(FormulatorAbstract):
             for i in range(num_portfolios):
                 weights = np.random.random(num_assets)
                 weights /= np.sum(weights)
-                returns = dataframe.weighted_log_returns(weights)
-                volatility = dataframe.weighted_log_volatility(weights)
+                returns = np.sum(weights * annual_log_returns)
+                volatility = np.sqrt(np.dot(weights.T, np.dot(cov_annual, weights)))
                 sharpe = returns / volatility
 
                 # create dictionary with calculations and push into results array
@@ -47,7 +47,7 @@ class EfficientFrontierSharpe(FormulatorAbstract):
                     max_sharpe_ratio = sharpe
                     max_sharpe_portfolio = portfolio
                     distribution= []
-                    for index, company in enumerate(companies):
+                    for index, company in enumerate(df.columns.tolist()):
                         entry = {
                             'ticker':company,
                             'value': round(weights[index], 2) * 100
@@ -59,14 +59,13 @@ class EfficientFrontierSharpe(FormulatorAbstract):
                     min_volatility_ratio = volatility
                     min_volatility_portfolio = portfolio
                     distribution= []
-                    for index, company in enumerate(companies):
+                    for index, company in enumerate(df.columns.tolist()):
                         entry = {
                             'ticker':company,
                             'value': round(weights[index], 2) * 100
                         }
                         distribution.append(entry)
                     min_volatility_distribution = distribution
-
                 result.append(portfolio)
 
             return {'frontier': result,

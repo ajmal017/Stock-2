@@ -34,7 +34,7 @@ async def calculate_financial_metrics(body: StockHistoryIn, request:Request):
             # pushing ticker entities to array
             tickers.append(ticker)
 
-        # joining dataframes of each ticker. The ['close'] column is taken from each each dataframe
+        # joining dataframes of each ticker. The ['close'] column is taken from each dataframe
         df_close = DataFrameJoiner.join_dataframes(
             tickers, HISTORICAL_DATA.CLOSE.value)
         # composing calculator with formulas -> composite pattern

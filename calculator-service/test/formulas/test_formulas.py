@@ -12,7 +12,7 @@ def setup():
     return setup_df()
 
 
-def test_annual_mean_log_risk_returns(setup):
+def test_stock_metrics_formula(setup):
     formula = StockRiskReturnsFactory().factory()
     results = formula.calculate(setup)
     expected_results = [
