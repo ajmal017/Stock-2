@@ -32,22 +32,27 @@ class DataFrame:
 
     @try_except
     def annual_log_returns(self):
-        if self._daily_log_returns is not None:
-            df = self._daily_log_returns.mean() * 250
+        list_of_companies = self.columns_list()
+        if self._daily_log_returns is None:
+            df = self.daily_log_returns()[list_of_companies].mean() * 250
         else:
-            df = self.daily_log_returns().mean() * 250
-        self._annual_log_returns = df
-        return df
+            df = self._daily_log_returns[list_of_companies].mean() * 250
+        result = df.tolist()
+        self._annual_log_returns = result
+        print(result)
+        return result
 
     @try_except
     def log_volatility(self):
         list_of_companies = self.columns_list()
-        if self._annual_log_returns is None:
-            df = self.annual_log_returns()[list_of_companies].std() ** 0.5
+        if self._daily_log_returns is None:
+            df = self.daily_log_returns()[list_of_companies].std() * 250 ** 0.5
         else:
-            df = self._annual_log_returns[list_of_companies].std() ** 0.5
-        self._log_volatility = df
-        return df
+            df = self._daily_log_returns[list_of_companies].std() * 250 ** 0.5
+        result = df.tolist()
+        self._log_volatility = result
+        return result
+
 
     @try_except
     def weighted_log_returns(self, weights):
@@ -94,6 +99,7 @@ class DataFrame:
         portfolio_variance = round(portfolio_variance * 100, 3)
 
         return idiosyncratic_risk, systematic_risk, portfolio_variance
+
 
 class DataFrameFactory(AbstractFactory):
     def factory(self):

@@ -21,8 +21,9 @@ def test_annual_log_returns(dataframe):
     assert result2 == 0.026092710152729407
 
 def test_log_volatility(dataframe):
-    result1 = dataframe.log_volatility()
-    assert result1 == 0.11001501925646952
+    result1, result2 = dataframe.log_volatility()
+    assert result1 == 0.3721444478544607
+    assert result2 == 0.19475833893158512
 
 def test_weighted_log_returns(dataframe):
     result = dataframe.weighted_log_returns(weights)
