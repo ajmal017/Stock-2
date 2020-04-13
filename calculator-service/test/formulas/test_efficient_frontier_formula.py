@@ -12,10 +12,10 @@ def test_efficient_frontier_returns_calculations_successfully(setup):
     formula = EfficientFrontierSharpeFactory().factory()
     results = formula.calculate(setup)
     assert results is not None
+    assert len(results['frontier']) == 2000
 
 
-
-def test_efficient_frontie_throws_no_data():
+def test_efficient_frontier_throws_no_data():
     formula = EfficientFrontierSharpeFactory().factory()
     with pytest.raises(Exception):
         formula.calculate()
