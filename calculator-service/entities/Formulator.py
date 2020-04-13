@@ -5,32 +5,6 @@ from scipy.stats import norm, linregress
 from entities.Abstracts import AbstractFactory, FormulatorAbstract
 
 
-class SimpleMeanRiskReturns(FormulatorAbstract):
-    def calculate(self, df):
-        try:
-            simple_returns = np.log(df / df.shift(1))
-            companies = df.columns.tolist()
-
-            price_volatility = round(
-                simple_returns[companies].std() * 250 ** 0.5 * 100, 2).tolist()
-            returns = round(
-                simple_returns[companies].mean() * 250 * 100, 2).tolist()
-
-            data = []
-            for index, ticker in enumerate(companies):
-                dictionary = {
-                    'price_volatility': price_volatility[index], 'ticker': ticker, 'annual_mean_return': returns[index]}
-                data.append(dictionary)
-            return data
-        except Exceptions as err:
-            raise RuntimeError('SimpleMeanRiskReturns formula failed')
-
-
-class SimpleMeanLogRiskReturnsFactory(AbstractFactory):
-    def factory(self):
-        return SimpleMeanRiskReturns()
-
-
 class HistoryPriceNormalized(FormulatorAbstract):
     def calculate(self, df):
         try:

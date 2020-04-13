@@ -2,7 +2,8 @@ from starlette.testclient import TestClient
 from main import app
 from test.setup.setup_data import setup_df
 import pytest
-from entities.Formulator import SimpleMeanLogRiskReturnsFactory, HistoryPriceNormalizedFactory, ResamplerFactory
+from entities.Formulator import HistoryPriceNormalizedFactory, ResamplerFactory
+from entities.StockMetrics import StockRiskReturnsFactory
 import pandas as pd
 
 
@@ -12,9 +13,8 @@ def setup():
 
 
 def test_annual_mean_log_risk_returns(setup):
-    formula = SimpleMeanLogRiskReturnsFactory().factory()
+    formula = StockRiskReturnsFactory().factory()
     results = formula.calculate(setup)
-    print(results)
     expected_results = [
         {
             "price_volatility": 37.21,
