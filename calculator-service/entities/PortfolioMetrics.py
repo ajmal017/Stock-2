@@ -38,8 +38,7 @@ class PortfolioRiskReturn(FormulatorAbstract):
 
             data = {'portfolio_returns': round(portfolio_returns * 100, 2),
                     'portfolio_volatility': round(portfolio_volatility * 100, 2),
-                    'sharpe_ratio':round(sharpe * 100, 2)
-                    }
+                    'sharpe_ratio':round(sharpe * 100, 2)}
 
             return data
         except Exception as error:
