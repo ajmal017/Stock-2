@@ -36,17 +36,14 @@ async def calculate_financial_metrics(body: StockHistoryIn):
         # joining dataframes of each ticker. The ['close'] column is taken from each each dataframe
         df_close = DataFrameJoiner.join_dataframes(
             tickers, HISTORICAL_DATA.CLOSE.value)
-        # composing calculator with formulas -> composite pattern
+
+        # composing calculator with formulas and data -> composite pattern
         calculator.add_formula(portfolio_risk_returns_formula)
-        # composing calculator with data
         calculator.add_data(df_close)
-
-        # executing all formulas in calculator and unpacking it
         portfolio_risk_returns, = calculator.calculate()
-        # calculating returns and risk the day before
-        # adding data until yesterday
-        calculator.add_data(df_close[:-1])
 
+        # calculating returns and risk the day before by adding data until yesterday
+        calculator.add_data(df_close[:-1])
         yesterday_annual_mean_log_risk_returns, = calculator.calculate()
 
         returns_change = Divider.divide(

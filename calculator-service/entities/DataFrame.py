@@ -84,8 +84,8 @@ class DataFrame:
     @try_except
     def systematic_idiosyncratic_risk(self, weights):
         stocks_risks = 0
-
-        for i, stock in enumerate(self._list_of_companies):
+        companies = self.columns_list()
+        for i, stock in enumerate(companies):
             stock_variance = log_returns[stock].var() * 250
             calculation = weights[i] ** 2 * stock_variance
             stocks_risks += calculation
