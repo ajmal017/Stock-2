@@ -24,6 +24,16 @@ def setup_data_one_ticker():
             historicData.append(json.load(json_file))
     return {"historicData": historicData}
 
+def setup_data_with_GSPC():
+    historicData = []
+    files = ['GS.json', 'GSPC.json']
+    for f in files:
+        path = os.path.join(base_dir, f)
+        with open(path) as json_file:
+            historicData.append(json.load(json_file))
+    return {"historicData": historicData}
+
+
 def setup_df():
     dataframe = DataFrameFactory().factory()
     path = os.path.join(base_dir, 'GS.json')

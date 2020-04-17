@@ -15,6 +15,7 @@ def setup():
 def test_efficient_fronter_api_returns_200(setup):
     response = client.post("/efficientFrontier", json=setup)
     assert response.status_code == 200
+    assert len(response.json()['frontier']) == 2000
 
 
 def test_efficient_fronter_api_returns_400_no_data():
