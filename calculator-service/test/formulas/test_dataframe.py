@@ -9,6 +9,16 @@ def dataframe():
 
 weights = np.array([0.3, 0.7])
 
+
+def test_columns_list(dataframe):
+    result = dataframe.columns_list()
+    print(result)
+    assert result == ['GS', '^GSPC']
+
+def test_daily_simple_returns(dataframe):
+    result = dataframe.daily_simple_returns()
+    assert result.shape == (5254,2)
+
 def test_daily_log_returns(dataframe):
     result = dataframe.daily_log_returns()
     assert result.shape == (5255,2)
@@ -34,3 +44,8 @@ def test_weighted_log_volatility(dataframe):
 def test_weighted_log_variance(dataframe):
     result = dataframe.weighted_log_variance(weights)
     assert result == 0.05317221064979723
+
+def test_change_last_day(dataframe):
+    value, change = dataframe.change_last_day()
+    assert len(value) == 2
+    assert len(change) == 2 
