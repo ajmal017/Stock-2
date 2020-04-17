@@ -41,13 +41,11 @@ class DataFrameJoiner(DataFrameJoinerAbstract):
         try:
             dataframes = []
             for ticker in array_of_tickers:
-                df = ticker.dataframe.dataframe[[column_filter]].rename(
+                df = ticker.dataframe[[column_filter]].rename(
                     columns={column_filter: ticker.get_ticker()})
                 dataframes.append(df)
             joined = pd.concat(dataframes, axis=1).dropna(how='any')
-            dataframe = DataFrameFactory().factory()
-            dataframe.dataframe = joined
-            return dataframe
+            return joined
         except Exception as err:
             raise err
 

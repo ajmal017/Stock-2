@@ -39,19 +39,11 @@ async def calculate_financial_metrics(body: StockHistoryIn):
         df_volume = DataFrameJoiner.join_dataframes(
             tickers, HISTORICAL_DATA.VOLUME.value)
 
-
-        stock_price_today = df_close.iloc[-1].values
-        stock_price_yesterday = df_close.iloc[-2].values
-        stock_price_change_value = stock_price_today - stock_price_yesterday
-        stock_price_change_pct = ((stock_price_today / stock_price_yesterday) - 1) * 100
-
-        stock_volume_today = df_volume.iloc[-1].values
-        stock_volume_yesterday = df_volume.iloc[-2].values
-        stock_volume_change_value = stock_volume_today - stock_volume_yesterday
-        stock_volume_change_pct = ((stock_volume_today / stock_volume_yesterday) - 1) * 100
+        stock_price_change_value, stock_price_change_pct = df_close.change_last_day()
+        stock_volume_change_value, stock_volume_change_pct = df_volume.change_last_day()
 
         results = []
-        list_companies = df_close.columns.tolist()
+        list_companies = df_close.columns_list()
 
         for i in range(len(list_companies) - 1):
             ticker = list_companies[i]
@@ -63,6 +55,7 @@ async def calculate_financial_metrics(body: StockHistoryIn):
             alpha = calculations['alpha']
 
             expected_returns = 0.83 + beta * 0.05
+
             entry = {
                 'price': stock_price_today[i],
                 'price_change_value': round(stock_price_change_value[i],4),

@@ -7,6 +7,7 @@ from utilities.decorators import try_except
 class DataFrame:
     def __init__(self,):
         self._dataframe = None
+        self._daily_simple_returns = None
         self._daily_log_returns = None
         self._annual_log_returns = None
         self._log_volatility = None
@@ -23,6 +24,12 @@ class DataFrame:
     @try_except
     def columns_list(self):
         return self._dataframe.columns.tolist()
+
+    @try_except
+    def daily_simple_returns(self):
+        df = self._dataframe.pct_change()[1:]
+        self._daily_simple_returns = df
+        return df
 
     @try_except
     def daily_log_returns(self):
@@ -80,6 +87,14 @@ class DataFrame:
             df = self._daily_log_returns
         result = np.dot(weights.T, np.dot(df.cov() *250, weights))
         return result
+
+    @try_except
+    def change_last_day(self):
+        today = self._dataframe.iloc[-1].values
+        yesterday = self._dataframe.iloc[-2].values
+        value = today - yesterday
+        change = ((today/yesterday) - 1) * 100
+        return value, change
 
     @try_except
     def systematic_idiosyncratic_risk(self, weights):

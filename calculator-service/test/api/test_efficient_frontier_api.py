@@ -8,6 +8,7 @@ client = TestClient(app)
 
 @pytest.fixture
 def setup():
+
     return setup_data_multiple_tickers()
 
 

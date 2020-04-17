@@ -6,11 +6,11 @@ from scipy.stats import norm, linregress
 class OptionsPricer(FormulatorAbstract):
     def calculate(self, df):
         try:
-            list_of_tickers = df.columns.tolist()
+            list_of_tickers = df.columns_list()
             results = []
             for indicator in range(90, 110, 1):
                 for item in list_of_tickers:
-                    dataframe = df[[item]]
+                    dataframe = df.dataframe[[item]]
                     S = dataframe[item].iloc[-1]
                     log_returns = np.log(1 + dataframe.pct_change())
                     stdev = float(log_returns.std() * 250 ** 0.5)

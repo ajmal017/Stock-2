@@ -11,9 +11,9 @@ def test_dataframer_returns_df(setup):
     data = setup['historicData'][0]['history']
     formula = DataframerFactory().factory()
     df = formula.create_dataframe(data)
-    assert len(df.columns.tolist()) > 0
-    assert df.shape[0] > 0
-    assert df.shape[1] > 0
+    assert len(df.dataframe.columns.tolist()) > 0
+    assert df.dataframe.shape[0] > 0
+    assert df.dataframe.shape[1] > 0
 
 
 def test_daframer_throws_no_data():

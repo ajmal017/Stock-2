@@ -12,6 +12,7 @@ def setup():
 def test_portfolio_metrics_api_returns_200(setup):
     response = client.post("/portfolioMetrics", json=setup)
     assert response.status_code == 200
+    print(response.json())
     assert response.json() == response_data
 
 def test_portfolio_metrics_api_returns_422_no_data():

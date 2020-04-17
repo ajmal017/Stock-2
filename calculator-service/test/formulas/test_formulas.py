@@ -35,7 +35,7 @@ def test_history_price_normalizer(setup):
 
 def test_resampler(setup):
     formula = ResamplerFactory().factory()
-    results = formula.calculate(setup)
+    results = formula.calculate(setup.dataframe)
     results['date'] = results.index.date
     dictionary = results.to_dict(orient='records')
     expected_results = [{'date': 2019-12-31, "GS": 409.41}]

@@ -7,11 +7,8 @@ from entities.DataFrame import DataFrameFactory
 class EfficientFrontierSharpe(FormulatorAbstract):
     def calculate(self, df):
         try:
-            dataframe = DataFrameFactory().factory()
-            dataframe.dataframe = df
-
             # number of assets to calculate weights
-            companies = dataframe.columns_list()
+            companies = df.columns_list()
             num_assets = len(companies)
 
             # empty lists to store returns, volatility and weights of imaginary portfolios
@@ -32,8 +29,8 @@ class EfficientFrontierSharpe(FormulatorAbstract):
             for i in range(num_portfolios):
                 weights = np.random.random(num_assets)
                 weights /= np.sum(weights)
-                returns = dataframe.weighted_log_returns(weights)
-                volatility = dataframe.weighted_log_volatility(weights)
+                returns = df.weighted_log_returns(weights)
+                volatility = df.weighted_log_volatility(weights)
                 sharpe = returns / volatility
 
                 # create dictionary with calculations and push into results array

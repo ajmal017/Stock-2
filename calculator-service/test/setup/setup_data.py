@@ -1,6 +1,7 @@
 import json
 import os
 import pandas as pd
+from entities.DataFrame import DataFrameFactory
 
 base_dir = os.path.dirname(__file__)
 
@@ -24,6 +25,7 @@ def setup_data_one_ticker():
     return {"historicData": historicData}
 
 def setup_df():
+    dataframe = DataFrameFactory().factory()
     path = os.path.join(base_dir, 'GS.json')
     data = {}
     with open(path) as json_file:
@@ -33,10 +35,12 @@ def setup_df():
     df = df.rename(columns={'close': 'GS'})
     df = df.astype('float')
     df.index = pd.to_datetime(df.index)
-    return df
+    dataframe.dataframe = df
+    return dataframe
 
 
 def setup_df_with_GSPC():
+    dataframe = DataFrameFactory().factory()
     files = ['GS.json', 'GSPC.json']
     dataframes = []
     for file in files:
@@ -51,4 +55,5 @@ def setup_df_with_GSPC():
         df.index = pd.to_datetime(df.index)
         dataframes.append(df)
     joined = pd.concat(dataframes, axis=1).dropna(how='any')
-    return joined
+    dataframe.dataframe = joined
+    return dataframe

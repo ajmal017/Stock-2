@@ -7,6 +7,7 @@ from entities.Formulator import Divider
 from entities.PortfolioMetrics import PortfolioRiskReturnFactory
 from models.api import PortfolioMetricsOut, StockHistoryIn
 from entities.TickerRunner import TickerRunner
+from entities.DataFrame import DataFrameFactory
 import Logger
 
 logger = Logger.getLogger(__name__)
@@ -43,17 +44,20 @@ async def calculate_financial_metrics(body: StockHistoryIn):
         portfolio_risk_returns, = calculator.calculate()
 
         # calculating returns and risk the day before by adding data until yesterday
-        calculator.add_data(df_close[:-1])
-        yesterday_annual_mean_log_risk_returns, = calculator.calculate()
+        yesterday = DataFrameFactory().factory()
+        yesterday.dataframe = df_close.dataframe[:-1]
+
+        calculator.add_data(yesterday)
+        yesterday_returns, = calculator.calculate()
 
         returns_change = Divider.divide(
             portfolio_risk_returns['portfolio_returns'],
-            yesterday_annual_mean_log_risk_returns['portfolio_returns'],
+            yesterday_returns['portfolio_returns'],
             4)
 
         volatility_change = Divider.divide(
             portfolio_risk_returns['portfolio_volatility'],
-            yesterday_annual_mean_log_risk_returns['portfolio_volatility'],
+            yesterday_returns['portfolio_volatility'],
             4)
 
         portfolio_risk_returns['portfolio_returns_change'] = returns_change

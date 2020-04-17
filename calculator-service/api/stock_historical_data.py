@@ -46,7 +46,7 @@ async def calculate_financial_metrics(body: StockHistoryIn):
         normalized_price,  = calculator.calculate()
 
         # resampling to yearly frequency
-        annual_price = annual_resampler.calculate(df_close)
+        annual_price = annual_resampler.calculate(df_close.dataframe)
         price_history_normalized = annual_resampler.calculate(
             normalized_price)
 

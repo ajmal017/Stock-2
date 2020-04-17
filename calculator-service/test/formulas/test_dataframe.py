@@ -5,9 +5,7 @@ import pytest
 
 @pytest.fixture
 def dataframe():
-    dataframe = DataFrameFactory().factory()
-    dataframe.dataframe = setup_df_with_GSPC()
-    return dataframe
+    return setup_df_with_GSPC()
 
 weights = np.array([0.3, 0.7])
 

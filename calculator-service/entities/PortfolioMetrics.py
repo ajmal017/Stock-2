@@ -1,7 +1,6 @@
 import numpy as np
 import pandas as pd
 from entities.Abstracts import AbstractFactory, FormulatorAbstract
-from entities.DataFrame import DataFrameFactory
 
 
 class EqualWeightMaker(FormulatorAbstract):
@@ -25,15 +24,14 @@ class EqualWeightMakerFactory(AbstractFactory):
 class PortfolioRiskReturn(FormulatorAbstract):
     def calculate(self, df):
         try:
-            dataframe = DataFrameFactory().factory()
-            dataframe.dataframe = df
+            print(df.dataframe.shape)
             """calculator portfolio returns """
-            number_assets = len(dataframe.columns_list())
+            number_assets = len(df.columns_list())
             weights = EqualWeightMakerFactory().factory().calculate(number_assets)
 
             # calculate portfolio returns using the mean of the annual simple returns and equal weights
-            portfolio_returns = dataframe.weighted_log_returns(weights)
-            portfolio_volatility = dataframe.weighted_log_volatility(weights)
+            portfolio_returns = df.weighted_log_returns(weights)
+            portfolio_volatility = df.weighted_log_volatility(weights)
             sharpe = portfolio_returns / portfolio_volatility
 
             data = {'portfolio_returns': round(portfolio_returns * 100, 2),

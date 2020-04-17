@@ -6,14 +6,10 @@ import numpy as np
 class StockRiskReturns(FormulatorAbstract):
     @try_except
     def calculate(self, df):
-        dataframe = DataFrameFactory().factory()
-        dataframe.dataframe = df
-        companies = dataframe.columns_list()
-        price_volatility =  dataframe.log_volatility()
-        returns = dataframe.annual_log_returns()
-
+        companies = df.columns_list()
+        price_volatility =  df.log_volatility()
+        returns = df.annual_log_returns()
         data = []
-
         for index, ticker in enumerate(companies):
             dictionary = {
                 'price_volatility': round(price_volatility[index] * 100, 2), 'ticker': ticker,
