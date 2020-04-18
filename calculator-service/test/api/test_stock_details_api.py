@@ -13,6 +13,7 @@ def setup():
 def test_stock_details_api_returns_200(setup):
     response = client.post('/stockDetails', json=setup)
     assert response.status_code == 200
+    print(response.json())
     assert response.json() == expected_response
 
 def test_stock_details_api_returns_422_not_data():
@@ -24,6 +25,6 @@ expected_response = {'stock_details': [
     {'price': 138.41, 'price_change_value': -11.08,
     'price_change_pct': -7.4119, 'volume': 7558700.0,
     'volume_change_value': 1010500.0, 'volume_change_pct': 15.4317,
-    'beta': 1.39, 'ticker': 'GS', 'expected_returns': 0.8997,
-    'alpha': 0.00019950227170530745}
+    'beta': 1.28, 'ticker': 'GS', 'expected_returns': 0.8939,
+    'alpha': 0}
 ]}

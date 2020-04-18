@@ -11,8 +11,8 @@ def test_beta_formula_returns_beta_value(setup):
     beta_formula = BetaFactory().factory()
     result = beta_formula.calculate(setup)
     print(result)
-    assert result['beta'] == 1.3937943453627861
-    assert result['alpha'] == 0.00019950227170530745
+    assert result['beta'] == 1.2789369706980658
+    assert result['alpha'] == 0
 
 
 def test_beta_formula_returns_throws():
