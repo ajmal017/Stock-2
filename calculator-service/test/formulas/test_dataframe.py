@@ -48,4 +48,4 @@ def test_weighted_log_variance(dataframe):
 def test_change_last_day(dataframe):
     value, change = dataframe.change_last_day()
     assert len(value) == 2
-    assert len(change) == 2 
+    assert len(change) == 2
