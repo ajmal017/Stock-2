@@ -10,7 +10,7 @@ const chartContainer = (props) => {
     let placeholder = null
     if (props.blur) placeholder = <p className={style.placeholder}>{props.placeholder ? props.placeholder : "Select a Company"}</p>
     return (
-        <Container fluid className={style.section}>
+        <Container fluid className={style.section} data-testid='chart'>
             <Row className={style.row}>
                 <Col className={style.col}>
                     <Paper elevation={11} className={props.blur ? style.blur : style.paper}>

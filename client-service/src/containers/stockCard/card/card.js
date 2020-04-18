@@ -15,10 +15,10 @@ const Card = ({ data, icn, blur, handleDelete }) => {
     if (blur) placeholder = <p className={style.placeholder}>Select a company</p>
     return (
         <Fragment>
-            <Paper elevation={11} className={blur ? style.blur : style.paper}>
+            <Paper elevation={11} className={blur ? style.blur : style.paper} data-testid='card'>
                 <Container fluid className={style.container}>
                     <Row className={style.row}>
-                        <DeleteForeverOutlinedIcon onClick={e => { handleDelete(e, data.ticker) }} color="error" style={{ 'cursor': 'pointer' }}></DeleteForeverOutlinedIcon>
+                        <DeleteForeverOutlinedIcon data-testid='remove' onClick={e => { handleDelete(e, data.ticker) }} color="error" style={{ 'cursor': 'pointer' }}></DeleteForeverOutlinedIcon>
 
                         <h3 className={style.symbol}> {data.ticker}</h3>
                         {icon}

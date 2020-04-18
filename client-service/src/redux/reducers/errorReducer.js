@@ -1,6 +1,6 @@
 import { SET_ERROR, REMOVE_ERROR } from '../actionTypes'
 
-const initialState = {
+export const initialState = {
     message: null
 }
 

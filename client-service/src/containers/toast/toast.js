@@ -7,7 +7,6 @@ import 'react-toastify/dist/ReactToastify.css';
 const Toaster = () => {
     const message = useSelector(state => state.errorReducer.message)
     if (message) {
-
         toast.error(message, {
             position: "top-center",
             autoClose: 4000,
@@ -29,6 +28,7 @@ const Toaster = () => {
             pauseOnVisibilityChange
             draggable
             pauseOnHover
+            data-testid="toast"
         />
     )
 }
