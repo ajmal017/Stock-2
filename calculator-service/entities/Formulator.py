@@ -25,6 +25,7 @@ class Resampler(FormulatorAbstract):
             result = df.head(1).append(
                 df.loc[(df.index.day == 31) & (df.index.month == 12) |
                                  (df.index.day == 30) & (df.index.month == 6)])
+            result = result.append(df.tail(1))
             return result
         except Exception as err:
             raise RuntimeError(f'Resampler formula failed - {err}')
