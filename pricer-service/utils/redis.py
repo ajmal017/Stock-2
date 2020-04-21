@@ -4,8 +4,8 @@ import logging
 import json
 from datetime import datetime, timedelta
 
-redis_host = os.environ['REDIS_SERVICE']
-redis_port = os.environ['REDIS_PORT']
+redis_host = os.environ.get('REDIS_SERVICE', 'redis')
+redis_port = os.environ.get('REDIS_PORT', 6379)
 
 logger = logging.getLogger(__name__)
 
