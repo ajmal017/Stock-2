@@ -1,5 +1,3 @@
-import numpy as np
-import pandas as pd
 from entities.Abstracts import AbstractFactory, FormulatorAbstract
 from entities.WeightMaker import EqualWeightMakerFactory
 
