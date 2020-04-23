@@ -6,7 +6,7 @@ import {
     RESET_EFFICIENT_FRONTIER
 } from "../actionTypes"
 
-const initialState = {
+export const initialState = {
     frontier: [],
     maxSharpeDistribution: [],
     maxSharpePortfolio: [],

@@ -2,7 +2,7 @@ import {
     FETCH_STOCK_OPTIONS, STOCK_OPTIONS_LOADING, STOCK_OPTIONS_NOT_LOADING, REMOVE_TICKER
 } from '../actionTypes'
 
-const initialState = {
+export const initialState = {
     optionPrices: [],
     loading: false
 }

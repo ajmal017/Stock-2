@@ -6,7 +6,7 @@ import {
 
 } from "../actionTypes"
 
-const initialState = {
+export const initialState = {
     priceHistory: [],
     priceNormalized: [],
     loading: false,

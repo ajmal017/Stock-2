@@ -5,7 +5,7 @@ import {
     RESET_REDUCER
 } from "../actionTypes"
 
-const initialState = {
+export const initialState = {
     portfolio: {
         returns: 0,
         volatility: 0,

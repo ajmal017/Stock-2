@@ -4,7 +4,7 @@ import {
     STOCK_METRICS_NOT_LOADING, REMOVE_TICKER
 } from "../actionTypes"
 
-const initialState = {
+export const initialState = {
     volatilityReturns: [],
     loading: false,
 

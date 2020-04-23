@@ -5,7 +5,7 @@ import {
     REMOVE_TICKER
 } from "../actionTypes"
 
-const initialState = {
+export const initialState = {
     stockDetails: [],
     loading: false,
 }
