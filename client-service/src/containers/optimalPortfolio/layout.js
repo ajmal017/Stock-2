@@ -7,7 +7,6 @@ import Barplot from '../charts/barplot2/barplot'
 
 const layout = () => {
     const { stocks, maxSharpe, loading, minVolatility } = logic()
-    console.log(maxSharpe, minVolatility)
     return (
         <Container fluid>
             <Row style={{ justifyContent: 'center', 'padding': 0 }}>

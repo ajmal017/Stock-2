@@ -1,82 +1,12 @@
 version: "3"
 
 services:
-  # calculator:
-  #   container_name: calculator
-  #   image: stock-calculator-service:dev
-  #   restart: always
-  #   command: "uvicorn main:app --reload --host 0.0.0.0 --port 3000"
-  #   env_file:
-  #     - docker.env
-  #   volumes:
-  #     - ./calculator-service:/app
-  #   ports:
-  #     - "8080:3000"
-      
-  # pricer:
-  #   container_name: pricer
-  #   image: stock-pricer-service:dev
-  #   restart: always
-  #   command: "uvicorn main:app --reload --host 0.0.0.0 --port 3000"
-  #   env_file:
-  #     - docker.env
-  #   volumes:
-  #     - ./pricer-service:/app
-  #   ports:
-  #     - "3010:3000"
-
-      
   client:
     container_name: test-client
     image: stock-client-service:dev
-    # restart: always
     command: npm run test
     env_file:
       - docker.env
     volumes:
       - /app/node_modules
       - ./client-service:/app
-
-  # nginx:
-  #   container_name: nginx
-  #   image: stock-nginx-service:dev
-  #   restart: always
-  #   ports:
-  #     - "80:80"
-
-  #   depends_on: 
-  #     - calculator
-  #     - pricer
-  #     - gateway
-  #     - redis
-  #     - client
-
-  # gateway:
-  #   container_name: gateway
-  #   image: stock-gateway-service:dev
-  #   command: "npm run dev"
-  #   restart: always
-  #   env_file:
-  #     - docker.env
-  #   volumes:
-  #     - /app/node_modules
-  #     - ./gateway-service:/app
-  #   ports:
-  #     - "3000:3000"
-  #   depends_on: 
-  #     - redis
-
-  # redis:
-  #   container_name: redis
-  #   image: stock-redis-service:dev
-  #   restart: always
-
-  # redis-admin:
-  #   image: erikdubbelboer/phpredisadmin
-  #   container_name: redis-admin
-  #   environment:
-  #       - REDIS_1_HOST=redis
-  #   ports:
-  #       - "6379:80"
-  #   depends_on:
-  #       - redis

@@ -37,7 +37,6 @@ const stockHistory = (state = initialState, action) => {
             }
 
         case RESET_REDUCER:
-            console.log('reset history', action)
             return {
                 ...state,
                 priceHistory: [],
