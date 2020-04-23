@@ -40,7 +40,7 @@ const stockHistory = (state = initialState, action) => {
             console.log('reset history', action)
             return {
                 ...state,
-                price_history: [],
+                priceHistory: [],
                 priceNormalized: [],
                 loading: false
             }

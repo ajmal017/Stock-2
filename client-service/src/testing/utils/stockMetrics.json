@@ -1,0 +1,9 @@
+{
+    "stock_annual_log_risk_return": [
+        {
+            "price_volatility": 37.44,
+            "ticker": "GS",
+            "annual_mean_return": 5.43
+        }
+    ]
+}

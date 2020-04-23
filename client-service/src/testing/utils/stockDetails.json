@@ -1,0 +1,28 @@
+{
+    "stock_details": [
+        {
+            "price": 175.48,
+            "price_change_value": -0.5,
+            "price_change_pct": -0.2841,
+            "volume": 1232421,
+            "volume_change_value": -1082079,
+            "volume_change_pct": -46.7522,
+            "beta": 1.26,
+            "ticker": "GS",
+            "expected_returns": 0.8932,
+            "alpha": 0
+        },
+        {
+            "price": 175.48,
+            "price_change_value": -0.5,
+            "price_change_pct": -0.2841,
+            "volume": 1232421,
+            "volume_change_value": -1082079,
+            "volume_change_pct": -46.7522,
+            "beta": 1.26,
+            "ticker": "BAC",
+            "expected_returns": 0.8932,
+            "alpha": 0
+        }
+    ]
+}

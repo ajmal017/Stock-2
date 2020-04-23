@@ -1,0 +1,9 @@
+{
+    "portfolio_risk_returns": {
+        "portfolio_returns": 5.43,
+        "portfolio_volatility": 37.44,
+        "sharpe_ratio": 14.49,
+        "portfolio_returns_change": -0.0018,
+        "portfolio_volatility_change": 0
+    }
+}
