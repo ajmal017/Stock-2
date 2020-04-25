@@ -17,7 +17,7 @@ script:
   - docker run vidalignacio/stock-calculator-service:latest python -m pytest
   - docker run vidalignacio/stock-pricer-service:latest python -m pytest
   - docker run -e CI vidalignacio/stock-client-service:test npm run test
-  - docker run -e CI vidalignacio/stock-gateway-service:test npm run test
+  - docker run -e CI vidalignacio/stock-gateway-service:latest npm run test
 
 after_success:
   #Build production images after testing
