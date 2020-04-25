@@ -4,8 +4,6 @@ Users can select stocks and optimise portfolios through the application of the M
 
 The application is available at www.romoclub.com and it uses a React web client, microservices developed with Node (Express) and Python (FastAPI), nginx as a reverse proxy and Redis as a caching layer. The services are deployed in Docker containers in Elastic Beanstalk through Travis CI/CD pipeline.
 
-This platform has been developed for personal educational purposes to apply for a Masters degree. It is not to be considered as investment advice.
-
 ## Features:
 
 - Calculation of the volatility and returns of individual stocks and portfolios.
@@ -18,7 +16,7 @@ You can clone this project and run docker-compose up. See example.env for the en
 
 ## Running the tests
 
-You can run the tests of each service through "npm run test:local" or pytest.
+You can run the tests of each service through "npm run test" or pytest.
 
 ### Break down of testing
 
@@ -56,3 +54,5 @@ This application uses Travis CI to run Continuous Delivery and Integration and t
 ## Authors
 
 - **Ignacio Vidal**
+
+<sub><sup>This platform has been developed for personal educational purposes to apply for a Masters degree. It is not to be considered as investment advice.</sup></sub>
