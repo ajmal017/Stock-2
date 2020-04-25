@@ -1,6 +1,9 @@
 const redis = require('redis');
 const { promisify } = require('util');
-const client = redis.createClient({ host: process.env.REDIS_SERVICE, port: process.env.REDIS_PORT })
+const client = redis.createClient({
+    host: process.env.REDIS_SERVICE || 'redis',
+    port: process.env.REDIS_PORT || 6379
+})
 
 client.on('error', (err) => {
     console.log("Redis client connection error " + err);
