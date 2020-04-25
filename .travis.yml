@@ -11,16 +11,17 @@ before_install:
   - docker build -t vidalignacio/stock-calculator-service:latest -t vidalignacio/stock-calculator-service:$SHA ./calculator-service
   - docker build -t vidalignacio/stock-pricer-service:latest -t vidalignacio/stock-pricer-service:$SHA ./pricer-service
   - docker build -t vidalignacio/stock-client-service:test -f ./client-service/Dockerfile.dev ./client-service
+  - docker build -t vidalignacio/stock-gateway-service:latest -t vidalignacio/stock-gateway-service:$SHA ./gateway-service
 
 script:
   - docker run vidalignacio/stock-calculator-service:latest python -m pytest
   - docker run vidalignacio/stock-pricer-service:latest python -m pytest
   - docker run -e CI vidalignacio/stock-client-service:test npm run test
+  - docker run -e CI vidalignacio/stock-gateway-service:test npm run test
 
 after_success:
   #Build production images after testing
   - docker build -t vidalignacio/stock-client-service:latest -t vidalignacio/stock-client-service:$SHA ./client-service
-  - docker build -t vidalignacio/stock-gateway-service:latest -t vidalignacio/stock-gateway-service:$SHA ./gateway-service
   - docker build -t vidalignacio/stock-redis-service:latest -t vidalignacio/stock-redis-service:$SHA ./redis-service
   - docker build -t vidalignacio/stock-nginx-service:latest -t vidalignacio/stock-nginx-service:$SHA ./nginx-service
 
