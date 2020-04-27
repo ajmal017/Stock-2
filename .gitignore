@@ -46,5 +46,15 @@ db-service/
 
 
 # idea
+.idea
 .idea/
+
+# build scripts and test docker compose
+bprod.sh
+docker-compose-test.yml
+
+# logo
+logo
+
+
 
