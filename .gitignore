@@ -50,7 +50,11 @@ bprod.sh
 docker-compose-test.yml
 
 # logo
-logo
+logo/
+
+#kubernetes
+k8s/
+
 
 
 
