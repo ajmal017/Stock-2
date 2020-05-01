@@ -38,6 +38,19 @@ services:
     ports:
       - "5000:3000"
 
+  identity:
+    container_name: identity
+    image: stock-identity-service:dev
+    command: "npm run dev"
+    restart: always
+    env_file:
+      - docker.env
+    volumes:
+      - /app/node_modules
+      - ./identity-service:/app
+    ports:
+      - "3020:3000"
+
   nginx:
     container_name: nginx
     image: stock-nginx-service:dev

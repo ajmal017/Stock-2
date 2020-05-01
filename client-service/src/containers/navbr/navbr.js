@@ -1,7 +1,8 @@
 import React from 'react'
-import { Button } from '@material-ui/core'
+import Button from '../auth/authModal'
 import { Navbar, Nav } from 'react-bootstrap'
 import logo from './logo.png'
+
 const navbr = () => {
     return (
         <Navbar expand="lg" >
@@ -19,7 +20,7 @@ const navbr = () => {
                 <Nav className="mr-auto">
                     <Nav.Link href="/">Home</Nav.Link>
                 </Nav>
-                {/* <Nav><Button color='primary' variant='contained'>Login/Register</Button></Nav> */}
+                <Nav><Button></Button></Nav>
             </Navbar.Collapse>
         </Navbar >
     )
