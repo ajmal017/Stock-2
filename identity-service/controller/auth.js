@@ -6,7 +6,6 @@ const setCookie = require('../utils/setCookie')
 
 exports.login = async (req, res) => {
     try {
-
         const { email, password } = req.body
         const user = await User.findOne({ email })
         if (!user) return res.status(401).json({ message: 'Invalid Credentials' })

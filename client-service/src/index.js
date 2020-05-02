@@ -6,6 +6,7 @@ import * as serviceWorker from './serviceWorker';
 import axios from 'axios'
 
 axios.defaults.baseURL = '/api';
+axios.defaults.withCredentials = true;
 
 
 ReactDOM.render(<App />, document.getElementById('root'));

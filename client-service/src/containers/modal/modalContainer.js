@@ -5,12 +5,12 @@ import DialogTitle from '@material-ui/core/DialogTitle';
 import Dialog from '@material-ui/core/Dialog';
 
 const DialogContainer = (props) => {
-    const [open, setOpen] = useState(true)
+    const [open, setOpen] = useState(false)
 
     return (
         <Fragment>
-            <Button onClick={() => setOpen(true)} color='primary' variant='contained'>{props.button}</Button>
-            <Dialog onClose={() => setOpen(false)} aria-labelledby="Dialog-window" open={open}>
+            <Button onClick={() => setOpen(true)} color={props.color || 'primary'} variant={props.variant || 'contained'}>{props.button}</Button>
+            <Dialog onClose={() => setOpen(false)} aria-labelledby="Dialog-window" open={open} fullWidth maxWidth='md'>
                 {props.children}
             </Dialog>
         </Fragment>

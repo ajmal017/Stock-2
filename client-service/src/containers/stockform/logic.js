@@ -15,7 +15,6 @@ const Logic = () => {
     const dispatch = useDispatch();
 
     const handleClick = (e) => {
-        console.log(value)
         e.preventDefault()
         if (!value) dispatch(setError('Select a stock from the dropwdown menu'))
         else {

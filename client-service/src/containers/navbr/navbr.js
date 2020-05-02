@@ -1,9 +1,13 @@
-import React from 'react'
-import Button from '../auth/authModal'
+import React, { Fragment } from 'react'
+import Login from '../auth/loginModal'
+import Register from '../auth/registerModal'
 import { Navbar, Nav } from 'react-bootstrap'
 import logo from './logo.png'
+import Logout from '../auth/logoutButton'
+import { useSelector } from "react-redux";
 
-const navbr = () => {
+const Navbr = () => {
+    const authenticated = useSelector(state => state.user.authenticated)
     return (
         <Navbar expand="lg" >
             <Navbar.Brand href="/">
@@ -20,10 +24,16 @@ const navbr = () => {
                 <Nav className="mr-auto">
                     <Nav.Link href="/">Home</Nav.Link>
                 </Nav>
-                <Nav><Button></Button></Nav>
+                {!authenticated ?
+                    (
+                        <Fragment>
+                            <Nav><Login></Login></Nav>
+                            <Nav><Register></Register></Nav>
+                        </Fragment>) : (<Logout></Logout>)}
+
             </Navbar.Collapse>
         </Navbar >
     )
 }
 
-export default navbr
+export default Navbr

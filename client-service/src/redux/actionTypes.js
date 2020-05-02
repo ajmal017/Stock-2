@@ -42,3 +42,7 @@ export const REMOVE_TICKER = 'REMOVE_TICKER'
 
 // REDUCER THAT REQUIRE APIs
 export const RESET_REDUCER = 'RESET_REDUCER'
+
+// USER
+export const LOGIN = 'LOGGIN'
+export const LOGOUT = 'LOGOUT'

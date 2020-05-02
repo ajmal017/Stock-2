@@ -8,7 +8,6 @@ import stocks from './stocks_list.json'
 
 const Form = () => {
     const { value, setValue, handleClick } = logic()
-    console.log('value of stockform', value)
 
     return (
         <Container fluid className={style.container}>

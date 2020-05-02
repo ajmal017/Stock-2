@@ -7,6 +7,7 @@ import portfolioMetrics from './portfolioMetrics'
 import efficientFrontier from './efficientFrontier'
 import tickers from './tickers'
 import stockOptions from './stockOptions'
+import user from './user'
 
 
 export default combineReducers({
@@ -17,5 +18,6 @@ export default combineReducers({
     efficientFrontier,
     errorReducer,
     tickers,
-    stockOptions
+    stockOptions,
+    user
 })

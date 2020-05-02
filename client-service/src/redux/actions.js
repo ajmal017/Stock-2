@@ -30,7 +30,9 @@ import {
     ADD_TICKER,
     REMOVE_TICKER,
     RESET_REDUCER,
-    RESET_EFFICIENT_FRONTIER
+    RESET_EFFICIENT_FRONTIER,
+
+    LOGIN, LOGOUT
 } from './actionTypes'
 import axios from 'axios'
 import {
@@ -39,7 +41,8 @@ import {
     STOCK_DETAILS_URL,
     PORTFOLIO_METRICS_URL,
     EFFICIENT_FRONTIER_URL,
-    STOCK_OPTIONS_URL
+    STOCK_OPTIONS_URL,
+    LOGIN_URL, LOGOUT_URL, REGISTER_URL
 } from '../api'
 
 
@@ -162,5 +165,34 @@ export const resetEfficientFrontier = () => dispatch => {
     } catch (error) {
         dispatch({ type: SET_ERROR, data: 'Network Error => Delete stock' })
 
+    }
+}
+
+export const login = data => async dispatch => {
+    try {
+        const res = await axios.post(LOGIN_URL, data)
+        dispatch({ type: LOGIN })
+    } catch (error) {
+        console.log(error)
+        dispatch({ type: SET_ERROR, data: 'Invalid Credentials' })
+    }
+}
+
+export const register = data => async dispatch => {
+    try {
+        const res = await axios.post(REGISTER_URL, data)
+        dispatch({ type: LOGIN })
+    } catch (error) {
+        console.log(error)
+        dispatch({ type: SET_ERROR, data: 'Invalid Credentials' })
+    }
+}
+
+export const logout = () => async dispatch => {
+    try {
+        const res = await axios.get(LOGOUT_URL)
+        dispatch({ type: LOGOUT })
+    } catch (error) {
+        dispatch({ type: SET_ERROR, data: error })
     }
 }
