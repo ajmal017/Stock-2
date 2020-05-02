@@ -6,8 +6,9 @@ exports.getGoogle = async (req, res) => {
     try {
         console.log('identity service in gateway')
         const response = await axios.get(`${IDENTITY_SERVICE}/google`)
-        console.log('response from identity')
-        return response
+        console.log('response from identity', response)
+
+        return res.send(response)
     } catch (error) {
         console.log('error in identity logged in gateway')
     }
