@@ -3,7 +3,6 @@ const dotenv = require("dotenv").config();
 
 const auth = async (req, res, next) => {
   try {
-    console.log("auth");
     const token = req.cookies.Authorization;
 
     console.log(token);
@@ -18,10 +17,7 @@ const auth = async (req, res, next) => {
       throw new Error();
     }
 
-    console.log(decodedToken);
-
     req.body = { ...req.body, ...decodedToken.payload };
-    console.log(req.body);
     next();
   } catch (e) {
     res.clearCookie("Authorization");

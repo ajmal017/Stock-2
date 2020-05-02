@@ -12,12 +12,14 @@ before_install:
   - docker build -t vidalignacio/stock-pricer-service:latest -t vidalignacio/stock-pricer-service:$SHA ./pricer-service
   - docker build -t vidalignacio/stock-client-service:test -f ./client-service/Dockerfile.dev ./client-service
   - docker build -t vidalignacio/stock-gateway-service:latest -t vidalignacio/stock-gateway-service:$SHA ./gateway-service
+  - docker build -t vidalignacio/stock-identity-service:latest -t vidalignacio/stock-identity-service:$SHA ./identity-service
 
 script:
   - docker run vidalignacio/stock-calculator-service:latest python -m pytest
   - docker run vidalignacio/stock-pricer-service:latest python -m pytest
   - docker run -e CI vidalignacio/stock-client-service:test npm run test
   - docker run -e CI vidalignacio/stock-gateway-service:latest npm run test
+  - docker run -e CI vidalignacio/stock-identity-service:latest npm run test
 
 after_success:
   #Build production images after testing
@@ -34,6 +36,7 @@ after_success:
   - docker push vidalignacio/stock-client-service:latest
   - docker push vidalignacio/stock-pricer-service:latest
   - docker push vidalignacio/stock-gateway-service:latest
+  - docker push vidalignacio/stock-identity-service:latest
   - docker push vidalignacio/stock-redis-service:latest
   - docker push vidalignacio/stock-nginx-service:latest
 
@@ -41,6 +44,7 @@ after_success:
   - docker push vidalignacio/stock-client-service:$SHA
   - docker push vidalignacio/stock-pricer-service:$SHA
   - docker push vidalignacio/stock-gateway-service:$SHA
+  - docker push vidalignacio/stock-identity-service:$SHA
   - docker push vidalignacio/stock-redis-service:$SHA
   - docker push vidalignacio/stock-nginx-service:$SHA
 

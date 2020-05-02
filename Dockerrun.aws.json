@@ -71,6 +71,19 @@
       ]
     },
     {
+      "name": "identity",
+      "image": "vidalignacio/stock-identity-service",
+      "hostname": "identity",
+      "essential": false,
+      "memory": 128,
+      "mountPoints": [
+        {
+          "sourceVolume": "awseb-logs-identity",
+          "containerPath": "/var/log/identity"
+        }
+      ]
+    },
+    {
       "name": "gateway",
       "image": "vidalignacio/stock-gateway-service",
       "hostname": "gateway",
@@ -79,7 +92,8 @@
       "links": [
         "calculator",
         "pricer",
-        "redis"
+        "redis",
+        "identity"
       ],
       "mountPoints": [
         {
