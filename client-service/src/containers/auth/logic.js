@@ -27,8 +27,11 @@ const Logic = () => {
         dispatch(logout())
     }
 
+    let loginValidator = state.email.length < 3 || state.password.length < 6
+    let registerValidator = state.email.length < 3 || state.password.length < 6 || state.password !== state.password2
 
-    return { handleChange, handleLogin, handleRegister, handleLogout, state }
+
+    return { handleChange, handleLogin, handleRegister, handleLogout, state, loginValidator, registerValidator }
 
 
 }
