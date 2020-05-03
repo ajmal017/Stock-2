@@ -6,19 +6,17 @@ import 'react-toastify/dist/ReactToastify.css';
 
 const Toaster = () => {
     const message = useSelector(state => state.errorReducer.message)
-    if (message) {
-        toast.error(message, {
-            position: "top-center",
-            autoClose: 4000,
-            hideProgressBar: false,
-            closeOnClick: true,
-            pauseOnHover: true,
-            draggable: true
-        });
-    }
+    message.map(item => toast.error(item, {
+        position: "top-center",
+        autoClose: 4000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true
+    }))
 
     return (
-        <ToastContainer
+        < ToastContainer
             position="top-center"
             autoClose={4000}
             hideProgressBar={false}
@@ -28,8 +26,7 @@ const Toaster = () => {
             pauseOnVisibilityChange
             draggable
             pauseOnHover
-            data-testid="toast"
-        />
+            data-testid="toast" />
     )
 }
 

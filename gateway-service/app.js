@@ -10,7 +10,6 @@ app.use(helmet())
 app.use(compression())
 app.use(cors())
 
-
 app.use('/', require('./routes/stock.routes'))
 app.use('/identity', require('./routes/identity.routes'))
 

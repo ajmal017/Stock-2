@@ -1,3 +1,6 @@
+import React from 'react'
+
+
 import {
     // Stock Resources
     FETCH_STOCK_DETAILS,
@@ -32,9 +35,10 @@ import {
     RESET_REDUCER,
     RESET_EFFICIENT_FRONTIER,
 
-    LOGIN, LOGOUT
+    LOGIN, LOGOUT, REMOVE_ERROR
 } from './actionTypes'
 import axios from 'axios'
+
 import {
     STOCK_METRICS_URL,
     STOCK_HISTORY_URL,
@@ -45,18 +49,19 @@ import {
     LOGIN_URL, LOGOUT_URL, REGISTER_URL
 } from '../api'
 
+import { useDispatch } from 'react-redux'
+
 
 export const stockMetrics = tickers => async dispatch => {
     try {
         dispatch({ type: STOCK_METRICS_LOADING })
-
         const res = await axios.post(STOCK_METRICS_URL, { tickers: tickers })
         dispatch({ type: FETCH_STOCK_METRICS, data: res.data.stock_annual_log_risk_return })
 
     } catch (error) {
         console.log('stockMetrics action creator dispatched error')
+        SetError(dispatch, 'Network Error => Delete stock')
 
-        dispatch({ type: SET_ERROR, data: 'Network Failure => stock metrics' })
     } finally {
         dispatch({ type: STOCK_METRICS_NOT_LOADING })
     }
@@ -71,7 +76,8 @@ export const stockHistory = tickers => async dispatch => {
 
     } catch (error) {
         console.log('stockHistory action creator dispatched error')
-        dispatch({ type: SET_ERROR, data: 'Network Error => stock history' })
+        SetError(dispatch, 'Network Error => Delete stock')
+
     } finally {
         dispatch({ type: STOCK_PRICE_HISTORY_NOT_LOADING })
     }
@@ -86,7 +92,8 @@ export const stockDetails = tickers => async dispatch => {
 
     } catch (error) {
         console.log('stockDetails action creator dispatched error')
-        dispatch({ type: SET_ERROR, data: 'Network Error => stock details' })
+        SetError(dispatch, 'Network Error => Delete stock')
+
     } finally {
         dispatch({ type: STOCK_DETAILS_NOT_LOADING })
     }
@@ -101,7 +108,8 @@ export const portfolioMetrics = tickers => async dispatch => {
 
     } catch (error) {
         console.log('portfolioMetrics action creator dispatched error')
-        dispatch({ type: SET_ERROR, data: 'Network Error => portfolio metrics' })
+        SetError(dispatch, 'Network Error => Delete stock')
+
     } finally {
         dispatch({ type: PORTFOLIO_METRICS_NOT_LOADING })
     }
@@ -116,7 +124,8 @@ export const efficientFrontier = tickers => async dispatch => {
 
     } catch (error) {
         console.log('efficientFrontier action creator dispatched error')
-        dispatch({ type: SET_ERROR, data: 'Network Error => efficient frontier' })
+        SetError(dispatch, 'Network Error => Delete stock')
+
     } finally {
         dispatch({ type: EFFICIENT_FRONTIER_NOT_LOADING })
     }
@@ -132,9 +141,11 @@ export const stockOptions = tickers => async dispatch => {
         dispatch({ type: STOCK_OPTIONS_LOADING })
         const res = await axios.post(STOCK_OPTIONS_URL, { tickers: tickers })
         dispatch({ type: FETCH_STOCK_OPTIONS, data: res.data.option_prices })
+
     } catch (error) {
         console.log('stockOptions action creator dispatched error')
-        dispatch({ type: SET_ERROR, data: 'Network Error => stock options' })
+        SetError(dispatch, 'Network Error => Delete stock')
+
     } finally {
         dispatch({ type: STOCK_OPTIONS_NOT_LOADING })
     }
@@ -145,7 +156,7 @@ export const removeTicker = (ticker) => dispatch => {
     try {
         dispatch({ type: REMOVE_TICKER, data: ticker })
     } catch (error) {
-        dispatch({ type: SET_ERROR, data: 'Network Error => Delete stock' })
+        SetError(dispatch, 'Network Error => Delete stock')
     }
 }
 
@@ -154,8 +165,7 @@ export const resetReducers = () => dispatch => {
     try {
         dispatch({ type: RESET_REDUCER })
     } catch (error) {
-        dispatch({ type: SET_ERROR, data: 'Network Error => Delete stock' })
-
+        SetError(dispatch, 'Network Error => Delete stock')
     }
 }
 
@@ -163,8 +173,7 @@ export const resetEfficientFrontier = () => dispatch => {
     try {
         dispatch({ type: RESET_EFFICIENT_FRONTIER })
     } catch (error) {
-        dispatch({ type: SET_ERROR, data: 'Network Error => Delete stock' })
-
+        SetError(dispatch, 'Network Error => Delete stock')
     }
 }
 
@@ -174,7 +183,7 @@ export const login = data => async dispatch => {
         dispatch({ type: LOGIN })
     } catch (error) {
         console.log(error)
-        dispatch({ type: SET_ERROR, data: 'Invalid Credentials' })
+        SetError(dispatch, 'Invalid Credentials')
     }
 }
 
@@ -196,3 +205,10 @@ export const logout = () => async dispatch => {
         dispatch({ type: SET_ERROR, data: error })
     }
 }
+
+
+const SetError = (dispatch, message) => {
+    dispatch({ type: SET_ERROR, data: [message] })
+    setTimeout(() => dispatch({ type: REMOVE_ERROR }), 4000);
+}
+

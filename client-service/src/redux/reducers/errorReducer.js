@@ -1,7 +1,7 @@
 import { SET_ERROR, REMOVE_ERROR } from '../actionTypes'
 
 export const initialState = {
-    message: null
+    message: []
 }
 
 const errorReducer = (state = initialState, action) => {
@@ -9,13 +9,13 @@ const errorReducer = (state = initialState, action) => {
         case SET_ERROR:
             return {
                 ...state,
-                message: action.data
+                message: [...action.data]
             }
 
         case REMOVE_ERROR:
             return {
                 ...state,
-                message: null
+                message: []
             }
         default:
             return state
