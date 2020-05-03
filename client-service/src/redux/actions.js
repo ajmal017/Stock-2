@@ -193,7 +193,7 @@ export const register = data => async dispatch => {
         dispatch({ type: LOGIN })
     } catch (error) {
         console.log(error)
-        dispatch({ type: SET_ERROR, data: 'Invalid Credentials' })
+        SetError(dispatch, 'Invalid Credentials')
     }
 }
 
@@ -202,7 +202,7 @@ export const logout = () => async dispatch => {
         const res = await axios.get(LOGOUT_URL)
         dispatch({ type: LOGOUT })
     } catch (error) {
-        dispatch({ type: SET_ERROR, data: error })
+        SetError(dispatch, 'Error to logout - Try again')
     }
 }
 
