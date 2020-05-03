@@ -29,7 +29,7 @@ const Navbr = () => {
                         <Fragment>
                             <Nav><Login></Login></Nav>
                             <Nav><Register></Register></Nav>
-                        </Fragment>) : (<Logout></Logout>)}
+                        </Fragment>) : (<Nav><Logout></Logout></Nav>)}
 
             </Navbar.Collapse>
         </Navbar >
