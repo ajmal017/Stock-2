@@ -16,6 +16,7 @@ router = APIRouter()
 @router.post('/stockHistorical', response_model=StockHistoryOut)
 async def calculate_financial_metrics(body: StockHistoryIn):
     try:
+        print('--------------------------request received in history--------------------------')
         # Initialising objects
         DataFrameJoiner = DataFrameJoinerFactory().factory()
         calculator = CalculatorFactory().factory()
