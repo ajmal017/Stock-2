@@ -4,14 +4,17 @@ import Navbr from './containers/navbr/navbr'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import myStore from './redux/store'
 import { Provider } from 'react-redux'
-import Layout from './containers/layout'
+import BaseRouter from './router'
+import { BrowserRouter } from 'react-router-dom'
 
 function App() {
   return (
     <Provider store={myStore}>
       <div className="App">
         <Navbr></Navbr>
-        <Layout></Layout>
+        <BrowserRouter>
+          <BaseRouter></BaseRouter>
+        </BrowserRouter>
       </div >
     </Provider>
   );

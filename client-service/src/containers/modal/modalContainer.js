@@ -5,7 +5,7 @@ import DialogTitle from '@material-ui/core/DialogTitle';
 import Dialog from '@material-ui/core/Dialog';
 
 const DialogContainer = (props) => {
-    const [open, setOpen] = useState(false)
+    const [open, setOpen] = useState(props.open || false)
 
     return (
         <Fragment>

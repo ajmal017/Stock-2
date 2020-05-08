@@ -1,5 +1,5 @@
 import React from 'react'
-
+import axios from 'axios'
 
 import {
     // Stock Resources
@@ -37,7 +37,6 @@ import {
 
     LOGIN, LOGOUT, REMOVE_ERROR
 } from './actionTypes'
-import axios from 'axios'
 
 import {
     STOCK_METRICS_URL,
@@ -46,10 +45,10 @@ import {
     PORTFOLIO_METRICS_URL,
     EFFICIENT_FRONTIER_URL,
     STOCK_OPTIONS_URL,
-    LOGIN_URL, LOGOUT_URL, REGISTER_URL
+    LOGIN_URL, LOGOUT_URL,
+    REGISTER_URL,
+    GET_USER_URL
 } from '../api'
-
-import { useDispatch } from 'react-redux'
 
 
 export const stockMetrics = tickers => async dispatch => {
@@ -203,6 +202,16 @@ export const logout = () => async dispatch => {
         dispatch({ type: LOGOUT })
     } catch (error) {
         SetError(dispatch, 'Error to logout - Try again')
+    }
+}
+
+export const getUser = () => async dispatch => {
+    try {
+        const res = await axios.get(GET_USER_URL)
+        dispatch({ type: LOGIN })
+    } catch (error) {
+        dispatch({ type: LOGOUT })
+        SetError(dispatch, 'Login required')
     }
 }
 
