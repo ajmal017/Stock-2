@@ -12,5 +12,6 @@ app.use(helmet())
 app.use(compression())
 
 app.use('/', require('./routes/auth'))
+app.use('/portfolio', require('./routes/portfolio'))
 
 module.exports = app

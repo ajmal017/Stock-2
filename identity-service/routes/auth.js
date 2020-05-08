@@ -6,5 +6,6 @@ router = express.Router()
 router.post('/register', [], controller.register)
 router.post('/login', [], controller.login)
 router.get('/logout', [], controller.logout)
+router.get('/getUser', [], controller.getUser)
 
 module.exports = router

@@ -13,7 +13,8 @@ exports.login = async (req, res) => {
         const isMatch = await bcrypt.compare(password, user.password)
         if (!isMatch) return res.status(401).json({ message: 'Invalid Credentials' })
 
-        const payload = { id: user._id }
+        const payload = { user: user._id }
+        console.log(payload)
         const token = await jwt(payload)
         setCookie('Authorization', token, res)
 
@@ -36,7 +37,7 @@ exports.register = async (req, res) => {
         user = new User({ email, password: hashedPassword })
         await user.save()
 
-        const payload = { id: user._id }
+        const payload = { user: user._id }
         const token = await jwt(payload)
         setCookie('Authorization', token, res)
 
@@ -55,10 +56,12 @@ exports.logout = async (req, res) => {
 };
 
 exports.getUser = async (req, res) => {
-    const { userId } = req.body;
-    const user = await User.findById(userId);
+    console.log('getuse')
+    const { user } = req.body;
+    console.log('user in getUser', user)
+    const existingUser = await User.findById(user);
 
-    if (!user) {
+    if (!existingUser) {
         res.clearCookie("Authorization");
         return res.status(401).json([{ msg: "Invalid Credentials" }]);
     }

@@ -4,6 +4,7 @@ const proxy = require('express-http-proxy')
 const { IDENTITY_SERVICE } = process.env
 const { check, body } = require('express-validator');
 const validator = require('../middleware/validateInput')
+const auth = require('../middleware/auth')
 
 router.post('/login', [[
     check('email').isEmail().normalizeEmail(),
@@ -22,6 +23,6 @@ router.post('/register', [[
 
 router.get('/logout', [], proxy(`${IDENTITY_SERVICE}/logout`))
 
-router.get('/getUser', [], proxy(`${IDENTITY_SERVICE}/getuser`))
+router.get('/getUser', [auth], proxy(`${IDENTITY_SERVICE}/getuser`))
 
 module.exports = router
