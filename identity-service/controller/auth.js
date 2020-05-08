@@ -56,7 +56,7 @@ exports.logout = async (req, res) => {
 };
 
 exports.getUser = async (req, res) => {
-    console.log('getuse')
+    console.log('getuse', req.body)
     const { user } = req.body;
     console.log('user in getUser', user)
     const existingUser = await User.findById(user);

@@ -5,7 +5,7 @@ import { Container } from 'react-bootstrap'
 
 const spinner = () => {
     return (
-        <Container className={style.container}>
+        <Container fluid className={style.container}>
             <CircularProgress size={80} className={style.spinner} color="primary"></CircularProgress>
         </Container>
     )

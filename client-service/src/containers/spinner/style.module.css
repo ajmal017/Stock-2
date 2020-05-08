@@ -1,10 +1,11 @@
 .container{
-    width: 100%;
-    height: 100%;
-    background: black;
+    /* width: 100vw; */
+    /* height: 100%; */
+    /* background: black;
     opacity: .5;
-    position: relative;
+    position: relative; */
     text-align: center;
+    height: 100vh;
 }
 
 .spinner {

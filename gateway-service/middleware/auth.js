@@ -2,7 +2,8 @@ const jwt = require('jsonwebtoken')
 
 const auth = async (req, res, next) => {
     try {
-        const token = req.headers.authorization
+        console.log(req.cookies)
+        const token = req.cookies.Authorization
         if (!token) return res.sendStatus(401)
         console.log('token exists')
 

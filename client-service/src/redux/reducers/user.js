@@ -2,7 +2,8 @@ import { LOGIN, LOGOUT } from '../actionTypes'
 
 
 export const initialState = {
-    authenticated: false
+    authenticated: false,
+    loading: true
 }
 
 const reducer = (state = initialState, action) => {
@@ -10,12 +11,14 @@ const reducer = (state = initialState, action) => {
         case LOGIN:
             return {
                 ...state,
-                authenticated: true
+                authenticated: true,
+                loading: false
             }
         case LOGOUT:
             return {
                 ...state,
-                authenticated: false
+                authenticated: false,
+                loading: false
             }
         default:
             return state
