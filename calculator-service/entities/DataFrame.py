@@ -46,7 +46,6 @@ class DataFrame:
             df = self._daily_log_returns[list_of_companies].mean() * 250
         result = df.tolist()
         self._annual_log_returns = result
-        print(result)
         return result
 
     @try_except

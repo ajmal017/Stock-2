@@ -38,3 +38,6 @@ class EfficientFrontierOut(BaseModel):
 
 class BetaOut(BaseModel):
     stock_details: List[Dict] = []
+
+
+
