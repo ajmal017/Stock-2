@@ -6,8 +6,9 @@ import Portfolio from './containers/portfolio/layout'
 
 const BaseRouter = () => (
     < Switch >
-        <Route exact path='/' component={LandingPage} ></Route>
         <PrivateRoute exact path='/portfolio' component={Portfolio}></PrivateRoute>
+        <Route exact path='/' component={LandingPage} />
+
     </Switch >
 )
 

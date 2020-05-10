@@ -28,7 +28,7 @@ const table = (props) => {
                         <TableHead>
                             <TableRow>
                                 {columns.map(item => (
-                                    <TableCell align="center">{item}</TableCell>
+                                    <TableCell align="center" key={item}>{item}</TableCell>
                                 ))}
                             </TableRow>
                         </TableHead>
@@ -36,7 +36,7 @@ const table = (props) => {
                             {rows.map((row, index) => (
                                 <TableRow key={index}>
                                     {row.map(item => (
-                                        <TableCell align="center">{item}</TableCell>
+                                        <TableCell align="center" key={item}>{item}</TableCell>
                                     ))}
                                 </TableRow>
                             ))}

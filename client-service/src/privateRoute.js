@@ -9,9 +9,14 @@ const PrivateRoute = ({ component: Component, ...rest }) => {
     const authenticated = useSelector(state => state.user.authenticated)
     const loading = useSelector(state => state.user.loading)
     const dispatch = useDispatch()
-    const isValidUser = () => dispatch(getUser())
 
-    useEffect(() => isValidUser(), [])
+    // useEffect(() => isValidUser(), [])
+
+    useEffect(() => {
+        const isValidUser = async () => await dispatch(getUser())
+
+        isValidUser()
+    }, []);
 
     if (loading) return <Spinner></Spinner>
     if (authenticated) return <Route {...rest} render={props => <Component {...props} />} />;

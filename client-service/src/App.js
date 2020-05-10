@@ -11,8 +11,8 @@ function App() {
   return (
     <Provider store={myStore}>
       <div className="App">
-        <Navbr></Navbr>
         <BrowserRouter>
+          <Navbr></Navbr>
           <BaseRouter></BaseRouter>
         </BrowserRouter>
       </div >

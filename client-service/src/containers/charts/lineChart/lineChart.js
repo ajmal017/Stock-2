@@ -7,9 +7,9 @@ import COLOURS from './Colours'
 import ChartContainer from '../chartContainer/chartContainer'
 
 
-const LinChart = ({ title, tooltip, data, stocks, width, xInterval, dataKey, tickFormatter, loading }) => {
+const LinChart = ({ title, tooltip, data, blur, stocks, width, xInterval, dataKey, tickFormatter, loading, placeholder }) => {
     return (
-        <ChartContainer title={title} tooltip={tooltip} blur={!stocks.length > 0} loading={loading}>
+        <ChartContainer placeholder={placeholder} title={title} tooltip={tooltip} blur={blur || !stocks.length > 0} loading={loading}>
             <LineChart
                 data={data}
                 margin={{
@@ -18,7 +18,7 @@ const LinChart = ({ title, tooltip, data, stocks, width, xInterval, dataKey, tic
             >
                 <CartesianGrid vertical={false} strokeDasharray="3 3" />
 
-                <XAxis dataKey={dataKey} interval={xInterval} tickFormatter={tickFormatter}>
+                <XAxis dataKey={dataKey} interval={xInterval || "preserveStartEnd"} tickFormatter={tickFormatter}>
                 </XAxis>
                 <YAxis />
                 <Tooltip />

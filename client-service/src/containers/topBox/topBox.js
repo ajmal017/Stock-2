@@ -7,7 +7,7 @@ import TableContainer from '../charts/table/tableContainer'
 import logic from './logic'
 
 const TopBox = () => {
-    const { equal, loading, rows, stocks } = logic()
+    const { equal, loading, rows, stocks, placeholder } = logic()
 
 
     return (
@@ -87,7 +87,6 @@ const TopBox = () => {
                         pl="Select 2+ Companies"
                     />
                 </Col>
-
             </Row>
         </Container >
     )

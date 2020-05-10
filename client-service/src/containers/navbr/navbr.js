@@ -5,12 +5,14 @@ import { Navbar, Nav } from 'react-bootstrap'
 import logo from './logo.png'
 import Logout from '../auth/logoutButton'
 import { useSelector } from "react-redux";
+import { LinkContainer } from 'react-router-bootstrap'
+import { Link } from 'react-router-dom'
 
 const Navbr = () => {
     const authenticated = useSelector(state => state.user.authenticated)
     return (
         <Navbar expand="lg" >
-            <Navbar.Brand href="/">
+            <Navbar.Brand as={Link} to='/'>
                 <img
                     src={logo}
                     width="40"
@@ -22,8 +24,8 @@ const Navbr = () => {
             <Navbar.Toggle aria-controls="basic-navbar-nav" />
             <Navbar.Collapse id="basic-navbar-nav">
                 <Nav className="mr-auto">
-                    <Nav.Link href="/">Home</Nav.Link>
-                    <Nav.Link href="/portfolio">Portfolio</Nav.Link>
+                    <Nav.Link as={Link} to='/'>Home</Nav.Link>
+                    <Nav.Link as={Link} to='/portfolio' >Portfolio</Nav.Link>
                 </Nav>
                 {!authenticated ?
                     (

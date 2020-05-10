@@ -7,7 +7,12 @@ export const STOCK_OPTIONS_URL = '/stockOptions'
 export const PORTFOLIO_METRICS_URL = '/portfolioMetrics'
 export const EFFICIENT_FRONTIER_URL = '/efficientFrontier'
 
+// USER AUTHENTICATION AND AUTHORISATION
 export const LOGIN_URL = '/identity/login'
 export const LOGOUT_URL = '/identity/logout'
 export const REGISTER_URL = '/identity/register'
 export const GET_USER_URL = '/identity/getUser'
+
+
+// PORTFOLIO PAGE
+export const PORTFOLO_ANALYSIS_URL = '/portfolio/portfolioAnalysis'

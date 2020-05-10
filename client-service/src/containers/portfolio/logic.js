@@ -1,16 +1,20 @@
 import React, { useState, useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
+import { portfolioAnalysis } from '../../redux/portfolioActions'
 
-const logic = () => {
+const Logic = () => {
     const dispatch = useDispatch()
-    const fetchData = dispatch()
-    const optimal = useState(state => state.portfolio.optimal)
-    const minimal = useState(state => state.portfolio.minimal)
-    const loading = useState(state => state.portfolio.loading)
+    const stocks = useSelector(state => state.tickers.tickers)
+    const rollingVolatility = useSelector(state => state.portfolioAnalysis.rollingVolatility)
+    const cumulativeReturns = useSelector(state => state.portfolioAnalysis.cumulativeReturns)
 
-    useEffect(() => fetchData())
+    useEffect(() => {
+        const fetchData = async () => await dispatch(portfolioAnalysis(stocks))
+        console.log('useEffect in portfolio')
+        if (stocks.length > 0) fetchData()
+    }, [stocks])
 
-    return { optimal, minimal, loading }
+    return { stocks, rollingVolatility, cumulativeReturns }
 }
 
-export default logic
+export default Logic
