@@ -73,21 +73,20 @@ const TopBox = () => {
                 </Col>
             </Row> */}
             <Row className={style.row}>
-
-                <TableContainer
-                    title="Portfolio Metrics"
-                    value={equal.idiosyncraticRisk}
-                    icn={false}
-                    loading={loading}
-                    tooltip="Compare the returns, volatility and Sharpe ratio of portfolios with different weight distributions.
+                <Col lg={6} >
+                    <TableContainer
+                        title="Portfolio Metrics"
+                        value={equal.idiosyncraticRisk}
+                        icn={false}
+                        loading={loading}
+                        tooltip="Compare the returns, volatility and Sharpe ratio of portfolios with different weight distributions.
                     Returns and volatility are calculated using the log returns and their standard deviation."
-                    columns={['Distribution Type', 'Returns %', 'Volatility %', 'Sharpe Ratio %']}
-                    rows={rows}
-                    blur={stocks.length < 2}
-                    pl="Select 2+ Companies"
-                >
-
-                </TableContainer>
+                        columns={['Distribution Type', 'Returns %', 'Volatility %', 'Sharpe Ratio %']}
+                        rows={rows}
+                        blur={stocks.length < 2}
+                        pl="Select 2+ Companies"
+                    />
+                </Col>
 
             </Row>
         </Container >

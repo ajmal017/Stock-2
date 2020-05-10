@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
@@ -17,40 +17,35 @@ const table = (props) => {
     if (blur) placeholder = <p className={style.placeholder}>{pl ? pl : "Select a Company"}</p>
 
     return (
-        <Container fluid className={style.cont}>
-            <Row className={style.row}>
-                <Col lg={6} >
-                    <Paper elevation={11} className={blur ? style.blur : style.paper}>
-                        <h5 className={style.title}> {title}
-                            <TP tooltip={tooltip}></TP>
-                            {loading ? <CircularProgress size={20} ></CircularProgress> : <p></p>}
-                        </h5>
-                        <TableContainer >
-                            <Table stickyHeader size="small" aria-label="a dense table">
-                                <TableHead>
-                                    <TableRow>
-                                        {columns.map(item => (
-                                            <TableCell align="center">{item}</TableCell>
-                                        ))}
-                                    </TableRow>
-                                </TableHead>
-                                <TableBody>
-                                    {rows.map((row, index) => (
-                                        <TableRow key={index}>
-                                            {row.map(item => (
-                                                <TableCell align="center">{item}</TableCell>
-                                            ))}
-                                        </TableRow>
+        <Fragment>
+            <Paper elevation={11} className={blur ? style.blur : style.paper}>
+                <h5 className={style.title}> {title}
+                    <TP tooltip={tooltip}></TP>
+                    {loading ? <CircularProgress size={20} ></CircularProgress> : <p></p>}
+                </h5>
+                <TableContainer >
+                    <Table stickyHeader size="small" aria-label="a dense table">
+                        <TableHead>
+                            <TableRow>
+                                {columns.map(item => (
+                                    <TableCell align="center">{item}</TableCell>
+                                ))}
+                            </TableRow>
+                        </TableHead>
+                        <TableBody>
+                            {rows.map((row, index) => (
+                                <TableRow key={index}>
+                                    {row.map(item => (
+                                        <TableCell align="center">{item}</TableCell>
                                     ))}
-                                </TableBody>
-                            </Table>
-                        </TableContainer>
-                    </Paper>
-                    {placeholder}
-                </Col>
-            </Row>
-        </Container >
-
+                                </TableRow>
+                            ))}
+                        </TableBody>
+                    </Table>
+                </TableContainer>
+            </Paper>
+            {placeholder}
+        </Fragment>
     );
 }
 
