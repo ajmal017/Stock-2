@@ -201,7 +201,8 @@ export const logout = () => async dispatch => {
         const res = await axios.get(LOGOUT_URL)
         dispatch({ type: LOGOUT })
     } catch (error) {
-        SetError(dispatch, 'Error to logout - Try again')
+        dispatch({ type: LOGOUT })
+
     }
 }
 
@@ -211,7 +212,6 @@ export const getUser = () => async dispatch => {
         dispatch({ type: LOGIN })
     } catch (error) {
         dispatch({ type: LOGOUT })
-        SetError(dispatch, 'Login required')
     }
 }
 

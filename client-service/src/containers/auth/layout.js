@@ -7,7 +7,7 @@ import style from './style.module.css'
 import logic from './logic'
 
 
-const AuhtModal = (props) => {
+const Layout = () => {
     const [login, setLogin] = useState(true)
     const { handleChange, state, handleLogin, loginValidator, handleRegister, registerValidator } = logic()
 
@@ -24,4 +24,4 @@ const AuhtModal = (props) => {
     )
 }
 
-export default AuhtModal
+export default Layout
