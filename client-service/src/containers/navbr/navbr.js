@@ -1,5 +1,5 @@
 import React, { Fragment } from 'react'
-import Login from '../auth/loginModal'
+import Login from '../auth/authModal'
 import Register from '../auth/registerModal'
 import { Navbar, Nav } from 'react-bootstrap'
 import logo from './logo.png'
@@ -31,7 +31,6 @@ const Navbr = () => {
                     (
                         <Fragment>
                             <Nav><Login></Login></Nav>
-                            <Nav><Register></Register></Nav>
                         </Fragment>) : (<Nav><Logout></Logout></Nav>)}
 
             </Navbar.Collapse>

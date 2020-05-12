@@ -2,7 +2,7 @@ import React, { useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { Route } from 'react-router-dom'
 import { getUser } from './redux/actions'
-import Login from './containers/auth/loginModal'
+import Login from './containers/auth/layout'
 import Spinner from './containers/spinner/spinner'
 
 const PrivateRoute = ({ component: Component, ...rest }) => {
