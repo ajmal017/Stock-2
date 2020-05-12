@@ -202,7 +202,6 @@ export const logout = () => async dispatch => {
         dispatch({ type: LOGOUT })
     } catch (error) {
         dispatch({ type: LOGOUT })
-
     }
 }
 

@@ -6,6 +6,7 @@ import myStore from './redux/store'
 import { Provider } from 'react-redux'
 import BaseRouter from './router'
 import { BrowserRouter } from 'react-router-dom'
+import Toast from './containers/toast/toast'
 
 function App() {
   return (
@@ -13,6 +14,7 @@ function App() {
       <div className="App">
         <BrowserRouter>
           <Navbr></Navbr>
+          <Toast></Toast>
           <BaseRouter></BaseRouter>
         </BrowserRouter>
       </div >
