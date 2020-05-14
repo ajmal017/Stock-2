@@ -7,6 +7,7 @@ from entities.DataFramer import DataframerFactory, DataFrameJoinerFactory
 from constants.CONSTANTS import HISTORICAL_DATA
 from entities.Calculator import CalculatorFactory
 from entities.EfficientFrontier import EfficientFrontierSharpeFactory
+from entities.PortfolioAnalysis import PortfolioAnalysisFactory
 from models.api import EfficientFrontierOut, StockHistoryIn
 import logging
 
@@ -15,12 +16,13 @@ router = APIRouter()
 
 
 @router.post('/efficientFrontier')
-async def calculate_financial_metrics(body: StockHistoryIn, request:Request):
+async def calculate_financial_metrics(body: StockHistoryIn):
     try:
         # Initialising objects
         DataFrameJoiner = DataFrameJoinerFactory().factory()
         calculator = CalculatorFactory().factory()
         efficient_frontier_formula = EfficientFrontierSharpeFactory().factory()
+        portfolio_analysis = PortfolioAnalysisFactory().factory()
 
         # this array will hold all the ticker entities
         # a ticker is a company with a dataframe with data
@@ -45,8 +47,11 @@ async def calculate_financial_metrics(body: StockHistoryIn, request:Request):
 
         # executing all formulas in calculator and unpacking it
         efficient_frontier, = calculator.calculate()
+        optimal_weights = efficient_frontier['max_sharpe_portfolio'][0]['weights']
+        minimal_weights = efficient_frontier['min_volatility_portfolio'][0]['weights']
+        analysis = portfolio_analysis.calculate(df_close, optimal_weights, minimal_weights)
 
-        return efficient_frontier
+        return {**efficient_frontier, **analysis}
 
     except Exception as err:
         logger.error('/stockPredictions failed', err)
