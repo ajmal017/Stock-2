@@ -13,6 +13,5 @@ app.use(cookieParser())
 
 app.use('/', require('./routes/stock.routes'))
 app.use('/identity', require('./routes/identity.routes'))
-app.use('/portfolio', require('./routes/portfolio.routes'))
 
 module.exports = app

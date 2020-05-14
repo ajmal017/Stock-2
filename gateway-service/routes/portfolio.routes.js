@@ -9,8 +9,6 @@ const { CALCULATOR_SERVICE, CALCULATOR_PORTFOLIO_ANALYSIS
 
 const router = express.Router()
 
-router.post('/portfolioAnalysis', [validateTickers, redis_new], proxy(`${CALCULATOR_SERVICE}${CALCULATOR_PORTFOLIO_ANALYSIS}`))
-
 
 // router.get('/getPortfolios', [], proxy())
 // router.post('/createPortfolios', [], proxy())
