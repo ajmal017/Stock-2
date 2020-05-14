@@ -13,6 +13,3 @@ export const LOGOUT_URL = '/identity/logout'
 export const REGISTER_URL = '/identity/register'
 export const GET_USER_URL = '/identity/getUser'
 
-
-// PORTFOLIO PAGE
-export const PORTFOLO_ANALYSIS_URL = '/portfolio/portfolioAnalysis'

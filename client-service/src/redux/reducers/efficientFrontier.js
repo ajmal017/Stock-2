@@ -12,7 +12,9 @@ export const initialState = {
     maxSharpePortfolio: [],
     minVolatilityDistribution: [],
     minVolatilityPortfolio: [],
-    loading: false
+    loading: false,
+    cumulativeReturns: [],
+    rollingVolatility: [],
 }
 const efficientFrontier = (state = initialState, action) => {
 
@@ -26,6 +28,8 @@ const efficientFrontier = (state = initialState, action) => {
                 maxSharpePortfolio: action.data.max_sharpe_portfolio,
                 minVolatilityDistribution: action.data.min_volatility_distribution,
                 minVolatilityPortfolio: action.data.min_volatility_portfolio,
+                cumulativeReturns: action.data.cumulative_returns,
+                rollingVolatility: action.data.rolling_volatility
             }
 
         case EFFICIENT_FRONTIER_LOADING:
