@@ -6,5 +6,4 @@ import Navbr from './navbr'
 
 test('navbar with home link is displayed', () => {
     render(<Navbr />)
-    expect(screen.getByText('Home')).toHaveTextContent('Home')
 })
