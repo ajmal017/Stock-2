@@ -9,7 +9,7 @@ const HistoricPrice = () => {
     return (
         <LinChart title="Normalised Price History" data={stockPriceHistory}
             stocks={stocks} xInterval="preserveStartEnd"
-            dataKey="date" width={3} tickFormatter={value => value.toString().slice(0, 4)}
+            dataKey="date" tickFormatter={value => value.toString().slice(0, 4)}
             tooltip="This is the normalized price of the stocks -> Price(t)= Price(t) / Price(t=1) * 100"
             loading={loading}
         ></LinChart>

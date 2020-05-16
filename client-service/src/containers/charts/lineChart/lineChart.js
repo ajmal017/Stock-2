@@ -7,7 +7,7 @@ import COLOURS from './Colours'
 import ChartContainer from '../chartContainer/chartContainer'
 
 
-const LinChart = ({ title, tooltip, data, blur, stocks, width, xInterval, dataKey, tickFormatter, loading, placeholder }) => {
+const LinChart = ({ title, tooltip, data, blur, stocks, width = 3, xInterval, dataKey, tickFormatter, loading, placeholder }) => {
     return (
         <ChartContainer placeholder={placeholder} title={title} tooltip={tooltip} blur={blur || !stocks.length > 0} loading={loading}>
             <LineChart

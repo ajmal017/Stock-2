@@ -7,6 +7,7 @@ import { Provider } from 'react-redux'
 import BaseRouter from './router'
 import { BrowserRouter } from 'react-router-dom'
 import Toast from './containers/toast/toast'
+import TopBox from './containers/topBox/topBox'
 
 function App() {
   return (
@@ -15,6 +16,8 @@ function App() {
         <BrowserRouter>
           <Navbr></Navbr>
           <Toast></Toast>
+          <TopBox></TopBox>
+
           <BaseRouter></BaseRouter>
         </BrowserRouter>
       </div >

@@ -8,7 +8,7 @@ const HistoricPrice = () => {
     return (
         <LinChart title="Price History" data={stockPriceHistory}
             stocks={stocks} xInterval="preserveStartEnd"
-            dataKey="date" width={3} tickFormatter={value => value.toString().slice(0, 4)}
+            dataKey="date" tickFormatter={value => value.toString().slice(0, 4)}
             tooltip="Closing price in June and December of each year"
             loading={loading}
         ></LinChart>

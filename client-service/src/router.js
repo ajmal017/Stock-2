@@ -1,14 +1,15 @@
 import React from 'react'
 import { Route, Switch } from 'react-router-dom'
-import LandingPage from './containers/layout'
 import PrivateRoute from './privateRoute'
-import Portfolio from './containers/portfolio/layout'
+import Stock from './pages/Stock'
+import Portfolio from './pages/Portfolio'
+import Options from './pages/Options'
 
 const BaseRouter = () => (
     < Switch >
-        <PrivateRoute exact path='/portfolio' component={Portfolio}></PrivateRoute>
-        <Route exact path='/' component={LandingPage} />
-
+        <Route exact path='/' component={Portfolio}></Route>
+        <Route exact path='/stocks' component={Stock} />
+        <Route exact path='/options' component={Options} />
     </Switch >
 )
 
