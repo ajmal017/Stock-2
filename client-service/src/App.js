@@ -8,6 +8,7 @@ import BaseRouter from './router'
 import { BrowserRouter } from 'react-router-dom'
 import Toast from './containers/toast/toast'
 import TopBox from './containers/topBox/topBox'
+import StockCard from './containers/stockCard/stockCard'
 
 function App() {
   return (
@@ -17,7 +18,7 @@ function App() {
           <Navbr></Navbr>
           <Toast></Toast>
           <TopBox></TopBox>
-
+          <StockCard></StockCard>
           <BaseRouter></BaseRouter>
         </BrowserRouter>
       </div >

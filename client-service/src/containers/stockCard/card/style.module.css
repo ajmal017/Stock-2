@@ -2,14 +2,14 @@
 
 .paper{
     padding:1rem;
-    margin:1rem 0 0 0;
+    /* margin:1rem 0 ; */
     background-color: #040E27!important;
     color:white!important
 }
 
 .blur{
     padding:1rem;
-    margin:1rem 0;
+    /* margin:1rem 0; */
     background-color: #040E27!important;
     color:white!important;
     filter: blur(5px) brightness(30%);

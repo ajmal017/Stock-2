@@ -14,7 +14,7 @@ const Card = ({ data, icn, blur, handleDelete }) => {
     let placeholder = null
     if (blur) placeholder = <p className={style.placeholder}>Select a company</p>
     return (
-        <Fragment>
+        <div style={{ 'paddingTop': '1rem' }}>
             <Paper elevation={11} className={blur ? style.blur : style.paper} data-testid='card'>
                 <Container fluid className={style.container}>
                     <Row className={style.row}>
@@ -42,7 +42,7 @@ const Card = ({ data, icn, blur, handleDelete }) => {
                 </Container>
             </Paper>
             {placeholder}
-        </Fragment >
+        </div  >
     )
 }
 
