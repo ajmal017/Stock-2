@@ -21,31 +21,35 @@ const Layout = () => {
                     <Row style={{ justifyContent: 'center' }}>
                         <Col xl={6} style={{ 'padding': 0 }} >
                             <LineChart
-                                blur={stocks.length < 1}
+                                blur={stocks.length < 2}
                                 title='Stocks Cumulative Log Returns'
                                 tooltip='Cumulative daily log returns of the stocks every 6 months'
                                 data={cumulativeReturns}
                                 stocks={stocks}
                                 dataKey="date"
                                 tickFormatter
+                                placeholder='Select 2+ Companies'
+
                             ></LineChart>
                         </Col>
                         <Col xl={6} style={{ 'padding': 0 }} >
                             <LineChart
-                                blur={stocks.length < 1}
+                                blur={stocks.length < 2}
                                 title='Stocks Volatility'
                                 tooltip='Volatility of stocks every 6 months'
                                 data={rollingVolatility}
                                 stocks={stocks}
                                 dataKey="date"
                                 tickFormatter
+                                placeholder='Select 2+ Companies'
+
                             ></LineChart>
                         </Col>
                     </Row>
                     <Row style={{ justifyContent: 'center' }}>
                         <Col xl={6} style={{ 'padding': 0 }} >
                             <LineChart
-                                placeholder='Select 2 Companies'
+                                placeholder='Select 2+ Companies'
                                 blur={stocks.length < 2}
                                 title='Portfolio Cumulative Log Returns'
                                 tooltip='Cumulative daily log returns of the portfolio every 6 months'
@@ -53,11 +57,12 @@ const Layout = () => {
                                 stocks={['equal', 'optimal', 'minimal']}
                                 dataKey="date"
                                 tickFormatter
+
                             ></LineChart>
                         </Col>
                         <Col xl={6} style={{ 'padding': 0 }} >
                             <LineChart
-                                placeholder='Select 2 Companies'
+                                placeholder='Select 2+ Companies'
                                 blur={stocks.length < 2}
                                 title='Portfolio Volatility'
                                 tooltip='Volatility of portfolio every 6 months'
