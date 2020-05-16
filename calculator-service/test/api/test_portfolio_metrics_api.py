@@ -18,9 +18,9 @@ def test_portfolio_metrics_api_returns_422_no_data():
     response = client.post("/portfolioMetrics")
     assert response.status_code == 422
 
-response_data = {'portfolio_risk_returns': {
+response_data = {
     'portfolio_returns': 2.56,
     'portfolio_volatility': 37.57,
     'portfolio_returns_change': -0.1233,
     'portfolio_volatility_change': 0.0008,
-    'sharpe_ratio': 6.82}}
+    'sharpe_ratio': 6.82}
