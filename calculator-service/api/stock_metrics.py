@@ -5,7 +5,8 @@ from entities.DataFramer import DataframerFactory, DataFrameJoinerFactory
 from constants.CONSTANTS import HISTORICAL_DATA
 from entities.Calculator import CalculatorFactory
 from entities.StockMetrics import StockRiskReturnsFactory
-from models.api import StockMetricsOut, StockHistoryIn
+from models.stock_metrics_api import StockMetricsResponse
+from models.api import StockHistoryIn
 from entities.TickerRunner import TickerRunner
 import Logger
 
@@ -13,7 +14,7 @@ logger = Logger.getLogger(__name__)
 router = APIRouter()
 
 
-@router.post('/stockMetrics', response_model=StockMetricsOut)
+@router.post('/stockMetrics', response_model=StockMetricsResponse)
 async def calculate_financial_metrics(body: StockHistoryIn):
     try:
         # Initialising objects

@@ -23,21 +23,8 @@ class StockHistoryOut(BaseModel):
     price_history: List[Dict] = []
     price_history_normalized: List[Dict] = []
 
-
-class StockMetricsOut(BaseModel):
-    stock_annual_log_risk_return: List[Dict] = []
-
-
 class PortfolioMetricsOut(BaseModel):
     portfolio_risk_returns: Dict = {}
-
-
-class EfficientFrontierOut(BaseModel):
-    efficient_frontier: List[Dict] = []
-
-
-class BetaOut(BaseModel):
-    stock_details: List[Dict] = []
 
 
 

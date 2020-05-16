@@ -5,7 +5,8 @@ from constants.CONSTANTS import HISTORICAL_DATA
 from entities.Calculator import CalculatorFactory
 from entities.Formulator import Divider
 from entities.PortfolioMetrics import PortfolioRiskReturnFactory
-from models.api import PortfolioMetricsOut, StockHistoryIn
+from models.api import StockHistoryIn
+from models.portfolio_metrics_api import PortfolioMetricsResponse
 from entities.TickerRunner import TickerRunner
 from entities.DataFrame import DataFrameFactory
 import Logger
@@ -14,7 +15,7 @@ logger = Logger.getLogger(__name__)
 router = APIRouter()
 
 
-@router.post('/portfolioMetrics', response_model=PortfolioMetricsOut)
+@router.post('/portfolioMetrics', response_model=PortfolioMetricsResponse)
 async def calculate_financial_metrics(body: StockHistoryIn):
     try:
         # Initialising objects
@@ -63,7 +64,7 @@ async def calculate_financial_metrics(body: StockHistoryIn):
         portfolio_risk_returns['portfolio_returns_change'] = returns_change
         portfolio_risk_returns['portfolio_volatility_change'] = volatility_change
 
-        return {'portfolio_risk_returns': portfolio_risk_returns}
+        return portfolio_risk_returns
 
     except Exception as err:
         logger.error('/portfolioMetrics api failed', err)

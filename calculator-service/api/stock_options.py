@@ -6,6 +6,7 @@ from constants.CONSTANTS import HISTORICAL_DATA
 from entities.Calculator import CalculatorFactory
 from entities.StockOptions import OptionsPricerFactory
 from models.api import StockHistoryIn
+from models.stock_options_api import StockOptionsResponse
 from entities.TickerRunner import TickerRunner
 import Logger
 
@@ -13,7 +14,7 @@ logger = Logger.getLogger(__name__)
 router = APIRouter()
 
 
-@router.post('/stockOptions', )
+@router.post('/stockOptions',response_model=StockOptionsResponse )
 async def calculate_financial_metrics(body: StockHistoryIn):
     try:
         # Initialising objects

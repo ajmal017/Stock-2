@@ -5,7 +5,8 @@ from entities.DataFramer import DataFrameJoinerFactory
 from constants.CONSTANTS import HISTORICAL_DATA
 from entities.Calculator import CalculatorFactory
 from entities.Beta import BetaFactory
-from models.api import BetaOut, StockHistoryIn
+from models.api import StockHistoryIn
+from models.stock_details_api import StockDetailsResponse
 from entities.TickerRunner import TickerRunner
 import logging
 import pandas as pd
@@ -14,7 +15,7 @@ router = APIRouter()
 logger = logging.getLogger(__name__)
 
 
-@router.post('/stockDetails', response_model=BetaOut)
+@router.post('/stockDetails', response_model=StockDetailsResponse)
 async def calculate_financial_metrics(body: StockHistoryIn):
     try:
         # Initialising objects

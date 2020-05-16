@@ -10,14 +10,15 @@ from entities.EfficientFrontier import EfficientFrontierSharpeFactory
 from entities.PortfolioAnalysis import PortfolioAnalysisFactory
 from entities.utilities import DictionaryConverterFactory
 
-from models.api import EfficientFrontierOut, StockHistoryIn
+from models.api import StockHistoryIn
+from models.efficient_frontier_api import EfficientFrontierResponse
 import logging
 
 logger = logging.getLogger(__name__)
 router = APIRouter()
 
 
-@router.post('/efficientFrontier')
+@router.post('/efficientFrontier', response_model=EfficientFrontierResponse)
 async def calculate_financial_metrics(body: StockHistoryIn):
     try:
         # Initialising objects
