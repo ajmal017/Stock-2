@@ -49,16 +49,16 @@ after_success:
   - docker push vidalignacio/stock-nginx-service:$SHA
 
 deploy:
-  - provider: elasticbeanstalk
-    region: "eu-west-2"
-    app: "stock"
-    env: "Stock-env-1"
-    bucket_name: "elasticbeanstalk-eu-west-2-571507774031"
-    bucket_path: "stock-container"
-    on:
-      branch: "master"
-    access_key_id: $AWS_ACCESS_KEY
-    secret_access_key: $AWS_SECRET_KEY
+  # - provider: elasticbeanstalk
+  #   region: "eu-west-2"
+  #   app: "stock"
+  #   env: "Stock-env-1"
+  #   bucket_name: "elasticbeanstalk-eu-west-2-571507774031"
+  #   bucket_path: "stock-container"
+  #   on:
+  #     branch: "master"
+  #   access_key_id: $AWS_ACCESS_KEY
+  #   secret_access_key: $AWS_SECRET_KEY
 
   - provider: elasticbeanstalk
     region: "eu-west-2"
@@ -70,3 +70,14 @@ deploy:
       all_branches: true
     access_key_id: $AWS_ACCESS_KEY
     secret_access_key: $AWS_SECRET_KEY
+
+  - provider: elasticbeanstalk
+  region: "eu-west-2"
+  app: "stock"
+  env: "romoclub-env"
+  bucket_name: "elasticbeanstalk-eu-west-2-571507774031"
+  bucket_path: "stock-container"
+  on:
+    branche: "master"
+  access_key_id: $AWS_ACCESS_KEY
+  secret_access_key: $AWS_SECRET_KEY
