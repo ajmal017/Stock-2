@@ -16,7 +16,7 @@ const LinChart = ({ title, tooltip, data, blur, stocks, width = 3, xInterval, da
                     top: 5, right: 30, left: 5, bottom: 5,
                 }}
             >
-                <CartesianGrid vertical={false} strokeDasharray="3 3" />
+                <CartesianGrid vertical={false} />
 
                 <XAxis dataKey={dataKey} tickFormatter={(value) => value.toString().slice(0, 4) || tickFormatter} interval={xInterval || 'preserveEnd'}>
                 </XAxis>
@@ -24,7 +24,7 @@ const LinChart = ({ title, tooltip, data, blur, stocks, width = 3, xInterval, da
                 <Tooltip />
                 <Legend />
                 {stocks.map((symbol, i) => (
-                    <Line type="monotone" dataKey={symbol} stroke={COLOURS[i]} strokeWidth={width} key={i} />
+                    <Line dataKey={symbol} stroke={COLOURS[i]} strokeWidth={width} key={i} dot={false} activeDot={true} />
 
                 ))}
             </LineChart>
