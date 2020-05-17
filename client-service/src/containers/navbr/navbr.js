@@ -5,7 +5,6 @@ import { Navbar, Nav } from 'react-bootstrap'
 import logo from './logo.png'
 import Logout from '../auth/logoutButton'
 import { useSelector } from "react-redux";
-import { LinkContainer } from 'react-router-bootstrap'
 import { Link } from 'react-router-dom'
 
 const Navbr = () => {
