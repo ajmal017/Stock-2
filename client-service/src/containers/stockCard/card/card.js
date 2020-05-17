@@ -1,6 +1,6 @@
 import React, { Fragment } from 'react'
 import { Paper } from '@material-ui/core'
-import { Container, Row, Col } from 'react-bootstrap'
+import { Container, Row } from 'react-bootstrap'
 import TrendingUpRoundedIcon from '@material-ui/icons/TrendingUpRounded';
 import TrendingDownRoundedIcon from '@material-ui/icons/TrendingDownRounded';
 import style from './style.module.css'

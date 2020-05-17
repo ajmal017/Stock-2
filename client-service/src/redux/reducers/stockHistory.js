@@ -42,7 +42,11 @@ const stockHistory = (state = initialState, action) => {
         case RESET_REDUCER:
             return {
                 ...state,
-                state: initialState
+                priceHistory: [],
+                priceNormalized: [],
+                loading: false,
+                cumulativeReturns: [],
+                rollingVolatility: [],
             }
 
         default:

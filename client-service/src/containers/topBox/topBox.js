@@ -1,7 +1,6 @@
 import React from 'react'
 import { Container, Row, Col } from 'react-bootstrap'
 import style from './style.module.css'
-import PortfolioCard from './card/card'
 import StockForm from '../stockform/stockForm'
 import TableContainer from '../charts/table/tableContainer'
 import logic from './logic'

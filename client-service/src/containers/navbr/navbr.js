@@ -1,6 +1,5 @@
-import React, { Fragment } from 'react'
+import React from 'react'
 import Login from '../auth/authModal'
-import Register from '../auth/registerModal'
 import { Navbar, Nav } from 'react-bootstrap'
 import logo from './logo.png'
 import Logout from '../auth/logoutButton'

@@ -28,8 +28,7 @@ describe('Stock History reducer', () => {
 
     it('should change status to loading', () => {
         expect(reducer(undefined, { type: STOCK_PRICE_HISTORY_LOADING })).toEqual({
-            priceHistory: [],
-            priceNormalized: [],
+            ...initialState,
             loading: true
         })
     })

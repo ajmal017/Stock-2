@@ -1,6 +1,6 @@
 import React from 'react';
 import {
-    ScatterChart, Scatter, XAxis, YAxis, Tooltip, Legend, ResponsiveContainer, CartesianGrid, Label
+    ScatterChart, Scatter, XAxis, YAxis, Tooltip, Legend, CartesianGrid, Label
 } from 'recharts';
 import ChartContainer from '../chartContainer/chartContainer'
 

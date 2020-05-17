@@ -5,10 +5,10 @@ import Item from './layout'
 import axiosMock from 'axios'
 import store from '../../redux/store'
 
-test('Optimal and minimal risk barplots are displayed charts are displayed', () => {
+test('Portfolio Cumulative Log returns chart is displayed', () => {
     render(<Item />)
     const element = screen.getByTestId('chart')
-    expect(element).toHaveTextContent('Minimal Volatility Distribution')
+    expect(element).toHaveTextContent('Portfolio Cumulative Log Returns')
 })
 
 
