@@ -19,10 +19,6 @@ class StockHistoryIn(BaseModel):
     historicData: List[Dict] = []
 
 
-class StockHistoryOut(BaseModel):
-    price_history: List[Dict] = []
-    price_history_normalized: List[Dict] = []
-
 class PortfolioMetricsOut(BaseModel):
     portfolio_risk_returns: Dict = {}
 

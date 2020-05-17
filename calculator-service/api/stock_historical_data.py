@@ -4,7 +4,9 @@ from entities.DataFramer import DataframerFactory, DataFrameJoinerFactory
 from constants.CONSTANTS import HISTORICAL_DATA
 from entities.Calculator import CalculatorFactory
 from entities.Formulator import ResamplerFactory, HistoryPriceNormalizedFactory
-from models.api import StockHistoryOut, StockHistoryIn
+from entities.StockRolling import StockRollingFactory
+from models.api import  StockHistoryIn
+from models.stock_historical_api import StockHistoricalResponse
 from entities.utilities import DictionaryConverterFactory
 from entities.TickerRunner import TickerRunner
 import logging
@@ -13,7 +15,7 @@ logger = logging.getLogger(__name__)
 router = APIRouter()
 
 
-@router.post('/stockHistorical', response_model=StockHistoryOut)
+@router.post('/stockHistorical',response_model=StockHistoricalResponse)
 async def calculate_financial_metrics(body: StockHistoryIn):
     try:
         print('--------------------------request received in history--------------------------')
@@ -23,6 +25,7 @@ async def calculate_financial_metrics(body: StockHistoryIn):
         normalized_price_formula = HistoryPriceNormalizedFactory().factory()
         annual_resampler = ResamplerFactory().factory()
         dict_converter = DictionaryConverterFactory().factory()
+        stock_rolling_formula = StockRollingFactory().factory()
 
         """this array will hold all the ticker entities.
         A ticker is a company with a dataframe"""
@@ -41,10 +44,11 @@ async def calculate_financial_metrics(body: StockHistoryIn):
 
         # composing calculator with formulas and data -> composite pattern
         calculator.add_formula(normalized_price_formula)
+        calculator.add_formula(stock_rolling_formula)
         calculator.add_data(df_close)
 
         # executing all formulas in calculator and unpacking it
-        normalized_price,  = calculator.calculate()
+        normalized_price,rolling  = calculator.calculate()
 
         # resampling to yearly frequency
         annual_price = annual_resampler.calculate(df_close.dataframe)
@@ -52,9 +56,10 @@ async def calculate_financial_metrics(body: StockHistoryIn):
             normalized_price)
 
         return {
+            **rolling,
             'price_history': dict_converter.convert_to_dictionary(annual_price),
-            'price_history_normalized': dict_converter.convert_to_dictionary(price_history_normalized)
-        }
+            'price_history_normalized': dict_converter.convert_to_dictionary(price_history_normalized),
+            }
 
     except Exception as err:
         logger.error('/stockHistorical api failed', err)
