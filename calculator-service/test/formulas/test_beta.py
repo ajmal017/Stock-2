@@ -10,7 +10,6 @@ def setup():
 def test_beta_formula_returns_beta_value(setup):
     beta_formula = BetaFactory().factory()
     result = beta_formula.calculate(setup)
-    print(result)
     assert result['beta'] == 1.2789369706980658
     assert result['alpha'] == 0
 

@@ -12,7 +12,6 @@ weights = np.array([0.3, 0.7])
 
 def test_columns_list(dataframe):
     result = dataframe.columns_list()
-    print(result)
     assert result == ['GS', '^GSPC']
 
 def test_daily_simple_returns(dataframe):

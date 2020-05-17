@@ -14,7 +14,6 @@ def setup():
 def test_stock_metrics_api_returns_200(setup):
     response = client.post("/stockMetrics", json=setup)
     assert response.status_code == 200
-    print(response.json())
     assert response.json() == response_data
 
 

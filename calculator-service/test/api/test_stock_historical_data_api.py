@@ -13,7 +13,6 @@ def setup():
 def test_stock_historical_data_api_returns_200(setup):
     response = client.post('/stockHistorical', json=setup)
     assert response.status_code == 200
-    print(response.json())
     assert response.json() == expected_response
 
 def test_stock_historical_data_api_returns_422_not_data():

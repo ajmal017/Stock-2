@@ -4,7 +4,6 @@ from entities.WeightMaker import EqualWeightMakerFactory
 class PortfolioRiskReturn(FormulatorAbstract):
     def calculate(self, df):
         try:
-            print(df.dataframe.shape)
             """calculator portfolio returns """
             number_assets = len(df.columns_list())
             weights = EqualWeightMakerFactory().factory().calculate(number_assets)

@@ -13,7 +13,6 @@ def setup():
 def test_stock_details_api_returns_200(setup):
     response = client.post('/stockDetails', json=setup)
     assert response.status_code == 200
-    print(response.json())
     assert response.json() == expected_response
 
 def test_stock_details_api_returns_422_not_data():
