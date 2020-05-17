@@ -10,6 +10,8 @@ export const initialState = {
     priceHistory: [],
     priceNormalized: [],
     loading: false,
+    cumulativeReturns: [],
+    rollingVolatility: [],
 }
 
 
@@ -20,8 +22,9 @@ const stockHistory = (state = initialState, action) => {
             return {
                 ...state,
                 priceHistory: [...action.data.price_history],
-                priceNormalized: [...action.data.price_history_normalized]
-
+                priceNormalized: [...action.data.price_history_normalized],
+                cumulativeReturns: action.data.cumulative_returns,
+                rollingVolatility: action.data.rolling_volatility
             }
 
         case STOCK_PRICE_HISTORY_NOT_LOADING:
@@ -39,9 +42,7 @@ const stockHistory = (state = initialState, action) => {
         case RESET_REDUCER:
             return {
                 ...state,
-                priceHistory: [],
-                priceNormalized: [],
-                loading: false
+                state: initialState
             }
 
         default:
