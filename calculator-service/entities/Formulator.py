@@ -24,8 +24,10 @@ class Resampler(FormulatorAbstract):
         try:
             result = df.head(1).append(
                 df.loc[
-                    (df.index.day == 31) & (df.index.month == 12) |
-                    (df.index.day == 30) & (df.index.month == 6)
+                    (df.index.day == 31) & (df.index.month == 1) |
+                    (df.index.day == 31) & (df.index.month == 3) |
+                    (df.index.day == 30) & (df.index.month == 6) |
+                    (df.index.day == 30) & (df.index.month == 9)
                 ]
             )
             result = result.append(df.tail(1))
