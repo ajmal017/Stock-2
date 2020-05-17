@@ -27,7 +27,6 @@ after_success:
   - docker build -t vidalignacio/stock-redis-service:latest -t vidalignacio/stock-redis-service:$SHA ./redis-service
   - docker build -t vidalignacio/stock-nginx-service:latest -t vidalignacio/stock-nginx-service:$SHA ./nginx-service
 
-
   #Log into docker CLI
   - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
 
@@ -48,7 +47,7 @@ after_success:
   - docker push vidalignacio/stock-redis-service:$SHA
   - docker push vidalignacio/stock-nginx-service:$SHA
 
-  
+
 deploy:
   # - provider: elasticbeanstalk
   #   region: "eu-west-2"
