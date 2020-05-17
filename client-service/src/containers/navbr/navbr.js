@@ -21,7 +21,6 @@ const Navbr = () => {
                     alt="logo"
                 />
             </Navbar.Brand>
-
             <Navbar.Toggle aria-controls="basic-navbar-nav" />
             <Navbar.Collapse id="basic-navbar-nav">
                 <Nav className="mr-auto">
@@ -32,8 +31,6 @@ const Navbr = () => {
                 <Nav className="ml-auto">
                     {!authenticated ? (<Login></Login>) : (<Logout></Logout>)}
                 </Nav>
-
-
             </Navbar.Collapse>
         </Navbar >
     )
