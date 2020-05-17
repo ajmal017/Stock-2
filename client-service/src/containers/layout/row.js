@@ -3,7 +3,7 @@ import { Container, Row } from 'react-bootstrap'
 
 const row = (props) => {
     return (
-        <Row style={{ justifyContent: 'center' }}>
+        <Row style={{ justifyContent: props.align || 'center' }} {...props}>
             {props.children}
         </Row>
     )

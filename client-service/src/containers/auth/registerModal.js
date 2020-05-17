@@ -1,5 +1,5 @@
-import React, { useState } from 'react'
-import { Container, Image, Row, Col } from 'react-bootstrap'
+import React from 'react'
+import { Container, Image, Row } from 'react-bootstrap'
 import { Button, TextField } from '@material-ui/core'
 import RomoclubLogo from '../navbr/logo.png'
 import style from './style.module.css'

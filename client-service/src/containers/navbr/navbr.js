@@ -21,18 +21,18 @@ const Navbr = () => {
                     alt="logo"
                 />
             </Navbar.Brand>
+
             <Navbar.Toggle aria-controls="basic-navbar-nav" />
             <Navbar.Collapse id="basic-navbar-nav">
                 <Nav className="mr-auto">
-                    <Nav.Link as={Link} to='/'>Portfolio</Nav.Link>
-                    <Nav.Link as={Link} to='/stocks' >Stocks</Nav.Link>
+                    <Nav.Link as={Link} to='/'>Stocks</Nav.Link>
+                    <Nav.Link as={Link} to='/portfolio' >Portfolio</Nav.Link>
                     <Nav.Link as={Link} to='/options' >Options</Nav.Link>
                 </Nav>
-                {!authenticated ?
-                    (
-                        <Fragment>
-                            <Nav><Login></Login></Nav>
-                        </Fragment>) : (<Nav><Logout></Logout></Nav>)}
+                <Nav className="ml-auto">
+                    {!authenticated ? (<Login></Login>) : (<Logout></Logout>)}
+                </Nav>
+
 
             </Navbar.Collapse>
         </Navbar >

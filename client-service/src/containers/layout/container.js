@@ -1,12 +1,18 @@
 import React from 'react'
 import { Container } from 'react-bootstrap'
 
-const row = (props) => {
+const defaultStyle = {
+    backgroundColor: '#F7F8FC'
+}
+
+const container = (props) => {
+    const style = { ...defaultStyle, ...props.style, }
     return (
-        <Container fluid data-testid='linecharts'>
+        <Container fluid data-testid='linecharts' style={style} >
             {props.children}
-        </Container>
+        </Container >
     )
 }
 
-export default row
+
+export default container

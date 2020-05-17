@@ -7,7 +7,6 @@ import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
 import style from './style.module.css'
-import { Container, Row, Col } from 'react-bootstrap'
 import TP from '../tooltip/tooltip'
 import CircularProgress from '@material-ui/core/CircularProgress';
 

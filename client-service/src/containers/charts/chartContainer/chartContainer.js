@@ -10,23 +10,18 @@ const chartContainer = (props) => {
     let placeholder = null
     if (props.blur) placeholder = <p className={style.placeholder}>{props.placeholder ? props.placeholder : "Select a Company"}</p>
     return (
-        <Container fluid className={style.section} data-testid='chart'>
-            <Row className={style.row}>
-                <Col className={style.col}>
-                    <Paper elevation={11} className={props.blur ? style.blur : style.paper}>
-                        <h5 className={style.title}>{props.title}
-                            <TP tooltip={props.tooltip}></TP>
-                            {props.loading ? <CircularProgress size={20} ></CircularProgress> : <p></p>}
-                        </h5>
-                        <ResponsiveContainer width="100%" height={400}>
-                            {props.children}
-                        </ResponsiveContainer>
-                    </Paper>
-                    {placeholder}
-                </Col>
-            </Row>
-        </Container >
-
+        <div>
+            <Paper elevation={11} className={props.blur ? style.blur : style.paper}>
+                <h5 className={style.title}>{props.title}
+                    <TP tooltip={props.tooltip}></TP>
+                    {props.loading ? <CircularProgress size={20} ></CircularProgress> : <p></p>}
+                </h5>
+                <ResponsiveContainer width="100%" height={400}>
+                    {props.children}
+                </ResponsiveContainer>
+            </Paper>
+            {placeholder}
+        </div>
     );
 }
 

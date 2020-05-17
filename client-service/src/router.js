@@ -7,8 +7,8 @@ import Options from './pages/Options'
 
 const BaseRouter = () => (
     < Switch >
-        <Route exact path='/' component={Portfolio}></Route>
-        <Route exact path='/stocks' component={Stock} />
+        <Route exact path='/' component={Stock}></Route>
+        <Route exact path='/portfolio' component={Portfolio} />
         <Route exact path='/options' component={Options} />
     </Switch >
 )

@@ -1,11 +1,10 @@
-import React, { Suspense, lazy } from 'react'
+import React from 'react'
 import logic from './logic'
 import LineChart from '../charts/lineChart/lineChart'
 
 const Layout = () => {
-    const { stocks, rollingVolatility } = logic()
+    const { stocks, rollingVolatility, loading } = logic()
     return (
-
         <LineChart
             blur={stocks.length < 1}
             title='Volatility Evolution'
@@ -15,7 +14,7 @@ const Layout = () => {
             dataKey="date"
             tickFormatter
             placeholder='Select a Company'
-
+            loading={loading}
         ></LineChart>
     )
 }

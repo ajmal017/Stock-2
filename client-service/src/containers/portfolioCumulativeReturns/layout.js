@@ -5,7 +5,7 @@ import LineChart from '../charts/lineChart/lineChart'
 
 
 const Layout = () => {
-    const { stocks, cumulativeReturns } = logic()
+    const { stocks, cumulativeReturns, loading } = logic()
     return (
         <LineChart
             placeholder='Select 2+ Companies'
@@ -16,6 +16,7 @@ const Layout = () => {
             stocks={['equal', 'optimal', 'minimal']}
             dataKey="date"
             tickFormatter
+            loading={loading}
         ></LineChart>
     )
 }
