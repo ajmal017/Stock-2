@@ -14,7 +14,6 @@ const Layout = () => {
             data={rollingVolatility}
             stocks={['equal', 'optimal', 'minimal']}
             dataKey="date"
-            tickFormatter
             loading={loading}
         ></LineChart>
     )

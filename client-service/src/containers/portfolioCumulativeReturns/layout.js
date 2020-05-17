@@ -1,6 +1,5 @@
 import React from 'react'
 import logic from './logic'
-import { Container, Row, Col } from 'react-bootstrap'
 import LineChart from '../charts/lineChart/lineChart'
 
 
@@ -15,7 +14,6 @@ const Layout = () => {
             data={cumulativeReturns}
             stocks={['equal', 'optimal', 'minimal']}
             dataKey="date"
-            tickFormatter
             loading={loading}
         ></LineChart>
     )

@@ -18,7 +18,7 @@ const LinChart = ({ title, tooltip, data, blur, stocks, width = 3, xInterval, da
             >
                 <CartesianGrid vertical={false} strokeDasharray="3 3" />
 
-                <XAxis dataKey={dataKey} interval={xInterval || "preserveStartEnd"} tickFormatter={tickFormatter}>
+                <XAxis dataKey={dataKey} tickFormatter={(value) => value.toString().slice(0, 4) || tickFormatter} interval={xInterval || 'preserveEnd'}>
                 </XAxis>
                 <YAxis />
                 <Tooltip />
@@ -28,7 +28,7 @@ const LinChart = ({ title, tooltip, data, blur, stocks, width = 3, xInterval, da
 
                 ))}
             </LineChart>
-        </ChartContainer>
+        </ChartContainer >
 
     );
 }
